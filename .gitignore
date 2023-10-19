@@ -1,5 +1,15 @@
-# environment
+# python
 .venv/
 
-# IDE
+# pycharm
 .idea/
+
+# postgres
+postgres/
+
+# mqtt
+mqtt/
+!mqtt/mosquitto.conf
+
+# environment
+.env

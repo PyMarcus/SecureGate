@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_inst
+    ports:
+      - '${DATABASE_PORT}:${DATABASE_PORT}'
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    restart: always
+
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt_broker_inst
+    ports:
+      - '${MQTT_PORT}:${MQTT_PORT}'
+      - '${MQTT_WS_PORT}:${MQTT_WS_PORT}'
+    volumes:
+      - ./mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mqtt/data:/mosquitto/data
+      - ./mqtt/log:/mosquitto/log
+    restart: unless-stopped
+    network_mode: bridge
