@@ -1,8 +1,8 @@
-[tool.black]
+[tool.black] # Black code formatter
 line-length = 100
 target-version = ['py310', 'py311']
 
-[tool.pylint."messages control"]
+[tool.pylint."messages control"] # Pylint
 ignore = ["__init__.py"]
 disable = "all"
 enable = [
@@ -12,5 +12,11 @@ enable = [
     "missing-module-docstring"
 ]
 
-[tool.isort]
+[tool.isort] # Isort import sorter
 profile = "black"
+
+[tools.pyright] # Pyright static type checker
+venvPath = "."
+venv = ".venv"
+reportMissingTypeArgument = true  # Report generic classes used without type arguments
+strictListInference = true  # Use union types when inferring types of lists elements, instead of Any

@@ -15,6 +15,7 @@ platformdirs==3.11.0
 pre-commit==3.5.0
 pycodestyle==2.11.1
 pyflakes==3.1.0
+pyright==1.1.332
 PyYAML==6.0.1
 tomli==2.0.1
 typing_extensions==4.8.0
