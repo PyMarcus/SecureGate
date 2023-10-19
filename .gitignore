@@ -5,11 +5,11 @@
 .idea/
 
 # postgres
-postgres/
+.postgres/
 
 # mqtt
-mqtt/
-!mqtt/mosquitto.conf
+.mqtt/data
+.mqtt/log
 
 # environment
 .env
