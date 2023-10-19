@@ -38,6 +38,14 @@ It enables users to manage gate access by RFID cards, providing better security 
     pre-commit install
     ```
 
+## Running
+
+1. Run docker-compose
+
+    ```bash
+    docker-compose up
+    ```
+
 ## Authors
 
 - [@pymarcus](https://github.com/PyMarcus)
