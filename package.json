@@ -1,0 +1,30 @@
+{
+  "name": "secure_gate",
+  "version": "1.0.0",
+  "description": "Secure Gate is a complete access management solution, combining a user-friendly web app, a robust backend system, and ESP32 integration. It enables users to manage gate access by RFID cards, providing better security and convenience.",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint 'apps/**/*.@(js|jsx|ts|tsx)' && prettier --check 'apps/**/*.@(js|jsx|ts|tsx)'",
+    "lint:fix": "eslint 'apps/**/*.@(js|jsx|ts|tsx)' --fix && prettier --write 'apps/**/*.@(js|jsx|ts|tsx)'",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npm run lint:fix"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "eslint": "^8.51.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3"
+  }
+}
