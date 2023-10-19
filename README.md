@@ -12,7 +12,23 @@ It enables users to manage gate access by RFID cards, providing better security 
 - Docker
 - Docker Compose
 
-## Installation
+## Setup
+
+To setup the project, you can just run the `setup.sh` script.
+
+1. Make the script executable
+
+   ```bash
+   chmod +x ./scripts/setup.sh
+   ```
+
+2. Run the script
+
+   ```bash
+   ./scripts/setup.sh
+   ```
+
+## Manual Setup
 
 1. Create a virtual environment
 
@@ -38,11 +54,17 @@ It enables users to manage gate access by RFID cards, providing better security 
    pre-commit install
    ```
 
-5. Make husky pre-commit hook executable
+5. Install node dependencies
 
-```bash
-chmod +x .husky/pre-commit
-```
+   ```bash
+   npm install
+   ```
+
+6. Make husky pre-commit hook executable
+
+   ```bash
+   chmod +x .husky/pre-commit
+   ```
 
 ## Running
 

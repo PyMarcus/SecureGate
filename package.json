@@ -13,7 +13,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "apps/**/*.@(js|jsx|ts|tsx)": [
       "npm run lint:fix"
     ]
   },
