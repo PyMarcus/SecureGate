@@ -11,7 +11,7 @@ export const NotFound = () => {
         <p className="text-sm text-muted-foreground">
           The page you are looking for does not exist.
         </p>
-        <Button variant="outline">
+        <Button variant="outline" asChild>
           <Link to="/">Go back home</Link>
         </Button>
       </article>
