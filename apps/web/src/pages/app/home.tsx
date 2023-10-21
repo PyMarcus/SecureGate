@@ -1,11 +1,7 @@
-import { usePreferencesStore } from '@/stores/preferences-store'
 import { useSessionStore } from '@/stores/session-store'
 
 export const Home = () => {
   const { session, clearSession } = useSessionStore()
-  const { theme } = usePreferencesStore()
-
-  console.log(theme)
 
   return (
     <section>
