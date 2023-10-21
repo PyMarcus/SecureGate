@@ -8,12 +8,17 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { useSessionStore } from '@/stores/session-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
 
 export const SignIn = () => {
+  const { setSession } = useSessionStore()
+
+  const { toast } = useToast()
   const navigate = useNavigate()
 
   const formSchema = zod.object({
@@ -36,7 +41,15 @@ export const SignIn = () => {
   })
 
   const handleFormSubmit = (data: FormType) => {
-    console.log(data)
+    setSession({
+      user: data.email,
+      token: data.email,
+    })
+
+    toast({
+      title: 'Welcome!',
+      description: 'You have successfully logged in to your account.',
+    })
 
     navigate('/')
   }

@@ -1,6 +1,7 @@
+import { useSessionStore } from '@/stores/session-store'
 import { Navigate, Outlet } from 'react-router-dom'
 
 export const PrivateRoutes = () => {
-  const authenticated = false
-  return authenticated ? <Outlet /> : <Navigate to="/session/sign-in" />
+  const { session } = useSessionStore()
+  return session ? <Outlet /> : <Navigate to="/session/sign-in" />
 }
