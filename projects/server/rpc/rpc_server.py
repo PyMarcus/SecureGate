@@ -34,3 +34,9 @@ class RPCServer(RPCServerInterface):
 
     def sing_up(self) -> typing.Dict[str, typing.Any]:
         ...
+
+    def __sign_in(self) -> typing.Dict[str, typing.Any]:
+        ...
+
+    def __sign_up(self) -> typing.Dict[str, typing.Any]:
+        ...
