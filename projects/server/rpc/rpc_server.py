@@ -1,5 +1,6 @@
 import Pyro4
 import typing
+import datetime
 import threading
 from libs import LogMaker, ReadEnv
 from projects.server.security import Security
@@ -31,29 +32,58 @@ class RPCServer(RPCServerInterface):
     """
 
     @Pyro4.expose
-    def sign_in(self) -> typing.Dict[str, typing.Any]:
-        ...
+    def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__sign_in(credentials)
 
     @Pyro4.expose
     def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         return self.__sign_up(credentials)
 
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        ...
-
-    def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
-        name: str = credentials["name"]
         email: str = credentials["email"]
         password: str = credentials["password"]
-        hashed_password: str = Security.hash_password(password)
+        # cosulta do banco retorna senha e user_id pelo email requisitado
+        hashed_password: str = "Vai vir do banco."
+        user_id: str = "vai vir do banco"
+        name: str = "vai vir do banco"
+        if not Security.verify_password(hashed_password, password):
+            return self.__unauthorizated_message()
+        return self.__authorizated_message(name, email, user_id)
 
-        new_user: typing.Dict[str, typing.Any] = {
-            "user": name,
-            "email": email,
-            "hashed_password": hashed_password
+    def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
+        try:
+            name: str = credentials["username"]
+            email: str = credentials["email"]
+            password: str = credentials["password"]
+            hashed_password: str = Security.hash_password(password)
+
+            new_user: typing.Dict[str, typing.Any] = {
+                "user": name,
+                "email": email,
+                "hashed_password": hashed_password
+            }
+            print(new_user)
+            return True
+        except Exception as err:
+            LogMaker.write_log(f"[-] {err}", "error")
+            return False
+
+    def __unauthorizated_message(self) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": "Access to the requested resource is forbidden",
         }
-        print(new_user)
-        return True
+
+    def __authorizated_message(self, name: str, email: str, user_id: str) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": None,
+            "status": "OK",
+            "message": "Welcome!",
+            "user_request": name,
+            "email": email,
+            "time": str(datetime.datetime.now()),
+            "user_id": user_id,
+            "token": Security.generate_token(user_id)
+        }
 
 
 if __name__ == '__main__':
