@@ -1,3 +1,4 @@
+import uuid
 import Pyro4
 import typing
 import datetime
@@ -5,6 +6,8 @@ import threading
 from libs import LogMaker, ReadEnv
 from projects.server.security import Security
 from rpc_server_interface import RPCServerInterface
+from projects.server.database import InsertMain
+from projects.server.database.models.__all_models import *
 
 
 @Pyro4.expose
@@ -57,13 +60,19 @@ class RPCServer(RPCServerInterface):
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
 
-            new_user: typing.Dict[str, typing.Any] = {
-                "user": name,
-                "email": email,
-                "hashed_password": hashed_password
-            }
+            new_user: User = User(
+                id=uuid.uuid4(),
+                name=name,
+                email=email,
+                password=hashed_password
+            )
             print(new_user)
-            return True
+
+            if InsertMain.insert_user(new_user):
+                LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
+                return True
+            LogMaker.write_log(f"[-]Fail to insert {new_user}", "info")
+            return False
         except Exception as err:
             LogMaker.write_log(f"[-] {err}", "error")
             return False

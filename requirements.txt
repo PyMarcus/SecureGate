@@ -25,3 +25,4 @@ Pyro4~=4.82
 itsdangerous~=2.1.2
 python-dotenv~=1.0.0
 bcrypt~=4.0.1
+SQLAlchemy~=2.0.22
