@@ -5,7 +5,7 @@ import typing
 from projects.server.rpc import RPCSingletonClient
 
 
-client: RPCSingletonClient = RPCSingletonClient(uri="PYRO:obj_4e89cd274369494c84ccd10af077c44a@0.0.0.0:7878")
+client: RPCSingletonClient = RPCSingletonClient(uri="PYRO:obj_73f6cc45416f49cca162cce7f911287b@0.0.0.0:7878")
 
 # cadastrar
 payload: typing.Dict[str, typing.Any] = {
@@ -14,5 +14,14 @@ payload: typing.Dict[str, typing.Any] = {
     "password": "notsosecure"
 }
 
-response = client.sign_up(request=payload)
+#response = client.sign_up(request=payload)
+#print(response)
+
+# logar
+payload: typing.Dict[str, typing.Any] = {
+    "email": "securegate@email.com",
+    "password": "notsosecure"
+}
+print(payload)
+response = client.sign_in(payload)
 print(response)

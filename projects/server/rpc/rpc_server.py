@@ -6,7 +6,7 @@ import threading
 from libs import LogMaker, ReadEnv
 from projects.server.security import Security
 from rpc_server_interface import RPCServerInterface
-from projects.server.database import InsertMain
+from projects.server.database import InsertMain, SelectMain
 from projects.server.database.models.__all_models import *
 
 
@@ -45,12 +45,15 @@ class RPCServer(RPCServerInterface):
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
-        # cosulta do banco retorna senha e user_id pelo email requisitado
-        hashed_password: str = "Vai vir do banco."
-        user_id: str = "vai vir do banco"
-        name: str = "vai vir do banco"
+        user = SelectMain.select_user(email)
+        if user is None:
+            return self.__bad_request_message()
+        hashed_password: str = user.password
+        user_id: str = str(user.id)
+        name: str = user.name
         if not Security.verify_password(hashed_password, password):
             return self.__unauthorizated_message()
+        LogMaker.write_log(f"{user} is logged!", "info")
         return self.__authorizated_message(name, email, user_id)
 
     def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
@@ -80,6 +83,7 @@ class RPCServer(RPCServerInterface):
     def __unauthorizated_message(self) -> typing.Dict[str, typing.Any]:
         return {
             "error": "Access to the requested resource is forbidden",
+            "status": "Error"
         }
 
     def __authorizated_message(self, name: str, email: str, user_id: str) -> typing.Dict[str, typing.Any]:
@@ -92,6 +96,12 @@ class RPCServer(RPCServerInterface):
             "time": str(datetime.datetime.now()),
             "user_id": user_id,
             "token": Security.generate_token(user_id)
+        }
+
+    def __bad_request_message(self) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": "Bad request",
+            "status": "Error",
         }
 
 

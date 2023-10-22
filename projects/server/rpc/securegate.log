@@ -1,4 +1,17 @@
-2023-10-21 23:15:47,938 - INFO - [+]RPCServer is running on 0.0.0.0/7878
-2023-10-21 23:15:47,938 - INFO - [+]SERVER URI: PYRO:obj_4e89cd274369494c84ccd10af077c44a@0.0.0.0:7878
-2023-10-21 23:16:22,431 - INFO - [+]Connected on database
-2023-10-21 23:16:22,543 - INFO - [+]<User: securegate - securegate@email.com> has been inserted
+2023-10-22 00:28:02,001 - WARNING - [-]Server is down
+2023-10-22 00:45:55,063 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:45:55,074 - INFO - [+]SERVER URI: PYRO:obj_c7cc879e4340487d8b1e415781e61dc5@0.0.0.0:7878
+2023-10-22 00:46:05,910 - INFO - [+]Connected on database
+2023-10-22 00:47:26,183 - WARNING - [-]Server is down
+2023-10-22 00:47:29,571 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:47:29,571 - INFO - [+]SERVER URI: PYRO:obj_139eca904fcc42c5bf9f2f6c7ce6bf82@0.0.0.0:7878
+2023-10-22 00:47:45,723 - INFO - [+]Connected on database
+2023-10-22 00:48:41,035 - WARNING - [-]Server is down
+2023-10-22 00:48:44,159 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:48:44,159 - INFO - [+]SERVER URI: PYRO:obj_a716cdb1ef6a4e36ab8acf659f50f11d@0.0.0.0:7878
+2023-10-22 00:48:55,505 - INFO - [+]Connected on database
+2023-10-22 00:49:52,551 - WARNING - [-]Server is down
+2023-10-22 00:49:56,276 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:49:56,276 - INFO - [+]SERVER URI: PYRO:obj_73f6cc45416f49cca162cce7f911287b@0.0.0.0:7878
+2023-10-22 00:50:09,655 - INFO - [+]Connected on database
+2023-10-22 00:51:15,241 - WARNING - [-]Server is down
