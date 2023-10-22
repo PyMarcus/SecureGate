@@ -1,6 +1,5 @@
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 
-from apps.api.middlewares.auth_middleware import auth_middleware
 from apps.api.routes.management_routes import routes as management_routes
 from apps.api.routes.session_routes import routes as session_routes
 from packages.config.env import env
@@ -11,7 +10,7 @@ app = FastAPI(
 
 app.include_router(management_routes)
 
-app.include_router(session_routes, dependencies=[Depends(auth_middleware)])
+app.include_router(session_routes)
 
 
 app.mount(f"/{env.API_URL_PREFIX}", app)
