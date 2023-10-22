@@ -1,18 +1,19 @@
 from fastapi import APIRouter, Depends
 
+from apps.api.schemas.session_schema import Signin, Signup
 from apps.server.rpc.rpc_client import RPCSingletonClient, get_rpc_client
 
-router = APIRouter(
+routes = APIRouter(
     prefix="/session",
     tags=["session"],
 )
 
 
-@router.get("/signin")
-def signin(rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    return rpc.sign_in({"email": "securegate@email.com", "password": "notsosecure"})
+@routes.post("/signin")
+def signin(body: Signin, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+    return rpc.sign_in(body.model_dump())
 
 
-@router.get("/signup")
-def signup(rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    return {"message": "signup"}
+@routes.post("/signup")
+def signup(body: Signup, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+    return rpc.sign_up(body.model_dump())

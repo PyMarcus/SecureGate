@@ -21,3 +21,6 @@ node_modules/
 
 # logs
 securegate.log
+
+# app
+.pyro_uri
