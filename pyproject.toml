@@ -14,10 +14,4 @@ enable = [
 
 [tool.isort] # Isort import sorter
 profile = "black"
-
-[tool.pyright] # Pyright static type checker
-venvPath = "./"
-venv = ".venv"
-include = ["apps", "packages", "libs"]
-reportMissingTypeArgument = true  # Report generic classes used without type arguments
-strictListInference = true  # Use union types when inferring types of lists elements, instead of Any
+line_length = 100

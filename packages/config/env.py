@@ -9,7 +9,17 @@ def _map_to_int(value: str | None) -> int | None:
     return int(value) if value is not None else None
 
 
-class Config:
+class DotEnv:
+    """
+    Using a .env file in software development is crucial for enhancing security and maintaining flexibility.
+    It allows developers to store sensitive information, such as API keys and database credentials,
+    separate from the codebase. By keeping these configurations in a separate file, applications become more secure,
+    as sensitive data is not hardcoded within the source code. Additionally,
+    it simplifies collaboration among developers and deployment processes, ensuring that the same
+    codebase can be deployed in various environments without exposing sensitive information.
+    Overall, the use of .env files promotes security, flexibility, and best practices in software development.
+    """
+
     # Database
     DATABASE_HOST: str | None = os.getenv("DATABASE_HOST")
     DATABASE_PORT: int | None = _map_to_int(os.getenv("DATABASE_PORT"))
@@ -35,5 +45,13 @@ class Config:
     API_URL_PREFIX: str | None = os.getenv("API_URL_PREFIX")
     API_URL: str | None = os.getenv("API_URL")
 
+    # RPC
+    RPC_HOST: str | None = os.getenv("RPC_HOST")
+    RPC_PORT: int | None = _map_to_int(os.getenv("RPC_PORT"))
 
-config = Config()
+    # TOKENS
+    SECRET_KEY: str | None = os.getenv("SECRET_KEY")
+    FERNET_KEY: str | None = os.getenv("FERNET_KEY")
+
+
+env = DotEnv()

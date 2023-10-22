@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from packages.config.config import config
+from packages.config.env import env
 
 app = FastAPI()
 
@@ -13,7 +13,7 @@ def read_root():
 if __name__ == "__main__":
     import uvicorn
 
-    host, port = config.API_HOST, config.API_PORT
+    host, port = env.API_HOST, env.API_PORT
     if not host or not port:
         raise Exception("API_HOST or API_PORT not set")
 

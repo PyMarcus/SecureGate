@@ -30,4 +30,7 @@ npm install
 echo -e "${CYAN}Making husky pre-commit hook executable${NC}"
 chmod +x .husky/pre-commit
 
+echo - "${CYAN}Creating .env file${NC}"
+cp .env.example .env
+
 echo -e "${GREEN}Setup completed. Virtual environment activated.${NC}"

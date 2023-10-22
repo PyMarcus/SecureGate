@@ -42,7 +42,7 @@ To setup the project, you can just run the `setup.sh` script.
    source .venv/bin/activate
    ```
 
-3. Install the dependencies
+3. Install python dependencies
 
    ```bash
    pip install -r requirements.txt
@@ -64,6 +64,12 @@ To setup the project, you can just run the `setup.sh` script.
 
    ```bash
    chmod +x .husky/pre-commit
+   ```
+
+7. Create `.env` file
+   
+   ```bash
+   cp .env.example .env
    ```
 
 ## Running

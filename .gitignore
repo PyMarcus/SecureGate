@@ -2,8 +2,9 @@
 .venv/
 __pycache__/
 
-# pycharm
+# tools
 .idea/
+.vscode/
 
 # postgres
 .postgres/
@@ -17,3 +18,6 @@ __pycache__/
 
 # node
 node_modules/
+
+# logs
+securegate.log
