@@ -23,6 +23,7 @@ class ReadEnv:
         self.__database_password: str = os.getenv("DATABASE_PASSWORD")
         self.__rpc_host: str = os.getenv("HOST")
         self.__rpc_port: int = int(os.getenv("PORT"))
+        self.__fernet_key: bytes = os.getenv("FERNET_KEY").encode()
 
 
     @property
@@ -56,3 +57,7 @@ class ReadEnv:
     @property
     def rpc_port(self) -> int:
         return self.__rpc_port
+
+    @property
+    def fernet_key(self) -> bytes:
+        return self.__fernet_key

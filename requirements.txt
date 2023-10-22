@@ -20,9 +20,9 @@ PyYAML==6.0.1
 tomli==2.0.1
 typing_extensions==4.8.0
 virtualenv==20.24.5
-
 Pyro4~=4.82
 itsdangerous~=2.1.2
 python-dotenv~=1.0.0
 bcrypt~=4.0.1
 SQLAlchemy~=2.0.22
+cryptography~=41.0.4
