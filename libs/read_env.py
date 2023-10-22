@@ -21,6 +21,9 @@ class ReadEnv:
         self.__database_name: str = os.getenv("DATABASE_NAME")
         self.__database_username: str = os.getenv("DATABASE_USERNAME")
         self.__database_password: str = os.getenv("DATABASE_PASSWORD")
+        self.__rpc_host: str = os.getenv("HOST")
+        self.__rpc_port: int = int(os.getenv("PORT"))
+
 
     @property
     def secret_key(self) -> str:
@@ -28,20 +31,28 @@ class ReadEnv:
 
     @property
     def database_host(self) -> str:
-        return os.getenv("DATABASE_HOST")
+        return self.__database_host
 
     @property
     def database_port(self) -> int:
-        return int(os.getenv("DATABASE_PORT"))
+        return self.__database_port
 
     @property
     def database_name(self) -> str:
-        return os.getenv("DATABASE_NAME")
+        return self.__database_name
 
     @property
     def database_username(self) -> str:
-        return os.getenv("DATABASE_USERNAME")
+        return self.__database_username
 
     @property
     def database_password(self) -> str:
-        return os.getenv("DATABASE_PASSWORD")
+        return self.__database_password
+
+    @property
+    def rpc_host(self) -> str:
+        return self.__rpc_host
+
+    @property
+    def rpc_port(self) -> int:
+        return self.__rpc_port

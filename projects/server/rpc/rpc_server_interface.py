@@ -17,9 +17,9 @@ class RPCServerInterface(ABC):
     """
 
     @abstractmethod
-    def sing_up(self) -> typing.Dict[str, typing.Any]:
+    def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         raise NotImplementedError("missing sing_up method")
 
     @abstractmethod
-    def sign_in(self) -> typing.Dict[str, typing.Any]:
+    def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing sing_in method")
