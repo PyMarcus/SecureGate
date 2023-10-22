@@ -64,7 +64,7 @@ export const SignUp = () => {
           <Link to="/session/sign-in">Sign In</Link>
         </Button>
       </div>
-      <header className="mb-4">
+      <header className="mb-4 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
           Sign up to Your Account
         </h1>
