@@ -10,6 +10,7 @@ from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
 from apps.server.security import Security
 from libs import LogMaker
+from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
 
 
@@ -112,6 +113,7 @@ if __name__ == "__main__":
     LogMaker.write_log(f"[+]RPCServer is running on {host}/{port}", "info")
     server: RPCServer = RPCServer()
     uri: Pyro4.URI = daemon.register(server)
+    set_pyro_uri(uri)
     print(f"[+]URI {uri}")
     LogMaker.write_log(f"[+]SERVER URI: {uri}", "info")
 

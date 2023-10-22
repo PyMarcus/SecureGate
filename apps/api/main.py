@@ -1,14 +1,11 @@
 from fastapi import FastAPI
 
+from apps.api.routes.session_routes import router as session_router
 from packages.config.env import env
 
 app = FastAPI()
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
+app.include_router(session_router)
 
 if __name__ == "__main__":
     import uvicorn

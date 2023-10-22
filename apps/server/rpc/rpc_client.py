@@ -2,6 +2,8 @@ import typing
 
 import Pyro4
 
+from libs.pyro_uri import get_pyro_uri
+
 
 class Singleton(type):
     _instances = {}
@@ -52,3 +54,11 @@ class RPCSingletonClient(metaclass=Singleton):
            password: A string representing the user's password.
         """
         return self.client.sign_up(request)
+
+
+def get_rpc_client() -> RPCSingletonClient:
+    """
+    This function is a factory that returns a RPCSingletonClient
+    instance.
+    """
+    return RPCSingletonClient(uri=get_pyro_uri())
