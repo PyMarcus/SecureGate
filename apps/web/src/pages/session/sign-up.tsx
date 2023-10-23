@@ -8,13 +8,19 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useToast } from '@/components/ui/use-toast'
+import { useSignUp } from '@/services/api/requests/session'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { SpinnerGap } from '@phosphor-icons/react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
 
 export const SignUp = () => {
+  const { toast } = useToast()
   const navigate = useNavigate()
+
+  const { isSuccess, data: response, isLoading, mutate } = useSignUp()
 
   const formSchema = zod
     .object({
@@ -49,8 +55,17 @@ export const SignUp = () => {
   })
 
   const handleFormSubmit = (data: FormType) => {
-    console.log(data)
-    navigate('/')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, ...rest } = data
+    mutate(rest)
+
+    if (isSuccess && response) {
+      toast({
+        title: `Welcome, ${data.name}!`,
+        description: 'Your account has been created successfully',
+      })
+      navigate('/session/sign-in')
+    }
   }
 
   return (
@@ -135,7 +150,8 @@ export const SignUp = () => {
             )}
           />
           <Button className="w-full" type="submit">
-            Sign Up
+            {isLoading && <SpinnerGap className="mr-2 animate-spin" />}
+            <span>Sign Up</span>
           </Button>
         </form>
       </Form>

@@ -2,17 +2,17 @@ import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
 interface Session {
-  user: string
+  user: User
   token: string
 }
 
-interface BearState {
+interface SessionState {
   session: Session | null
   setSession: (session: Session) => void
   clearSession: () => void
 }
 
-export const useSessionStore = create<BearState>()(
+export const useSessionStore = create<SessionState>()(
   devtools(
     persist(
       (set) => ({

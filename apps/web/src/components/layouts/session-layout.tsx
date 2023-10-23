@@ -8,7 +8,7 @@ export const SessionLayout = () => {
     overflow-x-hidden bg-background grid grid-cols-1 grid-rows-6 md:grid-cols-2
     md:grid-rows-1"
     >
-      <div className="bg-zinc-900 p-6 md:p-8 flex flex-col justify-between">
+      <div className="md:bg-zinc-900 p-6 md:p-8 flex flex-col justify-between">
         <strong
           className="inline-flex items-center gap-1 text-foreground
         md:text-neutral-50 py-1"

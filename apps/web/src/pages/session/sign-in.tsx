@@ -9,8 +9,10 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useToast } from '@/components/ui/use-toast'
+import { useSignIn } from '@/services/api/requests/session'
 import { useSessionStore } from '@/stores/session-store'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { SpinnerGap } from '@phosphor-icons/react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
@@ -20,6 +22,8 @@ export const SignIn = () => {
 
   const { toast } = useToast()
   const navigate = useNavigate()
+
+  const { isSuccess, data: response, isLoading, mutate } = useSignIn()
 
   const formSchema = zod.object({
     email: zod.string().email({
@@ -41,17 +45,23 @@ export const SignIn = () => {
   })
 
   const handleFormSubmit = (data: FormType) => {
-    setSession({
-      user: data.email,
-      token: data.email,
-    })
+    mutate(data)
 
-    toast({
-      title: 'Welcome!',
-      description: 'You have successfully logged in to your account.',
-    })
-
-    navigate('/')
+    if (isSuccess && response) {
+      setSession({
+        user: {
+          id: response.user_id,
+          email: response.email,
+          name: response.user_request,
+        },
+        token: response.token,
+      })
+      toast({
+        title: `Hi, ${response.user_request}!`,
+        description: 'You have successfully logged in to your account.',
+      })
+      navigate('/')
+    }
   }
 
   return (
@@ -106,7 +116,8 @@ export const SignIn = () => {
             )}
           />
           <Button className="w-full" type="submit">
-            Sign In
+            {isLoading && <SpinnerGap className="mr-2 animate-spin" />}
+            <span>Sign In</span>
           </Button>
         </form>
       </Form>

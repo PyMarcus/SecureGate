@@ -1,20 +1,16 @@
+import { Button } from '@/components/ui/button'
 import { useSessionStore } from '@/stores/session-store'
 
 export const Home = () => {
   const { session, clearSession } = useSessionStore()
 
+  const hasSession = !!session
+
   return (
     <section>
       <h1>Home</h1>
-
-      <p>
-        user: <strong>{session?.user}</strong>
-      </p>
-      <p>
-        token: <strong>{session?.token}</strong>
-      </p>
-
-      <button onClick={clearSession}>Logout</button>
+      <p>{session?.user.name}</p>
+      {hasSession && <Button onClick={clearSession}>Sign Out</Button>}
     </section>
   )
 }

@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from apps.api.routes.management_routes import routes as management_routes
 from apps.api.routes.session_routes import routes as session_routes
@@ -6,6 +7,16 @@ from packages.config.env import env
 
 app = FastAPI(
     title="SecureGate API",
+)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(management_routes)

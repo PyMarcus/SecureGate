@@ -1,0 +1,42 @@
+import { SignInRequest } from '@/@types/api/request'
+import { SignInResponse, SignUpRequest } from '@/@types/api/response'
+import { api } from '@/services/api/instance'
+import { useMutation } from 'react-query'
+
+const SESSIONS_ENDPOINT = '/session'
+
+const signInRequest = async (data: SignInRequest) => {
+  const response = await api.post<SignInResponse>(
+    `${SESSIONS_ENDPOINT}/signin`,
+    data,
+  )
+  return response.data
+}
+
+export const useSignIn = () => {
+  return useMutation('signin', signInRequest)
+}
+
+const signUpRequest = async (data: SignUpRequest) => {
+  const response = await api.post<SignInResponse>(
+    `${SESSIONS_ENDPOINT}/signup`,
+    {
+      username: data.name,
+      ...data,
+    },
+  )
+  return response.data
+}
+
+export const useSignUp = () => {
+  return useMutation('signup', signUpRequest)
+}
+
+// const healthRequest = async () => {
+//   const response = await api.get('/management/health')
+//   return response.data
+// }
+
+// export const useHealth = () => {
+//   return useQuery('health', healthRequest)
+// }
