@@ -3,6 +3,7 @@ import { queryClient } from '@/lib/react-query/client'
 import { AppRoutes } from '@/routes/app-routes'
 import { usePreferencesStore } from '@/stores/preferences-store'
 import '@/styles/globals.css'
+import { IconContext } from '@phosphor-icons/react'
 import { useEffect } from 'react'
 import { QueryClientProvider } from 'react-query'
 
@@ -15,9 +16,15 @@ export const App = () => {
   }, [theme])
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AppRoutes />
-      <Toaster duration={2000} />
-    </QueryClientProvider>
+    <IconContext.Provider
+      value={{
+        size: 18,
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <AppRoutes />
+        <Toaster duration={2000} />
+      </QueryClientProvider>
+    </IconContext.Provider>
   )
 }

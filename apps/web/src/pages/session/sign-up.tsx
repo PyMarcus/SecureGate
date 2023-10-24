@@ -20,7 +20,7 @@ export const SignUp = () => {
   const { toast } = useToast()
   const navigate = useNavigate()
 
-  const { isSuccess, data: response, isLoading, mutate } = useSignUp()
+  const { isLoading, mutateAsync } = useSignUp()
 
   const formSchema = zod
     .object({
@@ -54,12 +54,12 @@ export const SignUp = () => {
     },
   })
 
-  const handleFormSubmit = (data: FormType) => {
+  const handleFormSubmit = async (data: FormType) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...rest } = data
-    mutate(rest)
 
-    if (isSuccess && response) {
+    const response = await mutateAsync(rest)
+    if (response) {
       toast({
         title: `Welcome, ${data.name}!`,
         description: 'Your account has been created successfully',

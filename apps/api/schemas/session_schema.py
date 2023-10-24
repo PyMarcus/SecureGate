@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 
 
-class Signin(BaseModel):
+class SigninSchema(BaseModel):
     email: str
     password: str
 
 
-class Signup(BaseModel):
-    username: str
+class SignupSchema(BaseModel):
+    name: str
     email: str
     password: str
     # role: str #  'ADMIN' | 'ROOT'

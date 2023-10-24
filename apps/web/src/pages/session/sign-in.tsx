@@ -23,7 +23,7 @@ export const SignIn = () => {
   const { toast } = useToast()
   const navigate = useNavigate()
 
-  const { isSuccess, data: response, isLoading, mutate } = useSignIn()
+  const { isLoading, mutateAsync } = useSignIn()
 
   const formSchema = zod.object({
     email: zod.string().email({
@@ -44,10 +44,9 @@ export const SignIn = () => {
     },
   })
 
-  const handleFormSubmit = (data: FormType) => {
-    mutate(data)
-
-    if (isSuccess && response) {
+  const handleFormSubmit = async (data: FormType) => {
+    const response = await mutateAsync(data)
+    if (response) {
       setSession({
         user: {
           id: response.user_id,

@@ -1,0 +1,101 @@
+2023-10-22 00:28:02,001 - WARNING - [-]Server is down
+2023-10-22 00:45:55,063 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:45:55,074 - INFO - [+]SERVER URI: PYRO:obj_c7cc879e4340487d8b1e415781e61dc5@0.0.0.0:7878
+2023-10-22 00:46:05,910 - INFO - [+]Connected on database
+2023-10-22 00:47:26,183 - WARNING - [-]Server is down
+2023-10-22 00:47:29,571 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:47:29,571 - INFO - [+]SERVER URI: PYRO:obj_139eca904fcc42c5bf9f2f6c7ce6bf82@0.0.0.0:7878
+2023-10-22 00:47:45,723 - INFO - [+]Connected on database
+2023-10-22 00:48:41,035 - WARNING - [-]Server is down
+2023-10-22 00:48:44,159 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:48:44,159 - INFO - [+]SERVER URI: PYRO:obj_a716cdb1ef6a4e36ab8acf659f50f11d@0.0.0.0:7878
+2023-10-22 00:48:55,505 - INFO - [+]Connected on database
+2023-10-22 00:49:52,551 - WARNING - [-]Server is down
+2023-10-22 00:49:56,276 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 00:49:56,276 - INFO - [+]SERVER URI: PYRO:obj_73f6cc45416f49cca162cce7f911287b@0.0.0.0:7878
+2023-10-22 00:50:09,655 - INFO - [+]Connected on database
+2023-10-22 00:51:15,241 - WARNING - [-]Server is down
+2023-10-22 08:58:35,984 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-22 08:58:35,984 - INFO - [+]SERVER URI: PYRO:obj_68615a35f9674a459c5a54080ad88685@0.0.0.0:7878
+2023-10-22 09:01:22,012 - WARNING - [-]Server is down
+2023-10-22 09:50:47,423 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 09:50:47,423 - INFO - [+]SERVER URI: PYRO:obj_b012028b22b246388c806d122c6d6bd0@localhost:7878
+2023-10-22 10:04:12,462 - INFO - [+]Connected on database
+2023-10-22 10:05:19,272 - INFO - [+]<User: securegate - securegate@email.com> has been inserted
+2023-10-22 10:05:34,637 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 10:06:24,390 - WARNING - [-]Server is down
+2023-10-22 10:06:26,884 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 10:06:26,884 - INFO - [+]SERVER URI: PYRO:obj_19e08e28d8f54f06930215200c513563@localhost:7878
+2023-10-22 10:07:36,412 - WARNING - [-]Server is down
+2023-10-22 10:08:53,829 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 10:08:53,829 - INFO - [+]SERVER URI: PYRO:obj_59b9167e77ef415ba66dcd6fa57f015b@localhost:7878
+2023-10-22 10:09:30,138 - INFO - [+]Connected on database
+2023-10-22 10:09:30,393 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 10:09:53,303 - INFO - [-]Fail to insert <User: securegate - securegate@email.com>
+2023-10-22 10:09:53,514 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 10:10:09,766 - INFO - [-]Fail to insert <User: securegate - securegate2@email.com>
+2023-10-22 10:10:09,992 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 10:10:21,622 - INFO - [-]Fail to insert <User: securegate - securegate2@email.com>
+2023-10-22 10:10:29,131 - INFO - [+]<User: securegate213 - securegate2@email.com> has been inserted
+2023-10-22 11:34:56,434 - WARNING - [-]Server is down
+2023-10-22 12:16:59,666 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 12:16:59,666 - INFO - [+]SERVER URI: PYRO:obj_15b508c58a994c7eafe6d75037d30c74@localhost:7878
+2023-10-22 12:19:27,759 - INFO - [+]Connected on database
+2023-10-22 12:19:28,045 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 12:32:11,638 - WARNING - [-]Server is down
+2023-10-22 12:32:14,824 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 12:32:14,824 - INFO - [+]SERVER URI: PYRO:obj_f51a9b44a1014235b1af796bf854154a@localhost:7878
+2023-10-22 12:35:07,929 - WARNING - [-]Server is down
+2023-10-22 12:35:11,796 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 12:35:11,796 - INFO - [+]SERVER URI: PYRO:obj_2b2aebf35c59426ba02e16e8efb2cf54@localhost:7878
+2023-10-22 12:36:36,032 - WARNING - [-]Server is down
+2023-10-22 12:36:59,523 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 12:36:59,523 - INFO - [+]SERVER URI: PYRO:obj_2143a7284dc642ed9452bd3f276017eb@localhost:7878
+2023-10-22 12:37:24,020 - INFO - [+]Connected on database
+2023-10-22 12:37:24,286 - INFO - <User: securegate - securegate@email.com> is logged!
+2023-10-22 12:46:06,194 - WARNING - [-]Server is down
+2023-10-22 13:00:01,480 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 13:00:01,480 - INFO - [+]SERVER URI: PYRO:obj_5a586236321342ec811a1eabff9d31e5@localhost:7878
+2023-10-22 16:35:28,578 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-22 16:35:28,579 - INFO - [+]SERVER URI: PYRO:obj_df2ec2e6582044ab842bd6955d38c8c7@localhost:7878
+2023-10-22 17:02:09,431 - INFO - [+]Connected on database
+2023-10-22 17:02:09,526 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
+2023-10-22 17:02:52,725 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-22 17:02:56,530 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:03:58,793 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:04:01,685 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-22 17:10:31,095 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:14:07,818 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:14:48,204 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:15:08,940 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 17:22:39,585 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 18:12:53,148 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-22 18:12:55,885 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 19:46:11,644 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 19:47:01,874 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 19:49:25,781 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-22 21:25:02,247 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:25:40,845 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:25:44,119 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:26:13,953 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:27:31,735 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:27:33,959 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:27:37,038 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:30:10,517 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:30:33,286 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:30:34,136 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:31:05,083 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 21:55:37,527 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:01:10,921 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:01:18,985 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:01:28,897 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:04:48,095 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:04:54,070 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:05:17,323 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:05:24,463 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:09:31,680 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:09:34,317 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-22 22:16:59,119 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-22 22:17:58,329 - INFO - [+]<User: Isaac Santiago - isaacsgpz@gmail.com> has been inserted
+2023-10-22 22:18:24,696 - INFO - [-]Fail to insert <User: Isaac Santiago - isaacsgpz@gmail.com>
+2023-10-22 22:19:24,509 - WARNING - [-]Server is down

@@ -20,10 +20,7 @@ export const useSignIn = () => {
 const signUpRequest = async (data: SignUpRequest) => {
   const response = await api.post<SignInResponse>(
     `${SESSIONS_ENDPOINT}/signup`,
-    {
-      username: data.name,
-      ...data,
-    },
+    data,
   )
   return response.data
 }

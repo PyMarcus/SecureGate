@@ -62,7 +62,7 @@ class RPCServer(RPCServerInterface):
 
     def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         try:
-            name: str = credentials["username"]
+            name: str = credentials["name"]
             email: str = credentials["email"]
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
