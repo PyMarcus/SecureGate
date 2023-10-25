@@ -1,15 +1,15 @@
 import { UserNav } from '@/components/user-nav'
 import { useSessionStore } from '@/stores/session-store'
 
-export const DashboardHeader = () => {
+export const AppHeader = () => {
   const { session, clearSession } = useSessionStore()
 
   const { name, email } = session!.user
 
   return (
-    <div className="w-full px-6 md:px-8 border-b">
-      <header className="flex items-center justify-between h-16">
-        <span>header</span>
+    <div className="w-full px-6 md:px-8 border-b sticky bg-background">
+      <header className="flex items-center justify-between h-14">
+        <span>Secure Gate</span>
 
         <div className="inline-flex gap-4 items-center">
           <div className="hidden md:flex flex-col space-y-1 text-end">

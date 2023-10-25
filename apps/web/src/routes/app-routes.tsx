@@ -1,4 +1,4 @@
-import { DashboardLayout } from '@/components/layouts/dashboard-layout'
+import { AppLayout } from '@/components/layouts/app-layout'
 import { FullLayout } from '@/components/layouts/full-layout'
 import { SessionLayout } from '@/components/layouts/session-layout'
 import { Home } from '@/pages/app/home'
@@ -19,7 +19,7 @@ export const AppRoutes = () => {
           </Route>
 
           <Route element={<PrivateRoutes />}>
-            <Route element={<DashboardLayout />}>
+            <Route element={<AppLayout />}>
               <Route path="/" element={<Home />} />
             </Route>
           </Route>
