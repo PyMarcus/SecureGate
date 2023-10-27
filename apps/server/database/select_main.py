@@ -1,3 +1,6 @@
+import typing
+import uuid
+
 from .config import DBConnection
 from .models.__all_models import *
 
@@ -20,5 +23,18 @@ class SelectMain:
                 if user:
                     return user
             return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_root_id(cls) -> uuid.UUID | None:
+        try:
+            with cls.__session.create_session() as session:
+                user: typing.Type[User] = (
+                    session.query(User).filter(User.role == UserRole.ROOT).first()
+                )
+                if user:
+                    return user.role
+                return None
         except Exception:
             return None

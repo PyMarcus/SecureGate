@@ -18,18 +18,21 @@ class LogMaker:
     CRITICAL: A very serious error, indicating that the program itself may be unable to continue running.
     """
 
-    handler = TimedRotatingFileHandler('securegate.log', when='midnight', backupCount=7)
+    handler = TimedRotatingFileHandler("securegate.log", when="midnight", backupCount=7)
     handler.suffix = "%Y-%m-%d"
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[handler])
+    logging.basicConfig(
+        level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", handlers=[handler]
+    )
 
     @staticmethod
     def write_log(message: str, level: str) -> None:
+        print(message)
         match level.lower():
             case "info":
                 logging.info(message)
             case "debug":
                 logging.debug(message)
-            case"warning":
+            case "warning":
                 logging.warning(message)
             case "error":
                 logging.error(message)

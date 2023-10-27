@@ -62,3 +62,21 @@ def get_rpc_client() -> RPCSingletonClient:
     instance.
     """
     return RPCSingletonClient(uri=get_pyro_uri())
+
+
+if __name__ == "__main__":
+    client: RPCSingletonClient = get_rpc_client()
+    """print(client.sign_up({
+        "name": "root",
+        "email": "imaroot@email.com",
+        "password": "rootsecurity",
+        "role": "root"
+    }))"""
+    print(
+        client.sign_in(
+            {
+                "email": "imaroot@email.com",
+                "password": "rootsecurity",
+            }
+        )
+    )

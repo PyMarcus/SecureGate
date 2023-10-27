@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv("../../.env")
 
 
 def _map_to_int(value: str | None) -> int | None:

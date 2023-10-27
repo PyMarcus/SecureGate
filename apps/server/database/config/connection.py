@@ -6,7 +6,7 @@ from sqlalchemy import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from apps.server.database.models import BaseModel
-from libs import LogMaker
+from libs import LogMaker, ReadEnv
 from packages.config.env import env
 
 
@@ -30,7 +30,8 @@ class DBConnection:
         else:
             db_url = env.DATABASE_URL
             if not db_url:
-                raise Exception("DATABASE_URL not set")
+                re: ReadEnv = ReadEnv("/home/marcus/Documents/SecureGate/.env.example")
+                db_url = f"postgresql://{re.database_username}:{re.database_password}@{re.database_host}:{32771}/{re.database_name}"
 
             cls.__engine = sa.create_engine(url=db_url, echo=False)
         LogMaker.write_log("[+]Connected on database", "info")
