@@ -1,25 +1,26 @@
 import { Role } from '@/@types/schemas/user'
 
 export interface ApiError {
-  error: string
-  status: string
+  success: false
+  status_code: string
+  message: string
 }
 
-export interface SignInResponse {
-  error: null
-  status: string
+export interface ApiResponse<T> {
+  success: true
+  status_code: string
   message: string
-  user_request: string
-  email: string
-  time: string
+  data: T
+}
+
+interface SignInResponseData {
   user_id: string
+  name: string
+  email: string
   role: Role
   token: string
 }
+export type SignInResponse = ApiResponse<SignInResponseData>
 
-export interface SignUpRequest {
-  email: string
-  password: string
-  name: string
-  role: Role
-}
+type SignUpResponseData = true
+export type SignUpResponse = ApiResponse<SignUpResponseData>

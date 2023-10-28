@@ -52,19 +52,21 @@ export const SignIn = () => {
     },
   })
 
-  const handleFormSubmit = async (data: FormType) => {
-    const response = await mutateAsync(data)
-    if (response) {
+  const handleFormSubmit = async (values: FormType) => {
+    const response = await mutateAsync(values)
+    if (response && response.success) {
+      const { data } = response
+
       setSession({
         user: {
-          id: response.user_id,
-          email: response.email,
-          name: response.user_request,
+          id: data.user_id,
+          email: data.email,
+          name: data.name,
         },
-        token: response.token,
+        token: data.token,
       })
       toast({
-        title: `Hi, ${response.user_request}!`,
+        title: `Hi, ${data.name}!`,
         description: 'You have successfully logged in to your account.',
       })
       navigate('/')

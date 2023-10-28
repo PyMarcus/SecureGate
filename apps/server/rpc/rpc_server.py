@@ -89,6 +89,7 @@ class RPCServer(RPCServerInterface):
                 "user_id": user_id,
                 "name": name,
                 "email": email,
+                "token": Security.generate_token(user_id),
                 "role": role,
             },
         ).dict()

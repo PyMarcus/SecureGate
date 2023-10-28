@@ -62,17 +62,17 @@ export const SignUp = () => {
     },
   })
 
-  const handleFormSubmit = async (data: FormType) => {
+  const handleFormSubmit = async (values: FormType) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { confirmPassword, ...rest } = data
+    const { confirmPassword, ...rest } = values
 
     const response = await mutateAsync({
       ...rest,
       role: 'ROOT',
     })
-    if (response) {
+    if (response && response.success) {
       toast({
-        title: `Welcome, ${data.name}!`,
+        title: `Welcome, ${values.name}!`,
         description: 'Your account has been created successfully',
       })
       navigate('/session/sign-in')
