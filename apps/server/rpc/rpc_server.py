@@ -241,8 +241,7 @@ class RPCServer(RPCServerInterface):
 if __name__ == "__main__":
     host, port = env.RPC_HOST, env.RPC_PORT
     if not host or not port:
-        host = "0.0.0.0"
-        port = 7878
+        raise Exception("RPC_HOST or RPC_PORT not set")
     print(f"[+]Running on {host}:{port}")
 
     daemon: Pyro4.Daemon = Pyro4.Daemon(host=host, port=port)

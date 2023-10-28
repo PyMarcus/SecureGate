@@ -12,7 +12,7 @@
     "web:preview": "cd ./apps/web && vite preview",
     "lint": "eslint 'apps/web/src/**/*.@(js|jsx|ts|tsx)' && prettier --check 'apps/web/src/**/*.@(js|jsx|ts|tsx)'",
     "lint:fix": "eslint 'apps/web/src/**/*.@(js|jsx|ts|tsx)' --fix && prettier --write 'apps/web/src/**/*.@(js|jsx|ts|tsx)'",
-    "api": "python3 -m apps.api.main",
+    "api": "python3 -m apps.api.api",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },

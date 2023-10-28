@@ -38,4 +38,4 @@ if __name__ == "__main__":
     if not host or not port:
         raise Exception("API_HOST or API_PORT not set")
 
-    uvicorn.run("apps.api.main:app", host=host, port=port, log_level="info")
+    uvicorn.run("apps.api.api:app", host=host, port=port, log_level="info")
