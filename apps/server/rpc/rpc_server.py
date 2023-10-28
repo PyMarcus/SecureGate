@@ -46,18 +46,23 @@ class RPCServer(RPCServerInterface):
     def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         return self.__sign_up(credentials)
 
+    @Pyro4.expose
     def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__register_member(member)
 
+    @Pyro4.expose
     def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_user(user)
 
+    @Pyro4.expose
     def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_member(member)
 
+    @Pyro4.expose
     def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_members()
 
+    @Pyro4.expose
     def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_users()
 
