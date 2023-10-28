@@ -67,11 +67,9 @@ class RPCServer(RPCServerInterface):
             email: str = credentials["email"]
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
-            role: UserRole = (
-                UserRole.ROOT if credentials.get("role") is not None else UserRole.ADMIN
-            )
+            role: UserRole = UserRole.ROOT if credentials.get("role") == "root" else UserRole.ADMIN
+            created_uuid: uuid.UUID = uuid.uuid4()
             if role == UserRole.ROOT:
-                created_uuid: uuid.UUID = uuid.uuid4()
                 new_user: User = User(
                     id=created_uuid,
                     name=name,
@@ -82,7 +80,6 @@ class RPCServer(RPCServerInterface):
                 )
             else:
                 root_id = SelectMain.select_root_id()
-                created_uuid: uuid.UUID = uuid.uuid4()
                 new_user: User = User(
                     id=created_uuid,
                     name=name,
@@ -91,7 +88,7 @@ class RPCServer(RPCServerInterface):
                     root_id=root_id,
                     role=role,
                 )
-            print(new_user)
+            print(new_user.role)
             if InsertMain.insert_user(new_user):
                 LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
                 return True
@@ -100,6 +97,47 @@ class RPCServer(RPCServerInterface):
         except Exception as err:
             LogMaker.write_log(f"[-] {err}", "error")
             return False
+
+    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__register_member(member)
+
+    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_user(user)
+
+    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_member(member)
+
+    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_members()
+
+    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_users()
+
+    def __register_member(
+        self, member: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        name: str = member.get("name")
+        email: str = member.get("email")
+        rfid: str = member.get("rfid")
+        authorized: bool = member.get("authorized") if member.get("authorized") else True
+        added_by: uuid = member.get("added_by")
+        if isinstance(added_by, str):
+            added_by = uuid.UUID(added_by)
+        member: Member = Member(
+            name=name, email=email, rfid=rfid, authorized=authorized, added_by=added_by
+        )
+
+        if InsertMain.insert_member(member):
+            LogMaker.write_log(f"[+]{member} has been inserted", "info")
+            return True
+        LogMaker.write_log(f"[-]Fail to insert {member}", "info")
+        return False
+
+    def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        email: str = user.get("email")
+        user: User = SelectMain.select_user(email)
+        if user:
+            return {"status": 200}
 
     def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
         return {"error": "Access to the requested resource is forbidden", "status": 401}

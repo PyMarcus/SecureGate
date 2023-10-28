@@ -55,6 +55,19 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.sign_up(request)
 
+    def register_member(self, request: typing.Dict[str, typing.Any]) -> bool:
+        """
+        The register_member method creates a new member, allowing them access through the gate.
+        It takes a dictionary as input (request), containing member registration information.
+        The dictionary must include four mandatory fields:
+
+            name: A string representing the member's name.
+            email: A string representing the member's email address.
+            rfid: A string representing the member's RFID (Radio-Frequency Identification) tag information.
+            added_by: A string representing the ID of the person who added this member to the system.
+        """
+        return self.client.register_member(request)
+
 
 def get_rpc_client() -> RPCSingletonClient:
     """
@@ -71,12 +84,27 @@ if __name__ == "__main__":
         "email": "imaroot@email.com",
         "password": "rootsecurity",
         "role": "root"
-    }))"""
+    }))
     print(
         client.sign_in(
             {
                 "email": "imaroot@email.com",
                 "password": "rootsecurity",
+            }
+        )
+    )
+    print(client.sign_up({
+        "name": "admin",
+        "email": "imaadmin@email.com",
+        "password": "adminsecurity",
+    }))"""
+    print(
+        client.register_member(
+            {
+                "name": "aluno01",
+                "email": "aluno01@email.com",
+                "rfid": "40028922ABC",
+                "added_by": "0ad91ffb-78dd-4cd3-aeaf-519c7da27b52",
             }
         )
     )
