@@ -16,4 +16,7 @@ def signin(body: SigninSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)
 
 @routes.post("/signup")
 def signup(body: SignupSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    return rpc.sign_up(body.model_dump())
+    print(f"data: {body.model_dump()}")
+    result = rpc.sign_up(body.model_dump())
+    print(result)
+    return result

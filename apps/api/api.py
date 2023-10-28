@@ -9,7 +9,7 @@ from apps.api.routes.users_routes import routes as users_routes
 from packages.config.env import env
 
 app = FastAPI(
-    title="SecureGate API",
+    title="SecureGate API dfs",
 )
 
 origins = ["*"]
@@ -38,4 +38,6 @@ if __name__ == "__main__":
     if not host or not port:
         raise Exception("API_HOST or API_PORT not set")
 
-    uvicorn.run("apps.api.api:app", host=host, port=port, log_level="info")
+    uvicorn.run(
+        "apps.api.api:app", host=host, port=port, log_level="info", reload_dirs="apps", reload=True
+    )

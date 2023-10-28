@@ -9,10 +9,13 @@ venv
 
 # postgres
 .postgres/
+postgres/
 
 # mqtt
 .mqtt/data
 .mqtt/log
+mqtt/data
+mqtt/log
 
 # environment
 .env

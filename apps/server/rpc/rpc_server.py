@@ -87,7 +87,7 @@ class RPCServer(RPCServerInterface):
             email: str = credentials["email"]
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
-            role: UserRole = UserRole.ROOT if credentials.get("role") == "root" else UserRole.ADMIN
+            role: UserRole = UserRole.ROOT if credentials.get("role") == "ROOT" else UserRole.ADMIN
             created_uuid: uuid.UUID = uuid.uuid4()
             if role == UserRole.ROOT:
                 new_user: User = User(
