@@ -19,5 +19,16 @@ class InsertMain:
                 session.add(user)
                 session.commit()
             return True
+        except Exception as e:
+            print(e)
+            return False
+
+    @classmethod
+    def insert_member(cls, member: Member) -> bool:
+        try:
+            with cls.__session.create_session() as session:
+                session.add(member)
+                session.commit()
+                return True
         except Exception:
             return False

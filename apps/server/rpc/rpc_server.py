@@ -46,6 +46,26 @@ class RPCServer(RPCServerInterface):
     def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         return self.__sign_up(credentials)
 
+    @Pyro4.expose
+    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__register_member(member)
+
+    @Pyro4.expose
+    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_user(user)
+
+    @Pyro4.expose
+    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_member(member)
+
+    @Pyro4.expose
+    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_members()
+
+    @Pyro4.expose
+    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_users()
+
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
@@ -55,10 +75,11 @@ class RPCServer(RPCServerInterface):
         hashed_password: str = user.password
         user_id: str = str(user.id)
         name: str = user.name
+        role: UserRole = user.role
         if not Security.verify_password(hashed_password, password):
             return self.__unauthorized_message()
         LogMaker.write_log(f"{user} is logged!", "info")
-        return self.__authorized_message(name, email, user_id)
+        return self.__authorized_user_message(name, email, user_id, role)
 
     def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         try:
@@ -66,10 +87,28 @@ class RPCServer(RPCServerInterface):
             email: str = credentials["email"]
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
-
-            new_user: User = User(id=uuid.uuid4(), name=name, email=email, password=hashed_password)
-            print(new_user)
-
+            role: UserRole = UserRole.ROOT if credentials.get("role") == "root" else UserRole.ADMIN
+            created_uuid: uuid.UUID = uuid.uuid4()
+            if role == UserRole.ROOT:
+                new_user: User = User(
+                    id=created_uuid,
+                    name=name,
+                    email=email,
+                    password=hashed_password,
+                    root_id=created_uuid,
+                    role=role,
+                )
+            else:
+                root_id = SelectMain.select_root_id()
+                new_user: User = User(
+                    id=created_uuid,
+                    name=name,
+                    email=email,
+                    password=hashed_password,
+                    root_id=root_id,
+                    role=role,
+                )
+            print(new_user.role)
             if InsertMain.insert_user(new_user):
                 LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
                 return True
@@ -79,34 +118,131 @@ class RPCServer(RPCServerInterface):
             LogMaker.write_log(f"[-] {err}", "error")
             return False
 
-    def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
-        return {"error": "Access to the requested resource is forbidden", "status": "Error"}
+    def __register_member(
+        self, member: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        name: str = member.get("name")
+        email: str = member.get("email")
+        rfid: str = member.get("rfid")
+        authorized: bool = member.get("authorized") if member.get("authorized") else True
+        added_by: uuid = member.get("added_by")
+        if isinstance(added_by, str):
+            added_by = uuid.UUID(added_by)
+        member: Member = Member(
+            name=name, email=email, rfid=rfid, authorized=authorized, added_by=added_by
+        )
 
-    def __authorized_message(
-        self, name: str, email: str, user_id: str
+        if InsertMain.insert_member(member):
+            LogMaker.write_log(f"[+]{member} has been inserted", "info")
+            return True
+        LogMaker.write_log(f"[-]Fail to insert {member}", "info")
+        return False
+
+    def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        email: str = user.get("email")
+        user_data: User = SelectMain.select_user(email)
+        if user_data:
+            return self.__authorized_user_message(
+                user_data.name, user_data.email, str(user_data.id), user_data.role
+            )
+        return self.__bad_request_message()
+
+    def __select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        email: str = member.get("email")
+        member_data: Member = SelectMain.select_member(email)
+        if member_data:
+            return self.__authorized_member_message(
+                member_data.name,
+                member_data.email,
+                member_data.id,
+                member_data.rfid,
+                member_data.added_by,
+                member_data.authorized,
+            )
+        return self.__bad_request_message()
+
+    def __select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        data = SelectMain.select_all_users()
+        response: typing.List = list()
+        for content in data:
+            response.append(
+                {
+                    "name": content.name,
+                    "email": content.email,
+                    "role": content.role,
+                    "root_id": content.root_id,
+                    "id": content.id,
+                }
+            )
+        return response
+
+    def __select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        data = SelectMain.select_all_members()
+        response: typing.List = list()
+        for content in data:
+            response.append(
+                {
+                    "name": content.name,
+                    "email": content.email,
+                    "rfid": content.rfid,
+                    "added_by": str(content.added_by),
+                    "id": content.id,
+                    "authorized": content.authorized,
+                }
+            )
+        return response
+
+    def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
+        return {"error": "Access to the requested resource is forbidden", "status": 401}
+
+    def __authorized_user_message(
+        self, name: str, email: str, user_id: str, role: UserRole
     ) -> typing.Dict[str, typing.Any]:
         return {
             "error": None,
-            "status": "OK",
+            "status": 200,
             "message": "Welcome!",
             "user_request": name,
             "email": email,
             "time": str(datetime.datetime.now()),
             "user_id": user_id,
+            "role": role,
             "token": Security.generate_token(user_id),
+        }
+
+    def __authorized_member_message(
+        self,
+        name: str,
+        email: str,
+        member_id: str,
+        rfid: str,
+        added_by: uuid.UUID,
+        authorized: bool,
+    ) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": None,
+            "status": 200,
+            "message": f"Member {name}",
+            "rfid": rfid,
+            "added_by": str(added_by),
+            "email": email,
+            "time": str(datetime.datetime.now()),
+            "member_id": member_id,
+            "authorized": authorized,
         }
 
     def __bad_request_message(self) -> typing.Dict[str, typing.Any]:
         return {
             "error": "Bad request",
-            "status": "Error",
+            "status": 400,
         }
 
 
 if __name__ == "__main__":
     host, port = env.RPC_HOST, env.RPC_PORT
     if not host or not port:
-        raise Exception("RPC_HOST or RPC_PORT not set")
+        host = "0.0.0.0"
+        port = 7878
     print(f"[+]Running on {host}:{port}")
 
     daemon: Pyro4.Daemon = Pyro4.Daemon(host=host, port=port)
@@ -114,7 +250,6 @@ if __name__ == "__main__":
     server: RPCServer = RPCServer()
     uri: Pyro4.URI = daemon.register(server)
     set_pyro_uri(uri)
-    print(f"[+]URI {uri}")
     LogMaker.write_log(f"[+]SERVER URI: {uri}", "info")
 
     thread: threading.Thread = threading.Thread(target=daemon.requestLoop)

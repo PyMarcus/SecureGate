@@ -5,6 +5,7 @@ import bcrypt
 from cryptography.fernet import Fernet
 from itsdangerous import URLSafeTimedSerializer
 
+from libs import ReadEnv
 from packages.config.env import env
 
 
@@ -20,7 +21,9 @@ class Security:
         """creates a 24-hour token to the user"""
         secret_key = env.SECRET_KEY
         if not secret_key:
-            raise ValueError("SECRET_KEY is not set.")
+            # raise ValueError("SECRET_KEY is not set.")
+            re: ReadEnv = ReadEnv("../../../.env")
+            secret_key = re.secret_key
 
         token: URLSafeTimedSerializer = URLSafeTimedSerializer(secret_key)
         return token.dumps(user_id)
@@ -33,7 +36,9 @@ class Security:
         """checks whether the token entered is valid."""
         secret_key = env.SECRET_KEY
         if not secret_key:
-            raise ValueError("SECRET_KEY is not set.")
+            # raise ValueError("SECRET_KEY is not set.")
+            re: ReadEnv = ReadEnv("../../../.env")
+            secret_key = re.secret_key
 
         content = URLSafeTimedSerializer(secret_key)
         return content.loads(token) == user_id

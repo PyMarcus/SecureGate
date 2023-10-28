@@ -23,3 +23,23 @@ class RPCServerInterface(ABC):
     @abstractmethod
     def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing sing_in method")
+
+    @abstractmethod
+    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing register_member method")
+
+    @abstractmethod
+    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing register_member method")
+
+    @abstractmethod
+    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing register_member method")
+
+    @abstractmethod
+    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        raise NotImplementedError("missing register_member method")
+
+    @abstractmethod
+    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        raise NotImplementedError("missing register_member method")

@@ -1,6 +1,7 @@
 # python
 .venv/
 __pycache__/
+venv
 
 # tools
 .idea/
@@ -24,3 +25,5 @@ securegate.log
 
 # app
 .pyro_uri
+!/postgres/
+postgres
