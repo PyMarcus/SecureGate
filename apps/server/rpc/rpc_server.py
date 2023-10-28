@@ -59,7 +59,7 @@ class RPCServer(RPCServerInterface):
         if not Security.verify_password(hashed_password, password):
             return self.__unauthorized_message()
         LogMaker.write_log(f"{user} is logged!", "info")
-        return self.__authorized_message(name, email, user_id, role)
+        return self.__authorized_user_message(name, email, user_id, role)
 
     def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         try:
@@ -135,14 +135,62 @@ class RPCServer(RPCServerInterface):
 
     def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = user.get("email")
-        user: User = SelectMain.select_user(email)
-        if user:
-            return {"status": 200}
+        user_data: User = SelectMain.select_user(email)
+        if user_data:
+            return self.__authorized_user_message(
+                user_data.name, user_data.email, str(user_data.id), user_data.role
+            )
+        return self.__bad_request_message()
+
+    def __select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        email: str = member.get("email")
+        member_data: Member = SelectMain.select_member(email)
+        if member_data:
+            return self.__authorized_member_message(
+                member_data.name,
+                member_data.email,
+                member_data.id,
+                member_data.rfid,
+                member_data.added_by,
+                member_data.authorized,
+            )
+        return self.__bad_request_message()
+
+    def __select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        data = SelectMain.select_all_users()
+        response: typing.List = list()
+        for content in data:
+            response.append(
+                {
+                    "name": content.name,
+                    "email": content.email,
+                    "role": content.role,
+                    "root_id": content.root_id,
+                    "id": content.id,
+                }
+            )
+        return response
+
+    def __select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        data = SelectMain.select_all_members()
+        response: typing.List = list()
+        for content in data:
+            response.append(
+                {
+                    "name": content.name,
+                    "email": content.email,
+                    "rfid": content.rfid,
+                    "added_by": str(content.added_by),
+                    "id": content.id,
+                    "authorized": content.authorized,
+                }
+            )
+        return response
 
     def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
         return {"error": "Access to the requested resource is forbidden", "status": 401}
 
-    def __authorized_message(
+    def __authorized_user_message(
         self, name: str, email: str, user_id: str, role: UserRole
     ) -> typing.Dict[str, typing.Any]:
         return {
@@ -155,6 +203,27 @@ class RPCServer(RPCServerInterface):
             "user_id": user_id,
             "role": role,
             "token": Security.generate_token(user_id),
+        }
+
+    def __authorized_member_message(
+        self,
+        name: str,
+        email: str,
+        member_id: str,
+        rfid: str,
+        added_by: uuid.UUID,
+        authorized: bool,
+    ) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": None,
+            "status": 200,
+            "message": f"Member {name}",
+            "rfid": rfid,
+            "added_by": str(added_by),
+            "email": email,
+            "time": str(datetime.datetime.now()),
+            "member_id": member_id,
+            "authorized": authorized,
         }
 
     def __bad_request_message(self) -> typing.Dict[str, typing.Any]:
