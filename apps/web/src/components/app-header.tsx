@@ -1,5 +1,8 @@
 import { UserNav } from '@/components/user-nav'
 import { useSessionStore } from '@/stores/session-store'
+import { LockKey } from '@phosphor-icons/react'
+import { Link } from 'react-router-dom'
+import { AppNavigation } from './app-navigation'
 
 export const AppHeader = () => {
   const { session, clearSession } = useSessionStore()
@@ -8,8 +11,17 @@ export const AppHeader = () => {
 
   return (
     <div className="w-full px-6 md:px-8 border-b sticky bg-background">
-      <header className="flex items-center justify-between h-14">
-        <span>Secure Gate</span>
+      <header className="flex items-center justify-between h-16 gap-12">
+        <Link
+          to="/dashboard"
+          className="text-xl font-bold inline-flex gap-1 items-center leading-none"
+        >
+          <LockKey weight="bold" size={23} className="text-tertiary" />
+          <div className="hidden md:block">SecureGate</div>
+          <span className="md:hidden">SG</span>
+        </Link>
+
+        <AppNavigation />
 
         <div className="inline-flex gap-4 items-center">
           <div className="hidden md:flex flex-col space-y-1 text-end">
@@ -18,7 +30,12 @@ export const AppHeader = () => {
               {email}
             </p>
           </div>
-          <UserNav name={name} email={email} onSignOut={clearSession} />
+          <UserNav
+            avatar="/user.svg"
+            name={name}
+            email={email}
+            onSignOut={clearSession}
+          />
         </div>
       </header>
     </div>

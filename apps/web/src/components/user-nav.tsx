@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { GearSix, SignOut, User } from '@phosphor-icons/react'
+import { useNavigate } from 'react-router-dom'
 
 interface UserNavProps {
   name: string
@@ -25,6 +26,11 @@ export const UserNav = ({
   avatar = '',
   onSignOut,
 }: UserNavProps) => {
+  const navigate = useNavigate()
+
+  const handleNavigateToProfile = () => navigate('/profile')
+  const handleNavigateToPreferences = () => navigate('/preferences')
+
   const avatarFallback = name
     .split(' ')
     .map((n) => n[0])
@@ -33,8 +39,8 @@ export const UserNav = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-          <Avatar className="h-10 w-10">
+        <Button variant="ghost" className="relative h-12 w-12 rounded-full">
+          <Avatar className="h-12 w-12">
             <AvatarImage src={avatar} alt={name} />
             <AvatarFallback>{avatarFallback}</AvatarFallback>
           </Avatar>
@@ -53,14 +59,14 @@ export const UserNav = ({
           <DropdownMenuSeparator />
         </div>
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            Profile
+          <DropdownMenuItem onClick={handleNavigateToProfile}>
+            <span>Profile</span>
             <DropdownMenuShortcut>
               <User />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            Preferences
+          <DropdownMenuItem onClick={handleNavigateToPreferences}>
+            <span>Preferences</span>
             <DropdownMenuShortcut>
               <GearSix />
             </DropdownMenuShortcut>
@@ -68,7 +74,7 @@ export const UserNav = ({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onSignOut}>
-          Sign out
+          <span>Sign out</span>
           <DropdownMenuShortcut>
             <SignOut />
           </DropdownMenuShortcut>
