@@ -12,6 +12,8 @@ from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
+from packages.errors.errors import BadRequestError, InternalServerError, NotFoundError
+from packages.responses.responses import CreatedResponse, OKResponse
 
 
 def authorization_required(function: typing.Callable) -> typing.Any:
@@ -84,16 +86,26 @@ class RPCServer(RPCServerInterface):
         user = SelectMain.select_user(email)
 
         if user is None:
-            return self.__bad_request_message()
-
+            return NotFoundError("User not found").dict()
         hashed_password: str = user.password
         user_id: str = str(user.id)
         name: str = user.name
         role: UserRole = user.role
+
         if not Security.verify_password(hashed_password, password):
-            return self.__unauthorized_message()
+            return BadRequestError("Invalid Password").dict()
         LogMaker.write_log(f"{user} is logged!", "info")
-        return self.__authorized_user_message(name, email, user_id, role)
+
+        return OKResponse(
+            message="Successfully signed in",
+            data={
+                "user_id": user_id,
+                "name": name,
+                "email": email,
+                "token": Security.generate_token(email),
+                "role": role,
+            },
+        ).dict()
 
     def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         try:
@@ -101,7 +113,7 @@ class RPCServer(RPCServerInterface):
             email: str = credentials["email"]
             password: str = credentials["password"]
             hashed_password: str = Security.hash_password(password)
-            role: UserRole = UserRole.ROOT if credentials.get("role") == "root" else UserRole.ADMIN
+            role: UserRole = UserRole.ROOT if credentials.get("role") == "ROOT" else UserRole.ADMIN
             created_uuid: uuid.UUID = uuid.uuid4()
             if role == UserRole.ROOT:
                 new_user: User = User(
@@ -125,12 +137,13 @@ class RPCServer(RPCServerInterface):
             print(new_user.role)
             if InsertMain.insert_user(new_user):
                 LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
-                return True
+                return CreatedResponse(message="Successfully signed up", data=True).dict()
+
             LogMaker.write_log(f"[-]Fail to insert {new_user}", "info")
-            return False
+            return BadRequestError("Fail to insert user").dict()
         except Exception as err:
             LogMaker.write_log(f"[-] {err}", "error")
-            return False
+            return InternalServerError("Internal server error").dict()
 
     @authorization_required
     def __register_member(
@@ -280,8 +293,7 @@ class RPCServer(RPCServerInterface):
 if __name__ == "__main__":
     host, port = env.RPC_HOST, env.RPC_PORT
     if not host or not port:
-        host = "0.0.0.0"
-        port = 7878
+        raise Exception("RPC_HOST or RPC_PORT not set")
     print(f"[+]Running on {host}:{port}")
 
     daemon: Pyro4.Daemon = Pyro4.Daemon(host=host, port=port)

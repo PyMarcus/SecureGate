@@ -43,7 +43,7 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.sign_in(request)
 
-    def sign_up(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def sign_up(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
         The sign_up method takes a dictionary as input (request),
         containing user registration information. Specifically, the
@@ -152,9 +152,9 @@ if __name__ == "__main__":
             "password": "rootsecurity",
         }
     )
-    header = {"email": "imaroot@email.com", "token": n.get("token")}
+    header = {"email": "imaroot@email.com", "token": n.get("data").get("token")}
 
     print(n)
     print(header)
     print(client.select_all_users(header))
-    print(client.select_user({"email": "imaroot@email.com", "token": n.get("token")}))
+    print(client.select_user({"email": "imaroot@email.com", "token": n.get("data").get("token")}))

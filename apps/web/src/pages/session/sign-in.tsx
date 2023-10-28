@@ -1,5 +1,13 @@
 import { Button } from '@/components/ui/button'
 import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
   Form,
   FormControl,
   FormField,
@@ -44,19 +52,21 @@ export const SignIn = () => {
     },
   })
 
-  const handleFormSubmit = async (data: FormType) => {
-    const response = await mutateAsync(data)
-    if (response) {
+  const handleFormSubmit = async (values: FormType) => {
+    const response = await mutateAsync(values)
+    if (response && response.success) {
+      const { data } = response
+
       setSession({
         user: {
-          id: response.user_id,
-          email: response.email,
-          name: response.user_request,
+          id: data.user_id,
+          email: data.email,
+          name: data.name,
         },
-        token: response.token,
+        token: data.token,
       })
       toast({
-        title: `Hi, ${response.user_request}!`,
+        title: `Hi, ${data.name}!`,
         description: 'You have successfully logged in to your account.',
       })
       navigate('/')
@@ -64,62 +74,60 @@ export const SignIn = () => {
   }
 
   return (
-    <section className="w-full max-w-sm">
-      <div>
-        <Button
-          variant="ghost"
-          className="fixed top-6 right-6 md:top-8 md:right-8"
-          asChild
-        >
-          <Link to="/session/sign-up">Sign Up</Link>
-        </Button>
-      </div>
-      <header className="mb-4 text-center">
-        <h1 className="text-2xl font-semibold tracking-tight">
-          Sign in to your account
-        </h1>
-        <p className="text-sm text-muted-foreground">
+    <Card className="border-transparent sm:border-border w-full max-w-sm">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-2xl">Sign In to your account</CardTitle>
+        <CardDescription>
           Fill in your details to login to your account
-        </p>
-      </header>
+        </CardDescription>
+      </CardHeader>
 
-      <Form {...form}>
-        <form
-          className="space-y-2"
-          onSubmit={form.handleSubmit(handleFormSubmit)}
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="Email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input placeholder="Password" type="password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button className="w-full" type="submit">
-            {isLoading && <SpinnerGap className="mr-2 animate-spin" />}
-            <span>Sign In</span>
-          </Button>
-        </form>
-      </Form>
-    </section>
+      <CardContent>
+        <Form {...form}>
+          <form
+            className="space-y-2"
+            onSubmit={form.handleSubmit(handleFormSubmit)}
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Password" type="password" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="w-full" type="submit">
+              {isLoading && <SpinnerGap className="mr-2 animate-spin" />}
+              <span>Sign In</span>
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+
+      <CardFooter className="flex items-center justify-center text-sm p-0 pb-6">
+        <p className="text-muted-foreground">Don&apos;t have an account? </p>
+        <Button variant="link" className="px-2" asChild>
+          <Link to="/session/sign-up">Sign up</Link>
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }

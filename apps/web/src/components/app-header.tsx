@@ -21,7 +21,9 @@ export const AppHeader = () => {
           <span className="md:hidden">SG</span>
         </Link>
 
-        <AppNavigation />
+        <div className="hidden md:block flex-1">
+          <AppNavigation />
+        </div>
 
         <div className="inline-flex gap-4 items-center">
           <div className="hidden md:flex flex-col space-y-1 text-end">

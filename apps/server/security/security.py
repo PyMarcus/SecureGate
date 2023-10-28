@@ -5,7 +5,6 @@ import bcrypt
 from cryptography.fernet import Fernet
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 
-from libs import ReadEnv
 from packages.config.env import env
 
 
@@ -21,9 +20,7 @@ class Security:
         """creates a token to the user"""
         secret_key = env.SECRET_KEY
         if not secret_key:
-            # raise ValueError("SECRET_KEY is not set.")
-            re: ReadEnv = ReadEnv("../../../.env")
-            secret_key = re.secret_key
+            raise Exception("SECRET_KEY is not set.")
 
         token: URLSafeTimedSerializer = URLSafeTimedSerializer(secret_key)
         return token.dumps(email)
@@ -36,9 +33,7 @@ class Security:
         """checks whether the token entered is valid."""
         secret_key = env.SECRET_KEY
         if not secret_key:
-            # raise ValueError("SECRET_KEY is not set.")
-            re: ReadEnv = ReadEnv("../../../.env")
-            secret_key = re.secret_key
+            raise Exception("SECRET_KEY is not set.")
 
         content = URLSafeTimedSerializer(secret_key)
         try:

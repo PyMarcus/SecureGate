@@ -10,8 +10,8 @@ from .base_model import BaseModel
 
 
 class UserRole(E):
-    ROOT = "root"
-    ADMIN = "admin"
+    ROOT = "ROOT"
+    ADMIN = "ADMIN"
 
 
 class User(BaseModel):
@@ -31,7 +31,7 @@ class User(BaseModel):
     role = sa.Column(
         sa.Enum(UserRole, create_constraint=False, native_enum=False),
         default=UserRole.ADMIN,
-        server_default="admin",
+        server_default="ADMIN",
     )
 
     def __repr__(self) -> str:

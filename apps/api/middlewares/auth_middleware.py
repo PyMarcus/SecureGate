@@ -13,6 +13,6 @@ def auth_middleware(request: Request, authorization: str = Header(...)):
     request.state.token = authorization
 
 
-# set dependencies=[Depends(auth_middleware)] in route method
-# set request: Request as param in route method
-# set request.state.token as param in route method
+# set `dependencies=[Depends(auth_middleware)]` in route method
+# set `request: Request` as param in route method
+# set `request.state.token` to get token in route method
