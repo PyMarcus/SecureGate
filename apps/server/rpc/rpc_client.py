@@ -43,7 +43,7 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.sign_in(request)
 
-    def sign_up(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def sign_up(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
         The sign_up method takes a dictionary as input (request),
         containing user registration information. Specifically, the

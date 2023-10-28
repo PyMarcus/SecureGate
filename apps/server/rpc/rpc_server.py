@@ -12,8 +12,8 @@ from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
-from packages.errors.errors import BadRequestError, NotFoundError
-from packages.responses.responses import OKResponse
+from packages.errors.errors import BadRequestError, InternalServerError, NotFoundError
+from packages.responses.responses import CreatedResponse, OKResponse
 
 
 @Pyro4.expose
@@ -78,6 +78,7 @@ class RPCServer(RPCServerInterface):
         user_id: str = str(user.id)
         name: str = user.name
         role: UserRole = user.role
+
         if not Security.verify_password(hashed_password, password):
             return BadRequestError("Invalid Password").dict()
         LogMaker.write_log(f"{user} is logged!", "info")
@@ -122,12 +123,13 @@ class RPCServer(RPCServerInterface):
             print(new_user.role)
             if InsertMain.insert_user(new_user):
                 LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
-                return True
+                return CreatedResponse(message="Successfully signed up", data=True).dict()
+
             LogMaker.write_log(f"[-]Fail to insert {new_user}", "info")
-            return False
+            return BadRequestError("Fail to insert user").dict()
         except Exception as err:
             LogMaker.write_log(f"[-] {err}", "error")
-            return False
+            return InternalServerError("Internal server error").dict()
 
     def __register_member(
         self, member: typing.Dict[str, typing.Any]

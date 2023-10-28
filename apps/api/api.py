@@ -2,6 +2,7 @@ from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from apps.api.middlewares.auth_middleware import auth_middleware
+from apps.api.middlewares.exception_middleware import exception_middleware
 from apps.api.routes.management_routes import routes as management_routes
 from apps.api.routes.members_routes import routes as members_routes
 from apps.api.routes.session_routes import routes as session_routes
@@ -29,6 +30,8 @@ app.include_router(members_routes, dependencies=[Depends(auth_middleware)])
 
 
 app.mount(f"/{env.API_URL_PREFIX}", app)
+
+app.add_exception_handler(Exception, exception_middleware)
 
 
 if __name__ == "__main__":
