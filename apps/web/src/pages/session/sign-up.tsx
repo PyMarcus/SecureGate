@@ -58,7 +58,10 @@ export const SignUp = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...rest } = data
 
-    const response = await mutateAsync(rest)
+    const response = await mutateAsync({
+      ...rest,
+      role: 'ROOT',
+    })
     if (response) {
       toast({
         title: `Welcome, ${data.name}!`,

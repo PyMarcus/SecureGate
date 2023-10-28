@@ -2,11 +2,15 @@ import { cn } from '@/lib/utils'
 import { APP_PAGES } from '@/routes/app-pages'
 import { NavLink } from 'react-router-dom'
 
-export const AppNavigation = () => {
+interface AppNavigationProps {
+  mobile?: boolean
+}
+
+export const AppNavigation = ({ mobile }: AppNavigationProps) => {
   return (
-    <nav className="flex-1 hidden md:block">
-      <ul className="flex gap-4">
-        {APP_PAGES.map(({ name, path }) => (
+    <nav className={cn('flex-1', mobile && 'w-full py-4 px-6')}>
+      <ul className={cn('flex gap-4', mobile && 'justify-around')}>
+        {APP_PAGES.map(({ name, path, icon }) => (
           <li key={path}>
             <NavLink
               to={path}
@@ -17,7 +21,7 @@ export const AppNavigation = () => {
                 )
               }
             >
-              {name}
+              {mobile ? icon : name}
             </NavLink>
           </li>
         ))}

@@ -1,8 +1,11 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from apps.api.middlewares.auth_middleware import auth_middleware
 from apps.api.routes.management_routes import routes as management_routes
+from apps.api.routes.members_routes import routes as members_routes
 from apps.api.routes.session_routes import routes as session_routes
+from apps.api.routes.users_routes import routes as users_routes
 from packages.config.env import env
 
 app = FastAPI(
@@ -20,11 +23,13 @@ app.add_middleware(
 )
 
 app.include_router(management_routes)
-
 app.include_router(session_routes)
+app.include_router(users_routes, dependencies=[Depends(auth_middleware)])
+app.include_router(members_routes, dependencies=[Depends(auth_middleware)])
 
 
 app.mount(f"/{env.API_URL_PREFIX}", app)
+
 
 if __name__ == "__main__":
     import uvicorn

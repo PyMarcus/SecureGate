@@ -1,6 +1,6 @@
 import { AppHeader } from '@/components/app-header'
 import { Outlet } from 'react-router-dom'
-import { MobileNavigation } from '../mobile-navigation'
+import { AppNavigation } from '../app-navigation'
 
 export const AppLayout = () => {
   return (
@@ -11,7 +11,9 @@ export const AppLayout = () => {
         <Outlet />
       </div>
 
-      <MobileNavigation />
+      <div className="w-full md:hidden">
+        <AppNavigation mobile />
+      </div>
     </div>
   )
 }
