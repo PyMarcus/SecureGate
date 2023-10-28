@@ -11,7 +11,8 @@ routes = APIRouter(
 
 @routes.post("/signin")
 def signin(body: SigninSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    return rpc.sign_in(body.model_dump())
+    result = rpc.sign_in(body.model_dump())
+    return result
 
 
 @routes.post("/signup")

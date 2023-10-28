@@ -39,5 +39,10 @@ if __name__ == "__main__":
         raise Exception("API_HOST or API_PORT not set")
 
     uvicorn.run(
-        "apps.api.api:app", host=host, port=port, log_level="info", reload_dirs="apps", reload=True
+        "apps.api.api:app",
+        host=host,
+        port=port,
+        log_level="info",
+        reload_dirs=["apps", "libs"],
+        reload=True,
     )
