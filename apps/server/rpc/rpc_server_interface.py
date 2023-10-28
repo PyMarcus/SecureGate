@@ -37,9 +37,13 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing register_member method")
 
     @abstractmethod
-    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+    def select_all_members(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         raise NotImplementedError("missing register_member method")
 
     @abstractmethod
-    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+    def select_all_users(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         raise NotImplementedError("missing register_member method")

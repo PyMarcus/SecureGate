@@ -31,7 +31,7 @@ class DBConnection:
             db_url = env.DATABASE_URL
             if not db_url:
                 re: ReadEnv = ReadEnv("/home/marcus/Documents/SecureGate/.env.example")
-                db_url = f"postgresql://{re.database_username}:{re.database_password}@{re.database_host}:{32771}/{re.database_name}"
+                db_url = f"postgresql://{re.database_username}:{re.database_password}@{re.database_host}:{5432}/{re.database_name}"
 
             cls.__engine = sa.create_engine(url=db_url, echo=False)
         LogMaker.write_log("[+]Connected on database", "info")

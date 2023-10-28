@@ -14,6 +14,14 @@ from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
 
 
+def authorization_required(function: typing.Callable) -> typing.Any:
+    def wrapper(*args) -> typing.Any:
+        LogMaker.write_log(f"[+]Calling {function.__name__}", "info")
+        return function(*args)
+
+    return wrapper
+
+
 @Pyro4.expose
 class RPCServer(RPCServerInterface):
     """
@@ -59,19 +67,25 @@ class RPCServer(RPCServerInterface):
         return self.__select_member(member)
 
     @Pyro4.expose
-    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_members()
+    def select_all_members(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_members(header)
 
     @Pyro4.expose
-    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_users()
+    def select_all_users(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_users(header)
 
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
         user = SelectMain.select_user(email)
+
         if user is None:
             return self.__bad_request_message()
+
         hashed_password: str = user.password
         user_id: str = str(user.id)
         name: str = user.name
@@ -118,79 +132,104 @@ class RPCServer(RPCServerInterface):
             LogMaker.write_log(f"[-] {err}", "error")
             return False
 
+    @authorization_required
     def __register_member(
         self, member: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
-        name: str = member.get("name")
-        email: str = member.get("email")
-        rfid: str = member.get("rfid")
-        authorized: bool = member.get("authorized") if member.get("authorized") else True
-        added_by: uuid = member.get("added_by")
-        if isinstance(added_by, str):
-            added_by = uuid.UUID(added_by)
-        member: Member = Member(
-            name=name, email=email, rfid=rfid, authorized=authorized, added_by=added_by
-        )
+        if member.get("email") and member.get("token"):
+            if Security.verify_token(member.get("email"), member.get("token")):
+                name: str = member.get("name")
+                email: str = member.get("email")
+                rfid: str = member.get("rfid")
+                authorized: bool = member.get("authorized") if member.get("authorized") else True
+                added_by: uuid = member.get("added_by")
+                if isinstance(added_by, str):
+                    added_by = uuid.UUID(added_by)
+                member: Member = Member(
+                    name=name, email=email, rfid=rfid, authorized=authorized, added_by=added_by
+                )
 
-        if InsertMain.insert_member(member):
-            LogMaker.write_log(f"[+]{member} has been inserted", "info")
-            return True
-        LogMaker.write_log(f"[-]Fail to insert {member}", "info")
-        return False
+                if InsertMain.insert_member(member):
+                    LogMaker.write_log(f"[+]{member} has been inserted", "info")
+                    return True
+                LogMaker.write_log(f"[-]Fail to insert {member}", "info")
+                return False
+        return self.__unauthorized_message()
 
+    @authorization_required
     def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        email: str = user.get("email")
-        user_data: User = SelectMain.select_user(email)
-        if user_data:
-            return self.__authorized_user_message(
-                user_data.name, user_data.email, str(user_data.id), user_data.role
-            )
-        return self.__bad_request_message()
+        if user.get("email") and user.get("token"):
+            if Security.verify_token(user.get("email"), user.get("token")):
+                email: str = user.get("email")
+                user_data: User = SelectMain.select_user(email)
+                if user_data:
+                    return self.__authorized_user_message(
+                        user_data.name, user_data.email, str(user_data.id), user_data.role
+                    )
+                return self.__bad_request_message()
+        return self.__unauthorized_message()
 
+    @authorization_required
     def __select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        email: str = member.get("email")
-        member_data: Member = SelectMain.select_member(email)
-        if member_data:
-            return self.__authorized_member_message(
-                member_data.name,
-                member_data.email,
-                member_data.id,
-                member_data.rfid,
-                member_data.added_by,
-                member_data.authorized,
-            )
-        return self.__bad_request_message()
+        if member.get("email") and member.get("token"):
+            if Security.verify_token(member.get("email"), member.get("token")):
+                email: str = member.get("email")
+                member_data: Member = SelectMain.select_member(email)
+                if member_data:
+                    return self.__authorized_member_message(
+                        member_data.name,
+                        member_data.email,
+                        member_data.id,
+                        member_data.rfid,
+                        member_data.added_by,
+                        member_data.authorized,
+                    )
+                return self.__bad_request_message()
+        return self.__unauthorized_message()
 
-    def __select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        data = SelectMain.select_all_users()
-        response: typing.List = list()
-        for content in data:
-            response.append(
-                {
-                    "name": content.name,
-                    "email": content.email,
-                    "role": content.role,
-                    "root_id": content.root_id,
-                    "id": content.id,
-                }
-            )
-        return response
+    @authorization_required
+    def __select_all_users(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        if header.get("email") and header.get("token"):
+            print(header)
+            if Security.verify_token(header.get("email"), header.get("token")):
+                data = SelectMain.select_all_users()
+                response: typing.List = list()
+                for content in data:
+                    response.append(
+                        {
+                            "name": content.name,
+                            "email": content.email,
+                            "role": content.role,
+                            "root_id": content.root_id,
+                            "id": content.id,
+                        }
+                    )
+                return response
+        return self.__unauthorized_message()
 
-    def __select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        data = SelectMain.select_all_members()
-        response: typing.List = list()
-        for content in data:
-            response.append(
-                {
-                    "name": content.name,
-                    "email": content.email,
-                    "rfid": content.rfid,
-                    "added_by": str(content.added_by),
-                    "id": content.id,
-                    "authorized": content.authorized,
-                }
-            )
-        return response
+    @authorization_required
+    def __select_all_members(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
+                data = SelectMain.select_all_members()
+                response: typing.List = list()
+                for content in data:
+                    response.append(
+                        {
+                            "name": content.name,
+                            "email": content.email,
+                            "rfid": content.rfid,
+                            "added_by": str(content.added_by),
+                            "id": content.id,
+                            "authorized": content.authorized,
+                        }
+                    )
+                return response
+        return self.__unauthorized_message()
 
     def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
         return {"error": "Access to the requested resource is forbidden", "status": 401}
@@ -207,7 +246,7 @@ class RPCServer(RPCServerInterface):
             "time": str(datetime.datetime.now()),
             "user_id": user_id,
             "role": role,
-            "token": Security.generate_token(user_id),
+            "token": Security.generate_token(email),
         }
 
     def __authorized_member_message(

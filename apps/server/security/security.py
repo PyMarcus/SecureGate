@@ -3,7 +3,7 @@ import typing
 
 import bcrypt
 from cryptography.fernet import Fernet
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 
 from libs import ReadEnv
 from packages.config.env import env
@@ -17,8 +17,8 @@ class Security:
     """
 
     @staticmethod
-    def generate_token(user_id: str) -> str:
-        """creates a 24-hour token to the user"""
+    def generate_token(email: str) -> str:
+        """creates a token to the user"""
         secret_key = env.SECRET_KEY
         if not secret_key:
             # raise ValueError("SECRET_KEY is not set.")
@@ -26,11 +26,11 @@ class Security:
             secret_key = re.secret_key
 
         token: URLSafeTimedSerializer = URLSafeTimedSerializer(secret_key)
-        return token.dumps(user_id)
+        return token.dumps(email)
 
     @staticmethod
     def verify_token(
-        user_id: str,
+        email: str,
         token: str,
     ) -> bool:
         """checks whether the token entered is valid."""
@@ -41,7 +41,15 @@ class Security:
             secret_key = re.secret_key
 
         content = URLSafeTimedSerializer(secret_key)
-        return content.loads(token) == user_id
+        try:
+            loads = content.loads(token, max_age=86400)
+            return loads == email
+        except BadSignature as e:
+            print("Assing Error:", e)
+            return False
+        except Exception as e:
+            print("Error:", e)
+            return False
 
     @staticmethod
     def hash_password(password_str: str) -> str:
@@ -105,6 +113,12 @@ class Security:
 
 if __name__ == "__main__":
     # example teste de criptografia do trafego
-    data = Security.prototype_encrypted_traffic_example({"OK": 1})
-    print(data)
-    print(Security.decrypted_traffic_package(data["secure"]))
+    # data = Security.prototype_encrypted_traffic_example({"OK": 1})
+    # print(data)
+    # print(Security.decrypted_traffic_package(data["secure"]))
+    token = Security.generate_token("imaadmin@email.com")
+    h = {
+        "email": "imaadmin@email.com",
+        "token": "ImltYXJvb3RAZW1haWwuY29tIg.ZT1AmQ.uV9iJFUaW3CjDPFMQFk8ac0kzqQ",
+    }
+    print(Security.verify_token(h["email"], h["token"]))

@@ -1,0 +1,146 @@
+2023-10-27 17:07:11,170 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 17:07:11,170 - INFO - [+]SERVER URI: PYRO:obj_e0eff53bb3bd4b3f8fb6d6545c19d64d@0.0.0.0:7878
+2023-10-27 17:09:08,222 - ERROR - [-] 'password'
+2023-10-27 17:09:11,982 - ERROR - [-] 'password'
+2023-10-27 17:09:55,733 - ERROR - [-] 'password'
+2023-10-27 17:10:24,661 - ERROR - [-] 'password'
+2023-10-27 17:10:51,301 - WARNING - [-]Server is down
+2023-10-27 17:11:56,467 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 17:11:56,467 - INFO - [+]SERVER URI: PYRO:obj_bcc903c9422c4e92830f10bcd4d95429@0.0.0.0:7878
+2023-10-27 17:12:24,919 - ERROR - [-] 'password'
+2023-10-27 17:12:39,140 - INFO - [-]Fail to insert <User: jose - qualquer>
+2023-10-27 17:15:15,145 - WARNING - [-]Server is down
+2023-10-27 19:44:29,826 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 19:44:29,841 - INFO - [+]SERVER URI: PYRO:obj_4a3f087c5c434e78bebf5a0e7410954d@0.0.0.0:7878
+2023-10-27 19:47:53,204 - WARNING - [-]Server is down
+2023-10-27 19:47:55,237 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 19:47:55,238 - INFO - [+]SERVER URI: PYRO:obj_819d2825da674a87a62d3943b345be9a@0.0.0.0:7878
+2023-10-27 19:48:00,484 - INFO - [+]Connected on database
+2023-10-27 19:48:00,603 - INFO - [-]Fail to insert <User: root - imaroot@email.com>
+2023-10-27 19:49:02,394 - WARNING - [-]Server is down
+2023-10-27 19:49:10,811 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 19:49:10,811 - INFO - [+]SERVER URI: PYRO:obj_1c6753012a9d45be990b94e8ba967583@0.0.0.0:7878
+2023-10-27 19:49:18,261 - INFO - [+]Connected on database
+2023-10-27 19:49:18,352 - INFO - [-]Fail to insert <User: root - imaroot@email.com>
+2023-10-27 19:52:12,734 - WARNING - [-]Server is down
+2023-10-27 19:52:16,263 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 19:52:16,264 - INFO - [+]SERVER URI: PYRO:obj_323c6866729148029f1ba96a53d2cfde@0.0.0.0:7878
+2023-10-27 19:52:36,773 - INFO - [+]Connected on database
+2023-10-27 19:52:36,860 - INFO - [-]Fail to insert <User: root - imaroot@email.com>
+2023-10-27 19:53:48,377 - WARNING - [-]Server is down
+2023-10-27 19:59:48,953 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 19:59:48,953 - INFO - [+]SERVER URI: PYRO:obj_626b7c5406a841df90385f1b3cda0394@0.0.0.0:7878
+2023-10-27 19:59:53,725 - INFO - [+]Connected on database
+2023-10-27 19:59:53,826 - INFO - [+]<User: root - imaroot@email.com> has been inserted
+2023-10-27 20:06:12,469 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 20:09:18,116 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 20:09:20,173 - WARNING - [-]Server is down
+2023-10-27 20:09:24,001 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 20:09:24,001 - INFO - [+]SERVER URI: PYRO:obj_7002fca6f03a4685a4c51ec2593f8042@0.0.0.0:7878
+2023-10-27 20:09:31,661 - INFO - [+]Connected on database
+2023-10-27 20:09:31,965 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 20:10:00,326 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 20:11:14,555 - WARNING - [-]Server is down
+2023-10-27 20:11:19,031 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 20:11:19,031 - INFO - [+]SERVER URI: PYRO:obj_5b3412e8747646c2a3387b73d4a0fdd5@0.0.0.0:7878
+2023-10-27 20:11:23,866 - INFO - [+]Connected on database
+2023-10-27 20:11:24,183 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 20:16:52,362 - WARNING - [-]Server is down
+2023-10-27 20:52:38,600 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 20:52:38,600 - INFO - [+]SERVER URI: PYRO:obj_c56c05bae68f494da79954bb8bea00f9@0.0.0.0:7878
+2023-10-27 20:52:52,056 - INFO - [+]Connected on database
+2023-10-27 20:52:52,365 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 21:20:08,423 - WARNING - [-]Server is down
+2023-10-27 21:20:12,488 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:20:12,488 - INFO - [+]SERVER URI: PYRO:obj_1e8c8b0b0d5f4c3791895c8e2b63aff5@0.0.0.0:7878
+2023-10-27 21:20:54,151 - INFO - [+]Connected on database
+2023-10-27 21:20:54,251 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:21:11,279 - INFO - [+]<User: admin - imaadmin@email.com> has been inserted
+2023-10-27 21:22:31,390 - WARNING - [-]Server is down
+2023-10-27 21:22:39,304 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:22:39,304 - INFO - [+]SERVER URI: PYRO:obj_c3202e12c12c40b8a6fa04bf7aa91de5@0.0.0.0:7878
+2023-10-27 21:22:53,794 - INFO - [+]Connected on database
+2023-10-27 21:22:53,863 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:23:36,668 - WARNING - [-]Server is down
+2023-10-27 21:23:39,411 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:23:39,411 - INFO - [+]SERVER URI: PYRO:obj_9a77eee72d224545949ddcbb4b5b2553@0.0.0.0:7878
+2023-10-27 21:23:42,560 - INFO - [+]Connected on database
+2023-10-27 21:23:42,649 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:24:32,183 - WARNING - [-]Server is down
+2023-10-27 21:24:47,855 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:24:47,856 - INFO - [+]SERVER URI: PYRO:obj_163d3d479b5844a1835ea18694f2fe73@0.0.0.0:7878
+2023-10-27 21:24:52,583 - INFO - [+]Connected on database
+2023-10-27 21:24:52,681 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:25:57,249 - WARNING - [-]Server is down
+2023-10-27 21:26:07,349 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:26:07,349 - INFO - [+]SERVER URI: PYRO:obj_59398bd7e32445cabfb04226c26b0e64@0.0.0.0:7878
+2023-10-27 21:26:12,720 - INFO - [+]Connected on database
+2023-10-27 21:26:12,816 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:26:41,843 - WARNING - [-]Server is down
+2023-10-27 21:26:44,820 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:26:44,820 - INFO - [+]SERVER URI: PYRO:obj_b7bc4ec35c324ad0bb788ae7f37f8de5@0.0.0.0:7878
+2023-10-27 21:26:48,905 - INFO - [+]Connected on database
+2023-10-27 21:26:49,012 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:31:52,106 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:31:52,363 - WARNING - [-]Server is down
+2023-10-27 21:32:28,385 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:32:28,385 - INFO - [+]SERVER URI: PYRO:obj_4d366dfd8e204f7fb5a326c513c97a19@0.0.0.0:7878
+2023-10-27 21:32:40,415 - INFO - [+]Connected on database
+2023-10-27 21:32:40,521 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:32:59,635 - INFO - [+]<User: root - imaroot@email.com> has been inserted
+2023-10-27 21:32:59,891 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 21:33:00,188 - INFO - [-]Fail to insert <User: admin - imaadmin@email.com>
+2023-10-27 21:34:23,323 - WARNING - [-]Server is down
+2023-10-27 21:34:26,727 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:34:26,727 - INFO - [+]SERVER URI: PYRO:obj_a3837a65b4474bb0aa7395e22d73afe2@0.0.0.0:7878
+2023-10-27 21:34:31,219 - INFO - [+]Connected on database
+2023-10-27 21:34:31,322 - INFO - [+]<User: admin - imaadmin@email.com> has been inserted
+2023-10-27 21:43:14,702 - WARNING - [-]Server is down
+2023-10-27 21:44:28,125 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:44:28,125 - INFO - [+]SERVER URI: PYRO:obj_9102f620fb6248e592b66bfd5d935d1f@0.0.0.0:7878
+2023-10-27 21:44:33,451 - INFO - [+]Connected on database
+2023-10-27 21:44:33,553 - INFO - [+]<Member aluno01 - aluno01@email.com has been inserted
+2023-10-27 21:52:51,425 - WARNING - [-]Server is down
+2023-10-27 21:53:30,777 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 21:53:30,778 - INFO - [+]SERVER URI: PYRO:obj_ee7079bfca244d2084588b5cc8d58163@0.0.0.0:7878
+2023-10-27 21:53:45,838 - INFO - [+]Connected on database
+2023-10-27 21:53:45,930 - INFO - [+]<User: root - imaroot@email.com> has been inserted
+2023-10-27 21:53:46,189 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-27 21:53:46,472 - INFO - [+]<User: admin - imaadmin@email.com> has been inserted
+2023-10-27 21:53:46,505 - INFO - [-]Fail to insert <Member aluno01 - aluno01@email.com
+2023-10-27 21:54:19,190 - INFO - [+]<Member aluno01 - aluno01@email.com has been inserted
+2023-10-27 21:59:10,371 - WARNING - [-]Server is down
+2023-10-27 22:39:36,245 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:39:36,246 - INFO - [+]SERVER URI: PYRO:obj_92f12ccd2d6a46b6847de9ff25dc23f2@0.0.0.0:7878
+2023-10-27 22:44:40,419 - WARNING - [-]Server is down
+2023-10-27 22:44:43,594 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:44:43,594 - INFO - [+]SERVER URI: PYRO:obj_14d35b2f00c4471183e286074e405e16@0.0.0.0:7878
+2023-10-27 22:45:07,455 - WARNING - [-]Server is down
+2023-10-27 22:45:11,207 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:45:11,208 - INFO - [+]SERVER URI: PYRO:obj_b77b819a85a442d8936623b986541401@0.0.0.0:7878
+2023-10-27 22:45:13,909 - INFO - [+]Connected on database
+2023-10-27 22:46:31,170 - WARNING - [-]Server is down
+2023-10-27 22:48:01,177 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:48:01,178 - INFO - [+]SERVER URI: PYRO:obj_96839ddfcf3341fba72ec262c3fafc58@0.0.0.0:7878
+2023-10-27 22:48:03,886 - INFO - [+]Connected on database
+2023-10-27 22:48:38,907 - WARNING - [-]Server is down
+2023-10-27 22:48:42,486 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:48:42,487 - INFO - [+]SERVER URI: PYRO:obj_01bc3097439d449c8f198a8b5dcfe3e0@0.0.0.0:7878
+2023-10-27 22:48:45,021 - INFO - [+]Connected on database
+2023-10-27 22:48:59,752 - WARNING - [-]Server is down
+2023-10-27 22:51:40,109 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:51:40,109 - INFO - [+]SERVER URI: PYRO:obj_235894268149488ba7627d1a1fb89a1a@0.0.0.0:7878
+2023-10-27 22:53:45,087 - INFO - [+]Connected on database
+2023-10-27 22:56:14,900 - WARNING - [-]Server is down
+2023-10-27 22:56:18,097 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:56:18,098 - INFO - [+]SERVER URI: PYRO:obj_e836e93fddb44ec789b29318e79d90fd@0.0.0.0:7878
+2023-10-27 22:56:20,724 - INFO - [+]Connected on database
+2023-10-27 22:57:57,955 - WARNING - [-]Server is down
+2023-10-27 22:58:07,356 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 22:58:07,357 - INFO - [+]SERVER URI: PYRO:obj_436865187dd34d67bb315dd7118371c7@0.0.0.0:7878
+2023-10-27 22:58:11,232 - INFO - [+]Connected on database
+2023-10-27 22:58:38,217 - WARNING - [-]Server is down
+2023-10-27 23:02:33,974 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-27 23:02:33,975 - INFO - [+]SERVER URI: PYRO:obj_5d542c2c159b4e8fa788395b83a5b27e@0.0.0.0:7878
+2023-10-27 23:02:37,743 - INFO - [+]Connected on database
+2023-10-27 23:02:40,232 - WARNING - [-]Server is down

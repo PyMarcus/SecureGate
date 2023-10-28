@@ -82,17 +82,29 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_member(request)
 
-    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+    def select_all_members(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """
         The select_all_members method get a dict list with all members
-        """
-        return self.client.select_all_members()
 
-    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        header:
+            user_id,
+            token
+        """
+        return self.client.select_all_members(header)
+
+    def select_all_users(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
         """
         The select_all_users method get a dict list with all users
+
+        header:
+            user_id,
+            token
         """
-        return self.client.select_all_users()
+        return self.client.select_all_users(header)
 
 
 def get_rpc_client() -> RPCSingletonClient:
@@ -106,9 +118,9 @@ def get_rpc_client() -> RPCSingletonClient:
 if __name__ == "__main__":
     client: RPCSingletonClient = get_rpc_client()
     """print(client.sign_up({
-        "name": "root",
-        "email": "imaroot@email.com",
-        "password": "rootsecurity",
+        "name": "root2",
+        "email": "imaroot2@email.com",
+        "password": "rootsecurity2",
         "role": "root"
     }))
     print(
@@ -120,11 +132,11 @@ if __name__ == "__main__":
         )
     )
     print(client.sign_up({
-        "name": "admin",
-        "email": "imaadmin@email.com",
-        "password": "adminsecurity",
-    }))"""
-    """print(
+        "name": "admin2",
+        "email": "imaadmin@email2.com",
+        "password": "adminsecurity2",
+    }))
+    print(
         client.register_member(
             {
                 "name": "aluno01",
@@ -133,11 +145,16 @@ if __name__ == "__main__":
                 "added_by": "0ad91ffb-78dd-4cd3-aeaf-519c7da27b52",
             }
         )
+    )"""
+    n = client.sign_in(
+        {
+            "email": "imaroot@email.com",
+            "password": "rootsecurity",
+        }
     )
-    """
-    print(client.select_member({"email": "aluno01@email.com"}))
+    header = {"email": "imaroot@email.com", "token": n.get("token")}
 
-    print(client.select_user({"email": "imaadmin@email.com"}))
-
-    print(client.select_all_users())
-    print(client.select_all_members())
+    print(n)
+    print(header)
+    print(client.select_all_users(header))
+    print(client.select_user({"email": "imaroot@email.com", "token": n.get("token")}))
