@@ -1,8 +1,12 @@
 import os
+from os import path
 
 from dotenv import load_dotenv
 
-load_dotenv("../../.env")
+project_root = path.abspath(path.join(path.dirname(__file__), "../.."))
+loaded = load_dotenv(path.join(project_root, ".env"))
+
+print(f"Loaded .env file: {loaded}")
 
 
 def _map_to_int(value: str | None) -> int | None:
