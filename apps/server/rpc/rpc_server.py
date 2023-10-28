@@ -46,6 +46,21 @@ class RPCServer(RPCServerInterface):
     def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
         return self.__sign_up(credentials)
 
+    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__register_member(member)
+
+    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_user(user)
+
+    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_member(member)
+
+    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_members()
+
+    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_users()
+
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
@@ -97,21 +112,6 @@ class RPCServer(RPCServerInterface):
         except Exception as err:
             LogMaker.write_log(f"[-] {err}", "error")
             return False
-
-    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__register_member(member)
-
-    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__select_user(user)
-
-    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__select_member(member)
-
-    def select_all_members(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_members()
-
-    def select_all_users(self) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_users()
 
     def __register_member(
         self, member: typing.Dict[str, typing.Any]
