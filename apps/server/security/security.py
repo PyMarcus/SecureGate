@@ -7,6 +7,7 @@ from cryptography.fernet import Fernet
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 
 from packages.config.env import env
+from packages.responses import *
 
 
 class Security:
@@ -92,36 +93,26 @@ class Security:
             raise ValueError("FERNET_KEY is not set.")
         fernet: Fernet = Fernet(fernet_key)
         try:
-            encrypted_data = fernet.decrypt(encrypted_data.encode())
+            encrypted_data = fernet.decrypt(encrypted_data)
             return json.loads(encrypted_data)
-        except Exception as e:
-            print(e)
-            return {"error": "Something was wrong!", "status": 500}
+        except Exception:
+            return ServerErrorResponse("Server error", "Something was wrong").json()
 
 
 if __name__ == "__main__":
     # example teste de criptografia do trafego
-    data = Security.encrypted_traffic({"OK": 1})
-    print(data)
-    print(
-        Security.decrypted_traffic_package(
-            "Z0FBQUFBQmxQYVY0ZWVJdUJHdFJCaHI1ZW1yczg5Zmw5UFdqRHRsOFNGa"
-            "VhJWE5yT3NXbDJxTXJzdHc4RGE1WmMtWWdaS3NNcmlsRWNRSml1WUdHb"
-            "09lY2tONEJZa1VPclJ5aTV0TnBFbGlYV0hyQUlUTXdMWEl6dnJZVE1TQkZa"
-            "THVjZjBSeGJISG80VFhhaWtGYlZQVlBvbHBrN2stX1kzTUgtOVZHNi1BVTdhc"
-            "FF5ZEJsdjhPZ2I3REhFZkZ3WTdCQmRLbFgzcXJhWEpjV2x4cHdBcEQtX3p1bEJr"
-            "emdXbm52ZWYzVEpJYXlPdGdIRDBPa2Y2MHlrcDQycGpNTldfbE50OUxncWpfRmRP"
-            "amdjbEdXRDByUTRaSEdKYW8wX1hrY1F4OWQ5eGpFWG1OUE5LZkE0RnlxVHNUcnlCaXdzS"
-            "TdmclZ1UjMx"
-            "cVpfUmIxRUtmU0Y5NXV3c3BWWks1UE5xTjFpa1hmOU1tMkZPOUZSSHlhb2R0QUJ1RkJkS"
-            "UJXdWQ5dTBIQndLczdr"
-            "UlhyczAyVk9pTkE0cWd1ckNEZV9qY3U4VzQw"
-            "MGR1eDNOdEVwS0NReGVOdHQ0UWNmMmZIY1daLUJMRG91ZVNqVA=="
-        )
+    data = Security.encrypted_traffic(
+        {
+            "error": None,
+            "status": 200,
+            "message": "It's device",
+            "device": "device1",
+            "wifi_ssid": "wifihost",
+            "version": "0.0.0",
+            "id": "4cbf49ea-0879-4e43-ad32-6cf7550df2fc",
+            "time": "2023-10-29 12:32:35.827411",
+            "password": "$2b$12$WCldbPhwaA4f.nQL0d9TzO4vBc6wal5aaRNiSCM0y8Cjtau/DR5z6",
+        }
     )
-    token = Security.generate_token("imaadmin@email.com")
-    h = {
-        "email": "imaadmin@email.com",
-        "token": "ImltYXJvb3RAZW1haWwuY29tIg.ZT1AmQ.uV9iJFUaW3CjDPFMQFk8ac0kzqQ",
-    }
-    print(Security.verify_token(h["email"], h["token"]))
+    print(data)
+    print(Security.decrypted_traffic_package(data["secure"]))
