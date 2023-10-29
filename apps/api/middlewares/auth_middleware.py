@@ -1,4 +1,6 @@
-from fastapi import Header, HTTPException, Request
+from fastapi import Header, Request
+
+from packages.errors.errors import UnauthorizedError
 
 
 def auth_middleware(
@@ -11,9 +13,9 @@ def auth_middleware(
     """
 
     if not authorization:
-        raise HTTPException(status_code=401, detail="Authorization header is missing")
+        raise UnauthorizedError(message="Token is missing")
     if not userEmail:
-        raise HTTPException(status_code=401, detail="userId header is missing")
+        raise UnauthorizedError(message="User email is missing")
 
     request.state.token = authorization.split(" ")[1]
     request.state.user_email = userEmail

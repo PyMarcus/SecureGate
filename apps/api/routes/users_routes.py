@@ -13,9 +13,7 @@ routes = APIRouter(
 
 
 @routes.post("/")
-def create(request: Request, body: SignupSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    header = get_request_header(request)
-    print(header)
+def create(body: SignupSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
     result = rpc.sign_up(body.model_dump())
     return handle_rpc_result(result)
 
