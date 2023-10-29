@@ -62,19 +62,17 @@ export const Dashboard = () => {
             <TabsTrigger value="overview" className="flex-1">
               Overview
             </TabsTrigger>
-
-            {isRoot && (
-              <TabsTrigger value="users" className="flex-1">
-                Users
-              </TabsTrigger>
-            )}
-
             <TabsTrigger value="members" className="flex-1">
               Members
             </TabsTrigger>
             <TabsTrigger value="analytics" className="flex-1" disabled>
               Analytics
             </TabsTrigger>
+            {isRoot && (
+              <TabsTrigger value="users" className="flex-1">
+                Users
+              </TabsTrigger>
+            )}
           </TabsList>
         </header>
 
@@ -82,7 +80,7 @@ export const Dashboard = () => {
           <TabsContent
             value={currentTab}
             className="mt-0 flex-1 flex flex-col gap-6 md:gap-8 justify-between 
-            h-[calc(100vh-22rem)] md:h-[calc(100vh-20rem)]"
+            h-[calc(100vh-23rem)] md:h-[calc(100vh-21rem)]"
           >
             <Outlet />
           </TabsContent>

@@ -83,7 +83,7 @@ const week_data = [
 export const OverviewChart = () => {
   return (
     <ScrollArea className="w-full">
-      <ResponsiveContainer height={350} width="100%">
+      <ResponsiveContainer height={310} width="100%">
         <BarChart data={week_data}>
           <XAxis
             dataKey="name"

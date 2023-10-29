@@ -1,4 +1,3 @@
-import { MembersList } from '@/components/members-list'
 import { OverviewChart } from '@/components/overview-chart'
 import { Button } from '@/components/ui/button'
 import {
@@ -16,7 +15,7 @@ export const Overview = () => {
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
       <ScrollArea className="w-full">
-        <div className="w-[calc(100vw-3rem)] flex items-center gap-6 md:gap-8">
+        <div className="w-[calc(100vw-3rem)] flex items-center gap-6 md:gap-8 items-stretch">
           <Card className="w-full min-w-[12rem]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
@@ -60,31 +59,39 @@ export const Overview = () => {
       >
         <Card className="md:col-span-4">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="inline-flex items-center justify-between">
               <CardTitle>Overview</CardTitle>
-              <Button variant="link" asChild>
+              <Button variant="link" size="sm" asChild>
                 <Link to="/dashboard/analytics">See more</Link>
               </Button>
             </div>
-            <CardDescription>Last 24 hours gate accesses</CardDescription>
+            <CardDescription className="mt-0">
+              Last 24 hours gate accesses
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <OverviewChart />
+            <ScrollArea
+              className="max-w-[calc(100vw-6rem)] 
+            md:max-w-[calc(100vw-8rem)]"
+            >
+              <OverviewChart />
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
           </CardContent>
         </Card>
         <Card className="md:col-span-3">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="inline-flex items-center justify-between">
               <CardTitle>Last Accesses</CardTitle>
-              <Button variant="link" asChild>
+              <Button variant="link" size="sm" asChild>
                 <Link to="/dashboard/members">See all</Link>
               </Button>
             </div>
-            <CardDescription>Last 10 gate accesses</CardDescription>
+            <CardDescription className="mt-0">
+              Last 10 gate accesses
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <MembersList />
-          </CardContent>
+          <CardContent></CardContent>
         </Card>
       </div>
     </section>

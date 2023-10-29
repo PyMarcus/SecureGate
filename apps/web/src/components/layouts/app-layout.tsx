@@ -1,5 +1,6 @@
 import { AppHeader } from '@/components/app-header'
 import { Outlet } from 'react-router-dom'
+import { version } from '../../../package.json'
 import { AppNavigation } from '../app-navigation'
 
 export const AppLayout = () => {
@@ -11,9 +12,17 @@ export const AppLayout = () => {
         <Outlet />
       </div>
 
-      <div className="w-full md:hidden  bg-background">
+      <div className="w-full md:hidden bg-background">
         <AppNavigation mobile />
       </div>
+
+      <footer>
+        <p className="text-muted-foreground text-center text-xs py-2">
+          <span>SecureGate</span>
+          <span className="mx-1">-</span>
+          <span>v{version}</span>
+        </p>
+      </footer>
     </div>
   )
 }
