@@ -42,3 +42,13 @@ class InsertMain:
                 return True
         except Exception:
             return False
+
+    @classmethod
+    def insert_access_history(cls, history: AccessHistory) -> bool:
+        try:
+            with cls.__session.create_session() as session:
+                session.add(history)
+                session.commit()
+                return True
+        except Exception:
+            return False

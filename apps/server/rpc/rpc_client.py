@@ -62,7 +62,7 @@ class RPCSingletonClient(metaclass=Singleton):
         The register_member method creates a new member, allowing them access through the gate.
         It takes a dictionary as input (request), containing member registration information.
         The dictionary must include four mandatory fields:
-
+            token: A string representing the users token.
             name: A string representing the member's name.
             email: A string representing the member's email address.
             rfid: A string representing the member's RFID (Radio-Frequency Identification) tag information.
@@ -70,12 +70,25 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.register_member(request)
 
+    def register_access_history(self, request: typing.Dict[str, typing.Any]) -> bool:
+        """
+        The register_access_history method creates a new access history.
+        It takes a dictionary as input (request), containing member registration information.
+        The dictionary must include four mandatory fields:
+            token: A string representing the users token.
+            email: A string representing the member's email address.
+            member_id: A string representing the member's id.
+            device_id: A string representing the device's id.
+        """
+        return self.client.register_access_history(request)
+
     def register_device(self, request: typing.Dict[str, typing.Any]) -> bool:
         """
         The register_device method creates a new device, allowing them access through the gate.
         It takes a dictionary as input (request), containing device registration information.
         The dictionary must include four mandatory fields:
-
+            email: A string representing the users's email address.
+            token: A string representing the users token.
             name: A string representing the member's name.
             version: A string representing the device's version.
             wifi_ssid: A string representing the wifi's ssid.
@@ -88,7 +101,8 @@ class RPCSingletonClient(metaclass=Singleton):
     ) -> typing.Dict[str, typing.Any]:
         """
         The select_user method get a member with your data
-            user_id: A string representing the user's id.
+            email: A string representing the users's email address.
+            token: A string representing the users token.
         """
         return self.client.select_user(header, user_id)
 
@@ -96,9 +110,27 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         The select_member method get a member with your data
             email: A string representing the member's email address.
-            email: A string representing the member's email address.
+            token: A string representing the users token.
         """
         return self.client.select_member(request)
+
+    def select_access_history(
+        self,
+        request: typing.Dict[str, typing.Any],
+        date_ini: str | None = None,
+        date_end: str | None = None,
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        The select_access_history method get a member with your data
+            email: A string representing the users's email address.
+            token: A string representing the users token.
+            date_ini: 2023-10-29 06:00
+            date_end: 2023-10-29 18:00
+
+            if no date is passed, the selected data will be that of the current day,
+            from 6 am until the time of the search
+        """
+        return self.client.select_access_history(request, date_ini, date_end)
 
     def select_device(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
@@ -146,6 +178,18 @@ class RPCSingletonClient(metaclass=Singleton):
             token
         """
         return self.client.select_all_devices(header)
+
+    def select_all_access_history(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """
+        The select_all_access_history method get a dict list with all access history
+
+        header:
+            email,
+            token
+        """
+        return self.client.select_all_access_history(header)
 
 
 def get_rpc_client() -> RPCSingletonClient:
@@ -218,5 +262,34 @@ if __name__ == "__main__":
                 "token": n.get("data").get("token"),
                 "wifi_password": "wifipassword",
             }
+        )
+    )
+
+    """print(
+        client.register_access_history({
+            "email": "imaroot@email.com",
+            "token":  n.get("data").get("token"),
+            "member_id": "d9f26bf3-b0ff-41e1-b016-eb81684983f6",
+            "device_id": "4cbf49ea-0879-4e43-ad32-6cf7550df2fc"
+        })
+    )"""
+
+    print(
+        client.select_all_access_history(
+            {"email": "imaroot@email.com", "token": n.get("data").get("token")}
+        )
+    )
+
+    print(
+        client.select_access_history(
+            {"email": "imaroot@email.com", "token": n.get("data").get("token")}
+        )
+    )
+
+    print(
+        client.select_access_history(
+            {"email": "imaroot@email.com", "token": n.get("data").get("token")},
+            "2023-10-29 06:00",
+            "2023-10-29 19:22",
         )
     )

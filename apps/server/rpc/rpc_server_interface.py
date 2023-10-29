@@ -33,6 +33,12 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing register_device method")
 
     @abstractmethod
+    def register_access_history(
+        self, history: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing register_access_history method")
+
+    @abstractmethod
     def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing select_member method")
 
@@ -45,6 +51,12 @@ class RPCServerInterface(ABC):
     @abstractmethod
     def select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing select_device method")
+
+    @abstractmethod
+    def select_access_history(
+        self, history: typing.Dict[str, typing.Any], date_ini: str, date_end: str
+    ) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing select_access_history method")
 
     @abstractmethod
     def select_all_members(
@@ -63,3 +75,9 @@ class RPCServerInterface(ABC):
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         raise NotImplementedError("missing select_all_devices method")
+
+    @abstractmethod
+    def select_all_access_history(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        raise NotImplementedError("missing select_all_access_history method")

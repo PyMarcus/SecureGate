@@ -49,6 +49,8 @@ class RPCServer(RPCServerInterface):
        building interconnected, efficient, and secure applications
     """
 
+    __user_logged: uuid.UUID | None = None
+
     @Pyro4.expose
     def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__sign_in(credentials)
@@ -66,6 +68,12 @@ class RPCServer(RPCServerInterface):
         return self.__register_device(device)
 
     @Pyro4.expose
+    def register_access_history(
+        self, history: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        return self.__register_access_history(history)
+
+    @Pyro4.expose
     def select_user(
         self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
@@ -78,6 +86,12 @@ class RPCServer(RPCServerInterface):
     @Pyro4.expose
     def select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_device(device)
+
+    @Pyro4.expose
+    def select_access_history(
+        self, history: typing.Dict[str, typing.Any], date_ini: str, date_end: str
+    ) -> typing.Dict[str, typing.Any]:
+        return self.__select_access_history(history, date_ini, date_end)
 
     @Pyro4.expose
     def decoder(self, device_encrypted: str) -> typing.Dict[str, typing.Any]:
@@ -103,6 +117,12 @@ class RPCServer(RPCServerInterface):
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_devices(header)
 
+    @Pyro4.expose
+    def select_all_access_history(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_access_history(header)
+
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
@@ -112,6 +132,7 @@ class RPCServer(RPCServerInterface):
             return BadRequestError("Invalid credentials").dict()
         hashed_password: str = user.password
         user_id: str = str(user.id)
+        self.__user_logged = user.id
         name: str = user.name
         role: UserRole = user.role
 
@@ -211,6 +232,24 @@ class RPCServer(RPCServerInterface):
         return self.__unauthorized_message()
 
     @authorization_required
+    def __register_access_history(
+        self, history: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        if history.get("email") and history.get("token"):
+            if Security.verify_token(history.get("email"), history.get("token")):
+                history: AccessHistory = AccessHistory(
+                    user_id=self.__user_logged,
+                    member_id=history.get("member_id"),
+                    device_id=history.get("device_id"),
+                )
+                if InsertMain.insert_access_history(history):
+                    LogMaker.write_log(f"[+]{history} has been inserted", "info")
+                    return True
+                LogMaker.write_log(f"[-]Fail to insert {history}", "info")
+                return False
+        return self.__unauthorized_message()
+
+    @authorization_required
     def __select_user(
         self, header: typing.Dict[str, str], user_id: str
     ) -> typing.Dict[str, typing.Any]:
@@ -249,7 +288,6 @@ class RPCServer(RPCServerInterface):
                             device_data.wifi_password,
                         )
                         encrypted_data = Security.encrypted_traffic(auth_message)
-                        print(encrypted_data)
                         return encrypted_data
                 return self.__bad_request_message()
         return self.__unauthorized_message()
@@ -270,6 +308,41 @@ class RPCServer(RPCServerInterface):
                         member_data.authorized,
                     )
                 return self.__bad_request_message()
+        return self.__unauthorized_message()
+
+    @authorization_required
+    def __select_access_history(
+        self, header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
+    ) -> typing.Dict[str, typing.Any]:
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
+                if date_ini is None and date_end is None:
+                    today = datetime.datetime.now()
+                    start = datetime.datetime(today.year, today.month, today.day, 6, 0)
+                    date_ini = start.strftime("%Y-%m-%d %H:%M")
+                    date_end = today.strftime("%Y-%m-%d %H:%M")
+
+                access_data: AccessHistory = SelectMain.select_access_history(date_ini, date_end)
+                if access_data:
+                    for row in access_data:
+                        user = SelectMain.select_user_by_id(row.user_id)
+                        member = SelectMain.select_member_by_id(row.member_id)
+                        device = SelectMain.select_device_by_id(row.device_id)
+                        response = {
+                            "id": str(row.id),
+                            "member_id": str(member.id),
+                            "member_name": member.name,
+                            "user_id": str(user.id),
+                            "user_name": user.name,
+                            "device_id": str(device.id),
+                            "device_name": device.name,
+                            "when": row.created_at,
+                        }
+                    return OKResponse(
+                        message=f"Successfully selected range {date_ini} to {date_end} of access history",
+                        data=response,
+                    ).dict()
+                return NoContentResponse(message="No data", data={}).dict()
         return self.__unauthorized_message()
 
     @authorization_required
@@ -335,6 +408,39 @@ class RPCServer(RPCServerInterface):
                         }
                     )
                 return OKResponse(message="Successfully selected all devices", data=response).dict()
+            return UnauthorizedError("Invalid token or email").dict()
+        return BadRequestError("Token or email not found").dict()
+
+    @authorization_required
+    def __select_all_access_history(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
+                access_data: typing.List[AccessHistory] = SelectMain.select_all_access_history()
+                if access_data:
+                    response: typing.List = list()
+                    for row in access_data:
+                        user = SelectMain.select_user_by_id(str(row.user_id))
+                        member = SelectMain.select_member_by_id(str(row.member_id))
+                        device = SelectMain.select_device_by_id(str(row.device_id))
+                        response.append(
+                            {
+                                "id": str(row.id),
+                                "member_id": str(member.id),
+                                "member_name": member.name,
+                                "user_id": str(user.id),
+                                "user_name": user.name,
+                                "device_id": str(device.id),
+                                "device_name": device.name,
+                                "when": row.created_at,
+                            }
+                        )
+
+                    return OKResponse(
+                        message="Successfully selected all registers", data=response
+                    ).dict()
+                return NoContentResponse(message="No data", data={})
             return UnauthorizedError("Invalid token or email").dict()
         return BadRequestError("Token or email not found").dict()
 

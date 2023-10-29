@@ -1,3 +1,4 @@
+import datetime
 import typing
 import uuid
 
@@ -38,6 +39,28 @@ class SelectMain:
             return None
 
     @classmethod
+    def select_member_by_id(cls, member_id: str) -> User | None:
+        try:
+            with cls.__session.create_session() as session:
+                member: Member = session.query(Member).filter(Member.id == member_id).first()
+                if member:
+                    return member
+            return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_device_by_id(cls, device_id: str) -> User | None:
+        try:
+            with cls.__session.create_session() as session:
+                device: Device = session.query(Device).filter(Device.id == device_id).first()
+                if device:
+                    return device
+            return None
+        except Exception:
+            return None
+
+    @classmethod
     def select_root_id(cls) -> uuid.UUID | None:
         try:
             with cls.__session.create_session() as session:
@@ -48,6 +71,27 @@ class SelectMain:
                     return user.root_id
                 return None
         except Exception:
+            return None
+
+    @classmethod
+    def select_access_history(
+        cls, date_ini: str, date_end: str
+    ) -> typing.List[AccessHistory] | None:
+        try:
+            date_ini_obj = datetime.datetime.strptime(date_ini, "%Y-%m-%d %H:%M")
+            date_end_obj = datetime.datetime.strptime(date_end, "%Y-%m-%d %H:%M")
+            print(date_end_obj, date_ini_obj)
+            with cls.__session.create_session() as session:
+                history: typing.Type[AccessHistory] = (
+                    session.query(AccessHistory)
+                    .filter(AccessHistory.created_at.between(date_ini_obj, date_end_obj))
+                    .all()
+                )
+                if history:
+                    return history
+                return None
+        except Exception as e:
+            print(e)
             return None
 
     @classmethod
@@ -105,6 +149,17 @@ class SelectMain:
                 devices: typing.Type[Device] = session.query(Device).all()
                 if devices:
                     return devices
+                return list()
+        except Exception:
+            return list()
+
+    @classmethod
+    def select_all_access_history(cls) -> typing.List[AccessHistory]:
+        try:
+            with cls.__session.create_session() as session:
+                history: typing.Type[AccessHistory] = session.query(AccessHistory).all()
+                if history:
+                    return history
                 return list()
         except Exception:
             return list()
