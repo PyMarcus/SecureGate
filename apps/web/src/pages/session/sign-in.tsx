@@ -62,6 +62,7 @@ export const SignIn = () => {
           id: data.user_id,
           email: data.email,
           name: data.name,
+          role: data.role,
         },
         token: data.token,
       })

@@ -2,6 +2,10 @@ import { AppLayout } from '@/components/layouts/app-layout'
 import { FullLayout } from '@/components/layouts/full-layout'
 import { SessionLayout } from '@/components/layouts/session-layout'
 import { Dashboard } from '@/pages/app/dashboard'
+import { Analytics } from '@/pages/app/dashboard/tabs/analytics'
+import { Members } from '@/pages/app/dashboard/tabs/members'
+import { Overview } from '@/pages/app/dashboard/tabs/overview'
+import { Users } from '@/pages/app/dashboard/tabs/users'
 import { Preferences } from '@/pages/app/preferences'
 import { Profile } from '@/pages/app/profile'
 import { NotFound } from '@/pages/common/not-found'
@@ -22,9 +26,28 @@ export const AppRoutes = () => {
 
           <Route element={<PrivateRoutes />}>
             <Route element={<AppLayout />}>
-              <Route path="/" element={<Navigate to="/dashboard" />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={<Navigate to="/dashboard/overview" />} />
+              <Route
+                path="/dashboard"
+                element={<Navigate to="/dashboard/overview" />}
+              />
+
+              <Route path="/dashboard" element={<Dashboard />}>
+                <Route
+                  index
+                  path="/dashboard/overview"
+                  element={<Overview />}
+                />
+                <Route path="/dashboard/analytics" element={<Analytics />} />
+                <Route path="/dashboard/members" element={<Members />} />
+
+                <Route element={<PrivateRoutes enabledRole="ROOT" />}>
+                  <Route path="/dashboard/users" element={<Users />} />
+                </Route>
+              </Route>
+
               <Route path="/preferences" element={<Preferences />} />
+
               <Route path="/profile" element={<Profile />} />
             </Route>
           </Route>

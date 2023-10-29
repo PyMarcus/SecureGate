@@ -35,17 +35,21 @@ app.add_exception_handler(Exception, exception_middleware)
 
 
 if __name__ == "__main__":
+    from os import path
+
     import uvicorn
 
     host, port = env.API_HOST, env.API_PORT
     if not host or not port:
         raise Exception("API_HOST or API_PORT not set")
 
+    project_root = path.abspath(path.join(path.dirname(__file__)))
+
     uvicorn.run(
         "apps.api.api:app",
         host=host,
         port=port,
         log_level="info",
-        reload_dirs=["apps", "libs"],
+        reload_dirs=project_root,
         reload=True,
     )

@@ -16,8 +16,10 @@ export const AppNavigation = ({ mobile }: AppNavigationProps) => {
               to={path}
               className={({ isActive }) =>
                 cn(
-                  'text-sm font-medium transition-colors hover:text-muted-foreground leading-none',
-                  isActive ? 'text-primary' : 'text-muted-foreground',
+                  'text-sm font-medium transition-colors hover:text-primary/80 leading-none',
+                  isActive
+                    ? 'text-primary hover:text-primary'
+                    : 'text-muted-foreground',
                 )
               }
             >
