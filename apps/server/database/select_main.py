@@ -16,10 +16,21 @@ class SelectMain:
     __session: DBConnection = DBConnection()
 
     @classmethod
-    def select_user(cls, email: str) -> User | None:
+    def select_user_by_email(cls, email: str) -> User | None:
         try:
             with cls.__session.create_session() as session:
                 user: User = session.query(User).filter(User.email == email).first()
+                if user:
+                    return user
+            return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_user_by_id(cls, user_id: str) -> User | None:
+        try:
+            with cls.__session.create_session() as session:
+                user: User = session.query(User).filter(User.id == user_id).first()
                 if user:
                     return user
             return None

@@ -82,12 +82,14 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.register_device(request)
 
-    def select_user(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def select_user(
+        self, header: typing.Dict[str, typing.Any], user_id: str
+    ) -> typing.Dict[str, typing.Any]:
         """
         The select_user method get a member with your data
-            email: A string representing the member's email address.
+            user_id: A string representing the user's id.
         """
-        return self.client.select_user(request)
+        return self.client.select_user(header, user_id)
 
     def select_member(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """

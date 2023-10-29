@@ -12,8 +12,8 @@ from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
-from packages.errors.errors import BadRequestError, InternalServerError, NotFoundError
-from packages.responses.responses import CreatedResponse, OKResponse
+from packages.errors.errors import *
+from packages.responses.responses import *
 
 
 def authorization_required(function: typing.Callable) -> typing.Any:
@@ -65,8 +65,10 @@ class RPCServer(RPCServerInterface):
         return self.__register_device(device)
 
     @Pyro4.expose
-    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__select_user(user)
+    def select_user(
+        self, header: typing.Dict[str, typing.Any], user_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        return self.__select_user(header, user_id)
 
     @Pyro4.expose
     def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -97,17 +99,17 @@ class RPCServer(RPCServerInterface):
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
         password: str = credentials["password"]
-        user = SelectMain.select_user(email)
+        user = SelectMain.select_user_by_email(email)
 
         if user is None:
-            return NotFoundError("User not found").dict()
+            return BadRequestError("Invalid credentials").dict()
         hashed_password: str = user.password
         user_id: str = str(user.id)
         name: str = user.name
         role: UserRole = user.role
 
         if not Security.verify_password(hashed_password, password):
-            return BadRequestError("Invalid Password").dict()
+            return BadRequestError("Invalid credentials").dict()
         LogMaker.write_log(f"{user} is logged!", "info")
 
         return OKResponse(
@@ -202,17 +204,26 @@ class RPCServer(RPCServerInterface):
         return self.__unauthorized_message()
 
     @authorization_required
-    def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        if user.get("email") and user.get("token"):
-            if Security.verify_token(user.get("email"), user.get("token")):
-                email: str = user.get("email")
-                user_data: User = SelectMain.select_user(email)
-                if user_data:
-                    return self.__authorized_user_message(
-                        user_data.name, user_data.email, str(user_data.id), user_data.role
-                    )
-                return self.__bad_request_message()
-        return self.__unauthorized_message()
+    def __select_user(
+        self, header: typing.Dict[str, str], user_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
+                if not user_id:
+                    return BadRequestError("User id not found").dict()
+                data = SelectMain.select_user_by_id(user_id)
+                if data:
+                    return OKResponse(
+                        message="Successfully selected user",
+                        data={
+                            "id": str(data.id),
+                            "name": data.name,
+                            "email": data.email,
+                            "role": data.role,
+                        },
+                    ).dict()
+                return NotFoundError("User not found").dict()
+            return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -269,8 +280,9 @@ class RPCServer(RPCServerInterface):
                             "id": content.id,
                         }
                     )
-                return response
-        return self.__unauthorized_message()
+                return OKResponse(message="Successfully selected all users", data=response).dict()
+            return UnauthorizedError("Invalid token or email").dict()
+        return BadRequestError("Token or email not found").dict()
 
     @authorization_required
     def __select_all_members(
@@ -291,8 +303,9 @@ class RPCServer(RPCServerInterface):
                             "authorized": content.authorized,
                         }
                     )
-                return response
-        return self.__unauthorized_message()
+                return OKResponse(message="Successfully selected all members", data=response).dict()
+            return UnauthorizedError("Invalid token or email").dict()
+        return BadRequestError("Token or email not found").dict()
 
     @authorization_required
     def __select_all_devices(
@@ -311,8 +324,9 @@ class RPCServer(RPCServerInterface):
                             "wifi_ssid": content.wifi_ssid,
                         }
                     )
-                return response
-        return self.__unauthorized_message()
+                return OKResponse(message="Successfully selected all devices", data=response).dict()
+            return UnauthorizedError("Invalid token or email").dict()
+        return BadRequestError("Token or email not found").dict()
 
     def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
         return {"error": "Access to the requested resource is forbidden", "status": 401}

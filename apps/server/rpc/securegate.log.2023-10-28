@@ -1,0 +1,174 @@
+2023-10-28 11:24:15,773 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:24:15,773 - INFO - [+]SERVER URI: PYRO:obj_1f81976176074ecfb76ef9a7f1ee62f2@0.0.0.0:7878
+2023-10-28 11:54:59,443 - WARNING - [-]Server is down
+2023-10-28 11:54:59,854 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:54:59,854 - INFO - [+]SERVER URI: PYRO:obj_1816d6a10b484f26a83b2129c8660d26@0.0.0.0:7878
+2023-10-28 11:55:26,531 - WARNING - [-]Server is down
+2023-10-28 11:55:26,951 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:55:26,951 - INFO - [+]SERVER URI: PYRO:obj_791a339b3f8d44828ad1e396e5fe8ba6@0.0.0.0:7878
+2023-10-28 11:55:52,987 - WARNING - [-]Server is down
+2023-10-28 11:57:43,117 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:57:43,117 - INFO - [+]SERVER URI: PYRO:obj_ddbf8b31348648b88af1c76f6e4ab072@0.0.0.0:7878
+2023-10-28 11:57:58,044 - WARNING - [-]Server is down
+2023-10-28 11:57:59,877 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:57:59,877 - INFO - [+]SERVER URI: PYRO:obj_0d838355801d46428a74ba777ccb3815@0.0.0.0:7878
+2023-10-28 11:59:56,518 - WARNING - [-]Server is down
+2023-10-28 11:59:56,936 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 11:59:56,936 - INFO - [+]SERVER URI: PYRO:obj_fbd82d663a244c80968d1417293ca0e6@0.0.0.0:7878
+2023-10-28 12:00:04,794 - WARNING - [-]Server is down
+2023-10-28 12:01:10,539 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 12:01:10,540 - INFO - [+]SERVER URI: PYRO:obj_d448fdb398d04ea8882a8c8c97ea5731@0.0.0.0:7878
+2023-10-28 12:03:36,890 - WARNING - [-]Server is down
+2023-10-28 12:03:37,323 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 12:03:37,323 - INFO - [+]SERVER URI: PYRO:obj_a188eb4ea7154277a7a74b3c6e72aa4d@0.0.0.0:7878
+2023-10-28 12:04:52,912 - WARNING - [-]Server is down
+2023-10-28 12:04:53,336 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-28 12:04:53,337 - INFO - [+]SERVER URI: PYRO:obj_176a2bf0f31e4d399f12afd1a0287a3e@0.0.0.0:7878
+2023-10-28 12:37:33,206 - WARNING - [-]Server is down
+2023-10-28 13:05:38,978 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 13:05:38,978 - INFO - [+]SERVER URI: PYRO:obj_c6a6a4b74b6349cdb34c984b5676701b@localhost:7878
+2023-10-28 13:06:58,228 - WARNING - [-]Server is down
+2023-10-28 13:06:58,642 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 13:06:58,642 - INFO - [+]SERVER URI: PYRO:obj_ed2885f05d5f4ba98b2396240c5f170a@localhost:7878
+2023-10-28 13:07:04,344 - WARNING - [-]Server is down
+2023-10-28 13:07:04,764 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 13:07:04,764 - INFO - [+]SERVER URI: PYRO:obj_847c33feaffc408c91d5aca2f12a6c12@localhost:7878
+2023-10-28 13:10:22,078 - INFO - [+]Connected on database
+2023-10-28 13:11:09,682 - INFO - [-]Fail to insert <User: John Doe - john@doe.com>
+2023-10-28 14:21:17,051 - INFO - [-]Fail to insert <User: John Doe 3 - john9@doe.com>
+2023-10-28 14:22:56,184 - WARNING - [-]Server is down
+2023-10-28 14:23:46,498 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:23:46,498 - INFO - [+]SERVER URI: PYRO:obj_8d4436ee30d7456ba5c3421e9eb83dc2@localhost:7878
+2023-10-28 14:24:13,929 - INFO - [+]Connected on database
+2023-10-28 14:24:14,017 - INFO - [-]Fail to insert <User: John Doe 3 - john9@doe.com>
+2023-10-28 14:25:46,388 - WARNING - [-]Server is down
+2023-10-28 14:25:46,910 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:25:46,910 - INFO - [+]SERVER URI: PYRO:obj_11d36a717b804fd89fa5ad2c83a203d4@localhost:7878
+2023-10-28 14:26:33,571 - INFO - [+]Connected on database
+2023-10-28 14:26:33,651 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
+2023-10-28 14:37:09,689 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 14:43:10,979 - WARNING - [-]Server is down
+2023-10-28 14:43:11,535 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:43:11,535 - INFO - [+]SERVER URI: PYRO:obj_a2d4244c776d4cc4b210ff5a5de49cb2@localhost:7878
+2023-10-28 14:46:41,126 - WARNING - [-]Server is down
+2023-10-28 14:46:41,541 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:46:41,542 - INFO - [+]SERVER URI: PYRO:obj_0c19329c8d2d4eaaadee81d382f8685b@localhost:7878
+2023-10-28 14:47:00,231 - INFO - [+]Connected on database
+2023-10-28 14:47:00,495 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 14:47:46,859 - WARNING - [-]Server is down
+2023-10-28 14:47:47,382 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:47:47,382 - INFO - [+]SERVER URI: PYRO:obj_9d6a88ce047547089a391010f7686c0d@localhost:7878
+2023-10-28 14:48:31,503 - WARNING - [-]Server is down
+2023-10-28 14:48:31,931 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:48:31,932 - INFO - [+]SERVER URI: PYRO:obj_cd36f665af92488f98e0d33248beb6e7@localhost:7878
+2023-10-28 14:48:35,601 - INFO - [+]Connected on database
+2023-10-28 14:49:07,880 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 14:49:13,295 - INFO - [+]<User: John Doe 3 - john9@doe.com> has been inserted
+2023-10-28 14:49:53,131 - WARNING - [-]Server is down
+2023-10-28 14:49:53,653 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:49:53,653 - INFO - [+]SERVER URI: PYRO:obj_83ec26a2a5bc4162a0d3306dbdd45d29@localhost:7878
+2023-10-28 14:50:01,982 - WARNING - [-]Server is down
+2023-10-28 14:50:02,396 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:50:02,396 - INFO - [+]SERVER URI: PYRO:obj_eb2e2be676484819b010b926f6dffb8b@localhost:7878
+2023-10-28 14:50:19,299 - INFO - [+]Connected on database
+2023-10-28 14:51:55,743 - WARNING - [-]Server is down
+2023-10-28 14:51:56,165 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:51:56,166 - INFO - [+]SERVER URI: PYRO:obj_96f25a25e2b24009930053d7b912619d@localhost:7878
+2023-10-28 14:52:00,513 - INFO - [+]Connected on database
+2023-10-28 14:54:05,537 - WARNING - [-]Server is down
+2023-10-28 14:54:05,951 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:54:05,951 - INFO - [+]SERVER URI: PYRO:obj_599f6c40588e409bbf12be418677e721@localhost:7878
+2023-10-28 14:54:09,068 - WARNING - [-]Server is down
+2023-10-28 14:54:09,495 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:54:09,495 - INFO - [+]SERVER URI: PYRO:obj_61afa7927f9e4b1dba6ecff2f8ab3ae0@localhost:7878
+2023-10-28 14:54:15,305 - INFO - [+]Connected on database
+2023-10-28 14:57:04,668 - WARNING - [-]Server is down
+2023-10-28 14:57:05,089 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 14:57:05,089 - INFO - [+]SERVER URI: PYRO:obj_ddc71aaa74504d3aba1c5c8ad1fd6454@localhost:7878
+2023-10-28 14:57:11,160 - INFO - [+]Connected on database
+2023-10-28 14:57:11,447 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:00:47,287 - WARNING - [-]Server is down
+2023-10-28 15:00:47,809 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 15:00:47,809 - INFO - [+]SERVER URI: PYRO:obj_ce5f670953bd4ff290d06996fb968a1d@localhost:7878
+2023-10-28 15:01:03,523 - INFO - [+]Connected on database
+2023-10-28 15:01:03,805 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:02:28,593 - WARNING - [-]Server is down
+2023-10-28 15:02:29,017 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 15:02:29,017 - INFO - [+]SERVER URI: PYRO:obj_b8418222594d4ab981c89fdb30cd7c03@localhost:7878
+2023-10-28 15:02:35,851 - INFO - [+]Connected on database
+2023-10-28 15:02:36,138 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:06:01,414 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:08:12,708 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:10:41,558 - WARNING - [-]Server is down
+2023-10-28 15:10:41,983 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 15:10:41,984 - INFO - [+]SERVER URI: PYRO:obj_6eef4202deb6409c895575faeacc9c46@localhost:7878
+2023-10-28 15:11:10,427 - INFO - [+]Connected on database
+2023-10-28 15:11:10,496 - INFO - [-]Fail to insert <User: John Doe 3 - john9@doe.com>
+2023-10-28 15:11:17,598 - INFO - [-]Fail to insert <User: John Doe 3 - john2@doe.com>
+2023-10-28 15:12:06,187 - INFO - [+]<User: John Doe 1 - john2@doe.com> has been inserted
+2023-10-28 15:12:09,918 - INFO - [-]Fail to insert <User: John Doe 1 - john2@doe.com>
+2023-10-28 15:12:13,872 - INFO - [-]Fail to insert <User: John Doe 5 - john2@doe.com>
+2023-10-28 15:12:17,553 - INFO - [+]<User: John Doe 5 - johnt@doe.com> has been inserted
+2023-10-28 15:22:45,031 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:25:51,499 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:26:10,750 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:28:08,910 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:31:36,113 - WARNING - [-]Server is down
+2023-10-28 15:31:49,295 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 15:31:49,295 - INFO - [+]SERVER URI: PYRO:obj_6463b999f43e4df1a8c538186a9ebb71@localhost:7878
+2023-10-28 15:33:40,240 - WARNING - [-]Server is down
+2023-10-28 15:33:40,751 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 15:33:40,752 - INFO - [+]SERVER URI: PYRO:obj_b25e80a32c8f4797938e68b884376385@localhost:7878
+2023-10-28 15:33:46,236 - INFO - [+]Connected on database
+2023-10-28 15:33:46,522 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:34:26,350 - INFO - [-]Fail to insert <User: John Doe 5 - johnt@doe.com>
+2023-10-28 15:34:38,605 - INFO - [+]<User: John Doe 6 - johnt2@doe.com> has been inserted
+2023-10-28 15:38:40,778 - INFO - [+]<User: Isaac Santiago - isaacsgpz@gmail.com> has been inserted
+2023-10-28 15:39:13,818 - INFO - <User: Isaac Santiago - isaacsgpz@gmail.com> is logged!
+2023-10-28 15:44:35,734 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:46:55,605 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 15:48:22,457 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 19:40:05,209 - WARNING - [-]Server is down
+2023-10-28 19:40:08,005 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 19:40:08,005 - INFO - [+]SERVER URI: PYRO:obj_f8e7d6d86edc4dbfa557b31731e6d640@localhost:7878
+2023-10-28 19:40:21,996 - INFO - [+]Connected on database
+2023-10-28 19:40:22,281 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 19:40:27,060 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 19:41:05,114 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 19:41:22,073 - INFO - [+]<User: admin - admin@admin.com> has been inserted
+2023-10-28 19:41:24,341 - INFO - <User: admin - admin@admin.com> is logged!
+2023-10-28 19:42:19,857 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
+2023-10-28 19:42:27,247 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 19:43:15,962 - INFO - [+]<User: Jane Doe - Jane@doe.com> has been inserted
+2023-10-28 19:43:33,282 - INFO - <User: Jane Doe - Jane@doe.com> is logged!
+2023-10-28 19:43:54,352 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
+2023-10-28 19:44:03,619 - INFO - [+]<User: Jane Doe - jane@doe.com> has been inserted
+2023-10-28 19:44:14,390 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 21:41:32,323 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:33:26,856 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:37:10,427 - WARNING - [-]Server is down
+2023-10-28 22:37:10,864 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 22:37:10,865 - INFO - [+]SERVER URI: PYRO:obj_c544c7390ef94af8aaf7a2be1fb9e8b8@localhost:7878
+2023-10-28 22:37:35,941 - WARNING - [-]Server is down
+2023-10-28 22:37:44,773 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 22:37:44,773 - INFO - [+]SERVER URI: PYRO:obj_4a54b1701f334424926f098154f8ecfa@localhost:7878
+2023-10-28 22:38:11,018 - INFO - [+]Connected on database
+2023-10-28 22:38:11,297 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:38:40,575 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:39:34,513 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:40:07,830 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:40:33,095 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:40:49,861 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:42:21,429 - WARNING - [-]Server is down
+2023-10-28 22:42:25,715 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 22:42:25,715 - INFO - [+]SERVER URI: PYRO:obj_5861e909f66648b8a6c0fc37f4b684c9@localhost:7878
+2023-10-28 22:42:55,929 - WARNING - [-]Server is down
+2023-10-28 22:42:56,339 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 22:42:56,339 - INFO - [+]SERVER URI: PYRO:obj_1cd63f994ea7490cbe36c2824c665e12@localhost:7878
+2023-10-28 22:43:00,126 - WARNING - [-]Server is down
+2023-10-28 22:43:02,736 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-28 22:43:02,736 - INFO - [+]SERVER URI: PYRO:obj_d61c4c18ca064a29be66f5ab122f3603@localhost:7878
+2023-10-28 22:44:16,275 - INFO - [+]Connected on database
+2023-10-28 22:44:16,545 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:45:57,481 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-28 22:46:28,682 - INFO - <User: John Doe - john@doe.com> is logged!

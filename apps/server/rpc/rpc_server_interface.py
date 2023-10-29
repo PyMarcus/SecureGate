@@ -37,7 +37,9 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing select_member method")
 
     @abstractmethod
-    def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def select_user(
+        self, header: typing.Dict[str, typing.Any], user_id: str
+    ) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing select_user method")
 
     @abstractmethod

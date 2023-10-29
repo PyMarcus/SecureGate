@@ -15,5 +15,5 @@ def auth_middleware(
     if not userEmail:
         raise HTTPException(status_code=401, detail="userId header is missing")
 
-    request.state.token = authorization
+    request.state.token = authorization.split(" ")[1]
     request.state.user_email = userEmail
