@@ -4,14 +4,14 @@ import { AppNavigation } from '../app-navigation'
 
 export const AppLayout = () => {
   return (
-    <div className="flex-1 flex flex-col relative">
+    <div className="h-full w-full flex-1 flex flex-col relative">
       <AppHeader />
 
-      <div className="flex flex-1 p-6 md:p-8">
+      <div className="flex flex-1 p-6 md:p-8 overflow-y-hidden overflow-x-hidden">
         <Outlet />
       </div>
 
-      <div className="w-full md:hidden">
+      <div className="w-full md:hidden  bg-background">
         <AppNavigation mobile />
       </div>
     </div>

@@ -1,9 +1,11 @@
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { GatesSelector } from '@/components/gates-selector'
+import { NewGateDialog } from '@/components/new-gate-dialog'
 import { Button } from '@/components/ui/button'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useSessionStore } from '@/stores/session-store'
-import { LockKeyOpen, PlusCircle } from '@phosphor-icons/react'
+import { LockKeyOpen } from '@phosphor-icons/react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 export const Dashboard = () => {
@@ -21,68 +23,68 @@ export const Dashboard = () => {
   }
 
   return (
-    <section className="flex-1 flex flex-col gap-6 md:gap-8 bg-background">
-      <header className="flex items-center justify-between flex-col md:flex-row gap-4">
-        <h2 className="text-3xl font-bold tracking-tight self-start">
-          Dashboard
-        </h2>
-        <div className="inline-flex gap-4 justify-end w-full">
-          <GatesSelector />
-
-          {isRoot && (
-            <Button className="space-x-2 min-w-max">
-              <PlusCircle />
-              <span className="sr-only md:not-sr-only">New gate</span>
-            </Button>
-          )}
-
-          <ConfirmDialog
-            title="Are you sure you want to open this gate?"
-            description="This action cannot be undone. After opening the gate, you won't be able to close it automatically."
-            trigger={
-              <Button variant="destructive" className="space-x-2 min-w-max">
-                <LockKeyOpen />
-                <span className="sr-only md:not-sr-only">Open gate</span>
-              </Button>
-            }
-          />
-        </div>
-      </header>
-
+    <section className="flex-1 h-full">
       <Tabs
         defaultValue="overview"
         value={currentTab}
-        className="flex flex-1 flex-col gap-6 md:gap-8"
         onValueChange={handleTabsNavigation}
       >
-        <TabsList
-          className="w-full sm:w-auto justify-start flex-wrap h-auto 
+        <header
+          className="flex flex-col sticky -top-6 md:-top-8 bg-background 
+        z-30 gap-6 md:gap-8 py-6 md:py-8"
+        >
+          <div className="flex items-center justify-between flex-col md:flex-row gap-4">
+            <h2 className="text-3xl font-bold tracking-tight self-start">
+              Dashboard
+            </h2>
+            <div className="inline-flex gap-4 justify-end w-full">
+              <GatesSelector />
+
+              {isRoot && <NewGateDialog />}
+
+              <ConfirmDialog
+                title="Are you sure you want to open this gate?"
+                description="This action cannot be undone. After opening the gate, you won't be able to close it automatically."
+                trigger={
+                  <Button variant="destructive" className="space-x-2 min-w-max">
+                    <LockKeyOpen />
+                    <span className="sr-only md:not-sr-only">Open gate</span>
+                  </Button>
+                }
+              />
+            </div>
+          </div>
+          <TabsList
+            className="w-full sm:w-auto justify-start flex-wrap h-auto 
         self-start"
-        >
-          <TabsTrigger value="overview" className="flex-1">
-            Overview
-          </TabsTrigger>
-
-          {isRoot && (
-            <TabsTrigger value="users" className="flex-1">
-              Users
+          >
+            <TabsTrigger value="overview" className="flex-1">
+              Overview
             </TabsTrigger>
-          )}
 
-          <TabsTrigger value="members" className="flex-1">
-            Members
-          </TabsTrigger>
-          <TabsTrigger value="analytics" className="flex-1">
-            Analytics
-          </TabsTrigger>
-        </TabsList>
+            {isRoot && (
+              <TabsTrigger value="users" className="flex-1">
+                Users
+              </TabsTrigger>
+            )}
 
-        <TabsContent
-          value={currentTab}
-          className="flex-1 flex flex-col gap-6 md:gap-8 justify-between"
-        >
-          <Outlet />
-        </TabsContent>
+            <TabsTrigger value="members" className="flex-1">
+              Members
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="flex-1" disabled>
+              Analytics
+            </TabsTrigger>
+          </TabsList>
+        </header>
+
+        <ScrollArea className="h-[calc(100vh-21rem)] md:h-[calc(100vh-18rem)] z-20 flex">
+          <TabsContent
+            value={currentTab}
+            className="h-full flex flex-col gap-6 md:gap-8 justify-between pb-4"
+          >
+            <Outlet />
+          </TabsContent>
+        </ScrollArea>
       </Tabs>
     </section>
   )

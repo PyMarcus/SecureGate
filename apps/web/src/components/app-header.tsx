@@ -10,7 +10,7 @@ export const AppHeader = () => {
   const { name, email } = session!.user
 
   return (
-    <div className="w-full px-6 md:px-8 border-b sticky bg-background">
+    <div className="w-full px-6 md:px-8 border-b sticky bg-background top-0 inset-x-0">
       <header className="flex items-center justify-between h-16 gap-12">
         <Link
           to="/dashboard"

@@ -1,3 +1,4 @@
+import { LoadingIndicator } from '@/components/loading-indicator'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -20,7 +21,6 @@ import { useToast } from '@/components/ui/use-toast'
 import { useSignIn } from '@/services/api/requests/session'
 import { useSessionStore } from '@/stores/session-store'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { SpinnerGap } from '@phosphor-icons/react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import * as zod from 'zod'
@@ -116,7 +116,7 @@ export const SignIn = () => {
               )}
             />
             <Button className="w-full" type="submit">
-              {isLoading && <SpinnerGap className="mr-2 animate-spin" />}
+              {isLoading && <LoadingIndicator className="mr-2" />}
               <span>Sign In</span>
             </Button>
           </form>
