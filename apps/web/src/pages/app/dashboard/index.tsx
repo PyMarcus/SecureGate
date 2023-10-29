@@ -81,7 +81,7 @@ export const Dashboard = () => {
         <ScrollArea className="flex-1">
           <TabsContent
             value={currentTab}
-            className="mt-0 flex-1 flex flex-col gap-6 md:gap-8 justify-between
+            className="mt-0 flex-1 flex flex-col gap-6 md:gap-8 justify-between 
             h-[calc(100vh-22rem)] md:h-[calc(100vh-20rem)]"
           >
             <Outlet />
