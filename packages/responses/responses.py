@@ -30,3 +30,8 @@ class CreatedResponse(SuccessResponse):
 class NoContentResponse(SuccessResponse):
     def __init__(self, message=None, data=None):
         super().__init__(message, data, 204)
+
+
+class ServerErrorResponse(SuccessResponse):
+    def __init__(self, message=None, data=None):
+        super().__init__(message, data, 500)

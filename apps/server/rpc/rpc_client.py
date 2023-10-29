@@ -1,3 +1,4 @@
+import base64
 import typing
 
 import Pyro4
@@ -106,7 +107,9 @@ class RPCSingletonClient(metaclass=Singleton):
             token: A string representing the token.
             name: A string representing the device's name.
         """
-        return self.client.select_device(request)
+        base64_encoded_data = self.client.select_device(request).get("secure").get("data")
+        encrypted_data = base64.urlsafe_b64decode(base64_encoded_data)
+        return self.client.decoder(encrypted_data)
 
     def select_all_members(
         self, header: typing.Dict[str, str]
@@ -193,7 +196,12 @@ if __name__ == "__main__":
     header = {"email": "imaroot@email.com", "token": n.get("data").get("token")}
     print(header)
     print(client.select_all_users(header))
-    print(client.select_user({"email": "imaroot@email.com", "token": n.get("data").get("token")}))
+    print(
+        client.select_user(
+            {"email": "imaroot@email.com", "token": n.get("data").get("token")},
+            "fa109c61-7987-45bc-9e49-cc9322f72265",
+        )
+    )
     """print(client.register_device({
         "name": "device1",
         "version": "0.0.0",

@@ -1,3 +1,4 @@
+import base64
 import datetime
 import threading
 import typing
@@ -77,6 +78,12 @@ class RPCServer(RPCServerInterface):
     @Pyro4.expose
     def select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_device(device)
+
+    @Pyro4.expose
+    def decoder(self, device_encrypted: str) -> typing.Dict[str, typing.Any]:
+        LogMaker.write_log("[+]calling decoder", "info")
+        encrypted_data = base64.urlsafe_b64decode(device_encrypted.get("data"))
+        return Security.decrypted_traffic_package(encrypted_data)
 
     @Pyro4.expose
     def select_all_members(
@@ -234,13 +241,16 @@ class RPCServer(RPCServerInterface):
                 device_data: Device = SelectMain.select_device(name)
                 if Security.verify_password(device_data.wifi_password, password):
                     if device_data:
-                        return self.__authorized_device_message(
+                        auth_message = self.__authorized_device_message(
                             str(device_data.id),
                             device_data.name,
                             device_data.wifi_ssid,
                             device_data.version,
                             device_data.wifi_password,
                         )
+                        encrypted_data = Security.encrypted_traffic(auth_message)
+                        print(encrypted_data)
+                        return encrypted_data
                 return self.__bad_request_message()
         return self.__unauthorized_message()
 
