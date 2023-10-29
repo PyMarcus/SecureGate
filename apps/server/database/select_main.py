@@ -53,6 +53,19 @@ class SelectMain:
             return None
 
     @classmethod
+    def select_device(cls, name: str) -> Device | None:
+        try:
+            with cls.__session.create_session() as session:
+                device: typing.Type[Device] = (
+                    session.query(Device).filter(Device.name == name).first()
+                )
+                if device:
+                    return device
+                return None
+        except Exception:
+            return None
+
+    @classmethod
     def select_all_users(cls) -> typing.List[User]:
         try:
             with cls.__session.create_session() as session:
@@ -70,6 +83,17 @@ class SelectMain:
                 members: typing.Type[Member] = session.query(Member).all()
                 if members:
                     return members
+                return list()
+        except Exception:
+            return list()
+
+    @classmethod
+    def select_all_devices(cls) -> typing.List[Device]:
+        try:
+            with cls.__session.create_session() as session:
+                devices: typing.Type[Device] = session.query(Device).all()
+                if devices:
+                    return devices
                 return list()
         except Exception:
             return list()

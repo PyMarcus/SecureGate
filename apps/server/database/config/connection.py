@@ -50,7 +50,7 @@ class DBConnection:
             cls.__db_connection()
 
         LogMaker.write_log("[+]Drop all tables", "info")
-        BaseModel.metadata.drop_all(cls.__engine)
+        # BaseModel.metadata.drop_all(cls.__engine)
         LogMaker.write_log("[+]Create all tables", "info")
         BaseModel.metadata.create_all(cls.__engine)
         LogMaker.write_log("[+]OK", "info")

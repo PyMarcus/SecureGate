@@ -2,6 +2,7 @@ import json
 import typing
 
 import bcrypt
+import cryptography.fernet
 from cryptography.fernet import Fernet
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 
@@ -73,44 +74,51 @@ class Security:
             return False
 
     @staticmethod
-    def encrypted_traffic_prototype(
-        method: typing.Callable,
-    ) -> typing.Any:  # criptografa trafego, se der tempo...
-        def wrapper(arg: typing.Dict[str, typing.Any]) -> typing.Callable:
-            fernet_key = env.FERNET_KEY
-            if not fernet_key:
-                raise ValueError("FERNET_KEY is not set.")
-
-            fernet: Fernet = Fernet(fernet_key)
-            data: str = json.dumps(arg)
-            encrypted_data = fernet.encrypt(data.encode())
-            return method({"secure": encrypted_data})
-
-        return wrapper
-
-    @staticmethod
-    def decrypted_traffic_package(encrypted_data: bytes) -> typing.Dict[str, typing.Any]:
+    def encrypted_traffic(
+        package: typing.Dict[str, typing.Any],
+    ) -> typing.Any:
         fernet_key = env.FERNET_KEY
         if not fernet_key:
             raise ValueError("FERNET_KEY is not set.")
-
         fernet: Fernet = Fernet(fernet_key)
-        encrypted_data = fernet.decrypt(encrypted_data)
-        return json.loads(encrypted_data)
+        data: str = json.dumps(package)
+        encrypted_data = fernet.encrypt(data.encode())
+        return {"secure": encrypted_data}
 
     @staticmethod
-    @encrypted_traffic_prototype
-    def prototype_encrypted_traffic_example(
-        data: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
-        return data
+    def decrypted_traffic_package(encrypted_data: str) -> typing.Dict[str, typing.Any]:
+        fernet_key = env.FERNET_KEY
+        if not fernet_key:
+            raise ValueError("FERNET_KEY is not set.")
+        fernet: Fernet = Fernet(fernet_key)
+        try:
+            encrypted_data = fernet.decrypt(encrypted_data.encode())
+            return json.loads(encrypted_data)
+        except Exception as e:
+            print(e)
+            return {"error": "Something was wrong!", "status": 500}
 
 
 if __name__ == "__main__":
     # example teste de criptografia do trafego
-    # data = Security.prototype_encrypted_traffic_example({"OK": 1})
-    # print(data)
-    # print(Security.decrypted_traffic_package(data["secure"]))
+    data = Security.encrypted_traffic({"OK": 1})
+    print(data)
+    print(
+        Security.decrypted_traffic_package(
+            "Z0FBQUFBQmxQYVY0ZWVJdUJHdFJCaHI1ZW1yczg5Zmw5UFdqRHRsOFNGa"
+            "VhJWE5yT3NXbDJxTXJzdHc4RGE1WmMtWWdaS3NNcmlsRWNRSml1WUdHb"
+            "09lY2tONEJZa1VPclJ5aTV0TnBFbGlYV0hyQUlUTXdMWEl6dnJZVE1TQkZa"
+            "THVjZjBSeGJISG80VFhhaWtGYlZQVlBvbHBrN2stX1kzTUgtOVZHNi1BVTdhc"
+            "FF5ZEJsdjhPZ2I3REhFZkZ3WTdCQmRLbFgzcXJhWEpjV2x4cHdBcEQtX3p1bEJr"
+            "emdXbm52ZWYzVEpJYXlPdGdIRDBPa2Y2MHlrcDQycGpNTldfbE50OUxncWpfRmRP"
+            "amdjbEdXRDByUTRaSEdKYW8wX1hrY1F4OWQ5eGpFWG1OUE5LZkE0RnlxVHNUcnlCaXdzS"
+            "TdmclZ1UjMx"
+            "cVpfUmIxRUtmU0Y5NXV3c3BWWks1UE5xTjFpa1hmOU1tMkZPOUZSSHlhb2R0QUJ1RkJkS"
+            "UJXdWQ5dTBIQndLczdr"
+            "UlhyczAyVk9pTkE0cWd1ckNEZV9qY3U4VzQw"
+            "MGR1eDNOdEVwS0NReGVOdHQ0UWNmMmZIY1daLUJMRG91ZVNqVA=="
+        )
+    )
     token = Security.generate_token("imaadmin@email.com")
     h = {
         "email": "imaadmin@email.com",
