@@ -61,12 +61,20 @@ class RPCServer(RPCServerInterface):
         return self.__register_member(member)
 
     @Pyro4.expose
+    def register_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__register_device(device)
+
+    @Pyro4.expose
     def select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_user(user)
 
     @Pyro4.expose
     def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         return self.__select_member(member)
+
+    @Pyro4.expose
+    def select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return self.__select_device(device)
 
     @Pyro4.expose
     def select_all_members(
@@ -79,6 +87,12 @@ class RPCServer(RPCServerInterface):
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_users(header)
+
+    @Pyro4.expose
+    def select_all_devices(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.__select_all_devices(header)
 
     def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         email: str = credentials["email"]
@@ -134,7 +148,6 @@ class RPCServer(RPCServerInterface):
                     root_id=root_id,
                     role=role,
                 )
-            print(new_user.role)
             if InsertMain.insert_user(new_user):
                 LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
                 return CreatedResponse(message="Successfully signed up", data=True).dict()
@@ -170,6 +183,25 @@ class RPCServer(RPCServerInterface):
         return self.__unauthorized_message()
 
     @authorization_required
+    def __register_device(self, dev: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        if dev.get("email") and dev.get("token"):
+            if Security.verify_token(dev.get("email"), dev.get("token")):
+                name: str = dev.get("name")
+                wifi_ssid: str = dev.get("wifi_ssid")
+                version: str = dev.get("version")
+                password = Security.hash_password(dev.get("wifi_password"))
+                device: Device = Device(
+                    name=name, version=version, wifi_ssid=wifi_ssid, wifi_password=password
+                )
+
+                if InsertMain.insert_device(device):
+                    LogMaker.write_log(f"[+]{device} has been inserted", "info")
+                    return True
+                LogMaker.write_log(f"[-]Fail to insert {device}", "info")
+                return False
+        return self.__unauthorized_message()
+
+    @authorization_required
     def __select_user(self, user: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         if user.get("email") and user.get("token"):
             if Security.verify_token(user.get("email"), user.get("token")):
@@ -179,6 +211,25 @@ class RPCServer(RPCServerInterface):
                     return self.__authorized_user_message(
                         user_data.name, user_data.email, str(user_data.id), user_data.role
                     )
+                return self.__bad_request_message()
+        return self.__unauthorized_message()
+
+    @authorization_required
+    def __select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        if device.get("email") and device.get("token"):
+            if Security.verify_token(device.get("email"), device.get("token")):
+                name: str = device.get("name")
+                password: str = device.get("wifi_password")
+                device_data: Device = SelectMain.select_device(name)
+                if Security.verify_password(device_data.wifi_password, password):
+                    if device_data:
+                        return self.__authorized_device_message(
+                            str(device_data.id),
+                            device_data.name,
+                            device_data.wifi_ssid,
+                            device_data.version,
+                            device_data.wifi_password,
+                        )
                 return self.__bad_request_message()
         return self.__unauthorized_message()
 
@@ -205,7 +256,6 @@ class RPCServer(RPCServerInterface):
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         if header.get("email") and header.get("token"):
-            print(header)
             if Security.verify_token(header.get("email"), header.get("token")):
                 data = SelectMain.select_all_users()
                 response: typing.List = list()
@@ -244,6 +294,26 @@ class RPCServer(RPCServerInterface):
                 return response
         return self.__unauthorized_message()
 
+    @authorization_required
+    def __select_all_devices(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
+                data = SelectMain.select_all_devices()
+                response: typing.List = list()
+                for content in data:
+                    response.append(
+                        {
+                            "name": content.name,
+                            "version": content.version,
+                            "id": content.id,
+                            "wifi_ssid": content.wifi_ssid,
+                        }
+                    )
+                return response
+        return self.__unauthorized_message()
+
     def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
         return {"error": "Access to the requested resource is forbidden", "status": 401}
 
@@ -260,6 +330,26 @@ class RPCServer(RPCServerInterface):
             "user_id": user_id,
             "role": role,
             "token": Security.generate_token(email),
+        }
+
+    def __authorized_device_message(
+        self,
+        id: str,
+        name: str,
+        wifi_ssid: str,
+        version: str,
+        password: str,
+    ) -> typing.Dict[str, typing.Any]:
+        return {
+            "error": None,
+            "status": 200,
+            "message": "It's device",
+            "device": name,
+            "wifi_ssid": wifi_ssid,
+            "version": version,
+            "id": id,
+            "time": str(datetime.datetime.now()),
+            "password": password,
         }
 
     def __authorized_member_message(

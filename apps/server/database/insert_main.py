@@ -32,3 +32,13 @@ class InsertMain:
                 return True
         except Exception:
             return False
+
+    @classmethod
+    def insert_device(cls, device: Device) -> bool:
+        try:
+            with cls.__session.create_session() as session:
+                session.add(device)
+                session.commit()
+                return True
+        except Exception:
+            return False

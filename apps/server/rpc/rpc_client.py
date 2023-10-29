@@ -2,6 +2,7 @@ import typing
 
 import Pyro4
 
+from apps.server.security import Security
 from libs.pyro_uri import get_pyro_uri
 
 
@@ -68,6 +69,19 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.register_member(request)
 
+    def register_device(self, request: typing.Dict[str, typing.Any]) -> bool:
+        """
+        The register_device method creates a new device, allowing them access through the gate.
+        It takes a dictionary as input (request), containing device registration information.
+        The dictionary must include four mandatory fields:
+
+            name: A string representing the member's name.
+            version: A string representing the device's version.
+            wifi_ssid: A string representing the wifi's ssid.
+            wifi_password: A string representing the wifi's password of device.
+        """
+        return self.client.register_device(request)
+
     def select_user(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
         The select_user method get a member with your data
@@ -79,8 +93,18 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         The select_member method get a member with your data
             email: A string representing the member's email address.
+            email: A string representing the member's email address.
         """
         return self.client.select_member(request)
+
+    def select_device(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        """
+        The select_device method get a device with your data
+            email: A string representing the user's email address.
+            token: A string representing the token.
+            name: A string representing the device's name.
+        """
+        return self.client.select_device(request)
 
     def select_all_members(
         self, header: typing.Dict[str, str]
@@ -89,7 +113,7 @@ class RPCSingletonClient(metaclass=Singleton):
         The select_all_members method get a dict list with all members
 
         header:
-            user_id,
+            email,
             token
         """
         return self.client.select_all_members(header)
@@ -101,10 +125,22 @@ class RPCSingletonClient(metaclass=Singleton):
         The select_all_users method get a dict list with all users
 
         header:
-            user_id,
+            email,
             token
         """
         return self.client.select_all_users(header)
+
+    def select_all_devices(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """
+        The select_all_devices method get a dict list with all devices
+
+        header:
+            email,
+            token
+        """
+        return self.client.select_all_devices(header)
 
 
 def get_rpc_client() -> RPCSingletonClient:
@@ -153,8 +189,24 @@ if __name__ == "__main__":
         }
     )
     header = {"email": "imaroot@email.com", "token": n.get("data").get("token")}
-
-    print(n)
     print(header)
     print(client.select_all_users(header))
     print(client.select_user({"email": "imaroot@email.com", "token": n.get("data").get("token")}))
+    """print(client.register_device({
+        "name": "device1",
+        "version": "0.0.0",
+        "wifi_ssid": "wifihost",
+        "wifi_password": "wifipassword",
+        "email": "imaroot@email.com",
+        "token": n.get("data").get("token")
+    }))"""
+    print(
+        client.select_device(
+            {
+                "name": "device1",
+                "email": "imaroot@email.com",
+                "token": n.get("data").get("token"),
+                "wifi_password": "wifipassword",
+            }
+        )
+    )
