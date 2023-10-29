@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark'
 type Language = 'en-US' | 'pt-BR'
 
 interface PreferencesStates {
@@ -11,6 +11,7 @@ interface PreferencesStates {
 
 interface PreferencesSchema extends PreferencesStates {
   toggleTheme: () => void
+  setTheme: (theme: Theme) => void
   toggleLanguage: () => void
 }
 
@@ -58,6 +59,10 @@ export const usePreferencesStore = create<PreferencesSchema>()(
         toggleTheme: () =>
           set((state) => ({
             theme: state.theme === 'light' ? 'dark' : 'light',
+          })),
+        setTheme: (theme) =>
+          set(() => ({
+            theme,
           })),
         toggleLanguage: () =>
           set((state) => ({

@@ -23,10 +23,11 @@ export const Dashboard = () => {
   }
 
   return (
-    <section className="flex-1 h-full">
+    <section className="flex-1 flex">
       <Tabs
         defaultValue="overview"
         value={currentTab}
+        className="flex-1 flex flex-col"
         onValueChange={handleTabsNavigation}
       >
         <header
@@ -77,10 +78,11 @@ export const Dashboard = () => {
           </TabsList>
         </header>
 
-        <ScrollArea className="h-[calc(100vh-21rem)] md:h-[calc(100vh-18rem)] z-20 flex">
+        <ScrollArea className="flex-1">
           <TabsContent
             value={currentTab}
-            className="h-full flex flex-col gap-6 md:gap-8 justify-between pb-4"
+            className="mt-0 flex-1 flex flex-col gap-6 md:gap-8 justify-between
+            h-[calc(100vh-22rem)] md:h-[calc(100vh-20rem)]"
           >
             <Outlet />
           </TabsContent>

@@ -6,7 +6,6 @@ import { Analytics } from '@/pages/app/dashboard/tabs/analytics'
 import { Members } from '@/pages/app/dashboard/tabs/members'
 import { Overview } from '@/pages/app/dashboard/tabs/overview'
 import { Users } from '@/pages/app/dashboard/tabs/users'
-import { Preferences } from '@/pages/app/preferences'
 import { Profile } from '@/pages/app/profile'
 import { NotFound } from '@/pages/common/not-found'
 import { SignIn } from '@/pages/session/sign-in'
@@ -45,8 +44,6 @@ export const AppRoutes = () => {
                   <Route path="/dashboard/users" element={<Users />} />
                 </Route>
               </Route>
-
-              <Route path="/preferences" element={<Preferences />} />
 
               <Route path="/profile" element={<Profile />} />
             </Route>

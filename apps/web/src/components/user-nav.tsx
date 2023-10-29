@@ -6,11 +6,18 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { GearSix, SignOut, User } from '@phosphor-icons/react'
+import { Theme, usePreferencesStore } from '@/stores/preferences-store'
+import { Moon, SignOut, Sun, User } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
 interface UserNavProps {
@@ -26,10 +33,11 @@ export const UserNav = ({
   avatar = '',
   onSignOut,
 }: UserNavProps) => {
-  const navigate = useNavigate()
+  const { theme, setTheme } = usePreferencesStore()
+  const handleThemeChange = (theme: string) => setTheme(theme as Theme)
 
+  const navigate = useNavigate()
   const handleNavigateToProfile = () => navigate('/profile')
-  const handleNavigateToPreferences = () => navigate('/preferences')
 
   const avatarFallback = name
     .split(' ')
@@ -65,13 +73,32 @@ export const UserNav = ({
               <User />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleNavigateToPreferences}>
-            <span>Preferences</span>
-            <DropdownMenuShortcut>
-              <GearSix />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuSubContent>
+              <DropdownMenuRadioGroup
+                value={theme}
+                onValueChange={handleThemeChange}
+              >
+                <DropdownMenuRadioItem value="light">
+                  Light
+                  <DropdownMenuShortcut>
+                    <Sun />
+                  </DropdownMenuShortcut>
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="dark">
+                  Dark
+                  <DropdownMenuShortcut>
+                    <Moon />
+                  </DropdownMenuShortcut>
+                </DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuSubContent>
+          </DropdownMenuPortal>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={onSignOut}>
           <span>Sign out</span>
