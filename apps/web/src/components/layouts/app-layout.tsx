@@ -16,7 +16,7 @@ export const AppLayout = () => {
         <AppNavigation mobile />
       </div>
 
-      <footer>
+      <footer className="hidden md:block">
         <p className="text-muted-foreground text-center text-xs py-2">
           <span>SecureGate</span>
           <span className="mx-1">-</span>

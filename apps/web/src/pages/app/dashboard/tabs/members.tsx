@@ -1,3 +1,4 @@
+import { Member } from '@/@types/schemas/member'
 import { MembersTable } from '@/components/members-table'
 import {
   Card,
@@ -8,8 +9,24 @@ import {
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { IdentificationCard, LockKeyOpen, Users } from '@phosphor-icons/react'
+import { useRef, useState } from 'react'
 
 export const Members = () => {
+  const [selectedMember, setSelectedMember] = useState<Member | null>(null)
+
+  const memberHistoryRef = useRef<HTMLHeadingElement | null>(null)
+
+  const handleSelectMember = (member: Member) => {
+    if (member.id === selectedMember?.id) {
+      return setSelectedMember(null)
+    }
+
+    setSelectedMember(member)
+    if (memberHistoryRef.current) {
+      memberHistoryRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8 ">
       <ScrollArea className="w-full">
@@ -81,23 +98,28 @@ export const Members = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <ScrollArea
-              className="max-w-[calc(100vw-6rem)] 
-            md:max-w-[calc(100vw-8rem)]"
-            >
-              <MembersTable />
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+            <MembersTable
+              selectedMember={selectedMember}
+              onSelectMember={handleSelectMember}
+            />
           </CardContent>
         </Card>
         <Card className="md:col-span-3">
           <CardHeader>
-            <CardTitle>Member history</CardTitle>
+            <CardTitle ref={memberHistoryRef}>Member history</CardTitle>
             <CardDescription className="mt-0">
               Member access history
             </CardDescription>
           </CardHeader>
-          <CardContent></CardContent>
+          <CardContent>
+            {selectedMember ? (
+              <p>
+                {selectedMember.name} - {selectedMember.email}
+              </p>
+            ) : (
+              <p>No member selected</p>
+            )}
+          </CardContent>
         </Card>
       </div>
     </section>

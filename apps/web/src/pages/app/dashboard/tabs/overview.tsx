@@ -15,7 +15,7 @@ export const Overview = () => {
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
       <ScrollArea className="w-full">
-        <div className="w-[calc(100vw-3rem)] flex items-center gap-6 md:gap-8 items-stretch">
+        <div className="w-[calc(100vw-3rem)] flex gap-6 md:gap-8 items-stretch">
           <Card className="w-full min-w-[12rem]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">

@@ -5,22 +5,32 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { DotsThreeVertical } from '@phosphor-icons/react'
+import { cn } from '@/lib/utils'
+import { ClockCounterClockwise, DotsThreeVertical } from '@phosphor-icons/react'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { TableCell, TableRow } from './ui/table'
 
 interface MemberCardProps {
   member: Member
+  isSelected: boolean
+  onSelectRow: (member: Member) => void
 }
 
-export const MemberRow = ({ member }: MemberCardProps) => {
+export const MemberRow = ({
+  member,
+  isSelected,
+  onSelectRow,
+}: MemberCardProps) => {
   const displayId = member.id.split('-')[0]
 
+  const handleSelectRow = () => onSelectRow(member)
+
   return (
-    <TableRow>
+    <TableRow className={cn(isSelected && 'bg-muted')}>
       <TableCell>{displayId}</TableCell>
       <TableCell>{member.name}</TableCell>
       <TableCell>{member.email}</TableCell>
@@ -37,12 +47,14 @@ export const MemberRow = ({ member }: MemberCardProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuLabel>Options for {member.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuItem>Subscription</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleSelectRow}>
+              View History
+              <DropdownMenuShortcut>
+                <ClockCounterClockwise />
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </TableCell>

@@ -210,7 +210,7 @@ class RPCServer(RPCServerInterface):
                     return True
                 LogMaker.write_log(f"[-]Fail to insert {member}", "info")
                 return False
-        return self.__unauthorized_message()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __register_device(self, dev: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -229,7 +229,7 @@ class RPCServer(RPCServerInterface):
                     return True
                 LogMaker.write_log(f"[-]Fail to insert {device}", "info")
                 return False
-        return self.__unauthorized_message()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __register_access_history(
@@ -247,7 +247,7 @@ class RPCServer(RPCServerInterface):
                     return True
                 LogMaker.write_log(f"[-]Fail to insert {history}", "info")
                 return False
-        return self.__unauthorized_message()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __select_user(
@@ -289,8 +289,8 @@ class RPCServer(RPCServerInterface):
                         )
                         encrypted_data = Security.encrypted_traffic(auth_message)
                         return encrypted_data
-                return self.__bad_request_message()
-        return self.__unauthorized_message()
+                return BadRequestError("Invalid credentials").dict()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -307,8 +307,8 @@ class RPCServer(RPCServerInterface):
                         member_data.added_by,
                         member_data.authorized,
                     )
-                return self.__bad_request_message()
-        return self.__unauthorized_message()
+                return BadRequestError("Member not found").dict()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __select_access_history(
@@ -343,7 +343,7 @@ class RPCServer(RPCServerInterface):
                         data=response,
                     ).dict()
                 return NoContentResponse(message="No data", data={}).dict()
-        return self.__unauthorized_message()
+        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __select_all_users(
