@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 
-from apps.api.schemas.session_schema import SigninSchema, SignupSchema
 from apps.api.utils.handle_rpc_result import handle_rpc_result
 from apps.server.rpc.rpc_client import RPCSingletonClient, get_rpc_client
+from packages.schemas.session_schema import SigninSchema, SignupSchema
 
 routes = APIRouter(
     prefix="/session",

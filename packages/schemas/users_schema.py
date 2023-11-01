@@ -7,4 +7,3 @@ class CreateUserSchema(BaseModel):
     rfid: str
     added_by: str
     authorized: bool
-    added_by: str

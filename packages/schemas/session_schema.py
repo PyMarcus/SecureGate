@@ -10,4 +10,4 @@ class SignupSchema(BaseModel):
     name: str
     email: str
     password: str
-    role: str  # 'ADMIN' | 'ROOT'
+    role: str  # 'ROOT'

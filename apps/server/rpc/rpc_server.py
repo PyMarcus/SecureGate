@@ -9,6 +9,9 @@ from rpc_server_interface import RPCServerInterface
 
 from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
+from apps.server.rpc.controllers.admin_controller import AdminController
+from apps.server.rpc.controllers.session_controller import SessionController
+from apps.server.rpc.controllers.user_controller import UserController
 from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
@@ -52,16 +55,24 @@ class RPCServer(RPCServerInterface):
     __user_logged: uuid.UUID | None = None
 
     @Pyro4.expose
-    def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__sign_in(credentials)
+    def sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+        return SessionController.sign_in(payload)
 
     @Pyro4.expose
-    def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
-        return self.__sign_up(credentials)
+    def sign_up(self, payload: typing.Dict[str, typing.Any]) -> bool:
+        return SessionController.sign_up(payload)
 
     @Pyro4.expose
-    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__register_member(member)
+    def create_admin(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> bool:
+        return AdminController.create_admin(header, payload)
+
+    @Pyro4.expose
+    def create_user(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        return UserController.create_user(header, payload)
 
     @Pyro4.expose
     def register_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -122,95 +133,6 @@ class RPCServer(RPCServerInterface):
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_access_history(header)
-
-    def __sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        email: str = credentials["email"]
-        password: str = credentials["password"]
-        user = SelectMain.select_user_by_email(email)
-
-        if user is None:
-            return BadRequestError("Invalid credentials").dict()
-        hashed_password: str = user.password
-        user_id: str = str(user.id)
-        self.__user_logged = user.id
-        name: str = user.name
-        role: UserRole = user.role
-
-        if not Security.verify_password(hashed_password, password):
-            return BadRequestError("Invalid credentials").dict()
-        LogMaker.write_log(f"{user} is logged!", "info")
-
-        return OKResponse(
-            message="Successfully signed in",
-            data={
-                "user_id": user_id,
-                "name": name,
-                "email": email,
-                "token": Security.generate_token(email),
-                "role": role,
-            },
-        ).dict()
-
-    def __sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
-        try:
-            name: str = credentials["name"]
-            email: str = credentials["email"]
-            password: str = credentials["password"]
-            hashed_password: str = Security.hash_password(password)
-            role: UserRole = UserRole.ROOT if credentials.get("role") == "ROOT" else UserRole.ADMIN
-            created_uuid: uuid.UUID = uuid.uuid4()
-            if role == UserRole.ROOT:
-                new_user: User = User(
-                    id=created_uuid,
-                    name=name,
-                    email=email,
-                    password=hashed_password,
-                    root_id=created_uuid,
-                    role=role,
-                )
-            else:
-                root_id = SelectMain.select_root_id()
-                new_user: User = User(
-                    id=created_uuid,
-                    name=name,
-                    email=email,
-                    password=hashed_password,
-                    root_id=root_id,
-                    role=role,
-                )
-            if InsertMain.insert_user(new_user):
-                LogMaker.write_log(f"[+]{new_user} has been inserted", "info")
-                return CreatedResponse(message="Successfully signed up", data=True).dict()
-
-            LogMaker.write_log(f"[-]Fail to insert {new_user}", "info")
-            return BadRequestError("Fail to insert user").dict()
-        except Exception as err:
-            LogMaker.write_log(f"[-] {err}", "error")
-            return InternalServerError("Internal server error").dict()
-
-    @authorization_required
-    def __register_member(
-        self, member: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
-        if member.get("email") and member.get("token"):
-            if Security.verify_token(member.get("email"), member.get("token")):
-                name: str = member.get("name")
-                email: str = member.get("email")
-                rfid: str = member.get("rfid")
-                authorized: bool = member.get("authorized") if member.get("authorized") else True
-                added_by: uuid = member.get("added_by")
-                if isinstance(added_by, str):
-                    added_by = uuid.UUID(added_by)
-                member: Member = Member(
-                    name=name, email=email, rfid=rfid, authorized=authorized, added_by=added_by
-                )
-
-                if InsertMain.insert_member(member):
-                    LogMaker.write_log(f"[+]{member} has been inserted", "info")
-                    return True
-                LogMaker.write_log(f"[-]Fail to insert {member}", "info")
-                return False
-        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __register_device(self, dev: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:

@@ -39,13 +39,13 @@ export const NewUserDialog = () => {
 
   const formSchema = zod.object({
     name: zod.string().min(3, {
-      message: 'Name must be at least 3 characters',
+      message: 'O nome deve ter no mínimo 3 caracteres',
     }),
     email: zod.string().email({
-      message: 'Invalid email address',
+      message: 'Formato de email inválido',
     }),
     rfid: zod.string().length(8, {
-      message: 'RFID must be 8 characters',
+      message: 'O rfid deve ter 8 caracteres',
     }),
     authorized: zod.boolean().default(true),
   })
@@ -74,6 +74,7 @@ export const NewUserDialog = () => {
       added_by: session!.user.id,
     })
 
+    console.log(response)
     if (response && response.success) {
       toast({
         title: 'Novo usuário',

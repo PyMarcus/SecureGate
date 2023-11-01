@@ -1,0 +1,60 @@
+import typing
+import uuid
+
+from apps.server.database import InsertMain, SelectMain
+from apps.server.database.models.__all_models import *
+from apps.server.security import Security
+from libs import LogMaker
+from packages.errors.errors import *
+from packages.responses.responses import *
+from packages.schemas.session_schema import *
+
+
+class SessionController:
+    @staticmethod
+    def sign_in(payload: typing.Dict[str, typing.Any]):
+        data = SigninSchema(**payload)
+
+        if not data.email or not data.password:
+            return BadRequestError("Dados inválidos").dict()
+
+        user = SelectMain.select_user_by_email(data.email)
+        if not user:
+            return NotFoundError("Usuário não encontrado").dict()
+
+        hashed_password = user.password
+
+        if not Security.verify_password(hashed_password, data.password):
+            return BadRequestError("Email ou senha inválidos").dict()
+        LogMaker.write_log(f"User {user.email} signed in", "info")
+
+        return OKResponse(
+            message="Sign in realizado com sucesso!",
+            data={
+                "user_id": user.id,
+                "name": user.name,
+                "email": user.email,
+                "role": user.role,
+                "token": Security.generate_token(user.email),
+            },
+        ).dict()
+
+    @staticmethod
+    def sign_up(payload: dict):
+        data = SignupSchema(**payload)
+        if not data.name or not data.email or not data.password or not data.role:
+            return BadRequestError("Dados inválidos").dict()
+
+        user_id = uuid.uuid4()
+        user = User(
+            id=user_id,
+            name=data.name,
+            email=data.email,
+            password=Security.hash_password(data.password),
+            root_id=user_id,
+            role=UserRole.ROOT,
+        )
+        if InsertMain.insert_user(user):
+            LogMaker.write_log(f"User {user.email} signed up", "info")
+            return CreatedResponse(message="Usuário criado com sucesso!", data=True).dict()
+        return BadRequestError("Erro ao criar usuário").dict()

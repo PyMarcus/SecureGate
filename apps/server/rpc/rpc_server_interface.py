@@ -17,15 +17,22 @@ class RPCServerInterface(ABC):
     """
 
     @abstractmethod
-    def sign_up(self, credentials: typing.Dict[str, typing.Any]) -> bool:
+    def sign_up(self, payload: typing.Dict[str, typing.Any]) -> bool:
         raise NotImplementedError("missing sing_up method")
 
     @abstractmethod
-    def sign_in(self, credentials: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing sing_in method")
 
+    def create_admin(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> bool:
+        raise NotImplementedError("missing create_admin method")
+
     @abstractmethod
-    def register_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def create_user(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing register_member method")
 
     @abstractmethod

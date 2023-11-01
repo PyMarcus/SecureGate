@@ -1,10 +1,11 @@
 from fastapi import APIRouter, Depends, Request
 
-from apps.api.schemas.session_schema import SignupSchema
 from apps.api.utils.get_request_header import get_request_header
 from apps.api.utils.handle_rpc_result import handle_rpc_result
 from apps.server.rpc import RPCSingletonClient
 from apps.server.rpc.rpc_client import get_rpc_client
+from packages.schemas.admins_schema import AdminSchema
+from packages.schemas.session_schema import SignupSchema
 
 routes = APIRouter(
     prefix="/admins",
@@ -13,8 +14,9 @@ routes = APIRouter(
 
 
 @routes.post("/")
-def create(body: SignupSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
-    result = rpc.sign_up(body.model_dump())
+def create(request: Request, body: AdminSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+    header = get_request_header(request)
+    result = rpc.create_admin(header, body.model_dump())
     return handle_rpc_result(result)
 
 

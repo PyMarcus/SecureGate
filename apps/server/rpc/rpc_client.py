@@ -57,7 +57,14 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.sign_up(request)
 
-    def register_member(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def create_admin(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> bool:
+        return self.client.create_admin(header, payload)
+
+    def create_user(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> bool:
         """
         The register_member method creates a new member, allowing them access through the gate.
         It takes a dictionary as input (request), containing member registration information.
@@ -68,7 +75,7 @@ class RPCSingletonClient(metaclass=Singleton):
             rfid: A string representing the member's RFID (Radio-Frequency Identification) tag information.
             added_by: A string representing the ID of the person who added this member to the system.
         """
-        return self.client.register_member(request)
+        return self.client.create_user(header, payload)
 
     def register_access_history(self, request: typing.Dict[str, typing.Any]) -> bool:
         """

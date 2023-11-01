@@ -33,20 +33,20 @@ export const SignUp = () => {
   const formSchema = zod
     .object({
       name: zod.string().min(3, {
-        message: 'Name must be at least 3 characters long',
+        message: 'O nome deve ter no mínimo 3 caracteres',
       }),
       email: zod.string().email({
-        message: 'Invalid email address',
+        message: 'Formato de email inválido',
       }),
       password: zod.string().min(8, {
-        message: 'Password must be at least 8 characters long',
+        message: 'A senha deve ter no mínimo 8 caracteres ',
       }),
       confirmPassword: zod.string().min(8, {
-        message: 'Password must be at least 8 characters long',
+        message: 'A senha deve ter no mínimo 8 caracteres',
       }),
     })
     .refine((data) => data.password === data.confirmPassword, {
-      message: 'Passwords do not match',
+      message: 'As senhas devem ser iguais',
       path: ['confirmPassword'],
     })
 

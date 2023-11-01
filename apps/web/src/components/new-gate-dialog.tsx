@@ -33,20 +33,20 @@ export const NewGateDialog = () => {
   const formSchema = zod
     .object({
       name: zod.string().min(3, {
-        message: 'Name must be at least 3 characters',
+        message: 'O nome deve ter no mínimo 3 caracteres',
       }),
       wifiSSID: zod.string().min(3, {
-        message: 'SSID must be at least 3 characters',
+        message: 'O nome deve ter no mínimo 3 caracteres',
       }),
       wifiPassword: zod.string().min(8, {
-        message: 'Password must be at least 8 characters',
+        message: 'A senha deve ter no mínimo 8 caracteres',
       }),
       confirmWifiPassword: zod.string().min(8, {
-        message: 'Password must be at least 8 characters',
+        message: 'A senha deve ter no mínimo 8 caracteres',
       }),
     })
     .refine((data) => data.wifiPassword === data.confirmWifiPassword, {
-      message: 'Passwords do not match',
+      message: 'As senhas devem ser iguais',
       path: ['confirmPassword'],
     })
 

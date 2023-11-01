@@ -35,10 +35,10 @@ export const SignIn = () => {
 
   const formSchema = zod.object({
     email: zod.string().email({
-      message: 'Invalid email address',
+      message: 'Formato de email inválido',
     }),
     password: zod.string().min(8, {
-      message: 'Password must be at least 8 characters long',
+      message: 'A senha deve ter no mínimo 8 caracteres',
     }),
   })
 

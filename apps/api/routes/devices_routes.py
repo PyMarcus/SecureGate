@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Request
 
-from apps.api.schemas.users_schema import CreateUserSchema
 from apps.api.utils.get_request_header import get_request_header
 from apps.api.utils.handle_rpc_result import handle_rpc_result
 from apps.server.rpc import RPCSingletonClient
 from apps.server.rpc.rpc_client import get_rpc_client
+from packages.schemas.users_schema import CreateUserSchema
 
 routes = APIRouter(
     prefix="/devices",

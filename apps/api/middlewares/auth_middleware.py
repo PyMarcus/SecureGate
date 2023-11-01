@@ -4,7 +4,10 @@ from packages.errors.errors import UnauthorizedError
 
 
 def auth_middleware(
-    request: Request, authorization: str = Header(...), userEmail: str = Header(None)
+    request: Request,
+    authorization: str = Header(...),
+    userId: str = Header(None),
+    userEmail: str = Header(None),
 ):
     """
     This middleware is used to check if the request has a valid token in the header.
@@ -15,7 +18,10 @@ def auth_middleware(
     if not authorization:
         raise UnauthorizedError(message="Token is missing")
     if not userEmail:
+        raise UnauthorizedError(message="User id is missing")
+    if not userEmail:
         raise UnauthorizedError(message="User email is missing")
 
     request.state.token = authorization.split(" ")[1]
+    request.state.user_id = userId
     request.state.user_email = userEmail
