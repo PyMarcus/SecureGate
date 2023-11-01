@@ -2,8 +2,8 @@ import { AppLayout } from '@/components/layouts/app-layout'
 import { FullLayout } from '@/components/layouts/full-layout'
 import { SessionLayout } from '@/components/layouts/session-layout'
 import { Dashboard } from '@/pages/app/dashboard'
+import { Admins } from '@/pages/app/dashboard/tabs/admins'
 import { Analytics } from '@/pages/app/dashboard/tabs/analytics'
-import { Members } from '@/pages/app/dashboard/tabs/members'
 import { Overview } from '@/pages/app/dashboard/tabs/overview'
 import { Users } from '@/pages/app/dashboard/tabs/users'
 import { Profile } from '@/pages/app/profile'
@@ -18,34 +18,27 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<FullLayout />}>
-          <Route path="/session" element={<SessionLayout />}>
+          <Route path="/sessao" element={<SessionLayout />}>
             <Route path="sign-in" element={<SignIn />} />
             <Route path="sign-up" element={<SignUp />} />
           </Route>
 
           <Route element={<PrivateRoutes />}>
             <Route element={<AppLayout />}>
-              <Route path="/" element={<Navigate to="/dashboard/overview" />} />
-              <Route
-                path="/dashboard"
-                element={<Navigate to="/dashboard/overview" />}
-              />
+              <Route path="/" element={<Navigate to="/painel/geral" />} />
+              <Route path="/painel" element={<Navigate to="/painel/geral" />} />
 
-              <Route path="/dashboard" element={<Dashboard />}>
-                <Route
-                  index
-                  path="/dashboard/overview"
-                  element={<Overview />}
-                />
-                <Route path="/dashboard/analytics" element={<Analytics />} />
-                <Route path="/dashboard/members" element={<Members />} />
+              <Route path="/painel" element={<Dashboard />}>
+                <Route index path="/painel/geral" element={<Overview />} />
+                <Route path="/painel/graficos" element={<Analytics />} />
+                <Route path="/painel/usuarios" element={<Users />} />
 
                 <Route element={<PrivateRoutes enabledRole="ROOT" />}>
-                  <Route path="/dashboard/users" element={<Users />} />
+                  <Route path="/painel/admins" element={<Admins />} />
                 </Route>
               </Route>
 
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/perfil" element={<Profile />} />
             </Route>
           </Route>
 

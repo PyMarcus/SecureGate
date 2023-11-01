@@ -13,6 +13,7 @@
     "lint": "eslint 'apps/web/src/**/*.@(js|jsx|ts|tsx)' && prettier --check 'apps/web/src/**/*.@(js|jsx|ts|tsx)'",
     "lint:fix": "eslint 'apps/web/src/**/*.@(js|jsx|ts|tsx)' --fix && prettier --write 'apps/web/src/**/*.@(js|jsx|ts|tsx)'",
     "api": "python3 -m apps.api.api",
+    "rpc": "python3 -m apps.server.rpc.rpc_server",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },

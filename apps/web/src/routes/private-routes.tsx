@@ -1,4 +1,4 @@
-import { Role } from '@/@types/schemas/user'
+import { Role } from '@/@types/schemas/session-user'
 import { api } from '@/services/api/instance'
 import { useSessionStore } from '@/stores/session-store'
 import { Navigate, Outlet } from 'react-router-dom'
@@ -20,5 +20,5 @@ export const PrivateRoutes = ({ enabledRole = null }: PrivateRoutesProps) => {
     }
     return <Outlet />
   }
-  return <Navigate to="/session/sign-in" />
+  return <Navigate to="/sessao/sign-in" />
 }

@@ -19,7 +19,7 @@ export const Overview = () => {
           <Card className="w-full min-w-[12rem]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Members
+                Total de membros
               </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -29,14 +29,14 @@ export const Overview = () => {
                 <span className="text-sm font-medium">/1,500</span>
               </div>
               <p className="text-xs text-muted-foreground">
-                Total members registered
+                Total de membros cadastrados
               </p>
             </CardContent>
           </Card>
           <Card className="w-full min-w-[12rem]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Accesses
+                Total de acessos
               </CardTitle>
               <LockKeyOpen className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -45,7 +45,7 @@ export const Overview = () => {
                 <span>1,234</span>
               </div>
               <p className="text-xs text-muted-foreground">
-                Today&apos;s total gate accesses
+                Total de acessos hoje
               </p>
             </CardContent>
           </Card>
@@ -60,13 +60,13 @@ export const Overview = () => {
         <Card className="md:col-span-4">
           <CardHeader>
             <div className="inline-flex items-center justify-between">
-              <CardTitle>Overview</CardTitle>
+              <CardTitle>Geral</CardTitle>
               <Button variant="link" size="sm" asChild>
-                <Link to="/dashboard/analytics">See more</Link>
+                <Link to="/painel/graficos">Ver mais</Link>
               </Button>
             </div>
             <CardDescription className="mt-0">
-              Last 24 hours gate accesses
+              Acessos nas últimas 24 horas
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -82,13 +82,13 @@ export const Overview = () => {
         <Card className="md:col-span-3">
           <CardHeader>
             <div className="inline-flex items-center justify-between">
-              <CardTitle>Last Accesses</CardTitle>
+              <CardTitle>Últimos acessos</CardTitle>
               <Button variant="link" size="sm" asChild>
-                <Link to="/dashboard/members">See all</Link>
+                <Link to="/painel/membros">Ver todos</Link>
               </Button>
             </div>
             <CardDescription className="mt-0">
-              Last 10 gate accesses
+              Últimos 10 acessos
             </CardDescription>
           </CardHeader>
           <CardContent></CardContent>

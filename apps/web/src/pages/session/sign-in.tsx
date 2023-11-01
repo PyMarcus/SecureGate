@@ -67,8 +67,8 @@ export const SignIn = () => {
         token: data.token,
       })
       toast({
-        title: `Hi, ${data.name}!`,
-        description: 'You have successfully logged in to your account.',
+        title: `Olá, ${data.name}!`,
+        description: 'SignIn realizado com sucesso!',
       })
       navigate('/')
     }
@@ -77,9 +77,9 @@ export const SignIn = () => {
   return (
     <Card className="border-transparent sm:border-border w-full max-w-sm">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Sign In to your account</CardTitle>
+        <CardTitle className="text-2xl">Acesse sua conta</CardTitle>
         <CardDescription>
-          Fill in your details to login to your account
+          Preencha os campos abaixo para acessar sua conta.
         </CardDescription>
       </CardHeader>
 
@@ -107,9 +107,9 @@ export const SignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Password" type="password" {...field} />
+                    <Input placeholder="Senha" type="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,16 +117,16 @@ export const SignIn = () => {
             />
             <Button className="w-full" type="submit">
               {isLoading && <LoadingIndicator className="mr-2" />}
-              <span>Sign In</span>
+              <span>Entrar</span>
             </Button>
           </form>
         </Form>
       </CardContent>
 
       <CardFooter className="flex items-center justify-center text-sm p-0 pb-6">
-        <p className="text-muted-foreground">Don&apos;t have an account? </p>
+        <p className="text-muted-foreground">Não tem uma conta?</p>
         <Button variant="link" className="px-2" asChild>
-          <Link to="/session/sign-up">Sign up</Link>
+          <Link to="/sessao/sign-up">Cadastre-se</Link>
         </Button>
       </CardFooter>
     </Card>

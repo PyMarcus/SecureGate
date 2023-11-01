@@ -1,9 +1,9 @@
-import { User } from '@/@types/schemas/user'
+import { SessionUser } from '@/@types/schemas/session-user'
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
 interface Session {
-  user: User
+  user: SessionUser
   token: string
 }
 

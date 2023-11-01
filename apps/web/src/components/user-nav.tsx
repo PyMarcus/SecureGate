@@ -37,7 +37,7 @@ export const UserNav = ({
   const handleThemeChange = (theme: string) => setTheme(theme as Theme)
 
   const navigate = useNavigate()
-  const handleNavigateToProfile = () => navigate('/profile')
+  const handleNavigateToProfile = () => navigate('/perfil')
 
   const avatarFallback = name
     .split(' ')
@@ -68,7 +68,7 @@ export const UserNav = ({
         </div>
         <DropdownMenuGroup>
           <DropdownMenuItem onClick={handleNavigateToProfile}>
-            <span>Profile</span>
+            <span>Perfil</span>
             <DropdownMenuShortcut>
               <User />
             </DropdownMenuShortcut>
@@ -76,7 +76,7 @@ export const UserNav = ({
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Tema</DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
               <DropdownMenuRadioGroup
@@ -84,13 +84,13 @@ export const UserNav = ({
                 onValueChange={handleThemeChange}
               >
                 <DropdownMenuRadioItem value="light">
-                  Light
+                  Claro
                   <DropdownMenuShortcut>
                     <Sun />
                   </DropdownMenuShortcut>
                 </DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="dark">
-                  Dark
+                  Escuro
                   <DropdownMenuShortcut>
                     <Moon />
                   </DropdownMenuShortcut>

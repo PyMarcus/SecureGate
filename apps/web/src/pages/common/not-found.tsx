@@ -13,15 +13,15 @@ export const NotFound = () => {
     <div className="grid flex-1 place-items-center">
       <Card className="border-transparent sm:border-border w-full max-w-sm">
         <CardHeader>
-          <CardTitle>404 - Page not found</CardTitle>
+          <CardTitle>404 - Página não encontrada!</CardTitle>
           <CardDescription>
-            The page you are looking for does not exist.
+            A página que você está procurando não existe.
           </CardDescription>
         </CardHeader>
 
         <CardFooter>
           <Button variant="outline" className="w-full" asChild>
-            <Link to="/">Go back home</Link>
+            <Link to="/">Voltar para o painel</Link>
           </Button>
         </CardFooter>
       </Card>

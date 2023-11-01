@@ -43,8 +43,8 @@ export function GatesSelector() {
       </PopoverTrigger>
       <PopoverContent className="w-full md:w-64 p-0">
         <Command>
-          <CommandInput placeholder="Search gate..." className="h-9" />
-          <CommandEmpty>No gate found.</CommandEmpty>
+          <CommandInput placeholder="Buscar portão" className="h-9" />
+          <CommandEmpty>Nenhum portão encontrado!</CommandEmpty>
           <CommandGroup>
             {gatesList.map((gate) => (
               <CommandItem

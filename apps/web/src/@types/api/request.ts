@@ -1,4 +1,4 @@
-import { Role } from '../schemas/user'
+import { Role } from '../schemas/session-user'
 
 export interface SignInRequest {
   email: string
@@ -10,4 +10,12 @@ export interface SignUpRequest {
   email: string
   password: string
   role: Role
+}
+
+export interface CreateUserRequest {
+  name: string
+  email: string
+  rfid: string
+  authorized: boolean
+  added_by: string
 }

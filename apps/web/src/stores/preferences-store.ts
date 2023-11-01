@@ -2,17 +2,14 @@ import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 
 export type Theme = 'light' | 'dark'
-type Language = 'en-US' | 'pt-BR'
 
 interface PreferencesStates {
   theme: Theme
-  language: Language
 }
 
 interface PreferencesSchema extends PreferencesStates {
   toggleTheme: () => void
   setTheme: (theme: Theme) => void
-  toggleLanguage: () => void
 }
 
 interface PreferencesStorage {
@@ -41,21 +38,11 @@ const getInitialTheme = (): Theme => {
   return 'light'
 }
 
-const getInitialLanguage = (): Language => {
-  const storedPreferences = getStoredPreferences()
-  const preferredIsBR = navigator.language === 'pt-BR'
-
-  if (storedPreferences) return storedPreferences.state.language
-  if (preferredIsBR) return 'pt-BR'
-  return 'en-US'
-}
-
 export const usePreferencesStore = create<PreferencesSchema>()(
   devtools(
     persist(
       (set) => ({
         theme: getInitialTheme(),
-        language: getInitialLanguage(),
         toggleTheme: () =>
           set((state) => ({
             theme: state.theme === 'light' ? 'dark' : 'light',
@@ -63,10 +50,6 @@ export const usePreferencesStore = create<PreferencesSchema>()(
         setTheme: (theme) =>
           set(() => ({
             theme,
-          })),
-        toggleLanguage: () =>
-          set((state) => ({
-            language: state.language === 'en-US' ? 'pt-BR' : 'en-US',
           })),
       }),
       {

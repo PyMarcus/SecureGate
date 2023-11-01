@@ -19,7 +19,7 @@ export const Dashboard = () => {
   const isRoot = role === 'ROOT'
 
   const handleTabsNavigation = (value: string) => {
-    navigate(`/dashboard/${value}`)
+    navigate(`/painel/${value}`)
   }
 
   return (
@@ -36,7 +36,7 @@ export const Dashboard = () => {
         >
           <div className="flex items-center justify-between flex-col md:flex-row gap-4">
             <h2 className="text-3xl font-bold tracking-tight self-start">
-              Dashboard
+              Painel
             </h2>
             <div className="inline-flex gap-4 justify-end w-full">
               <GatesSelector />
@@ -49,7 +49,7 @@ export const Dashboard = () => {
                 trigger={
                   <Button variant="destructive" className="space-x-2 min-w-max">
                     <LockKeyOpen />
-                    <span className="sr-only md:not-sr-only">Open gate</span>
+                    <span className="sr-only md:not-sr-only">Abrir portão</span>
                   </Button>
                 }
               />
@@ -59,18 +59,18 @@ export const Dashboard = () => {
             className="w-full sm:w-auto justify-start flex-wrap h-auto 
         self-start"
           >
-            <TabsTrigger value="overview" className="flex-1">
-              Overview
+            <TabsTrigger value="geral" className="flex-1">
+              Geral
             </TabsTrigger>
-            <TabsTrigger value="members" className="flex-1">
-              Members
+            <TabsTrigger value="usuarios" className="flex-1">
+              Usuários
             </TabsTrigger>
-            <TabsTrigger value="analytics" className="flex-1" disabled>
-              Analytics
+            <TabsTrigger value="graficos" className="flex-1" disabled>
+              Gráficos
             </TabsTrigger>
             {isRoot && (
-              <TabsTrigger value="users" className="flex-1">
-                Users
+              <TabsTrigger value="admins" className="flex-1">
+                Administradores
               </TabsTrigger>
             )}
           </TabsList>

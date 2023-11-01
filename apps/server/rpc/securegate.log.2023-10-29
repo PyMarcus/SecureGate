@@ -1,0 +1,224 @@
+2023-10-29 08:16:46,178 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:16:46,178 - INFO - [+]SERVER URI: PYRO:obj_a90a9727d7d04f3ea06b47d32bb42b97@localhost:7878
+2023-10-29 08:18:53,551 - INFO - [+]Connected on database
+2023-10-29 08:18:53,847 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:19:26,219 - INFO - [+]Calling __select_all_users
+2023-10-29 08:19:50,056 - INFO - [+]Calling __select_all_users
+2023-10-29 08:22:21,272 - WARNING - [-]Server is down
+2023-10-29 08:22:21,796 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:22:21,796 - INFO - [+]SERVER URI: PYRO:obj_1beb550cb012415ca77e8ad13cc99b67@localhost:7878
+2023-10-29 08:22:28,180 - INFO - [+]Calling __select_all_users
+2023-10-29 08:23:28,576 - WARNING - [-]Server is down
+2023-10-29 08:23:29,115 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:23:29,115 - INFO - [+]SERVER URI: PYRO:obj_5f8de4e4988e4bf588ca22708a702354@localhost:7878
+2023-10-29 08:23:50,123 - INFO - [+]Calling __select_all_users
+2023-10-29 08:24:12,704 - INFO - [+]Calling __select_all_users
+2023-10-29 08:24:13,338 - INFO - [+]Connected on database
+2023-10-29 08:24:22,896 - INFO - [+]Calling __select_all_users
+2023-10-29 08:24:27,151 - INFO - [+]Calling __select_all_users
+2023-10-29 08:25:24,763 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:25,046 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:25,075 - INFO - [+]Calling __select_all_users
+2023-10-29 08:25:47,123 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:47,370 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:47,661 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:47,908 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:25:47,941 - INFO - [+]Calling __select_all_users
+2023-10-29 08:26:23,480 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:26:23,719 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:26:23,995 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:26:24,248 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:30:21,957 - WARNING - [-]Server is down
+2023-10-29 08:30:22,377 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:30:22,377 - INFO - [+]SERVER URI: PYRO:obj_e9be86849ae64c16a5a8e19747e47777@localhost:7878
+2023-10-29 08:30:30,461 - INFO - [+]Connected on database
+2023-10-29 08:30:30,729 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:30:30,984 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:30:31,326 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:30:31,582 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:30:31,620 - INFO - [+]Calling __select_all_members
+2023-10-29 08:33:34,013 - WARNING - [-]Server is down
+2023-10-29 08:33:34,444 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:33:34,444 - INFO - [+]SERVER URI: PYRO:obj_b0316cfb5c1a4d14a324b07a91ba5a04@localhost:7878
+2023-10-29 08:33:55,211 - INFO - [+]Connected on database
+2023-10-29 08:33:55,494 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:33:55,738 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:33:56,029 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:33:56,280 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 08:33:56,318 - INFO - [+]Calling __select_all_devices
+2023-10-29 08:55:51,019 - WARNING - [-]Server is down
+2023-10-29 08:55:51,465 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:55:51,465 - INFO - [+]SERVER URI: PYRO:obj_2bfd8f342272439f8ebc37c216828ae2@localhost:7878
+2023-10-29 08:56:04,444 - INFO - [+]Connected on database
+2023-10-29 08:59:14,158 - WARNING - [-]Server is down
+2023-10-29 08:59:14,694 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 08:59:14,694 - INFO - [+]SERVER URI: PYRO:obj_639fbb618c2341a78c268f70b2d53835@localhost:7878
+2023-10-29 08:59:25,152 - INFO - [+]Connected on database
+2023-10-29 09:00:40,994 - WARNING - [-]Server is down
+2023-10-29 09:00:41,528 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:00:41,528 - INFO - [+]SERVER URI: PYRO:obj_de9247ee10e444a9b67966be27c1cbb3@localhost:7878
+2023-10-29 09:00:47,886 - INFO - [+]Connected on database
+2023-10-29 09:02:26,976 - WARNING - [-]Server is down
+2023-10-29 09:02:27,508 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:02:27,509 - INFO - [+]SERVER URI: PYRO:obj_3bc5a39c7a244410b42fd77b97d7858b@localhost:7878
+2023-10-29 09:02:29,086 - WARNING - [-]Server is down
+2023-10-29 09:02:29,506 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:02:29,506 - INFO - [+]SERVER URI: PYRO:obj_2e1256bd853e4039b6136c5bd9743db4@localhost:7878
+2023-10-29 09:02:35,593 - INFO - [+]Connected on database
+2023-10-29 09:03:25,054 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
+2023-10-29 09:03:26,984 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:38,897 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:39,125 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:39,417 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:39,648 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:53,963 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:54,189 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:54,502 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:54,759 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:03:57,408 - WARNING - [-]Server is down
+2023-10-29 09:03:57,926 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:03:57,926 - INFO - [+]SERVER URI: PYRO:obj_dece6c1ed4df417486d76d54fed45399@localhost:7878
+2023-10-29 09:04:09,665 - INFO - [+]Connected on database
+2023-10-29 09:04:09,944 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:10,203 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:10,499 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:10,767 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:32,228 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:32,470 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:32,773 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:04:33,027 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:05:59,711 - WARNING - [-]Server is down
+2023-10-29 09:06:00,251 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:06:00,251 - INFO - [+]SERVER URI: PYRO:obj_46321075666a4f5795daf3a59458e15a@localhost:7878
+2023-10-29 09:06:02,418 - WARNING - [-]Server is down
+2023-10-29 09:06:02,838 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:06:02,838 - INFO - [+]SERVER URI: PYRO:obj_42fc53f2721c4d858b5e05dc358ae4cc@localhost:7878
+2023-10-29 09:06:15,158 - INFO - [+]Connected on database
+2023-10-29 09:07:25,394 - WARNING - [-]Server is down
+2023-10-29 09:07:25,916 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:07:25,916 - INFO - [+]SERVER URI: PYRO:obj_70d811817d5b4e5b95184aa766a80593@localhost:7878
+2023-10-29 09:07:30,775 - INFO - [+]Connected on database
+2023-10-29 09:07:52,740 - WARNING - [-]Server is down
+2023-10-29 09:07:53,279 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:07:53,279 - INFO - [+]SERVER URI: PYRO:obj_9889b0087d4c43a49039db718a555927@localhost:7878
+2023-10-29 09:07:59,040 - INFO - [+]Connected on database
+2023-10-29 09:10:18,045 - WARNING - [-]Server is down
+2023-10-29 09:10:18,467 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:10:18,468 - INFO - [+]SERVER URI: PYRO:obj_d6fc5a398e8b42339caaa1f14c73627e@localhost:7878
+2023-10-29 09:10:26,783 - INFO - [+]Connected on database
+2023-10-29 09:11:32,710 - WARNING - [-]Server is down
+2023-10-29 09:11:33,121 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:11:33,122 - INFO - [+]SERVER URI: PYRO:obj_06e64c012be042fb9860df4a3961ea24@localhost:7878
+2023-10-29 09:11:41,631 - INFO - [+]Connected on database
+2023-10-29 09:12:08,142 - WARNING - [-]Server is down
+2023-10-29 09:12:08,679 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:12:08,680 - INFO - [+]SERVER URI: PYRO:obj_8513121aedf149088bdb3cf6762efd8c@localhost:7878
+2023-10-29 09:12:15,494 - INFO - [+]Connected on database
+2023-10-29 09:12:59,140 - WARNING - [-]Server is down
+2023-10-29 09:12:59,675 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:12:59,676 - INFO - [+]SERVER URI: PYRO:obj_bccf8b0249a348af9df997633c9ea5a9@localhost:7878
+2023-10-29 09:13:06,838 - INFO - [+]Connected on database
+2023-10-29 09:15:23,699 - WARNING - [-]Server is down
+2023-10-29 09:15:24,240 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:15:24,241 - INFO - [+]SERVER URI: PYRO:obj_763c24f9d4744e6bac836d8c376f3c18@localhost:7878
+2023-10-29 09:15:43,925 - INFO - [+]Connected on database
+2023-10-29 09:15:44,235 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:15:47,347 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:15:47,583 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:15:47,880 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:15:48,145 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:15:48,158 - INFO - [+]Calling __select_all_users
+2023-10-29 09:18:10,564 - WARNING - [-]Server is down
+2023-10-29 09:18:11,106 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:18:11,106 - INFO - [+]SERVER URI: PYRO:obj_49f0d232b25246c088caf1a669a987b5@localhost:7878
+2023-10-29 09:18:17,610 - INFO - [+]Connected on database
+2023-10-29 09:18:17,894 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:18,148 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:18,444 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:18,699 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:18,732 - INFO - [+]Calling __select_all_users
+2023-10-29 09:18:25,910 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:26,157 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:26,472 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:18:26,739 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:00,089 - WARNING - [-]Server is down
+2023-10-29 09:21:00,624 - INFO - [+]RPCServer is running on localhost/7878
+2023-10-29 09:21:00,624 - INFO - [+]SERVER URI: PYRO:obj_1e3f572250d544bea514dc51b58c9d16@localhost:7878
+2023-10-29 09:21:07,440 - INFO - [+]Connected on database
+2023-10-29 09:21:07,723 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:07,991 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:08,299 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:08,557 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:08,590 - INFO - [+]Calling __select_user
+2023-10-29 09:21:12,980 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:13,222 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:13,524 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:13,789 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:21:13,819 - INFO - [+]Calling __select_all_users
+2023-10-29 09:21:15,895 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:10,796 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:11,055 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:11,314 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:11,575 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:11,609 - INFO - [+]Calling __select_user
+2023-10-29 09:22:15,174 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:24,133 - INFO - [+]<User: Jane Doe - jane@doe.com> has been inserted
+2023-10-29 09:22:28,483 - INFO - <User: Jane Doe - jane@doe.com> is logged!
+2023-10-29 09:22:35,666 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:38,213 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:38,470 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:38,754 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:39,006 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:39,035 - INFO - [+]Calling __select_all_users
+2023-10-29 09:22:41,309 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:41,555 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:41,834 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:42,099 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:42,142 - INFO - [+]Calling __select_user
+2023-10-29 09:22:43,894 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:44,146 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:44,441 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:44,705 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:22:44,724 - INFO - [+]Calling __select_all_devices
+2023-10-29 09:31:03,276 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:31:03,508 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:31:03,797 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:31:04,051 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:31:04,309 - INFO - [+]<User: John Doe Admin - john_admin@doe.com> has been inserted
+2023-10-29 09:33:50,478 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:33:50,764 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:33:59,207 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:33:59,501 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:35:56,872 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:35:57,219 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:01,512 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:01,809 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:06,238 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:06,532 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:56,901 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:36:57,202 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:12,115 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:12,359 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:12,638 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:12,886 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:13,356 - INFO - [+]<User: John Doe Admin2 - john_admin2@doe.com> has been inserted
+2023-10-29 09:37:17,551 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:17,790 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:18,075 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:18,334 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:37:18,600 - INFO - [-]Fail to insert <User: John Doe Admin2 - john_admin2@doe.com>
+2023-10-29 09:38:52,263 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:38:52,544 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:39:54,155 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:39:54,438 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:40:16,585 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:40:16,876 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:40:31,166 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:40:31,431 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:53:34,485 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:53:34,733 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:53:35,037 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:53:35,298 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 09:53:35,341 - INFO - [+]Calling __select_all_users
+2023-10-29 10:36:18,643 - INFO - <User: John Doe - john@doe.com> is logged!
+2023-10-29 17:59:31,694 - WARNING - [-]Server is down

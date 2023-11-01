@@ -80,14 +80,14 @@ export const NewGateDialog = () => {
       <DialogTrigger asChild>
         <Button className="space-x-2 min-w-max">
           <PlusCircle />
-          <span className="sr-only md:not-sr-only">New gate</span>
+          <span className="sr-only md:not-sr-only">Novo portão</span>
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a new gate</DialogTitle>
+          <DialogTitle>Adicionar novo portão</DialogTitle>
           <DialogDescription>
-            Fill in the form below to add a new gate.
+            Preencha os campos abaixo para adicionar um novo portão
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -101,9 +101,9 @@ export const NewGateDialog = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Gate Name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Gate Name" {...field} />
+                    <Input placeholder="Nome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,9 +114,9 @@ export const NewGateDialog = () => {
               name="wifiSSID"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Wifi SSID</FormLabel>
+                  <FormLabel>Nome da rede Wifi</FormLabel>
                   <FormControl>
-                    <Input placeholder="Wifi SSID" {...field} />
+                    <Input placeholder="Nome da rede Wifi" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,10 +127,10 @@ export const NewGateDialog = () => {
               name="wifiPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Wifi Password</FormLabel>
+                  <FormLabel>Senha da rede Wifi</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Wifi password"
+                      placeholder="Senha da rede Wifi"
                       type="password"
                       {...field}
                     />
@@ -144,9 +144,9 @@ export const NewGateDialog = () => {
               name="confirmWifiPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Wifi Password</FormLabel>
+                  <FormLabel>Confirme a senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Confirm Wifi password" {...field} />
+                    <Input placeholder="Confirme a senha" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,10 +156,10 @@ export const NewGateDialog = () => {
         </Form>
         <DialogFooter className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <DialogClose onClick={handleResetAndClose} asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">Cancelar</Button>
           </DialogClose>
           <Button form={formId} type="submit">
-            Add Gate
+            Adicionar
           </Button>
         </DialogFooter>
       </DialogContent>

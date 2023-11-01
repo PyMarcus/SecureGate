@@ -1,8 +1,8 @@
+import { AppNavigation } from '@/components/app-navigation'
 import { UserNav } from '@/components/user-nav'
 import { useSessionStore } from '@/stores/session-store'
 import { LockKey } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
-import { AppNavigation } from './app-navigation'
 
 export const AppHeader = () => {
   const { session, clearSession } = useSessionStore()
@@ -13,7 +13,7 @@ export const AppHeader = () => {
     <div className="w-full px-6 md:px-8 border-b sticky bg-background top-0 inset-x-0">
       <header className="flex items-center justify-between h-16 gap-12">
         <Link
-          to="/dashboard"
+          to="/painel"
           className="text-xl font-bold inline-flex gap-1 items-center leading-none"
         >
           <LockKey weight="bold" size={23} className="text-tertiary" />

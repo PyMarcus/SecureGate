@@ -8,13 +8,13 @@ export interface Page {
 
 export const APP_PAGES: Page[] = [
   {
-    name: 'Dashboard',
-    path: '/dashboard',
+    name: 'Painel',
+    path: '/painel',
     icon: <SquaresFour size={26} />,
   },
   {
-    name: 'Profile',
-    path: '/profile',
+    name: 'Perfil',
+    path: '/perfil',
     icon: <User size={26} />,
   },
 ]

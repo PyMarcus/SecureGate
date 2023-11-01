@@ -75,16 +75,16 @@ export const SignUp = () => {
         title: `Welcome, ${values.name}!`,
         description: 'Your account has been created successfully',
       })
-      navigate('/session/sign-in')
+      navigate('/sessao/sign-in')
     }
   }
 
   return (
     <Card className="border-transparent sm:border-border w-full max-w-sm">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl">Create an account</CardTitle>
+        <CardTitle className="text-2xl">Criar uma nova conta</CardTitle>
         <CardDescription>
-          Fill in your details to login to your account
+          Preencha os campos abaixo para criar uma nova conta.
         </CardDescription>
       </CardHeader>
 
@@ -99,9 +99,9 @@ export const SignUp = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Name" {...field} />
+                    <Input placeholder="Nome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,9 +125,9 @@ export const SignUp = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Password" type="password" {...field} />
+                    <Input placeholder="Senha" type="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,10 +138,10 @@ export const SignUp = () => {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel>Confirme a senha</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Confirm Password"
+                      placeholder="Confirme a senha"
                       type="password"
                       {...field}
                     />
@@ -152,15 +152,15 @@ export const SignUp = () => {
             />
             <Button className="w-full" type="submit">
               {isLoading && <LoadingIndicator className="mr-2" />}
-              <span>Sign Up</span>
+              <span>Cadastrar</span>
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="flex items-center justify-center text-sm p-0 pb-6">
-        <p className="text-muted-foreground">Already have an account?</p>
+        <p className="text-muted-foreground">Já possui uma conta?</p>
         <Button variant="link" className="px-2" asChild>
-          <Link to="/session/sign-in">Sign up</Link>
+          <Link to="/sessao/sign-in">Entrar</Link>
         </Button>
       </CardFooter>
     </Card>

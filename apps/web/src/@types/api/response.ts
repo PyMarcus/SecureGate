@@ -1,4 +1,5 @@
-import { Role } from '@/@types/schemas/user'
+import { User } from '@/@types//schemas/user'
+import { Role } from '@/@types/schemas/session-user'
 
 export interface ApiError {
   success: false
@@ -13,6 +14,7 @@ export interface ApiResponse<T> {
   data: T
 }
 
+// Session =====================================================================
 interface SignInResponseData {
   user_id: string
   name: string
@@ -24,3 +26,7 @@ export type SignInResponse = ApiResponse<SignInResponseData>
 
 type SignUpResponseData = true
 export type SignUpResponse = ApiResponse<SignUpResponseData>
+
+// Members =====================================================================
+type GetAllUsersResponseData = User[]
+export type GetAllMembersResponse = ApiResponse<GetAllUsersResponseData>
