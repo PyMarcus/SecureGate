@@ -77,7 +77,9 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.create_user(header, payload)
 
-    def register_access_history(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def register_access_history(
+        self, header: typing.Dict[str, typing.Any], request: typing.Dict[str, typing.Any]
+    ) -> bool:
         """
         The register_access_history method creates a new access history.
         It takes a dictionary as input (request), containing member registration information.
@@ -87,7 +89,7 @@ class RPCSingletonClient(metaclass=Singleton):
             member_id: A string representing the member's id.
             device_id: A string representing the device's id.
         """
-        return self.client.register_access_history(request)
+        return self.client.register_access_history(header, request)
 
     def create_device(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
@@ -139,6 +141,21 @@ class RPCSingletonClient(metaclass=Singleton):
             from 6 am until the time of the search
         """
         return self.client.select_user_access_history(header, user_id)
+
+    def select_all_users_by_device_id(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        The select_all_users_by_device_id method get a member with your data
+            header:
+                email: A string representing the users's email address.
+                token: A string representing the users token.
+
+            device_id:
+                id of device
+
+        """
+        return self.client.select_users_by_device_id(header, device_id)
 
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id
@@ -288,7 +305,8 @@ if __name__ == "__main__":
         "token": "ImltYWFkbWluQGVtYWlsLmNvbSI.ZUP9YQ.6TshlbUdr401C3DJE50d4rIPXLg",
         "user_id": "f6c7284b-f5c8-49cb-a219-79aef5d857f3",
     }
-    print(
+
+    """print(
         client.create_device(
             header,
             {
@@ -298,15 +316,10 @@ if __name__ == "__main__":
                 "wifi_password": "wifipassword",
             },
         )
-    )
+    )"""
     print(
-        client.create_device(
-            header,
-            {
-                "name": "device3131",
-                "version": "0.0.0",
-                "wifi_ssid": "wifihost",
-                "wifi_password": "wifipassword",
-            },
+        client.select_all_users_by_device_id(
+            header=header,
+            device_id="3eedc71c-7da8-4360-9180-d29d48f9a686",
         )
     )

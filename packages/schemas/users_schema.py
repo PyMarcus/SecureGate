@@ -1,3 +1,6 @@
+import datetime
+import typing
+
 from pydantic import BaseModel
 
 
@@ -8,5 +11,13 @@ class CreateUserSchema(BaseModel):
     # added_by: str
     authorized: bool
 
-    def __str__(self) -> str:
-        return f"{self.name} {self.email} {self.rfid} {self.authorized}"
+
+class UserAccessHistoryJoinSchema(BaseModel):
+    id: typing.Any
+    name: str
+    email: str
+    rfid: str
+    authorized: bool
+    added_by: typing.Any
+    created_at: datetime.datetime
+    device_id: typing.Any

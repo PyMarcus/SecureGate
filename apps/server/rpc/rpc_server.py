@@ -53,11 +53,13 @@ class RPCServer(RPCServerInterface):
        building interconnected, efficient, and secure applications
     """
 
-    __user_logged: uuid.UUID | None = None
+    __user_logged: uuid.UUID | None = None  # admin or root
 
     @Pyro4.expose
     def sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return SessionController.sign_in(payload)
+        response = SessionController.sign_in(payload)
+        self.__user_logged = response.get("data").get("user_id")
+        return response
 
     @Pyro4.expose
     def sign_up(self, payload: typing.Dict[str, typing.Any]) -> bool:
@@ -82,10 +84,10 @@ class RPCServer(RPCServerInterface):
         return DeviceController.create_device(header, payload)
 
     @Pyro4.expose
-    def register_access_history(
-        self, history: typing.Dict[str, typing.Any]
+    def register_access_history(  # chamar quando o user passar no portao
+        self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
-        return self.__register_access_history(history)
+        return self.__register_access_history(header, history)
 
     @Pyro4.expose
     def select_admin(
@@ -136,6 +138,14 @@ class RPCServer(RPCServerInterface):
         return DeviceController.select_all_devices(header)
 
     @Pyro4.expose
+    def select_users_by_device_id(
+        self,
+        header: typing.Dict[str, str],
+        device_id: str,
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return UserController.select_users_by_device_id(header=header, device_id=device_id)
+
+    @Pyro4.expose
     def select_device_access_history(
         self, header: typing.Dict[str, str], device_id: str
     ) -> typing.List[typing.Dict[str, typing.Any]]:
@@ -143,15 +153,17 @@ class RPCServer(RPCServerInterface):
 
     @authorization_required
     def __register_access_history(
-        self, history: typing.Dict[str, typing.Any]
+        self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
-        if history.get("email") and history.get("token"):
-            if Security.verify_token(history.get("email"), history.get("token")):
+        if header.get("email") and header.get("token"):
+            if Security.verify_token(header.get("email"), header.get("token")):
                 history: AccessHistory = AccessHistory(
-                    user_id=self.__user_logged,
-                    member_id=history.get("member_id"),
+                    id=uuid.uuid4(),
+                    user_id=history.get("user_id"),
+                    admin_id=self.__user_logged,
                     device_id=history.get("device_id"),
                 )
+                print(f"HISTORY {history}")
                 if InsertMain.insert_access_history(history):
                     LogMaker.write_log(f"[+]{history} has been inserted", "info")
                     return True

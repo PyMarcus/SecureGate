@@ -14,9 +14,9 @@ from packages.schemas.session_header import SessionHeader
 class AccessHistoryController:
     @staticmethod
     def create_access_history(payload: typing.Dict[str, typing.Any]):
-        # We won't use that method in api requests
+        print(f"PAY {payload}")
         try:
-            pass
+            InsertMain.insert_access_history(payload)
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()

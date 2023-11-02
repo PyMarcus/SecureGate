@@ -2,6 +2,10 @@ import datetime
 import typing
 import uuid
 
+from sqlalchemy.orm import aliased
+
+from packages.schemas.users_schema import UserAccessHistoryJoinSchema
+
 from .config import DBConnection
 from .models.__all_models import *
 
@@ -61,6 +65,25 @@ class SelectMain:
             return None
 
     @classmethod
+    def select_users_by_device_id(
+        cls, device_id: str
+    ) -> typing.List[typing.Type[UserAccessHistoryJoinSchema]] | None:
+        try:
+            with cls.__session.create_session() as session:
+                ah_alias = aliased(AccessHistory)
+                history: typing.Type[UserAccessHistoryJoinSchema] = (
+                    session.query(User, ah_alias.created_at, ah_alias.device_id)
+                    .outerjoin(ah_alias, ah_alias.device_id == device_id)
+                    .order_by(ah_alias.created_at.desc())
+                    .all()
+                )
+                if history:
+                    return history
+                return None
+        except Exception:
+            return None
+
+    @classmethod
     def select_root_id(cls) -> uuid.UUID | None:
         try:
             with cls.__session.create_session() as session:
@@ -80,7 +103,6 @@ class SelectMain:
         try:
             date_ini_obj = datetime.datetime.strptime(date_ini, "%Y-%m-%d %H:%M")
             date_end_obj = datetime.datetime.strptime(date_end, "%Y-%m-%d %H:%M")
-            print(date_end_obj, date_ini_obj)
             with cls.__session.create_session() as session:
                 history: typing.Type[AccessHistory] = (
                     session.query(AccessHistory)

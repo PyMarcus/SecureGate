@@ -3,12 +3,13 @@ import uuid
 
 from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
+from apps.server.rpc.controllers.authorization_required import authorization_required
 from apps.server.security import Security
 from libs import LogMaker
 from packages.errors.errors import *
 from packages.responses.responses import *
 from packages.schemas.session_header import SessionHeader
-from packages.schemas.users_schema import CreateUserSchema
+from packages.schemas.users_schema import CreateUserSchema, UserAccessHistoryJoinSchema
 
 
 class UserController:
@@ -21,7 +22,6 @@ class UserController:
 
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
-            print(f"PAYLOAD {payload}")
             data = CreateUserSchema(**payload)
             member = User(
                 id=uuid.uuid4(),
@@ -64,6 +64,45 @@ class UserController:
                     },
                 ).dict()
             return NotFoundError("Usuário não encontrado").dict()
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+            return InternalServerError("Não foi possível processar a requisição").dict()
+
+    @staticmethod
+    @authorization_required
+    def select_users_by_device_id(
+        header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        try:
+            users: typing.List = SelectMain.select_users_by_device_id(device_id)
+            response = []
+            if users:
+                for user in users:
+                    u: UserAccessHistoryJoinSchema = UserAccessHistoryJoinSchema(
+                        id=user[0].id,
+                        name=user[0].name,
+                        email=user[0].name,
+                        rfid=user[0].rfid,
+                        authorized=user[0].authorized,
+                        added_by=user[0].added_by,
+                        created_at=user[1],
+                        device_id=user[2],
+                    )
+
+                    response.append(
+                        {
+                            "name": u.name,
+                            "email": u.email,
+                            "rfid": u.rfid,
+                            "added_by": str(u.added_by),
+                            "id": u.id,
+                            "authorized": u.authorized,
+                            "time": u.created_at,
+                            "device_id": u.device_id,
+                        }
+                    )
+                return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
+            return NoContentResponse(message="Sem dados", data={}).dict()
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
