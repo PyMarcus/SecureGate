@@ -1,7 +1,7 @@
 import typing
 import uuid
 
-from apps.server.database import InsertMain, SelectMain
+from apps.server.database import InsertMain, SelectMain, UpdateMain
 from apps.server.database.models.__all_models import *
 from apps.server.rpc.controllers.authorization_required import authorization_required
 from apps.server.security import Security
@@ -131,6 +131,24 @@ class UserController:
                     }
                 )
             return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+            return InternalServerError("Não foi possível processar a requisição").dict()
+
+    @staticmethod
+    @authorization_required
+    def update_user_authorization(
+        header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        try:
+            print("called1")
+            if UpdateMain.update_user_authorization(user):
+                return OKResponse(
+                    message="Permissao de usuário atualizada com sucesso!", data={}
+                ).dict()
+            return InternalServerError(
+                "Não foi possível atualizar o usuario, verifique os dados"
+            ).dict()
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
