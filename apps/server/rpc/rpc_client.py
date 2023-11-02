@@ -219,6 +219,22 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_device_access_history(header, device_id)
 
+    def update_user_authorization(
+        self, header: typing.Dict[str, str], request: typing.Dict[str, typing.Any]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        """
+        The update_user_authorization method update the authorization of user
+
+        header:
+            email,
+            token
+
+         request:
+             user_id: user`s id
+             new_authorization: (bool) new authorization value
+        """
+        return self.client.update_user_authorization(header, request)
+
 
 def get_rpc_client() -> RPCSingletonClient:
     """
@@ -292,18 +308,17 @@ if __name__ == "__main__":
     )
 
     """
-    print(
-        client.sign_in(
-            {
-                "email": "imaadmin@email.com",
-                "password": "adminsecurity",
-            }
-        )
+    data = client.sign_in(
+        {
+            "email": "imaadmin@email.com",
+            "password": "adminsecurity",
+        }
     )
+
     header = {
-        "email": "imaadmin@email.com",
-        "token": "ImltYWFkbWluQGVtYWlsLmNvbSI.ZUP9YQ.6TshlbUdr401C3DJE50d4rIPXLg",
-        "user_id": "f6c7284b-f5c8-49cb-a219-79aef5d857f3",
+        "email": data.get("data").get("email"),
+        "token": data.get("data").get("token"),
+        "user_id": data.get("data").get("user_id"),
     }
 
     """print(
@@ -317,9 +332,7 @@ if __name__ == "__main__":
             },
         )
     )"""
-    print(
-        client.select_all_users_by_device_id(
-            header=header,
-            device_id="3eedc71c-7da8-4360-9180-d29d48f9a686",
-        )
-    )
+    print(header)
+    r = {"user_id": "eccbe35e-8d4e-4904-8ec8-06d759774984", "new_authorization": False}
+    print(r)
+    print(client.update_user_authorization(header=header, request=r))

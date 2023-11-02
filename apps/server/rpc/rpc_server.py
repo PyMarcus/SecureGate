@@ -151,6 +151,12 @@ class RPCServer(RPCServerInterface):
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return AccessHistoryController.select_device_access_history(header, device_id)
 
+    @Pyro4.expose
+    def update_user_authorization(
+        self, header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return UserController.update_user_authorization(header, user)
+
     @authorization_required
     def __register_access_history(
         self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
