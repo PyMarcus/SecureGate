@@ -9,13 +9,14 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { useDeviceStore } from '@/stores/user-device'
+import { useDeviceStore } from '@/stores/device-store'
+import { useUserStore } from '@/stores/user-store'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
-  const { users, isLoading } = useDeviceStore()
-
+  const { isLoadingDevices } = useDeviceStore()
+  const { users, isLoadingUsers } = useUserStore()
   const totalUsers = users.length
 
   return (
@@ -31,7 +32,11 @@ export const Overview = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {isLoading ? <LoadingIndicator /> : <span>{totalUsers}</span>}
+                {isLoadingUsers ? (
+                  <LoadingIndicator />
+                ) : (
+                  <span>{totalUsers}</span>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">
                 Total de usuários cadastrados
@@ -79,7 +84,14 @@ export const Overview = () => {
               className="max-w-[calc(100vw-6rem)] 
             md:max-w-[calc(100vw-8rem)]"
             >
-              <OverviewChart />
+              {isLoadingDevices ? (
+                <div className="h-[310px] grid place-items-center">
+                  <LoadingIndicator />
+                </div>
+              ) : (
+                <OverviewChart />
+              )}
+
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </CardContent>

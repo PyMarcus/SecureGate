@@ -12,22 +12,37 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-// import { useAllDevices } from '@/services/api/requests/devices'
+import { useDeviceStore } from '@/stores/device-store'
 import { CaretUpDown, Check } from '@phosphor-icons/react'
 
-import * as React from 'react'
-
-const gatesList = [
-  { label: 'Gate 1', value: 'gate1' },
-  { label: 'Gate 2', value: 'gate2' },
-  { label: 'Gate 3', value: 'gate3' },
-] as const
+import { Device } from '@/@types/schemas/device'
+import { useEffect, useState } from 'react'
+import { useQueryClient } from 'react-query'
+import { LoadingIndicator } from './loading-indicator'
 
 export function GatesSelector() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState('')
+  const [open, setOpen] = useState(false)
+  const [filter, setFilter] = useState('')
 
-  // const { isLoading, data: response } = useAllDevices()
+  const queryClient = useQueryClient()
+
+  const { devices, currentDevice, isLoadingDevices, setCurrentDevice } =
+    useDeviceStore()
+  const hasSelectedDevice = currentDevice !== null
+
+  useEffect(() => {
+    if (devices.length > 0) {
+      setCurrentDevice(devices[0])
+    }
+  }, [devices, setCurrentDevice])
+
+  const handleSelectDevice = (device: Device) => {
+    setCurrentDevice(device)
+
+    queryClient.invalidateQueries('allUsers')
+    queryClient.invalidateQueries('allDevices')
+    queryClient.invalidateQueries('deviceAccessHistory')
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -38,35 +53,46 @@ export function GatesSelector() {
           aria-expanded={open}
           className="w-full md:w-64 justify-between"
         >
-          {value
-            ? gatesList.find((gate) => gate.value === value)?.label
-            : 'Select gate...'}
+          {hasSelectedDevice ? currentDevice.name : 'Selecione um portão'}
           <CaretUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full md:w-64 p-0">
         <Command>
           <CommandInput placeholder="Buscar portão" className="h-9" />
-          <CommandEmpty>Nenhum portão encontrado!</CommandEmpty>
+          <CommandEmpty>
+            {isLoadingDevices
+              ? 'Buscando portões!'
+              : 'Nenhum portão encontrado!'}
+          </CommandEmpty>
           <CommandGroup>
-            {gatesList.map((gate) => (
-              <CommandItem
-                key={gate.value}
-                value={gate.value}
-                onSelect={(currentValue) => {
-                  setValue(currentValue === value ? '' : currentValue)
-                  setOpen(false)
-                }}
-              >
-                {gate.label}
-                <Check
-                  className={cn(
-                    'ml-auto h-4 w-4',
-                    value === gate.value ? 'opacity-100' : 'opacity-0',
-                  )}
-                />
-              </CommandItem>
-            ))}
+            {isLoadingDevices ? (
+              <div className="grid place-items-center mb-4">
+                <LoadingIndicator />
+              </div>
+            ) : (
+              devices.map((gate) => (
+                <CommandItem
+                  key={gate.id}
+                  value={gate.name}
+                  onSelect={(currentValue) => {
+                    handleSelectDevice(gate)
+                    setFilter(currentValue === filter ? '' : currentValue)
+                    setOpen(false)
+                  }}
+                >
+                  {gate.name}
+                  <Check
+                    className={cn(
+                      'ml-auto h-4 w-4',
+                      currentDevice?.name === gate.name
+                        ? 'opacity-100'
+                        : 'opacity-0',
+                    )}
+                  />
+                </CommandItem>
+              ))
+            )}
           </CommandGroup>
         </Command>
       </PopoverContent>

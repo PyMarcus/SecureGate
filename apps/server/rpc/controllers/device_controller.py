@@ -93,3 +93,31 @@ class DeviceController:
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
+
+    @staticmethod
+    def select_device_users(header: typing.Dict[str, typing.Any], device_id: str):
+        try:
+            header_data = SessionHeader(**header)
+            if not header_data.token or not header_data.email:
+                return BadRequestError("Token ou email não informados").dict()
+
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
+            users = SelectMain.select_all_users()
+            response = []
+            for u in users:
+                response.append(
+                    {
+                        "name": u.name,
+                        "email": u.email,
+                        "rfid": u.rfid,
+                        "added_by": str(u.added_by),
+                        "id": u.id,
+                        "authorized": u.authorized,
+                    }
+                )
+            return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+            return InternalServerError("Não foi possível processar a requisição").dict()

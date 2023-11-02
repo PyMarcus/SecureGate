@@ -66,7 +66,12 @@ class AccessHistoryController:
         return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_device_access_history(header: typing.Dict[str, typing.Any], device_id: str):
+    def select_device_access_history(
+        header: typing.Dict[str, typing.Any],
+        device_id: str,
+        date_ini: str | None,
+        date_end: str | None,
+    ):
         try:
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
@@ -78,7 +83,13 @@ class AccessHistoryController:
             if not device_id:
                 return BadRequestError("ID do dispositivo não informado").dict()
 
-            data = SelectMain.select_device_access_history(device_id)
+            if not date_ini and not date_end:
+                today = datetime.datetime.now()
+                start = datetime.datetime(today.year, today.month, today.day, 6, 0)
+                date_ini = start.strftime("%Y-%m-%d %H:%M")
+                date_end = today.strftime("%Y-%m-%d %H:%M")
+
+            data = SelectMain.select_device_access_history(device_id, date_ini, date_end)
             response = []
             if data:
                 for d in data:

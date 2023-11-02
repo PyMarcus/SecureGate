@@ -1,30 +1,49 @@
 import {
-  GetAllAccessHistoryRequest,
+  GetDeviceHistoryRequest,
   GetUserAccessHistoryRequest,
 } from '@/@types/api/request'
+import { GetAccessHistoryResponse } from '@/@types/api/response'
 import { api } from '@/services/api/instance'
-import { useQuery } from 'react-query'
+import { QueryFunctionContext, useQuery } from 'react-query'
 
 const ACCESS_HISTORY_ENDPOINT = '/history'
 
-const getAllAccessHistoryRequest = async () => {
-  const response = await api.get<GetAllAccessHistoryRequest>(
-    ACCESS_HISTORY_ENDPOINT,
+const getDeviceAccessHistoryRequest = async (ctx: QueryFunctionContext) => {
+  const [, deviceId, startDate, endDate] = ctx.queryKey
+
+  const response = await api.get<GetAccessHistoryResponse>(
+    `${ACCESS_HISTORY_ENDPOINT}/device/${deviceId}`,
+    {
+      params: {
+        date_ini: startDate,
+        date_end: endDate,
+      },
+    },
   )
   return response.data
 }
 
-export const useAllAccessHistory = () => {
-  return useQuery('allAccessHistory', getAllAccessHistoryRequest, {})
+export const useDeviceAccessHistory = ({
+  deviceId,
+  startDate,
+  endDate,
+}: GetDeviceHistoryRequest) => {
+  return useQuery(
+    ['deviceAccessHistory', deviceId, startDate, endDate],
+    getDeviceAccessHistoryRequest,
+  )
 }
 
-const getUserAccessHistoryRequest = async () => {
-  const response = await api.get<GetUserAccessHistoryRequest>(
-    ACCESS_HISTORY_ENDPOINT,
+const getUserAccessHistoryRequest = async (ctx: QueryFunctionContext) => {
+  const [, userId] = ctx.queryKey
+  const response = await api.get<GetAccessHistoryResponse>(
+    `${ACCESS_HISTORY_ENDPOINT}/${userId}`,
   )
   return response.data
 }
 
-export const useUserAccessHistory = () => {
-  return useQuery('userAccessHistory', getUserAccessHistoryRequest, {})
+export const useUserAccessHistory = ({
+  userId,
+}: GetUserAccessHistoryRequest) => {
+  return useQuery(['userAccessHistory', userId], getUserAccessHistoryRequest)
 }

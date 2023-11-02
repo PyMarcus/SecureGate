@@ -64,6 +64,12 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing select_device method")
 
     @abstractmethod
+    def select_device_users(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        raise NotImplementedError("missing select_device_users method")
+
+    @abstractmethod
     def select_user_access_history(
         self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
@@ -89,6 +95,10 @@ class RPCServerInterface(ABC):
 
     @abstractmethod
     def select_device_access_history(
-        self, header: typing.Dict[str, str], device_id: str
+        self,
+        header: typing.Dict[str, str],
+        device_id: str,
+        date_ini: str | None,
+        date_end: str | None,
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         raise NotImplementedError("missing select_device_access_history method")

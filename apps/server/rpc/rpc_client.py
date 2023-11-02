@@ -105,6 +105,11 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.create_device(header, payload)
 
+    def select_device_users(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        return self.client.select_device_users(header, device_id)
+
     def select_user(
         self, header: typing.Dict[str, typing.Any], admin_id: str
     ) -> typing.Dict[str, typing.Any]:
@@ -191,7 +196,11 @@ class RPCSingletonClient(metaclass=Singleton):
         return self.client.select_all_devices(header)
 
     def select_device_access_history(
-        self, header: typing.Dict[str, str], device_id: str
+        self,
+        header: typing.Dict[str, str],
+        device_id: str,
+        date_ini: str | None,
+        date_end: str | None,
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         """
         The select_all_access_history method get a dict list with all access history
@@ -200,7 +209,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_device_access_history(header, device_id)
+        return self.client.select_device_access_history(header, device_id, date_ini, date_end)
 
 
 def get_rpc_client() -> RPCSingletonClient:

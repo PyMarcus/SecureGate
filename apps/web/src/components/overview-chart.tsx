@@ -81,6 +81,8 @@ const week_data = [
 ]
 
 export const OverviewChart = () => {
+  // const { deviceAccessHistory } = useDeviceStore()
+
   return (
     <ScrollArea className="w-full">
       <ResponsiveContainer height={310} width="100%">

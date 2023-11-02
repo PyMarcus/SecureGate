@@ -106,6 +106,12 @@ class RPCServer(RPCServerInterface):
         return DeviceController.select_device(header, device_id)
 
     @Pyro4.expose
+    def select_device_users(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        return DeviceController.select_device_users(header, device_id)
+
+    @Pyro4.expose
     def select_user_access_history(
         self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
@@ -137,9 +143,15 @@ class RPCServer(RPCServerInterface):
 
     @Pyro4.expose
     def select_device_access_history(
-        self, header: typing.Dict[str, str], device_id: str
+        self,
+        header: typing.Dict[str, str],
+        device_id: str,
+        date_ini: str | None,
+        date_end: str | None,
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return AccessHistoryController.select_device_access_history(header, device_id)
+        return AccessHistoryController.select_device_access_history(
+            header, device_id, date_ini, date_end
+        )
 
     @authorization_required
     def __register_access_history(

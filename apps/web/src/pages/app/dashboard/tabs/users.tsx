@@ -11,38 +11,28 @@ import {
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { UserHistoryTable } from '@/components/user-history-table'
 import { UsersTable } from '@/components/users-table'
-import { useAllUsers } from '@/services/api/requests/users'
-import { useDeviceStore } from '@/stores/user-device'
+import { useUserStore } from '@/stores/user-store'
 import {
   IdentificationCard,
   LockKeyOpen,
   Users as UsersIcon,
 } from '@phosphor-icons/react'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 export const Users = () => {
-  const { data: response, isLoading } = useAllUsers()
   const {
     users,
     selectedUser,
-    setUsers,
+    isLoadingUsers,
     setSelectedUser,
-    clearSelectedUser,
-    setIsLoading,
-  } = useDeviceStore()
-
-  useEffect(() => {
-    setIsLoading(isLoading)
-    if (response && response.success) {
-      setUsers(response.data)
-    }
-  }, [isLoading, response, setIsLoading, setUsers])
+    removeSelectedUser,
+  } = useUserStore()
 
   const memberHistoryRef = useRef<HTMLHeadingElement | null>(null)
 
   const handleSelectMember = (member: User) => {
     if (member.id === selectedUser?.id) {
-      return clearSelectedUser()
+      return removeSelectedUser()
     }
 
     setSelectedUser(member)
@@ -68,7 +58,11 @@ export const Users = () => {
             <CardContent>
               <div className="text-2xl font-bold">
                 <span>
-                  {isLoading ? <LoadingIndicator /> : <span>{totalUsers}</span>}
+                  {isLoadingUsers ? (
+                    <LoadingIndicator />
+                  ) : (
+                    <span>{totalUsers}</span>
+                  )}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground">
@@ -86,7 +80,7 @@ export const Users = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {isLoading ? (
+                {isLoadingUsers ? (
                   <LoadingIndicator />
                 ) : (
                   <div>
@@ -134,7 +128,7 @@ export const Users = () => {
           </CardHeader>
           <CardContent>
             <UsersTable
-              isLoading={isLoading}
+              isLoading={isLoadingUsers}
               users={users}
               selectedUser={selectedUser}
               onSelectUser={handleSelectMember}

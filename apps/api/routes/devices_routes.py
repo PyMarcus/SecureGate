@@ -32,3 +32,12 @@ def get_by_id(request: Request, device_id: str, rpc: RPCSingletonClient = Depend
     header = get_request_header(request)
     result = rpc.select_device(header, device_id)
     return handle_rpc_result(result)
+
+
+@routes.get("/{device_id}/users")
+def get_device_users(
+    request: Request, device_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)
+):
+    header = get_request_header(request)
+    result = rpc.select_device_users(header, device_id)
+    return handle_rpc_result(result)

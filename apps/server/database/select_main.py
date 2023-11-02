@@ -74,16 +74,16 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_access_history(
-        cls, date_ini: str, date_end: str
+    def select_device_access_history(
+        cls, device_id: str, date_ini: str, date_end: str
     ) -> typing.List[AccessHistory] | None:
         try:
             date_ini_obj = datetime.datetime.strptime(date_ini, "%Y-%m-%d %H:%M")
             date_end_obj = datetime.datetime.strptime(date_end, "%Y-%m-%d %H:%M")
-            print(date_end_obj, date_ini_obj)
             with cls.__session.create_session() as session:
                 history: typing.Type[AccessHistory] = (
                     session.query(AccessHistory)
+                    .filter(AccessHistory.device_id == device_id)
                     .filter(AccessHistory.created_at.between(date_ini_obj, date_end_obj))
                     .all()
                 )
@@ -100,19 +100,6 @@ class SelectMain:
             with cls.__session.create_session() as session:
                 history: typing.Type[AccessHistory] = (
                     session.query(AccessHistory).filter(AccessHistory.user_id == user_id).all()
-                )
-                if history:
-                    return history
-                return None
-        except Exception:
-            return None
-
-    @classmethod
-    def select_device_access_history(cls, device_id: str):
-        try:
-            with cls.__session.create_session() as session:
-                history: typing.Type[AccessHistory] = (
-                    session.query(AccessHistory).filter(AccessHistory.device_id == device_id).all()
                 )
                 if history:
                     return history

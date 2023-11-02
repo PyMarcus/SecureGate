@@ -2,10 +2,11 @@ import { CreateDeviceRequest } from '@/@types/api/request'
 import {
   CreateDeviceResponse,
   GetAllDevicesResponse,
+  GetDeviceUsersResponse,
 } from '@/@types/api/response'
 import { queryClient } from '@/lib/react-query/client'
 import { api } from '@/services/api/instance'
-import { useMutation, useQuery } from 'react-query'
+import { QueryFunctionContext, useMutation, useQuery } from 'react-query'
 
 const DEVICES_ENDPOINT = '/devices'
 
@@ -15,7 +16,7 @@ const getAllDevicesRequest = async () => {
 }
 
 export const useAllDevices = () => {
-  return useQuery('allDevices', getAllDevicesRequest, {})
+  return useQuery('allDevices', getAllDevicesRequest)
 }
 
 const createDeviceRequest = async (data: CreateDeviceRequest) => {
@@ -26,7 +27,19 @@ const createDeviceRequest = async (data: CreateDeviceRequest) => {
 export const useCreateDevice = () => {
   return useMutation('createDevice', createDeviceRequest, {
     onSuccess: () => {
-      queryClient.invalidateQueries('allUsers')
+      queryClient.invalidateQueries('allDevices')
     },
   })
+}
+
+const getDeviceUsers = async (ctx: QueryFunctionContext) => {
+  const [, deviceId] = ctx.queryKey
+  const response = await api.get<GetDeviceUsersResponse>(
+    `${DEVICES_ENDPOINT}/${deviceId}/users`,
+  )
+  return response.data
+}
+
+export const useDeviceUsers = () => {
+  return useQuery('deviceUsers', getDeviceUsers, {})
 }

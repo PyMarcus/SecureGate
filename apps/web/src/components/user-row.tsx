@@ -69,7 +69,7 @@ export const UserRow = ({ user, isSelected, onSelectRow }: UserCardProps) => {
             <DropdownMenuLabel>Opções para {user.name}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSelectRow}>
-              {isSelected ? 'Close History' : 'View History'}
+              {isSelected ? 'Fechar Histórico' : 'Ver Histórico'}
               <DropdownMenuShortcut>
                 {isSelected ? <X /> : <ClockCounterClockwise />}
               </DropdownMenuShortcut>

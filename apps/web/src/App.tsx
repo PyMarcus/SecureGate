@@ -6,6 +6,7 @@ import '@/styles/globals.css'
 import { IconContext } from '@phosphor-icons/react'
 import { useEffect } from 'react'
 import { QueryClientProvider } from 'react-query'
+import { DeviceProvider } from './contexts/device-context'
 
 export const App = () => {
   const { theme } = usePreferencesStore()
@@ -16,15 +17,17 @@ export const App = () => {
   }, [theme])
 
   return (
-    <IconContext.Provider
-      value={{
-        size: 18,
-      }}
-    >
-      <QueryClientProvider client={queryClient}>
-        <AppRoutes />
-        <Toaster duration={2000} />
-      </QueryClientProvider>
-    </IconContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <DeviceProvider>
+        <IconContext.Provider
+          value={{
+            size: 18,
+          }}
+        >
+          <AppRoutes />
+          <Toaster duration={2000} />
+        </IconContext.Provider>
+      </DeviceProvider>
+    </QueryClientProvider>
   )
 }

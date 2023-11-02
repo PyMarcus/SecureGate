@@ -26,11 +26,12 @@ export interface CreateDeviceRequest {
   version: string
 }
 
-export interface GetAllAccessHistoryRequest {
-  start: string
-  end: string
+export interface GetDeviceHistoryRequest {
+  deviceId: string
+  startDate?: string
+  endDate?: string
 }
 
 export interface GetUserAccessHistoryRequest {
-  user_id: string
+  userId: string
 }
