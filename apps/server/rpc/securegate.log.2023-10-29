@@ -1,224 +1,839 @@
-2023-10-29 08:16:46,178 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:16:46,178 - INFO - [+]SERVER URI: PYRO:obj_a90a9727d7d04f3ea06b47d32bb42b97@localhost:7878
-2023-10-29 08:18:53,551 - INFO - [+]Connected on database
-2023-10-29 08:18:53,847 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:19:26,219 - INFO - [+]Calling __select_all_users
-2023-10-29 08:19:50,056 - INFO - [+]Calling __select_all_users
-2023-10-29 08:22:21,272 - WARNING - [-]Server is down
-2023-10-29 08:22:21,796 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:22:21,796 - INFO - [+]SERVER URI: PYRO:obj_1beb550cb012415ca77e8ad13cc99b67@localhost:7878
-2023-10-29 08:22:28,180 - INFO - [+]Calling __select_all_users
-2023-10-29 08:23:28,576 - WARNING - [-]Server is down
-2023-10-29 08:23:29,115 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:23:29,115 - INFO - [+]SERVER URI: PYRO:obj_5f8de4e4988e4bf588ca22708a702354@localhost:7878
-2023-10-29 08:23:50,123 - INFO - [+]Calling __select_all_users
-2023-10-29 08:24:12,704 - INFO - [+]Calling __select_all_users
-2023-10-29 08:24:13,338 - INFO - [+]Connected on database
-2023-10-29 08:24:22,896 - INFO - [+]Calling __select_all_users
-2023-10-29 08:24:27,151 - INFO - [+]Calling __select_all_users
-2023-10-29 08:25:24,763 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:25,046 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:25,075 - INFO - [+]Calling __select_all_users
-2023-10-29 08:25:47,123 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:47,370 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:47,661 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:47,908 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:25:47,941 - INFO - [+]Calling __select_all_users
-2023-10-29 08:26:23,480 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:26:23,719 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:26:23,995 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:26:24,248 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:30:21,957 - WARNING - [-]Server is down
-2023-10-29 08:30:22,377 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:30:22,377 - INFO - [+]SERVER URI: PYRO:obj_e9be86849ae64c16a5a8e19747e47777@localhost:7878
-2023-10-29 08:30:30,461 - INFO - [+]Connected on database
-2023-10-29 08:30:30,729 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:30:30,984 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:30:31,326 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:30:31,582 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:30:31,620 - INFO - [+]Calling __select_all_members
-2023-10-29 08:33:34,013 - WARNING - [-]Server is down
-2023-10-29 08:33:34,444 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:33:34,444 - INFO - [+]SERVER URI: PYRO:obj_b0316cfb5c1a4d14a324b07a91ba5a04@localhost:7878
-2023-10-29 08:33:55,211 - INFO - [+]Connected on database
-2023-10-29 08:33:55,494 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:33:55,738 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:33:56,029 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:33:56,280 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 08:33:56,318 - INFO - [+]Calling __select_all_devices
-2023-10-29 08:55:51,019 - WARNING - [-]Server is down
-2023-10-29 08:55:51,465 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:55:51,465 - INFO - [+]SERVER URI: PYRO:obj_2bfd8f342272439f8ebc37c216828ae2@localhost:7878
-2023-10-29 08:56:04,444 - INFO - [+]Connected on database
-2023-10-29 08:59:14,158 - WARNING - [-]Server is down
-2023-10-29 08:59:14,694 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 08:59:14,694 - INFO - [+]SERVER URI: PYRO:obj_639fbb618c2341a78c268f70b2d53835@localhost:7878
-2023-10-29 08:59:25,152 - INFO - [+]Connected on database
-2023-10-29 09:00:40,994 - WARNING - [-]Server is down
-2023-10-29 09:00:41,528 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:00:41,528 - INFO - [+]SERVER URI: PYRO:obj_de9247ee10e444a9b67966be27c1cbb3@localhost:7878
-2023-10-29 09:00:47,886 - INFO - [+]Connected on database
-2023-10-29 09:02:26,976 - WARNING - [-]Server is down
-2023-10-29 09:02:27,508 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:02:27,509 - INFO - [+]SERVER URI: PYRO:obj_3bc5a39c7a244410b42fd77b97d7858b@localhost:7878
-2023-10-29 09:02:29,086 - WARNING - [-]Server is down
-2023-10-29 09:02:29,506 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:02:29,506 - INFO - [+]SERVER URI: PYRO:obj_2e1256bd853e4039b6136c5bd9743db4@localhost:7878
-2023-10-29 09:02:35,593 - INFO - [+]Connected on database
-2023-10-29 09:03:25,054 - INFO - [+]<User: John Doe - john@doe.com> has been inserted
-2023-10-29 09:03:26,984 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:38,897 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:39,125 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:39,417 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:39,648 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:53,963 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:54,189 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:54,502 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:54,759 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:03:57,408 - WARNING - [-]Server is down
-2023-10-29 09:03:57,926 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:03:57,926 - INFO - [+]SERVER URI: PYRO:obj_dece6c1ed4df417486d76d54fed45399@localhost:7878
-2023-10-29 09:04:09,665 - INFO - [+]Connected on database
-2023-10-29 09:04:09,944 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:10,203 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:10,499 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:10,767 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:32,228 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:32,470 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:32,773 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:04:33,027 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:05:59,711 - WARNING - [-]Server is down
-2023-10-29 09:06:00,251 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:06:00,251 - INFO - [+]SERVER URI: PYRO:obj_46321075666a4f5795daf3a59458e15a@localhost:7878
-2023-10-29 09:06:02,418 - WARNING - [-]Server is down
-2023-10-29 09:06:02,838 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:06:02,838 - INFO - [+]SERVER URI: PYRO:obj_42fc53f2721c4d858b5e05dc358ae4cc@localhost:7878
-2023-10-29 09:06:15,158 - INFO - [+]Connected on database
-2023-10-29 09:07:25,394 - WARNING - [-]Server is down
-2023-10-29 09:07:25,916 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:07:25,916 - INFO - [+]SERVER URI: PYRO:obj_70d811817d5b4e5b95184aa766a80593@localhost:7878
-2023-10-29 09:07:30,775 - INFO - [+]Connected on database
-2023-10-29 09:07:52,740 - WARNING - [-]Server is down
-2023-10-29 09:07:53,279 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:07:53,279 - INFO - [+]SERVER URI: PYRO:obj_9889b0087d4c43a49039db718a555927@localhost:7878
-2023-10-29 09:07:59,040 - INFO - [+]Connected on database
-2023-10-29 09:10:18,045 - WARNING - [-]Server is down
-2023-10-29 09:10:18,467 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:10:18,468 - INFO - [+]SERVER URI: PYRO:obj_d6fc5a398e8b42339caaa1f14c73627e@localhost:7878
-2023-10-29 09:10:26,783 - INFO - [+]Connected on database
-2023-10-29 09:11:32,710 - WARNING - [-]Server is down
-2023-10-29 09:11:33,121 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:11:33,122 - INFO - [+]SERVER URI: PYRO:obj_06e64c012be042fb9860df4a3961ea24@localhost:7878
-2023-10-29 09:11:41,631 - INFO - [+]Connected on database
-2023-10-29 09:12:08,142 - WARNING - [-]Server is down
-2023-10-29 09:12:08,679 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:12:08,680 - INFO - [+]SERVER URI: PYRO:obj_8513121aedf149088bdb3cf6762efd8c@localhost:7878
-2023-10-29 09:12:15,494 - INFO - [+]Connected on database
-2023-10-29 09:12:59,140 - WARNING - [-]Server is down
-2023-10-29 09:12:59,675 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:12:59,676 - INFO - [+]SERVER URI: PYRO:obj_bccf8b0249a348af9df997633c9ea5a9@localhost:7878
-2023-10-29 09:13:06,838 - INFO - [+]Connected on database
-2023-10-29 09:15:23,699 - WARNING - [-]Server is down
-2023-10-29 09:15:24,240 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:15:24,241 - INFO - [+]SERVER URI: PYRO:obj_763c24f9d4744e6bac836d8c376f3c18@localhost:7878
-2023-10-29 09:15:43,925 - INFO - [+]Connected on database
-2023-10-29 09:15:44,235 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:15:47,347 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:15:47,583 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:15:47,880 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:15:48,145 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:15:48,158 - INFO - [+]Calling __select_all_users
-2023-10-29 09:18:10,564 - WARNING - [-]Server is down
-2023-10-29 09:18:11,106 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:18:11,106 - INFO - [+]SERVER URI: PYRO:obj_49f0d232b25246c088caf1a669a987b5@localhost:7878
-2023-10-29 09:18:17,610 - INFO - [+]Connected on database
-2023-10-29 09:18:17,894 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:18,148 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:18,444 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:18,699 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:18,732 - INFO - [+]Calling __select_all_users
-2023-10-29 09:18:25,910 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:26,157 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:26,472 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:18:26,739 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:00,089 - WARNING - [-]Server is down
-2023-10-29 09:21:00,624 - INFO - [+]RPCServer is running on localhost/7878
-2023-10-29 09:21:00,624 - INFO - [+]SERVER URI: PYRO:obj_1e3f572250d544bea514dc51b58c9d16@localhost:7878
-2023-10-29 09:21:07,440 - INFO - [+]Connected on database
-2023-10-29 09:21:07,723 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:07,991 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:08,299 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:08,557 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:08,590 - INFO - [+]Calling __select_user
-2023-10-29 09:21:12,980 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:13,222 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:13,524 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:13,789 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:21:13,819 - INFO - [+]Calling __select_all_users
-2023-10-29 09:21:15,895 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:10,796 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:11,055 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:11,314 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:11,575 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:11,609 - INFO - [+]Calling __select_user
-2023-10-29 09:22:15,174 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:24,133 - INFO - [+]<User: Jane Doe - jane@doe.com> has been inserted
-2023-10-29 09:22:28,483 - INFO - <User: Jane Doe - jane@doe.com> is logged!
-2023-10-29 09:22:35,666 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:38,213 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:38,470 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:38,754 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:39,006 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:39,035 - INFO - [+]Calling __select_all_users
-2023-10-29 09:22:41,309 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:41,555 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:41,834 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:42,099 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:42,142 - INFO - [+]Calling __select_user
-2023-10-29 09:22:43,894 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:44,146 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:44,441 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:44,705 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:22:44,724 - INFO - [+]Calling __select_all_devices
-2023-10-29 09:31:03,276 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:31:03,508 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:31:03,797 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:31:04,051 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:31:04,309 - INFO - [+]<User: John Doe Admin - john_admin@doe.com> has been inserted
-2023-10-29 09:33:50,478 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:33:50,764 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:33:59,207 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:33:59,501 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:35:56,872 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:35:57,219 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:01,512 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:01,809 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:06,238 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:06,532 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:56,901 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:36:57,202 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:12,115 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:12,359 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:12,638 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:12,886 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:13,356 - INFO - [+]<User: John Doe Admin2 - john_admin2@doe.com> has been inserted
-2023-10-29 09:37:17,551 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:17,790 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:18,075 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:18,334 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:37:18,600 - INFO - [-]Fail to insert <User: John Doe Admin2 - john_admin2@doe.com>
-2023-10-29 09:38:52,263 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:38:52,544 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:39:54,155 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:39:54,438 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:40:16,585 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:40:16,876 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:40:31,166 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:40:31,431 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:53:34,485 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:53:34,733 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:53:35,037 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:53:35,298 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 09:53:35,341 - INFO - [+]Calling __select_all_users
-2023-10-29 10:36:18,643 - INFO - <User: John Doe - john@doe.com> is logged!
-2023-10-29 17:59:31,694 - WARNING - [-]Server is down
+2023-10-29 12:12:34,519 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:12:34,519 - INFO - [+]SERVER URI: PYRO:obj_5e3730e715b84f3e9b90fe74913cb3a7@0.0.0.0:7878
+2023-10-29 12:13:31,429 - INFO - [+]Connected on database
+2023-10-29 12:13:31,748 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:13:31,764 - INFO - [+]Calling __select_all_users
+2023-10-29 12:13:31,787 - INFO - [+]Calling __select_user
+2023-10-29 12:13:31,820 - INFO - [+]Calling __select_device
+2023-10-29 12:16:40,013 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:16:40,039 - INFO - [+]Calling __select_all_users
+2023-10-29 12:16:40,062 - INFO - [+]Calling __select_user
+2023-10-29 12:16:40,100 - INFO - [+]Calling __select_device
+2023-10-29 12:16:44,374 - WARNING - [-]Server is down
+2023-10-29 12:16:46,847 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:16:46,847 - INFO - [+]SERVER URI: PYRO:obj_94c4b999c33c47aa8bf32defbbb135ca@0.0.0.0:7878
+2023-10-29 12:16:48,671 - INFO - [+]Connected on database
+2023-10-29 12:16:48,978 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:16:48,994 - INFO - [+]Calling __select_all_users
+2023-10-29 12:16:49,017 - INFO - [+]Calling __select_user
+2023-10-29 12:16:49,050 - INFO - [+]Calling __select_device
+2023-10-29 12:18:07,284 - WARNING - [-]Server is down
+2023-10-29 12:18:11,138 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:18:11,139 - INFO - [+]SERVER URI: PYRO:obj_c955853e07da491e894684f389befe5b@0.0.0.0:7878
+2023-10-29 12:18:50,003 - INFO - [+]Connected on database
+2023-10-29 12:18:50,297 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:18:50,318 - INFO - [+]Calling __select_all_users
+2023-10-29 12:18:50,341 - INFO - [+]Calling __select_user
+2023-10-29 12:19:07,273 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:19:07,299 - INFO - [+]Calling __select_all_users
+2023-10-29 12:19:07,327 - INFO - [+]Calling __select_user
+2023-10-29 12:19:07,359 - INFO - [+]Calling __select_device
+2023-10-29 12:19:25,998 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:19:26,014 - INFO - [+]Calling __select_all_users
+2023-10-29 12:19:26,042 - INFO - [+]Calling __select_user
+2023-10-29 12:19:26,059 - INFO - [+]Calling __select_device
+2023-10-29 12:20:00,994 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:20:01,020 - INFO - [+]Calling __select_all_users
+2023-10-29 12:20:01,042 - INFO - [+]Calling __select_user
+2023-10-29 12:20:01,059 - INFO - [+]Calling __select_device
+2023-10-29 12:24:26,499 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:24:26,530 - INFO - [+]Calling __select_all_users
+2023-10-29 12:24:26,557 - INFO - [+]Calling __select_user
+2023-10-29 12:24:26,595 - INFO - [+]Calling __select_device
+2023-10-29 12:25:20,455 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:25:20,481 - INFO - [+]Calling __select_all_users
+2023-10-29 12:25:20,513 - INFO - [+]Calling __select_user
+2023-10-29 12:25:20,545 - INFO - [+]Calling __select_device
+2023-10-29 12:25:45,338 - WARNING - [-]Server is down
+2023-10-29 12:26:31,695 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:26:31,696 - INFO - [+]SERVER URI: PYRO:obj_be604f44474747cd96641818f29a6be7@0.0.0.0:7878
+2023-10-29 12:26:35,665 - INFO - [+]Connected on database
+2023-10-29 12:26:35,963 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:26:35,974 - INFO - [+]Calling __select_all_users
+2023-10-29 12:26:35,992 - INFO - [+]Calling __select_user
+2023-10-29 12:26:36,015 - INFO - [+]Calling __select_device
+2023-10-29 12:30:06,036 - WARNING - [-]Server is down
+2023-10-29 12:30:08,465 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:30:08,465 - INFO - [+]SERVER URI: PYRO:obj_771e89dea90c49e48a99da9155c53c94@0.0.0.0:7878
+2023-10-29 12:30:12,347 - INFO - [+]Connected on database
+2023-10-29 12:30:12,651 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:30:12,677 - INFO - [+]Calling __select_all_users
+2023-10-29 12:30:12,695 - INFO - [+]Calling __select_user
+2023-10-29 12:30:12,717 - INFO - [+]Calling __select_device
+2023-10-29 12:30:29,159 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:30:29,170 - INFO - [+]Calling __select_all_users
+2023-10-29 12:30:29,192 - INFO - [+]Calling __select_user
+2023-10-29 12:30:29,209 - INFO - [+]Calling __select_device
+2023-10-29 12:31:12,321 - WARNING - [-]Server is down
+2023-10-29 12:31:15,081 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:31:15,081 - INFO - [+]SERVER URI: PYRO:obj_ce0d5e89b40e4605b11a2ad31b279086@0.0.0.0:7878
+2023-10-29 12:31:17,827 - INFO - [+]Connected on database
+2023-10-29 12:31:18,125 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:31:18,146 - INFO - [+]Calling __select_all_users
+2023-10-29 12:31:18,169 - INFO - [+]Calling __select_user
+2023-10-29 12:31:18,202 - INFO - [+]Calling __select_device
+2023-10-29 12:32:20,516 - WARNING - [-]Server is down
+2023-10-29 12:32:30,704 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:32:30,704 - INFO - [+]SERVER URI: PYRO:obj_2de4d7722eb343269d669bc75dd14e61@0.0.0.0:7878
+2023-10-29 12:32:35,175 - INFO - [+]Connected on database
+2023-10-29 12:32:35,474 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:32:35,495 - INFO - [+]Calling __select_all_users
+2023-10-29 12:32:35,528 - INFO - [+]Calling __select_user
+2023-10-29 12:32:35,571 - INFO - [+]Calling __select_device
+2023-10-29 12:34:29,788 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:34:29,825 - INFO - [+]Calling __select_all_users
+2023-10-29 12:34:29,852 - INFO - [+]Calling __select_user
+2023-10-29 12:34:29,884 - INFO - [+]Calling __select_device
+2023-10-29 12:34:47,215 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:34:47,225 - INFO - [+]Calling __select_all_users
+2023-10-29 12:34:47,258 - INFO - [+]Calling __select_user
+2023-10-29 12:34:47,285 - INFO - [+]Calling __select_device
+2023-10-29 12:34:59,985 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:34:59,996 - INFO - [+]Calling __select_all_users
+2023-10-29 12:35:00,028 - INFO - [+]Calling __select_user
+2023-10-29 12:35:00,061 - INFO - [+]Calling __select_device
+2023-10-29 12:35:34,417 - WARNING - [-]Server is down
+2023-10-29 12:35:39,122 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:35:39,122 - INFO - [+]SERVER URI: PYRO:obj_d6009cf1ccb5402d80efe2454bf94fb2@0.0.0.0:7878
+2023-10-29 12:35:41,772 - INFO - [+]Connected on database
+2023-10-29 12:35:42,078 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:35:42,089 - INFO - [+]Calling __select_all_users
+2023-10-29 12:35:42,117 - INFO - [+]Calling __select_user
+2023-10-29 12:35:42,139 - INFO - [+]Calling __select_device
+2023-10-29 12:36:21,885 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:36:21,916 - INFO - [+]Calling __select_all_users
+2023-10-29 12:36:21,948 - INFO - [+]Calling __select_user
+2023-10-29 12:36:21,991 - INFO - [+]Calling __select_device
+2023-10-29 12:36:48,181 - WARNING - [-]Server is down
+2023-10-29 12:36:52,179 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:36:52,179 - INFO - [+]SERVER URI: PYRO:obj_4c6651665806414c91a95d395543ca50@0.0.0.0:7878
+2023-10-29 12:36:54,788 - INFO - [+]Connected on database
+2023-10-29 12:36:55,089 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:36:55,110 - INFO - [+]Calling __select_all_users
+2023-10-29 12:36:55,143 - INFO - [+]Calling __select_user
+2023-10-29 12:36:55,176 - INFO - [+]Calling __select_device
+2023-10-29 12:37:27,173 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:37:27,194 - INFO - [+]Calling __select_all_users
+2023-10-29 12:37:27,216 - INFO - [+]Calling __select_user
+2023-10-29 12:37:27,244 - INFO - [+]Calling __select_device
+2023-10-29 12:39:25,343 - WARNING - [-]Server is down
+2023-10-29 12:41:26,040 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:41:26,040 - INFO - [+]SERVER URI: PYRO:obj_9274cabc45dc4a3e8f9f03d0ad57700f@0.0.0.0:7878
+2023-10-29 12:41:30,189 - INFO - [+]Connected on database
+2023-10-29 12:41:30,495 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:41:30,511 - INFO - [+]Calling __select_all_users
+2023-10-29 12:41:30,529 - INFO - [+]Calling __select_user
+2023-10-29 12:41:30,546 - INFO - [+]Calling __select_device
+2023-10-29 12:42:14,325 - WARNING - [-]Server is down
+2023-10-29 12:42:17,991 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:42:17,991 - INFO - [+]SERVER URI: PYRO:obj_b44806b8577f4992a0b4450bfa444637@0.0.0.0:7878
+2023-10-29 12:42:20,695 - INFO - [+]Connected on database
+2023-10-29 12:42:20,998 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:42:21,009 - INFO - [+]Calling __select_all_users
+2023-10-29 12:42:21,042 - INFO - [+]Calling __select_user
+2023-10-29 12:42:21,060 - INFO - [+]Calling __select_device
+2023-10-29 12:44:01,486 - WARNING - [-]Server is down
+2023-10-29 12:44:51,535 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:44:51,535 - INFO - [+]SERVER URI: PYRO:obj_e8cebac326164f8c8248ec711146b1a0@0.0.0.0:7878
+2023-10-29 12:45:00,558 - INFO - [+]Connected on database
+2023-10-29 12:45:00,862 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:45:00,878 - INFO - [+]Calling __select_all_users
+2023-10-29 12:45:00,906 - INFO - [+]Calling __select_user
+2023-10-29 12:45:00,929 - INFO - [+]Calling __select_device
+2023-10-29 12:45:55,881 - WARNING - [-]Server is down
+2023-10-29 12:45:59,053 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:45:59,053 - INFO - [+]SERVER URI: PYRO:obj_580fb0a91f5e4d9cad1b9e81ceb149b4@0.0.0.0:7878
+2023-10-29 12:46:02,091 - INFO - [+]Connected on database
+2023-10-29 12:46:02,391 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:46:02,407 - INFO - [+]Calling __select_all_users
+2023-10-29 12:46:02,425 - INFO - [+]Calling __select_user
+2023-10-29 12:46:02,443 - INFO - [+]Calling __select_device
+2023-10-29 12:46:04,148 - INFO - [+]calling decoder
+2023-10-29 12:46:46,116 - WARNING - [-]Server is down
+2023-10-29 12:46:59,721 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:46:59,721 - INFO - [+]SERVER URI: PYRO:obj_48d0de75e1c24b8db9db037107f55db8@0.0.0.0:7878
+2023-10-29 12:47:10,054 - INFO - [+]Connected on database
+2023-10-29 12:47:10,355 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:47:10,376 - INFO - [+]Calling __select_all_users
+2023-10-29 12:47:10,414 - INFO - [+]Calling __select_user
+2023-10-29 12:47:10,448 - INFO - [+]Calling __select_device
+2023-10-29 12:47:12,073 - INFO - [+]calling decoder
+2023-10-29 12:50:59,889 - WARNING - [-]Server is down
+2023-10-29 12:51:11,069 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:51:11,069 - INFO - [+]SERVER URI: PYRO:obj_d152dcf41f19478e8f67ab3b0ed180cd@0.0.0.0:7878
+2023-10-29 12:51:17,194 - INFO - [+]Connected on database
+2023-10-29 12:51:17,498 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:51:17,514 - INFO - [+]Calling __select_all_users
+2023-10-29 12:51:17,537 - INFO - [+]Calling __select_user
+2023-10-29 12:51:17,565 - INFO - [+]Calling __select_device
+2023-10-29 12:51:19,372 - INFO - [+]calling decoder
+2023-10-29 12:51:30,179 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:51:30,195 - INFO - [+]Calling __select_all_users
+2023-10-29 12:51:30,238 - INFO - [+]Calling __select_user
+2023-10-29 12:51:30,270 - INFO - [+]Calling __select_device
+2023-10-29 12:51:30,555 - INFO - [+]calling decoder
+2023-10-29 12:51:43,448 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:51:43,489 - INFO - [+]Calling __select_all_users
+2023-10-29 12:51:43,511 - INFO - [+]Calling __select_user
+2023-10-29 12:51:43,559 - INFO - [+]Calling __select_device
+2023-10-29 12:51:43,818 - INFO - [+]calling decoder
+2023-10-29 12:52:56,256 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:52:56,287 - INFO - [+]Calling __select_all_users
+2023-10-29 12:52:56,324 - INFO - [+]Calling __select_user
+2023-10-29 12:52:56,367 - INFO - [+]Calling __select_device
+2023-10-29 12:52:56,641 - INFO - [+]calling decoder
+2023-10-29 12:53:08,767 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:53:08,783 - INFO - [+]Calling __select_all_users
+2023-10-29 12:53:08,805 - INFO - [+]Calling __select_user
+2023-10-29 12:53:08,827 - INFO - [+]Calling __select_device
+2023-10-29 12:53:09,090 - INFO - [+]Calling __select_device
+2023-10-29 12:53:09,364 - INFO - [+]calling decoder
+2023-10-29 12:53:23,745 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:53:23,760 - INFO - [+]Calling __select_all_users
+2023-10-29 12:53:23,782 - INFO - [+]Calling __select_user
+2023-10-29 12:53:23,809 - INFO - [+]Calling __select_device
+2023-10-29 12:53:24,073 - INFO - [+]Calling __select_device
+2023-10-29 12:53:24,343 - INFO - [+]calling decoder
+2023-10-29 12:53:51,563 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:53:51,594 - INFO - [+]Calling __select_all_users
+2023-10-29 12:53:51,616 - INFO - [+]Calling __select_user
+2023-10-29 12:53:51,639 - INFO - [+]Calling __select_device
+2023-10-29 12:53:51,908 - INFO - [+]Calling __select_device
+2023-10-29 12:53:52,172 - INFO - [+]calling decoder
+2023-10-29 12:54:29,536 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:54:29,551 - INFO - [+]Calling __select_all_users
+2023-10-29 12:54:29,589 - INFO - [+]Calling __select_user
+2023-10-29 12:54:29,621 - INFO - [+]Calling __select_device
+2023-10-29 12:54:29,880 - INFO - [+]Calling __select_device
+2023-10-29 12:54:30,140 - INFO - [+]calling decoder
+2023-10-29 12:55:12,319 - WARNING - [-]Server is down
+2023-10-29 12:55:15,182 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:55:15,182 - INFO - [+]SERVER URI: PYRO:obj_3758d8140e654fde9cc80ee27ac8c424@0.0.0.0:7878
+2023-10-29 12:55:19,251 - INFO - [+]Connected on database
+2023-10-29 12:55:19,550 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:55:19,591 - INFO - [+]Calling __select_all_users
+2023-10-29 12:55:19,619 - INFO - [+]Calling __select_user
+2023-10-29 12:55:19,642 - INFO - [+]Calling __select_device
+2023-10-29 12:55:21,302 - INFO - [+]Calling __select_device
+2023-10-29 12:55:21,561 - INFO - [+]calling decoder
+2023-10-29 12:55:37,089 - WARNING - [-]Server is down
+2023-10-29 12:55:40,891 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:55:40,892 - INFO - [+]SERVER URI: PYRO:obj_46ce8bdeca244924b00931ca4eb296e3@0.0.0.0:7878
+2023-10-29 12:55:43,501 - INFO - [+]Connected on database
+2023-10-29 12:55:43,810 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:55:43,831 - INFO - [+]Calling __select_all_users
+2023-10-29 12:55:43,854 - INFO - [+]Calling __select_user
+2023-10-29 12:55:43,871 - INFO - [+]Calling __select_device
+2023-10-29 12:55:45,459 - INFO - [+]Calling __select_device
+2023-10-29 12:55:45,735 - INFO - [+]calling decoder
+2023-10-29 12:56:35,398 - WARNING - [-]Server is down
+2023-10-29 12:56:37,877 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:56:37,877 - INFO - [+]SERVER URI: PYRO:obj_0ee31eb2a82a4125a2fa6da99b77cad8@0.0.0.0:7878
+2023-10-29 12:56:40,820 - INFO - [+]Connected on database
+2023-10-29 12:56:41,119 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:56:41,135 - INFO - [+]Calling __select_all_users
+2023-10-29 12:56:41,162 - INFO - [+]Calling __select_user
+2023-10-29 12:56:41,190 - INFO - [+]Calling __select_device
+2023-10-29 12:58:16,901 - WARNING - [-]Server is down
+2023-10-29 12:58:18,468 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 12:58:18,469 - INFO - [+]SERVER URI: PYRO:obj_67cd16fa8c66490d953b6d0bea929eb0@0.0.0.0:7878
+2023-10-29 12:58:21,206 - INFO - [+]Connected on database
+2023-10-29 12:58:21,515 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:58:21,531 - INFO - [+]Calling __select_all_users
+2023-10-29 12:58:21,553 - INFO - [+]Calling __select_user
+2023-10-29 12:58:21,582 - INFO - [+]Calling __select_device
+2023-10-29 12:58:23,307 - INFO - [+]Calling __select_device
+2023-10-29 12:58:23,582 - INFO - [+]calling decoder
+2023-10-29 12:59:04,830 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 12:59:04,846 - INFO - [+]Calling __select_all_users
+2023-10-29 12:59:04,864 - INFO - [+]Calling __select_user
+2023-10-29 12:59:04,892 - INFO - [+]Calling __select_device
+2023-10-29 12:59:05,193 - INFO - [+]Calling __select_device
+2023-10-29 12:59:05,491 - INFO - [+]calling decoder
+2023-10-29 13:01:57,471 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:01:57,502 - INFO - [+]Calling __select_all_users
+2023-10-29 13:01:57,535 - INFO - [+]Calling __select_user
+2023-10-29 13:02:21,056 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:02:21,061 - INFO - [+]Calling __select_all_users
+2023-10-29 13:02:21,084 - INFO - [+]Calling __select_user
+2023-10-29 13:02:21,116 - INFO - [+]Calling __select_device
+2023-10-29 13:02:52,794 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:02:52,810 - INFO - [+]Calling __select_all_users
+2023-10-29 13:02:52,837 - INFO - [+]Calling __select_user
+2023-10-29 13:02:52,879 - INFO - [+]Calling __select_device
+2023-10-29 13:02:53,149 - INFO - [+]Calling __select_device
+2023-10-29 13:02:53,428 - INFO - [+]calling decoder
+2023-10-29 13:03:07,129 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:03:07,144 - INFO - [+]Calling __select_all_users
+2023-10-29 13:03:07,181 - INFO - [+]Calling __select_user
+2023-10-29 13:03:07,224 - INFO - [+]Calling __select_device
+2023-10-29 13:03:07,498 - INFO - [+]calling decoder
+2023-10-29 13:03:22,604 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:03:22,620 - INFO - [+]Calling __select_all_users
+2023-10-29 13:03:22,637 - INFO - [+]Calling __select_user
+2023-10-29 13:03:22,659 - INFO - [+]Calling __select_device
+2023-10-29 13:03:22,903 - INFO - [+]calling decoder
+2023-10-29 13:03:32,637 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:03:32,647 - INFO - [+]Calling __select_all_users
+2023-10-29 13:03:32,674 - INFO - [+]Calling __select_user
+2023-10-29 13:03:32,692 - INFO - [+]Calling __select_device
+2023-10-29 13:03:32,952 - INFO - [+]calling decoder
+2023-10-29 13:04:36,887 - WARNING - [-]Server is down
+2023-10-29 13:04:49,630 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:04:49,630 - INFO - [+]SERVER URI: PYRO:obj_f81b4b13870a40539b21568afd3a8438@0.0.0.0:7878
+2023-10-29 13:04:55,530 - INFO - [+]Connected on database
+2023-10-29 13:04:55,855 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:04:55,871 - INFO - [+]Calling __select_all_users
+2023-10-29 13:04:55,908 - INFO - [+]Calling __select_user
+2023-10-29 13:04:55,936 - INFO - [+]Calling __select_device
+2023-10-29 13:04:57,906 - INFO - [+]calling decoder
+2023-10-29 13:05:39,421 - WARNING - [-]Server is down
+2023-10-29 13:05:41,576 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:05:41,576 - INFO - [+]SERVER URI: PYRO:obj_a3684a66682144fa97c481e5089befd5@0.0.0.0:7878
+2023-10-29 13:05:44,863 - INFO - [+]Connected on database
+2023-10-29 13:05:45,167 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:05:45,188 - INFO - [+]Calling __select_all_users
+2023-10-29 13:05:45,216 - INFO - [+]Calling __select_user
+2023-10-29 13:05:45,244 - INFO - [+]Calling __select_device
+2023-10-29 13:05:47,132 - INFO - [+]calling decoder
+2023-10-29 13:06:06,480 - WARNING - [-]Server is down
+2023-10-29 13:06:08,661 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:06:08,661 - INFO - [+]SERVER URI: PYRO:obj_2a03dda359f94fb39af28a738df543fa@0.0.0.0:7878
+2023-10-29 13:06:11,617 - INFO - [+]Connected on database
+2023-10-29 13:06:11,927 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:06:11,938 - INFO - [+]Calling __select_all_users
+2023-10-29 13:06:11,960 - INFO - [+]Calling __select_user
+2023-10-29 13:06:12,008 - INFO - [+]Calling __select_device
+2023-10-29 13:06:13,928 - INFO - [+]calling decoder
+2023-10-29 13:07:20,574 - WARNING - [-]Server is down
+2023-10-29 13:07:22,812 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:07:22,812 - INFO - [+]SERVER URI: PYRO:obj_1eb0c3904d574363a64f51eec7e4313e@0.0.0.0:7878
+2023-10-29 13:07:25,266 - INFO - [+]Connected on database
+2023-10-29 13:07:25,565 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:07:25,591 - INFO - [+]Calling __select_all_users
+2023-10-29 13:07:25,613 - INFO - [+]Calling __select_user
+2023-10-29 13:07:25,636 - INFO - [+]Calling __select_device
+2023-10-29 13:07:27,276 - INFO - [+]calling decoder
+2023-10-29 13:07:56,765 - WARNING - [-]Server is down
+2023-10-29 13:07:59,306 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:07:59,306 - INFO - [+]SERVER URI: PYRO:obj_fc6f80c6de154f748d4838b0169a8d78@0.0.0.0:7878
+2023-10-29 13:08:01,661 - INFO - [+]Connected on database
+2023-10-29 13:08:01,980 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:08:01,995 - INFO - [+]Calling __select_all_users
+2023-10-29 13:08:02,013 - INFO - [+]Calling __select_user
+2023-10-29 13:08:02,041 - INFO - [+]Calling __select_device
+2023-10-29 13:08:03,761 - INFO - [+]calling decoder
+2023-10-29 13:09:35,015 - WARNING - [-]Server is down
+2023-10-29 13:09:37,049 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:09:37,049 - INFO - [+]SERVER URI: PYRO:obj_4329cd292f6447eb93f32ed2dd16d62b@0.0.0.0:7878
+2023-10-29 13:09:40,588 - INFO - [+]Connected on database
+2023-10-29 13:09:40,899 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:09:40,915 - INFO - [+]Calling __select_all_users
+2023-10-29 13:09:40,937 - INFO - [+]Calling __select_user
+2023-10-29 13:09:40,980 - INFO - [+]Calling __select_device
+2023-10-29 13:09:42,727 - INFO - [+]calling decoder
+2023-10-29 13:10:05,341 - WARNING - [-]Server is down
+2023-10-29 13:10:15,891 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:10:15,892 - INFO - [+]SERVER URI: PYRO:obj_017ee7f420994ba9aa88738d39a18277@0.0.0.0:7878
+2023-10-29 13:10:19,709 - INFO - [+]Connected on database
+2023-10-29 13:10:20,002 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:10:20,023 - INFO - [+]Calling __select_all_users
+2023-10-29 13:10:20,071 - INFO - [+]Calling __select_user
+2023-10-29 13:10:20,105 - INFO - [+]Calling __select_device
+2023-10-29 13:10:21,866 - INFO - [+]calling decoder
+2023-10-29 13:11:21,182 - WARNING - [-]Server is down
+2023-10-29 13:11:22,848 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 13:11:22,848 - INFO - [+]SERVER URI: PYRO:obj_7fd35d8e08c3431eafa23b0e6ec0375e@0.0.0.0:7878
+2023-10-29 13:11:26,376 - INFO - [+]Connected on database
+2023-10-29 13:11:26,690 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 13:11:26,701 - INFO - [+]Calling __select_all_users
+2023-10-29 13:11:26,729 - INFO - [+]Calling __select_user
+2023-10-29 13:11:26,762 - INFO - [+]Calling __select_device
+2023-10-29 13:11:28,477 - INFO - [+]calling decoder
+2023-10-29 13:11:39,885 - WARNING - [-]Server is down
+2023-10-29 17:10:04,954 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:12:50,683 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:12:50,683 - INFO - [+]SERVER URI: PYRO:obj_f33bf4151d25484a803606c3109dadac@0.0.0.0:7878
+2023-10-29 17:20:57,705 - WARNING - [-]Server is down
+2023-10-29 17:28:38,316 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:28:38,316 - INFO - [+]SERVER URI: PYRO:obj_6686319d2a0448ac8e3eb2887c368575@0.0.0.0:7878
+2023-10-29 17:31:01,570 - INFO - [+]Connected on database
+2023-10-29 17:31:01,874 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:31:01,895 - INFO - [+]Calling __select_all_users
+2023-10-29 17:31:01,913 - INFO - [+]Calling __select_user
+2023-10-29 17:31:01,935 - INFO - [+]Calling __select_device
+2023-10-29 17:31:03,723 - INFO - [+]calling decoder
+2023-10-29 17:31:03,754 - INFO - [+]Calling __register_member
+2023-10-29 17:31:38,561 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:31:38,587 - INFO - [+]Calling __select_all_users
+2023-10-29 17:31:38,609 - INFO - [+]Calling __select_user
+2023-10-29 17:31:38,642 - INFO - [+]Calling __select_device
+2023-10-29 17:31:38,911 - INFO - [+]calling decoder
+2023-10-29 17:31:38,937 - INFO - [+]Calling __register_member
+2023-10-29 17:31:38,966 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:32:26,804 - WARNING - [-]Server is down
+2023-10-29 17:33:05,678 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:33:05,679 - INFO - [+]SERVER URI: PYRO:obj_a36efee3bc804210848d1751eb3992b2@0.0.0.0:7878
+2023-10-29 17:33:08,940 - INFO - [+]Connected on database
+2023-10-29 17:33:09,250 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:33:09,265 - INFO - [+]Calling __select_all_users
+2023-10-29 17:33:09,288 - INFO - [+]Calling __select_user
+2023-10-29 17:33:09,321 - INFO - [+]Calling __select_device
+2023-10-29 17:33:10,999 - INFO - [+]calling decoder
+2023-10-29 17:33:11,010 - INFO - [+]Calling __register_member
+2023-10-29 17:33:11,027 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:34:05,128 - WARNING - [-]Server is down
+2023-10-29 17:34:11,602 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:34:11,603 - INFO - [+]SERVER URI: PYRO:obj_98d9197063d946179b55fedeb371c7fc@0.0.0.0:7878
+2023-10-29 17:34:13,882 - INFO - [+]Connected on database
+2023-10-29 17:34:14,191 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:34:14,212 - INFO - [+]Calling __select_all_users
+2023-10-29 17:34:14,235 - INFO - [+]Calling __select_user
+2023-10-29 17:34:14,253 - INFO - [+]Calling __select_device
+2023-10-29 17:34:16,020 - INFO - [+]calling decoder
+2023-10-29 17:34:16,031 - INFO - [+]Calling __register_member
+2023-10-29 17:34:16,049 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:34:23,355 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:34:23,391 - INFO - [+]Calling __select_all_users
+2023-10-29 17:34:23,413 - INFO - [+]Calling __select_user
+2023-10-29 17:34:23,431 - INFO - [+]Calling __select_device
+2023-10-29 17:34:23,715 - INFO - [+]calling decoder
+2023-10-29 17:34:23,736 - INFO - [+]Calling __register_member
+2023-10-29 17:34:23,758 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:34:52,803 - WARNING - [-]Server is down
+2023-10-29 17:34:56,756 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:34:56,756 - INFO - [+]SERVER URI: PYRO:obj_295a7fe25b6441f4a3310140ca33f805@0.0.0.0:7878
+2023-10-29 17:34:59,590 - INFO - [+]Connected on database
+2023-10-29 17:34:59,889 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:34:59,905 - INFO - [+]Calling __select_all_users
+2023-10-29 17:34:59,938 - INFO - [+]Calling __select_user
+2023-10-29 17:34:59,961 - INFO - [+]Calling __select_device
+2023-10-29 17:35:01,830 - INFO - [+]calling decoder
+2023-10-29 17:35:01,861 - INFO - [+]Calling __register_member
+2023-10-29 17:35:01,879 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:35:11,439 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:35:11,465 - INFO - [+]Calling __select_all_users
+2023-10-29 17:35:11,492 - INFO - [+]Calling __select_user
+2023-10-29 17:35:11,530 - INFO - [+]Calling __select_device
+2023-10-29 17:35:11,799 - INFO - [+]calling decoder
+2023-10-29 17:35:11,815 - INFO - [+]Calling __register_member
+2023-10-29 17:35:11,837 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:35:21,857 - WARNING - [-]Server is down
+2023-10-29 17:36:45,335 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:36:45,335 - INFO - [+]SERVER URI: PYRO:obj_5b815cfc40b1453594234cc0ff856528@0.0.0.0:7878
+2023-10-29 17:36:48,496 - INFO - [+]Connected on database
+2023-10-29 17:36:48,802 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:36:48,828 - INFO - [+]Calling __select_all_users
+2023-10-29 17:36:48,851 - INFO - [+]Calling __select_user
+2023-10-29 17:36:48,888 - INFO - [+]Calling __select_device
+2023-10-29 17:36:50,782 - INFO - [+]calling decoder
+2023-10-29 17:36:50,813 - INFO - [+]Calling __register_member
+2023-10-29 17:36:50,831 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:37:04,430 - WARNING - [-]Server is down
+2023-10-29 17:37:33,430 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:37:33,430 - INFO - [+]SERVER URI: PYRO:obj_111432cc1a5c44b38f9325395beb0a4f@0.0.0.0:7878
+2023-10-29 17:37:35,724 - INFO - [+]Connected on database
+2023-10-29 17:37:36,033 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:37:36,059 - INFO - [+]Calling __select_all_users
+2023-10-29 17:37:36,088 - INFO - [+]Calling __select_user
+2023-10-29 17:37:36,116 - INFO - [+]Calling __select_device
+2023-10-29 17:37:38,000 - INFO - [+]calling decoder
+2023-10-29 17:37:38,031 - INFO - [+]Calling __register_member
+2023-10-29 17:37:38,054 - INFO - [-]Fail to insert <Member None - imaroot@email.com
+2023-10-29 17:38:10,129 - WARNING - [-]Server is down
+2023-10-29 17:38:21,194 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:38:21,194 - INFO - [+]SERVER URI: PYRO:obj_afe38b2c90694d239114e81f83bf22e5@0.0.0.0:7878
+2023-10-29 17:38:31,214 - INFO - [+]Connected on database
+2023-10-29 17:38:31,505 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:38:31,526 - INFO - [+]Calling __select_all_users
+2023-10-29 17:38:31,559 - INFO - [+]Calling __select_user
+2023-10-29 17:38:31,582 - INFO - [+]Calling __select_device
+2023-10-29 17:38:33,375 - INFO - [+]calling decoder
+2023-10-29 17:38:33,421 - INFO - [+]Calling __register_access_history
+2023-10-29 17:38:33,459 - INFO - [+]<apps.server.database.models.access_history.AccessHistory object at 0x7f0f67442d50> has been inserted
+2023-10-29 17:39:49,914 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:39:49,955 - INFO - [+]Calling __select_all_users
+2023-10-29 17:39:49,988 - INFO - [+]Calling __select_user
+2023-10-29 17:39:50,011 - INFO - [+]Calling __select_device
+2023-10-29 17:39:50,297 - INFO - [+]calling decoder
+2023-10-29 17:39:50,354 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:40:00,655 - WARNING - [-]Server is down
+2023-10-29 17:41:08,612 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:41:08,613 - INFO - [+]SERVER URI: PYRO:obj_1e9f3a6137644f1f9e1faba5fbdf7e48@0.0.0.0:7878
+2023-10-29 17:41:11,352 - INFO - [+]Connected on database
+2023-10-29 17:41:11,663 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:41:11,699 - INFO - [+]Calling __select_all_users
+2023-10-29 17:41:11,722 - INFO - [+]Calling __select_user
+2023-10-29 17:41:11,750 - INFO - [+]Calling __select_device
+2023-10-29 17:41:13,617 - INFO - [+]calling decoder
+2023-10-29 17:41:13,668 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:42:01,089 - WARNING - [-]Server is down
+2023-10-29 17:42:07,570 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:42:07,570 - INFO - [+]SERVER URI: PYRO:obj_9166b3d14e8d447083d8e79722a73b81@0.0.0.0:7878
+2023-10-29 17:42:10,234 - INFO - [+]Connected on database
+2023-10-29 17:42:10,539 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:42:10,545 - INFO - [+]Calling __select_all_users
+2023-10-29 17:42:10,572 - INFO - [+]Calling __select_user
+2023-10-29 17:42:10,595 - INFO - [+]Calling __select_device
+2023-10-29 17:42:12,648 - INFO - [+]calling decoder
+2023-10-29 17:42:12,658 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:42:29,866 - WARNING - [-]Server is down
+2023-10-29 17:42:31,630 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:42:31,630 - INFO - [+]SERVER URI: PYRO:obj_5ea00342bacd430a8dcf1a098a378e9e@0.0.0.0:7878
+2023-10-29 17:42:36,343 - INFO - [+]Connected on database
+2023-10-29 17:42:36,643 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:42:36,659 - INFO - [+]Calling __select_all_users
+2023-10-29 17:42:36,696 - INFO - [+]Calling __select_user
+2023-10-29 17:42:36,729 - INFO - [+]Calling __select_device
+2023-10-29 17:42:38,343 - INFO - [+]calling decoder
+2023-10-29 17:42:38,354 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:44:14,383 - WARNING - [-]Server is down
+2023-10-29 17:44:16,709 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:44:16,709 - INFO - [+]SERVER URI: PYRO:obj_f47dbf5842c94872af67d1f49c2e7cbb@0.0.0.0:7878
+2023-10-29 17:44:20,788 - INFO - [+]Connected on database
+2023-10-29 17:44:21,088 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:44:21,109 - INFO - [+]Calling __select_all_users
+2023-10-29 17:44:21,131 - INFO - [+]Calling __select_user
+2023-10-29 17:44:21,154 - INFO - [+]Calling __select_device
+2023-10-29 17:44:22,927 - INFO - [+]calling decoder
+2023-10-29 17:44:22,948 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:45:11,878 - WARNING - [-]Server is down
+2023-10-29 17:45:13,801 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:45:13,802 - INFO - [+]SERVER URI: PYRO:obj_03a4d374f8ce412992e2a6802c3715c5@0.0.0.0:7878
+2023-10-29 17:45:16,909 - INFO - [+]Connected on database
+2023-10-29 17:45:17,214 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:45:17,230 - INFO - [+]Calling __select_all_users
+2023-10-29 17:45:17,252 - INFO - [+]Calling __select_user
+2023-10-29 17:45:17,275 - INFO - [+]Calling __select_device
+2023-10-29 17:45:19,194 - INFO - [+]calling decoder
+2023-10-29 17:45:19,220 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:46:14,955 - WARNING - [-]Server is down
+2023-10-29 17:46:16,902 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:46:16,902 - INFO - [+]SERVER URI: PYRO:obj_13d47df07dd44dd4bb310de1adbf0a5c@0.0.0.0:7878
+2023-10-29 17:46:21,041 - INFO - [+]Connected on database
+2023-10-29 17:46:21,360 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:46:21,376 - INFO - [+]Calling __select_all_users
+2023-10-29 17:46:21,399 - INFO - [+]Calling __select_user
+2023-10-29 17:46:21,426 - INFO - [+]Calling __select_device
+2023-10-29 17:46:23,520 - INFO - [+]calling decoder
+2023-10-29 17:46:23,540 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:46:36,546 - WARNING - [-]Server is down
+2023-10-29 17:46:49,373 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:46:49,374 - INFO - [+]SERVER URI: PYRO:obj_55323393cd6a43789ab41586a26d1b27@0.0.0.0:7878
+2023-10-29 17:46:53,262 - INFO - [+]Connected on database
+2023-10-29 17:46:53,570 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:46:53,591 - INFO - [+]Calling __select_all_users
+2023-10-29 17:46:53,614 - INFO - [+]Calling __select_user
+2023-10-29 17:46:53,642 - INFO - [+]Calling __select_device
+2023-10-29 17:46:55,460 - INFO - [+]calling decoder
+2023-10-29 17:46:55,471 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:47:31,383 - WARNING - [-]Server is down
+2023-10-29 17:47:33,416 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:47:33,417 - INFO - [+]SERVER URI: PYRO:obj_20f286026cc948f5910cbc9de70eecb3@0.0.0.0:7878
+2023-10-29 17:47:36,846 - INFO - [+]Connected on database
+2023-10-29 17:47:37,150 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:47:37,166 - INFO - [+]Calling __select_all_users
+2023-10-29 17:47:37,189 - INFO - [+]Calling __select_user
+2023-10-29 17:47:37,222 - INFO - [+]Calling __select_device
+2023-10-29 17:47:39,115 - INFO - [+]calling decoder
+2023-10-29 17:47:39,130 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:49:32,934 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:49:32,950 - INFO - [+]Calling __select_all_users
+2023-10-29 17:49:32,987 - INFO - [+]Calling __select_user
+2023-10-29 17:49:33,010 - INFO - [+]Calling __select_device
+2023-10-29 17:49:33,279 - INFO - [+]calling decoder
+2023-10-29 17:49:33,289 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:49:59,673 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:49:59,699 - INFO - [+]Calling __select_all_users
+2023-10-29 17:49:59,732 - INFO - [+]Calling __select_user
+2023-10-29 17:49:59,764 - INFO - [+]Calling __select_device
+2023-10-29 17:50:00,038 - INFO - [+]calling decoder
+2023-10-29 17:50:00,059 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:50:41,971 - WARNING - [-]Server is down
+2023-10-29 17:51:32,137 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:51:32,137 - INFO - [+]SERVER URI: PYRO:obj_8aed541e009f4a858c566705b62717a2@0.0.0.0:7878
+2023-10-29 17:51:34,986 - INFO - [+]Connected on database
+2023-10-29 17:51:35,295 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:51:35,316 - INFO - [+]Calling __select_all_users
+2023-10-29 17:51:35,349 - INFO - [+]Calling __select_user
+2023-10-29 17:51:35,377 - INFO - [+]Calling __select_device
+2023-10-29 17:51:37,224 - INFO - [+]calling decoder
+2023-10-29 17:51:37,240 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:51:37,315 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:52:40,270 - WARNING - [-]Server is down
+2023-10-29 17:52:42,198 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:52:42,198 - INFO - [+]SERVER URI: PYRO:obj_6309bd6e087b422fb3019aa5a9a6ae30@0.0.0.0:7878
+2023-10-29 17:52:46,718 - INFO - [+]Connected on database
+2023-10-29 17:52:47,033 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:52:47,054 - INFO - [+]Calling __select_all_users
+2023-10-29 17:52:47,077 - INFO - [+]Calling __select_user
+2023-10-29 17:52:47,100 - INFO - [+]Calling __select_device
+2023-10-29 17:52:48,977 - INFO - [+]calling decoder
+2023-10-29 17:52:49,008 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:52:49,072 - INFO - [+]Calling __select_access_history
+2023-10-29 17:53:59,893 - WARNING - [-]Server is down
+2023-10-29 17:54:05,101 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:54:05,101 - INFO - [+]SERVER URI: PYRO:obj_f2c47954df3740af9c59d69185cc6a36@0.0.0.0:7878
+2023-10-29 17:54:07,960 - INFO - [+]Connected on database
+2023-10-29 17:54:08,265 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:54:08,286 - INFO - [+]Calling __select_all_users
+2023-10-29 17:54:08,334 - INFO - [+]Calling __select_user
+2023-10-29 17:54:08,357 - INFO - [+]Calling __select_device
+2023-10-29 17:54:09,816 - INFO - [+]calling decoder
+2023-10-29 17:54:09,842 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:54:09,912 - INFO - [+]Calling __select_access_history
+2023-10-29 17:54:48,050 - WARNING - [-]Server is down
+2023-10-29 17:54:51,770 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:54:51,770 - INFO - [+]SERVER URI: PYRO:obj_b3880b4d52154ae0bd06b008c785d081@0.0.0.0:7878
+2023-10-29 17:54:54,564 - INFO - [+]Connected on database
+2023-10-29 17:54:54,868 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:54:54,884 - INFO - [+]Calling __select_all_users
+2023-10-29 17:54:54,901 - INFO - [+]Calling __select_user
+2023-10-29 17:54:54,934 - INFO - [+]Calling __select_device
+2023-10-29 17:54:56,772 - INFO - [+]calling decoder
+2023-10-29 17:54:56,808 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:54:56,878 - INFO - [+]Calling __select_access_history
+2023-10-29 17:55:42,145 - WARNING - [-]Server is down
+2023-10-29 17:55:47,721 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:55:47,722 - INFO - [+]SERVER URI: PYRO:obj_601c25ae608d4010bbc33b369bd7c5de@0.0.0.0:7878
+2023-10-29 17:55:50,331 - INFO - [+]Connected on database
+2023-10-29 17:55:50,645 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:55:50,660 - INFO - [+]Calling __select_all_users
+2023-10-29 17:55:50,703 - INFO - [+]Calling __select_user
+2023-10-29 17:55:50,731 - INFO - [+]Calling __select_device
+2023-10-29 17:55:52,753 - INFO - [+]calling decoder
+2023-10-29 17:55:52,764 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:55:52,833 - INFO - [+]Calling __select_access_history
+2023-10-29 17:56:45,823 - WARNING - [-]Server is down
+2023-10-29 17:56:49,866 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:56:49,866 - INFO - [+]SERVER URI: PYRO:obj_50daf15989414970996f04482ee3efc9@0.0.0.0:7878
+2023-10-29 17:56:51,871 - INFO - [+]Connected on database
+2023-10-29 17:56:52,170 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:56:52,186 - INFO - [+]Calling __select_all_users
+2023-10-29 17:56:52,219 - INFO - [+]Calling __select_user
+2023-10-29 17:56:52,257 - INFO - [+]Calling __select_device
+2023-10-29 17:56:53,906 - INFO - [+]calling decoder
+2023-10-29 17:56:53,937 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:56:54,012 - INFO - [+]Calling __select_access_history
+2023-10-29 17:57:22,906 - WARNING - [-]Server is down
+2023-10-29 17:57:24,861 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 17:57:24,862 - INFO - [+]SERVER URI: PYRO:obj_6368b529353748dba0198088c554b769@0.0.0.0:7878
+2023-10-29 17:57:31,045 - INFO - [+]Connected on database
+2023-10-29 17:57:31,349 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:57:31,365 - INFO - [+]Calling __select_all_users
+2023-10-29 17:57:31,398 - INFO - [+]Calling __select_user
+2023-10-29 17:57:31,426 - INFO - [+]Calling __select_device
+2023-10-29 17:57:33,213 - INFO - [+]calling decoder
+2023-10-29 17:57:33,260 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:57:33,345 - INFO - [+]Calling __select_access_history
+2023-10-29 17:57:56,252 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 17:57:56,268 - INFO - [+]Calling __select_all_users
+2023-10-29 17:57:56,300 - INFO - [+]Calling __select_user
+2023-10-29 17:57:56,343 - INFO - [+]Calling __select_device
+2023-10-29 17:57:56,628 - INFO - [+]calling decoder
+2023-10-29 17:57:56,638 - INFO - [+]Calling __select_all_access_history
+2023-10-29 17:57:56,705 - INFO - [+]Calling __select_access_history
+2023-10-29 17:58:31,048 - WARNING - [-]Server is down
+2023-10-29 18:01:06,110 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:01:06,110 - INFO - [+]SERVER URI: PYRO:obj_1c8361f5788c44c1880ff1f3053eafd3@0.0.0.0:7878
+2023-10-29 18:01:09,399 - INFO - [+]Connected on database
+2023-10-29 18:01:09,698 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:01:09,719 - INFO - [+]Calling __select_all_users
+2023-10-29 18:01:09,747 - INFO - [+]Calling __select_user
+2023-10-29 18:01:09,770 - INFO - [+]Calling __select_device
+2023-10-29 18:01:11,303 - INFO - [+]calling decoder
+2023-10-29 18:01:11,334 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:01:11,403 - INFO - [+]Calling __select_access_history
+2023-10-29 18:01:23,026 - WARNING - [-]Server is down
+2023-10-29 18:01:50,224 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:01:50,225 - INFO - [+]SERVER URI: PYRO:obj_f86f139a09cc4cbf87f998eb3a09a95b@0.0.0.0:7878
+2023-10-29 18:01:55,085 - INFO - [+]Connected on database
+2023-10-29 18:01:55,399 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:01:55,425 - INFO - [+]Calling __select_all_users
+2023-10-29 18:01:55,443 - INFO - [+]Calling __select_user
+2023-10-29 18:01:55,467 - INFO - [+]Calling __select_device
+2023-10-29 18:01:57,075 - INFO - [+]calling decoder
+2023-10-29 18:01:57,081 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:01:57,151 - INFO - [+]Calling __select_access_history
+2023-10-29 18:02:19,919 - WARNING - [-]Server is down
+2023-10-29 18:02:23,355 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:02:23,356 - INFO - [+]SERVER URI: PYRO:obj_6daa3a901cd4485b84ed3f49d995f84d@0.0.0.0:7878
+2023-10-29 18:02:26,205 - INFO - [+]Connected on database
+2023-10-29 18:02:26,516 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:02:26,522 - INFO - [+]Calling __select_all_users
+2023-10-29 18:02:26,540 - INFO - [+]Calling __select_user
+2023-10-29 18:02:26,563 - INFO - [+]Calling __select_device
+2023-10-29 18:02:28,249 - INFO - [+]calling decoder
+2023-10-29 18:02:28,280 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:02:28,345 - INFO - [+]Calling __select_access_history
+2023-10-29 18:02:39,106 - WARNING - [-]Server is down
+2023-10-29 18:03:34,668 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:03:34,669 - INFO - [+]SERVER URI: PYRO:obj_38e7966853d148b2ae164bf4f067564c@0.0.0.0:7878
+2023-10-29 18:03:37,975 - INFO - [+]Connected on database
+2023-10-29 18:03:38,279 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:03:38,295 - INFO - [+]Calling __select_all_users
+2023-10-29 18:03:38,323 - INFO - [+]Calling __select_user
+2023-10-29 18:03:38,356 - INFO - [+]Calling __select_device
+2023-10-29 18:03:39,984 - INFO - [+]calling decoder
+2023-10-29 18:03:40,010 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:03:40,080 - INFO - [+]Calling __select_access_history
+2023-10-29 18:04:32,110 - WARNING - [-]Server is down
+2023-10-29 18:04:35,088 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:04:35,088 - INFO - [+]SERVER URI: PYRO:obj_988dcc592d9c45788e8ecf2979ab61f5@0.0.0.0:7878
+2023-10-29 18:04:39,384 - INFO - [+]Connected on database
+2023-10-29 18:04:39,699 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:04:39,715 - INFO - [+]Calling __select_all_users
+2023-10-29 18:04:39,743 - INFO - [+]Calling __select_user
+2023-10-29 18:04:39,781 - INFO - [+]Calling __select_device
+2023-10-29 18:04:41,461 - INFO - [+]calling decoder
+2023-10-29 18:04:41,477 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:04:41,552 - INFO - [+]Calling __select_access_history
+2023-10-29 18:04:51,122 - WARNING - [-]Server is down
+2023-10-29 18:05:19,303 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:05:19,303 - INFO - [+]SERVER URI: PYRO:obj_60cb599590674691997ff743de08ba2b@0.0.0.0:7878
+2023-10-29 18:05:23,061 - INFO - [+]Connected on database
+2023-10-29 18:05:23,370 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:05:23,386 - INFO - [+]Calling __select_all_users
+2023-10-29 18:05:23,424 - INFO - [+]Calling __select_user
+2023-10-29 18:05:23,462 - INFO - [+]Calling __select_device
+2023-10-29 18:05:25,203 - INFO - [+]calling decoder
+2023-10-29 18:05:25,214 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:05:25,303 - INFO - [+]Calling __select_access_history
+2023-10-29 18:07:37,023 - WARNING - [-]Server is down
+2023-10-29 18:07:38,906 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:07:38,906 - INFO - [+]SERVER URI: PYRO:obj_436839630099463a8884284572afe3ec@0.0.0.0:7878
+2023-10-29 18:07:41,844 - INFO - [+]Connected on database
+2023-10-29 18:07:42,159 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:07:42,180 - INFO - [+]Calling __select_all_users
+2023-10-29 18:07:42,208 - INFO - [+]Calling __select_user
+2023-10-29 18:07:42,246 - INFO - [+]Calling __select_device
+2023-10-29 18:07:43,934 - INFO - [+]calling decoder
+2023-10-29 18:07:43,971 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:07:44,030 - INFO - [+]Calling __select_access_history
+2023-10-29 18:08:35,326 - WARNING - [-]Server is down
+2023-10-29 18:08:37,494 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:08:37,494 - INFO - [+]SERVER URI: PYRO:obj_91ef9a77f0ac4c16975a4583590407bc@0.0.0.0:7878
+2023-10-29 18:08:40,911 - INFO - [+]Connected on database
+2023-10-29 18:08:41,210 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:08:41,221 - INFO - [+]Calling __select_all_users
+2023-10-29 18:08:41,254 - INFO - [+]Calling __select_user
+2023-10-29 18:08:41,287 - INFO - [+]Calling __select_device
+2023-10-29 18:08:43,237 - INFO - [+]calling decoder
+2023-10-29 18:08:43,248 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:08:43,348 - INFO - [+]Calling __select_access_history
+2023-10-29 18:08:57,347 - WARNING - [-]Server is down
+2023-10-29 18:08:58,001 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:08:58,001 - INFO - [+]SERVER URI: PYRO:obj_6069d7704be34940a79de1468e202662@0.0.0.0:7878
+2023-10-29 18:09:00,643 - INFO - [+]Connected on database
+2023-10-29 18:09:00,944 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:09:00,976 - INFO - [+]Calling __select_all_users
+2023-10-29 18:09:01,004 - INFO - [+]Calling __select_user
+2023-10-29 18:09:01,021 - INFO - [+]Calling __select_device
+2023-10-29 18:09:02,732 - INFO - [+]calling decoder
+2023-10-29 18:09:02,753 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:09:02,812 - INFO - [+]Calling __select_access_history
+2023-10-29 18:11:00,135 - WARNING - [-]Server is down
+2023-10-29 18:11:08,052 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:11:08,053 - INFO - [+]SERVER URI: PYRO:obj_d12078076c654df59edf26eebd7ed1bf@0.0.0.0:7878
+2023-10-29 18:11:11,849 - INFO - [+]Connected on database
+2023-10-29 18:11:12,148 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:11:12,174 - INFO - [+]Calling __select_all_users
+2023-10-29 18:11:12,197 - INFO - [+]Calling __select_user
+2023-10-29 18:11:12,230 - INFO - [+]Calling __select_device
+2023-10-29 18:11:13,895 - INFO - [+]calling decoder
+2023-10-29 18:11:13,941 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:11:14,027 - INFO - [+]Calling __select_access_history
+2023-10-29 18:17:40,127 - WARNING - [-]Server is down
+2023-10-29 18:17:40,787 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:17:40,788 - INFO - [+]SERVER URI: PYRO:obj_e4e36aa652b7435fad172a494bfdc531@0.0.0.0:7878
+2023-10-29 18:17:44,052 - INFO - [+]Connected on database
+2023-10-29 18:17:44,359 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:17:44,375 - INFO - [+]Calling __select_all_users
+2023-10-29 18:17:44,398 - INFO - [+]Calling __select_user
+2023-10-29 18:17:44,421 - INFO - [+]Calling __select_device
+2023-10-29 18:17:46,267 - INFO - [+]calling decoder
+2023-10-29 18:17:46,277 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:17:46,352 - INFO - [+]Calling __select_access_history
+2023-10-29 18:18:50,596 - WARNING - [-]Server is down
+2023-10-29 18:18:53,996 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:18:53,996 - INFO - [+]SERVER URI: PYRO:obj_55a3df3231f84e3d8b139ffffd56021e@0.0.0.0:7878
+2023-10-29 18:18:56,259 - INFO - [+]Connected on database
+2023-10-29 18:18:56,556 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:18:56,567 - INFO - [+]Calling __select_all_users
+2023-10-29 18:18:56,594 - INFO - [+]Calling __select_user
+2023-10-29 18:18:56,627 - INFO - [+]Calling __select_device
+2023-10-29 18:18:58,259 - INFO - [+]calling decoder
+2023-10-29 18:18:58,280 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:18:58,355 - INFO - [+]Calling __select_access_history
+2023-10-29 18:19:11,881 - WARNING - [-]Server is down
+2023-10-29 18:19:15,621 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:19:15,621 - INFO - [+]SERVER URI: PYRO:obj_941dbf6897cd43309881abac1bf2caa8@0.0.0.0:7878
+2023-10-29 18:19:18,033 - INFO - [+]Connected on database
+2023-10-29 18:19:18,347 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:19:18,368 - INFO - [+]Calling __select_all_users
+2023-10-29 18:19:18,390 - INFO - [+]Calling __select_user
+2023-10-29 18:19:18,418 - INFO - [+]Calling __select_device
+2023-10-29 18:19:20,199 - INFO - [+]calling decoder
+2023-10-29 18:19:20,220 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:19:20,299 - INFO - [+]Calling __select_access_history
+2023-10-29 18:19:32,725 - WARNING - [-]Server is down
+2023-10-29 18:20:37,157 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:20:37,157 - INFO - [+]SERVER URI: PYRO:obj_906ce03d54dc4fbda035f96c79f12ab8@0.0.0.0:7878
+2023-10-29 18:20:39,570 - INFO - [+]Connected on database
+2023-10-29 18:20:39,868 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:20:39,884 - INFO - [+]Calling __select_all_users
+2023-10-29 18:20:39,907 - INFO - [+]Calling __select_user
+2023-10-29 18:20:39,945 - INFO - [+]Calling __select_device
+2023-10-29 18:20:41,908 - INFO - [+]calling decoder
+2023-10-29 18:20:41,924 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:20:41,993 - INFO - [+]Calling __select_access_history
+2023-10-29 18:20:56,212 - WARNING - [-]Server is down
+2023-10-29 18:20:59,361 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:20:59,361 - INFO - [+]SERVER URI: PYRO:obj_b398b2f6f8f847369775aaefc4971c4f@0.0.0.0:7878
+2023-10-29 18:21:02,461 - INFO - [+]Connected on database
+2023-10-29 18:21:02,767 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:21:02,783 - INFO - [+]Calling __select_all_users
+2023-10-29 18:21:02,805 - INFO - [+]Calling __select_user
+2023-10-29 18:21:02,838 - INFO - [+]Calling __select_device
+2023-10-29 18:21:04,843 - INFO - [+]calling decoder
+2023-10-29 18:21:04,864 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:21:04,933 - INFO - [+]Calling __select_access_history
+2023-10-29 18:21:38,665 - WARNING - [-]Server is down
+2023-10-29 18:21:41,586 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:21:41,586 - INFO - [+]SERVER URI: PYRO:obj_2b65fa34796540a3988310908f40bc4c@0.0.0.0:7878
+2023-10-29 18:21:44,621 - INFO - [+]Connected on database
+2023-10-29 18:21:44,915 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:21:44,936 - INFO - [+]Calling __select_all_users
+2023-10-29 18:21:44,964 - INFO - [+]Calling __select_user
+2023-10-29 18:21:44,986 - INFO - [+]Calling __select_device
+2023-10-29 18:21:46,620 - INFO - [+]calling decoder
+2023-10-29 18:21:46,625 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:21:46,700 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:05,421 - WARNING - [-]Server is down
+2023-10-29 18:22:07,213 - INFO - [+]RPCServer is running on 0.0.0.0/7878
+2023-10-29 18:22:07,213 - INFO - [+]SERVER URI: PYRO:obj_1f6ce7a25da149c99ccd26d752fcb7d4@0.0.0.0:7878
+2023-10-29 18:22:10,560 - INFO - [+]Connected on database
+2023-10-29 18:22:10,848 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:22:10,874 - INFO - [+]Calling __select_all_users
+2023-10-29 18:22:10,912 - INFO - [+]Calling __select_user
+2023-10-29 18:22:10,940 - INFO - [+]Calling __select_device
+2023-10-29 18:22:12,707 - INFO - [+]calling decoder
+2023-10-29 18:22:12,732 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:22:12,792 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:35,101 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:22:35,107 - INFO - [+]Calling __select_all_users
+2023-10-29 18:22:35,134 - INFO - [+]Calling __select_user
+2023-10-29 18:22:35,171 - INFO - [+]Calling __select_device
+2023-10-29 18:22:35,449 - INFO - [+]calling decoder
+2023-10-29 18:22:35,480 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:22:35,552 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:35,639 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:45,916 - INFO - <User: root - imaroot@email.com> is logged!
+2023-10-29 18:22:45,947 - INFO - [+]Calling __select_all_users
+2023-10-29 18:22:45,974 - INFO - [+]Calling __select_user
+2023-10-29 18:22:46,002 - INFO - [+]Calling __select_device
+2023-10-29 18:22:46,275 - INFO - [+]calling decoder
+2023-10-29 18:22:46,300 - INFO - [+]Calling __select_all_access_history
+2023-10-29 18:22:46,362 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:46,444 - INFO - [+]Calling __select_access_history
+2023-10-29 18:22:49,299 - WARNING - [-]Server is down

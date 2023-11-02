@@ -7,3 +7,6 @@ class CreateUserSchema(BaseModel):
     rfid: str
     # added_by: str
     authorized: bool
+
+    def __str__(self) -> str:
+        return f"{self.name} {self.email} {self.rfid} {self.authorized}"

@@ -21,7 +21,7 @@ class UserController:
 
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
-
+            print(f"PAYLOAD {payload}")
             data = CreateUserSchema(**payload)
             member = User(
                 id=uuid.uuid4(),

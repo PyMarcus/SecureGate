@@ -40,8 +40,9 @@ class InsertMain:
             with cls.__session.create_session() as session:
                 session.add(device)
                 session.commit()
-                return True
-        except Exception:
+            return True
+        except Exception as e:
+            print(f"ERRRO {e}")
             return False
 
     @classmethod
