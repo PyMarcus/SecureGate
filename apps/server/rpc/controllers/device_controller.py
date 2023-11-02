@@ -1,4 +1,5 @@
 import typing
+import uuid
 
 from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
@@ -26,12 +27,13 @@ class DeviceController:
                 return BadRequestError("Dados inválidos").dict()
 
             device = Device(
+                id=uuid.uuid4(),
                 name=data.name,
                 version=data.version,
                 wifi_ssid=data.wifi_ssid,
                 wifi_password=Security.hash_password(data.wifi_password),
             )
-
+            print(f"device {device}")
             if InsertMain.insert_device(device):
                 LogMaker.write_log(f"[+]{device} has been created", "info")
                 return CreatedResponse(message="Dispositivo criado com sucesso!", data=True).dict()

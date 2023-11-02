@@ -77,7 +77,9 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.create_user(header, payload)
 
-    def register_access_history(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def register_access_history(
+        self, header: typing.Dict[str, typing.Any], request: typing.Dict[str, typing.Any]
+    ) -> bool:
         """
         The register_access_history method creates a new access history.
         It takes a dictionary as input (request), containing member registration information.
@@ -87,7 +89,7 @@ class RPCSingletonClient(metaclass=Singleton):
             member_id: A string representing the member's id.
             device_id: A string representing the device's id.
         """
-        return self.client.register_access_history(request)
+        return self.client.register_access_history(header, request)
 
     def create_device(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
@@ -144,6 +146,21 @@ class RPCSingletonClient(metaclass=Singleton):
             from 6 am until the time of the search
         """
         return self.client.select_user_access_history(header, user_id)
+
+    def select_all_users_by_device_id(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        """
+        The select_all_users_by_device_id method get a member with your data
+            header:
+                email: A string representing the users's email address.
+                token: A string representing the users token.
+
+            device_id:
+                id of device
+
+        """
+        return self.client.select_users_by_device_id(header, device_id)
 
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id
@@ -222,7 +239,8 @@ def get_rpc_client() -> RPCSingletonClient:
 
 if __name__ == "__main__":
     client: RPCSingletonClient = get_rpc_client()
-    """print(client.sign_up({
+    """
+    print(client.sign_up({
         "name": "root2",
         "email": "imaroot2@email.com",
         "password": "rootsecurity2",
@@ -231,8 +249,8 @@ if __name__ == "__main__":
     print(
         client.sign_in(
             {
-                "email": "imaroot@email.com",
-                "password": "rootsecurity",
+                "email": "imaroot2@email.com",
+                "password": "rootsecurity2",
             }
         )
     )
@@ -241,75 +259,76 @@ if __name__ == "__main__":
         "email": "imaadmin@email2.com",
         "password": "adminsecurity2",
     }))
+    print(client.sign_up({
+        "name": "admin",
+        "email": "imaadmin@email.com",
+        "password": "adminsecurity",
+        "role": "admin"
+    }))
+
     print(
-        client.register_member(
+        client.sign_in(
             {
-                "name": "aluno01",
-                "email": "aluno01@email.com",
-                "rfid": "40028922ABC",
-                "added_by": "0ad91ffb-78dd-4cd3-aeaf-519c7da27b52",
+                "email": "imaadmin@email.com",
+                "password": "adminsecurity",
             }
         )
-    )"""
-    n = client.sign_in(
-        {
-            "email": "imaroot@email.com",
-            "password": "rootsecurity",
-        }
     )
-    header = {"email": "imaroot@email.com", "token": n.get("data").get("token")}
-    print(header)
+    print(
+        client.create_user(
+            header={"email": "imaadmin@email.com",
+                    'token': 'ImltYWFkbWluQGVtYWlsLmNvbSI.ZUPwKA.ermkhm-p1vJqywmOzMLkw_VvhvY',
+                    'user_id':'f6c7284b-f5c8-49cb-a219-79aef5d857f3'},
+            payload={
+                "name": "aluno02",
+                "email": "aluno02@email.com",
+                "rfid": "40028922ABD",
+                "authorized": True,
+            }
+        )
+    )
+
+    header = {"email": "imaadmin@email.com",
+              "token": 'ImltYWFkbWluQGVtYWlsLmNvbSI.ZUPwKA.ermkhm-p1vJqywmOzMLkw_VvhvY',
+              'user_id':'13daa86d-babd-4fd8-8779-36ca7d052493'}
     print(client.select_all_users(header))
+
     print(
         client.select_user(
-            {"email": "imaroot@email.com", "token": n.get("data").get("token")},
-            "fa109c61-7987-45bc-9e49-cc9322f72265",
+            header,
+            'e62d14ac-cd26-4986-ad1f-ea65021f709d'
         )
     )
-    """print(client.register_device({
-        "name": "device1",
-        "version": "0.0.0",
-        "wifi_ssid": "wifihost",
-        "wifi_password": "wifipassword",
-        "email": "imaroot@email.com",
-        "token": n.get("data").get("token")
-    }))"""
+
+    """
     print(
-        client.select_device(
+        client.sign_in(
             {
-                "name": "device1",
-                "email": "imaroot@email.com",
-                "token": n.get("data").get("token"),
-                "wifi_password": "wifipassword",
+                "email": "imaadmin@email.com",
+                "password": "adminsecurity",
             }
         )
     )
+    header = {
+        "email": "imaadmin@email.com",
+        "token": "ImltYWFkbWluQGVtYWlsLmNvbSI.ZUP9YQ.6TshlbUdr401C3DJE50d4rIPXLg",
+        "user_id": "f6c7284b-f5c8-49cb-a219-79aef5d857f3",
+    }
 
     """print(
-        client.register_access_history({
-            "email": "imaroot@email.com",
-            "token":  n.get("data").get("token"),
-            "member_id": "d9f26bf3-b0ff-41e1-b016-eb81684983f6",
-            "device_id": "4cbf49ea-0879-4e43-ad32-6cf7550df2fc"
-        })
+        client.create_device(
+            header,
+            {
+                "name": "device23333",
+                "version": "0.0.0",
+                "wifi_ssid": "wifihost",
+                "wifi_password": "wifipassword",
+            },
+        )
     )"""
-
     print(
-        client.select_all_access_history(
-            {"email": "imaroot@email.com", "token": n.get("data").get("token")}
-        )
-    )
-
-    print(
-        client.select_access_history(
-            {"email": "imaroot@email.com", "token": n.get("data").get("token")}
-        )
-    )
-
-    print(
-        client.select_access_history(
-            {"email": "imaroot@email.com", "token": n.get("data").get("token")},
-            "2023-10-29 06:00",
-            "2023-10-29 19:22",
+        client.select_all_users_by_device_id(
+            header=header,
+            device_id="3eedc71c-7da8-4360-9180-d29d48f9a686",
         )
     )
