@@ -27,7 +27,7 @@ class AdminController:
             if not data.name or not data.email or not data.password or not data.role:
                 return BadRequestError("Dados inválidos").dict()
 
-            user = User(
+            user = Admin(
                 id=uuid.uuid4(),
                 name=data.name,
                 email=data.email,
@@ -36,8 +36,7 @@ class AdminController:
                 role=UserRole.ADMIN,
             )
 
-            print(user)
-            if InsertMain.insert_user(user):
+            if InsertMain.insert_admin(user):
                 LogMaker.write_log(f"Admin {user.email} signed up", "info")
                 return CreatedResponse(
                     message="Administrador criado com sucesso!", data=True
@@ -57,7 +56,7 @@ class AdminController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            data = SelectMain.select_user_by_id(admin_id)
+            data = SelectMain.select_admin_by_id(admin_id)
             if data:
                 return OKResponse(
                     message="Administrador encontrado com sucesso!",
@@ -83,7 +82,7 @@ class AdminController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            admins = SelectMain.select_all_users()
+            admins = SelectMain.select_all_admins()
             response = []
             for a in admins:
                 response.append(

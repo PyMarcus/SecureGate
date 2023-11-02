@@ -11,20 +11,33 @@ routes = APIRouter(
 )
 
 
-@routes.get("/")
-def get_all(request: Request, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+@routes.get("/device/{device_id}")
+def get_by_device_id(
+    request: Request, device_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)
+):
     header = get_request_header(request)
-    result = rpc.select_all_access_history(header)
+    result = rpc.select_device_access_history(header, device_id)
     return handle_rpc_result(result)
 
 
-@routes.get("/interval/")
-def get_by_date(
+# @routes.get("/interval/")
+# def get_by_date(
+#     request: Request,
+#     date_ini: str | None = None,
+#     date_end: str | None = None,
+#     rpc: RPCSingletonClient = Depends(get_rpc_client),
+# ):
+#     header = get_request_header(request)
+#     result = rpc.select_access_history(header, date_ini, date_end)
+#     return handle_rpc_result(result)
+
+
+@routes.get("/user/{user_id}")
+def get_by_user(
     request: Request,
-    date_ini: str | None = None,
-    date_end: str | None = None,
+    user_id: str,
     rpc: RPCSingletonClient = Depends(get_rpc_client),
 ):
     header = get_request_header(request)
-    result = rpc.select_access_history(header, date_ini, date_end)
+    result = rpc.select_user_access_history(header, user_id)
     return handle_rpc_result(result)

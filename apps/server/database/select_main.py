@@ -17,18 +17,29 @@ class SelectMain:
     __session: DBConnection = DBConnection()
 
     @classmethod
-    def select_user_by_email(cls, email: str) -> User | None:
+    def select_admin_by_email(cls, email: str) -> Admin | None:
         try:
             with cls.__session.create_session() as session:
-                user: User = session.query(User).filter(User.email == email).first()
-                if user:
-                    return user
+                admin: Admin = session.query(Admin).filter(Admin.email == email).first()
+                if admin:
+                    return admin
             return None
         except Exception:
             return None
 
     @classmethod
-    def select_user_by_id(cls, user_id: str) -> User | None:
+    def select_admin_by_id(cls, admin_id: str) -> Admin | None:
+        try:
+            with cls.__session.create_session() as session:
+                admin: Admin = session.query(Admin).filter(Admin.id == admin_id).first()
+                if admin:
+                    return admin
+            return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_user_by_id(cls, user_id: str) -> Admin | None:
         try:
             with cls.__session.create_session() as session:
                 user: User = session.query(User).filter(User.id == user_id).first()
@@ -39,18 +50,7 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_member_by_id(cls, member_id: str) -> User | None:
-        try:
-            with cls.__session.create_session() as session:
-                member: Member = session.query(Member).filter(Member.id == member_id).first()
-                if member:
-                    return member
-            return None
-        except Exception:
-            return None
-
-    @classmethod
-    def select_device_by_id(cls, device_id: str) -> User | None:
+    def select_device_by_id(cls, device_id: str) -> Admin | None:
         try:
             with cls.__session.create_session() as session:
                 device: Device = session.query(Device).filter(Device.id == device_id).first()
@@ -64,11 +64,11 @@ class SelectMain:
     def select_root_id(cls) -> uuid.UUID | None:
         try:
             with cls.__session.create_session() as session:
-                user: typing.Type[User] = (
-                    session.query(User).filter(User.role == UserRole.ROOT).first()
+                admin: typing.Type[Admin] = (
+                    session.query(Admin).filter(Admin.role == UserRole.ROOT).first()
                 )
-                if user:
-                    return user.root_id
+                if admin:
+                    return admin.root_id
                 return None
         except Exception:
             return None
@@ -95,12 +95,38 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_member(cls, id: str) -> Member | None:
+    def select_user_access_history(cls, user_id: str) -> typing.List[AccessHistory] | None:
         try:
             with cls.__session.create_session() as session:
-                member: typing.Type[Member] = session.query(Member).filter(Member.id == id).first()
-                if member:
-                    return member
+                history: typing.Type[AccessHistory] = (
+                    session.query(AccessHistory).filter(AccessHistory.user_id == user_id).all()
+                )
+                if history:
+                    return history
+                return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_device_access_history(cls, device_id: str):
+        try:
+            with cls.__session.create_session() as session:
+                history: typing.Type[AccessHistory] = (
+                    session.query(AccessHistory).filter(AccessHistory.device_id == device_id).all()
+                )
+                if history:
+                    return history
+                return None
+        except Exception:
+            return None
+
+    @classmethod
+    def select_user(cls, user_id: str) -> User | None:
+        try:
+            with cls.__session.create_session() as session:
+                user: typing.Type[User] = session.query(User).filter(User.id == user_id).first()
+                if user:
+                    return user
                 return None
         except Exception:
             return None
@@ -117,23 +143,23 @@ class SelectMain:
             return None
 
     @classmethod
+    def select_all_admins(cls) -> typing.List[Admin]:
+        try:
+            with cls.__session.create_session() as session:
+                admins: typing.Type[Admin] = session.query(Admin).all()
+                if admins:
+                    return admins
+                return list()
+        except Exception:
+            return list()
+
+    @classmethod
     def select_all_users(cls) -> typing.List[User]:
         try:
             with cls.__session.create_session() as session:
                 users: typing.Type[User] = session.query(User).all()
                 if users:
                     return users
-                return list()
-        except Exception:
-            return list()
-
-    @classmethod
-    def select_all_members(cls) -> typing.List[Member]:
-        try:
-            with cls.__session.create_session() as session:
-                members: typing.Type[Member] = session.query(Member).all()
-                if members:
-                    return members
                 return list()
         except Exception:
             return list()

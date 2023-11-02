@@ -106,10 +106,10 @@ class RPCServer(RPCServerInterface):
         return DeviceController.select_device(header, device_id)
 
     @Pyro4.expose
-    def select_access_history(
-        self, header: typing.Dict[str, typing.Any], date_ini: str, date_end: str
+    def select_user_access_history(
+        self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
-        return AccessHistoryController.select_access_history(header, date_ini, date_end)
+        return AccessHistoryController.select_user_access_history(header, user_id)
 
     @Pyro4.expose
     def decoder(self, device_encrypted: str) -> typing.Dict[str, typing.Any]:
@@ -136,10 +136,10 @@ class RPCServer(RPCServerInterface):
         return DeviceController.select_all_devices(header)
 
     @Pyro4.expose
-    def select_all_access_history(
-        self, header: typing.Dict[str, str]
+    def select_device_access_history(
+        self, header: typing.Dict[str, str], device_id: str
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return AccessHistoryController.select_all_access_history(header)
+        return AccessHistoryController.select_device_access_history(header, device_id)
 
     @authorization_required
     def __register_access_history(

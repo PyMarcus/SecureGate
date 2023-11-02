@@ -1,4 +1,5 @@
 import { User } from '@/@types/schemas/user'
+import { LoadingIndicator } from '@/components/loading-indicator'
 
 import {
   Card,
@@ -10,21 +11,38 @@ import {
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { UserHistoryTable } from '@/components/user-history-table'
 import { UsersTable } from '@/components/users-table'
+import { useAllUsers } from '@/services/api/requests/users'
+import { useDeviceStore } from '@/stores/user-device'
 import {
   IdentificationCard,
   LockKeyOpen,
   Users as UsersIcon,
 } from '@phosphor-icons/react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export const Users = () => {
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
+  const { data: response, isLoading } = useAllUsers()
+  const {
+    users,
+    selectedUser,
+    setUsers,
+    setSelectedUser,
+    clearSelectedUser,
+    setIsLoading,
+  } = useDeviceStore()
+
+  useEffect(() => {
+    setIsLoading(isLoading)
+    if (response && response.success) {
+      setUsers(response.data)
+    }
+  }, [isLoading, response, setIsLoading, setUsers])
 
   const memberHistoryRef = useRef<HTMLHeadingElement | null>(null)
 
   const handleSelectMember = (member: User) => {
     if (member.id === selectedUser?.id) {
-      return setSelectedUser(null)
+      return clearSelectedUser()
     }
 
     setSelectedUser(member)
@@ -32,6 +50,9 @@ export const Users = () => {
       memberHistoryRef.current.scrollIntoView({ behavior: 'smooth' })
     }
   }
+
+  const totalUsers = users.length
+  const totalAuthorizedUsers = users.filter(({ authorized }) => authorized)
 
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8 ">
@@ -46,7 +67,9 @@ export const Users = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <span>1,500</span>
+                <span>
+                  {isLoading ? <LoadingIndicator /> : <span>{totalUsers}</span>}
+                </span>
               </div>
               <p className="text-xs text-muted-foreground">
                 Total de usuários cadastrados
@@ -63,8 +86,14 @@ export const Users = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <span>1,234</span>
-                <span className="text-sm font-medium">/1,500</span>
+                {isLoading ? (
+                  <LoadingIndicator />
+                ) : (
+                  <div>
+                    <span>{totalAuthorizedUsers.length}</span>
+                    <span className="text-sm font-medium">/{totalUsers}</span>
+                  </div>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">
                 Total de usuários autorizados a entrar
@@ -105,6 +134,8 @@ export const Users = () => {
           </CardHeader>
           <CardContent>
             <UsersTable
+              isLoading={isLoading}
+              users={users}
               selectedUser={selectedUser}
               onSelectUser={handleSelectMember}
             />

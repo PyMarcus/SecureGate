@@ -9,28 +9,25 @@ import {
 } from '@/components/ui/table'
 import { UserRow } from '@/components/user-row'
 
-import { useAllUsers } from '@/services/api/requests/users'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { LoadingIndicator } from './loading-indicator'
 import { NewUserDialog } from './new-user-dialog'
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
 
 interface UsersTableProps {
+  isLoading: boolean
+  users: User[]
   selectedUser: User | null
   onSelectUser: (member: User) => void
 }
 
-export const UsersTable = ({ selectedUser, onSelectUser }: UsersTableProps) => {
-  const [users, setUsers] = useState<User[]>([])
+export const UsersTable = ({
+  isLoading,
+  users,
+  selectedUser,
+  onSelectUser,
+}: UsersTableProps) => {
   const [filter, setFilter] = useState('')
-
-  const { data: response, isLoading } = useAllUsers()
-
-  useEffect(() => {
-    if (response && response.success) {
-      setUsers(response.data)
-    }
-  }, [response])
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setFilter(e.target.value)

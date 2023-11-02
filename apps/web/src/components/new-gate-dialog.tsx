@@ -17,15 +17,20 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { useCreateDevice } from '@/services/api/requests/devices'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react'
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
+import { LoadingIndicator } from './loading-indicator'
 import { Input } from './ui/input'
+import { toast } from './ui/use-toast'
 
 export const NewGateDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const { isLoading, mutateAsync } = useCreateDevice()
 
   const handleOpenChange = (open: boolean) => setIsOpen(open)
   const closeDialog = () => setIsOpen(false)
@@ -34,6 +39,9 @@ export const NewGateDialog = () => {
     .object({
       name: zod.string().min(3, {
         message: 'O nome deve ter no mínimo 3 caracteres',
+      }),
+      version: zod.string().min(3, {
+        message: 'A versão deve ter no mínimo 3 caracteres',
       }),
       wifiSSID: zod.string().min(3, {
         message: 'O nome deve ter no mínimo 3 caracteres',
@@ -71,8 +79,20 @@ export const NewGateDialog = () => {
   const handleFormSubmit = async (values: FormType) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmWifiPassword, ...rest } = values
-    console.log(rest)
-    handleResetAndClose()
+
+    const response = await mutateAsync({
+      ...rest,
+      wifi_password: values.wifiPassword,
+      wifi_ssid: values.wifiSSID,
+    })
+
+    if (response && response.success) {
+      toast({
+        title: 'Novo portão',
+        description: `O portão ${values.name} foi adicionado com sucesso!`,
+      })
+      handleResetAndClose()
+    }
   }
 
   return (
@@ -104,6 +124,19 @@ export const NewGateDialog = () => {
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
                     <Input placeholder="Nome" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="version"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Versão</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Versão" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -146,7 +179,11 @@ export const NewGateDialog = () => {
                 <FormItem>
                   <FormLabel>Confirme a senha</FormLabel>
                   <FormControl>
-                    <Input placeholder="Confirme a senha" {...field} />
+                    <Input
+                      placeholder="Confirme a senha"
+                      type="password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -159,6 +196,7 @@ export const NewGateDialog = () => {
             <Button variant="outline">Cancelar</Button>
           </DialogClose>
           <Button form={formId} type="submit">
+            {isLoading && <LoadingIndicator className="mr-2" />}
             Adicionar
           </Button>
         </DialogFooter>

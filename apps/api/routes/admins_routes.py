@@ -30,5 +30,5 @@ def get_all(request: Request, rpc: RPCSingletonClient = Depends(get_rpc_client))
 @routes.get("/{admin_id}")
 def get_by_id(request: Request, admin_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)):
     header = get_request_header(request)
-    result = rpc.select_user(header, admin_id)
+    result = rpc.select_admin(header, admin_id)
     return handle_rpc_result(result)

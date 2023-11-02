@@ -21,18 +21,17 @@ import {
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { useCreateUser } from '@/services/api/requests/users'
-import { useSessionStore } from '@/stores/session-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react'
 import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
+import { LoadingIndicator } from './loading-indicator'
 
 export const NewUserDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const { session } = useSessionStore()
-  const { mutateAsync } = useCreateUser()
+  const { isLoading, mutateAsync } = useCreateUser()
 
   const handleOpenChange = (open: boolean) => setIsOpen(open)
   const closeDialog = () => setIsOpen(false)
@@ -69,12 +68,8 @@ export const NewUserDialog = () => {
   }
 
   const handleFormSubmit = async (values: FormType) => {
-    const response = await mutateAsync({
-      ...values,
-      added_by: session!.user.id,
-    })
+    const response = await mutateAsync(values)
 
-    console.log(response)
     if (response && response.success) {
       toast({
         title: 'Novo usuário',
@@ -112,7 +107,7 @@ export const NewUserDialog = () => {
                 <FormItem>
                   <FormLabel>Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Gate Name" {...field} />
+                    <Input placeholder="Nome" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -169,6 +164,7 @@ export const NewUserDialog = () => {
             <Button variant="outline">Cancelar</Button>
           </DialogClose>
           <Button form={formId} type="submit">
+            {isLoading && <LoadingIndicator className="mr-2" />}
             Adicionar
           </Button>
         </DialogFooter>

@@ -1,5 +1,7 @@
 import { User } from '@/@types//schemas/user'
 import { Role } from '@/@types/schemas/session-user'
+import { AccessHistory } from '../schemas/access-history'
+import { Device } from '../schemas/device'
 
 export interface ApiError {
   success: false
@@ -30,3 +32,17 @@ export type SignUpResponse = ApiResponse<SignUpResponseData>
 // Members =====================================================================
 type GetAllUsersResponseData = User[]
 export type GetAllMembersResponse = ApiResponse<GetAllUsersResponseData>
+
+type CreateUserResponseData = true
+export type CreateUserResponse = ApiResponse<CreateUserResponseData>
+
+// Devices =====================================================================
+type GetAllDevicesResponseData = Device[]
+export type GetAllDevicesResponse = ApiResponse<GetAllDevicesResponseData>
+
+type CreateDeviceResponseData = true
+export type CreateDeviceResponse = ApiResponse<CreateDeviceResponseData>
+
+// Access History ==============================================================
+type GetAccessHistoryResponseData = AccessHistory[]
+export type GetAccessHistoryResponse = ApiResponse<GetAccessHistoryResponseData>

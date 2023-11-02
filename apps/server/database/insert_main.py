@@ -13,7 +13,7 @@ class InsertMain:
     __session: DBConnection = DBConnection()
 
     @classmethod
-    def insert_user(cls, user: User) -> bool:
+    def insert_admin(cls, user: Admin) -> bool:
         try:
             with cls.__session.create_session() as session:
                 session.add(user)
@@ -24,13 +24,14 @@ class InsertMain:
             return False
 
     @classmethod
-    def insert_member(cls, member: Member) -> bool:
+    def insert_user(cls, member: User) -> bool:
         try:
             with cls.__session.create_session() as session:
                 session.add(member)
                 session.commit()
                 return True
-        except Exception:
+        except Exception as e:
+            print(e)
             return False
 
     @classmethod

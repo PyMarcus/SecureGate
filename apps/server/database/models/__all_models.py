@@ -1,4 +1,4 @@
 from .access_history import AccessHistory
+from .admin import Admin, UserRole
 from .device import Device
-from .members import Member
-from .user import User, UserRole
+from .user import User

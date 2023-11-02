@@ -12,6 +12,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
+// import { useAllDevices } from '@/services/api/requests/devices'
 import { CaretUpDown, Check } from '@phosphor-icons/react'
 
 import * as React from 'react'
@@ -25,6 +26,8 @@ const gatesList = [
 export function GatesSelector() {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState('')
+
+  // const { isLoading, data: response } = useAllDevices()
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

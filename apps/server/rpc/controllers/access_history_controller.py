@@ -22,10 +22,9 @@ class AccessHistoryController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_access_history(
-        header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
-    ):
+    def select_user_access_history(header: typing.Dict[str, typing.Any], user_id: str):
         try:
+            # date_ini: str | None, date_end: str | None
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
@@ -33,67 +32,23 @@ class AccessHistoryController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            if not date_ini or not date_end:
-                today = datetime.datetime.now()
-                start = datetime.datetime(today.year, today.month, today.day, 6, 0)
-                date_ini = start.strftime("%Y-%m-%d %H:%M")
-                date_end = today.strftime("%Y-%m-%d %H:%M")
+            if not user_id:
+                return BadRequestError("ID do usuário não informado").dict()
 
-            data = SelectMain.select_access_history(date_ini, date_end)
+            data = SelectMain.select_user_access_history(user_id)
             response = []
             if data:
                 for d in data:
+                    admin = SelectMain.select_admin_by_id(str(d.admin_id))
                     user = SelectMain.select_user_by_id(str(d.user_id))
-                    member = SelectMain.select_member_by_id(str(d.member_id))
                     device = SelectMain.select_device_by_id(str(d.device_id))
                     response.append(
                         {
                             "id": str(d.id),
-                            "member_id": str(member.id),
-                            "member_name": member.name,
                             "user_id": str(user.id),
                             "user_name": user.name,
-                            "device_id": str(device.id),
-                            "device_name": device.name,
-                            "when": d.created_at,
-                        }
-                    )
-                return OKResponse(
-                    message=f"Histórico de acessos de {date_ini} até {date_end} encontrado com sucesso",
-                    data=response,
-                ).dict()
-            return NoContentResponse(
-                f"Nenhum histórico de acesso encontrado de {date_ini} até {date_end}"
-            ).dict()
-
-        except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
-        return InternalServerError("Não foi possível processar a requisição").dict()
-
-    @staticmethod
-    def select_all_access_history(header: typing.Dict[str, typing.Any]):
-        try:
-            header_data = SessionHeader(**header)
-            if not header_data.token or not header_data.email:
-                return BadRequestError("Token ou email não informados").dict()
-
-            if not Security.verify_token(header_data.email, header_data.token):
-                return UnauthorizedError("Token inválido").dict()
-
-            data = SelectMain.select_all_access_history()
-            response = []
-            if data:
-                for d in data:
-                    user = SelectMain.select_user_by_id(str(d.user_id))
-                    member = SelectMain.select_member_by_id(str(d.member_id))
-                    device = SelectMain.select_device_by_id(str(d.device_id))
-                    response.append(
-                        {
-                            "id": str(d.id),
-                            "member_id": str(member.id),
-                            "member_name": member.name,
-                            "user_id": str(user.id),
-                            "user_name": user.name,
+                            "admin_id": str(admin.id),
+                            "admin_name": admin.name,
                             "device_id": str(device.id),
                             "device_name": device.name,
                             "when": d.created_at,
@@ -102,7 +57,52 @@ class AccessHistoryController:
                 return OKResponse(
                     message="Histórico de acessos encontrado com sucesso", data=response
                 ).dict()
-            return NoContentResponse("Nenhum histórico de acesso encontrado").dict()
+            return NoContentResponse(
+                "Nenhum histórico de acesso encontrado para este usuário",
+            ).dict()
+
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+        return InternalServerError("Não foi possível processar a requisição").dict()
+
+    @staticmethod
+    def select_device_access_history(header: typing.Dict[str, typing.Any], device_id: str):
+        try:
+            header_data = SessionHeader(**header)
+            if not header_data.token or not header_data.email:
+                return BadRequestError("Token ou email não informados").dict()
+
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
+            if not device_id:
+                return BadRequestError("ID do dispositivo não informado").dict()
+
+            data = SelectMain.select_device_access_history(device_id)
+            response = []
+            if data:
+                for d in data:
+                    admin = SelectMain.select_admin_by_id(str(d.admin_id))
+                    user = SelectMain.select_user_by_id(str(d.user_id))
+                    device = SelectMain.select_device_by_id(str(d.device_id))
+                    response.append(
+                        {
+                            "id": str(d.id),
+                            "user_id": str(user.id),
+                            "user_name": user.name,
+                            "admin_id": str(admin.id),
+                            "admin_name": admin.name,
+                            "device_id": str(device.id),
+                            "device_name": device.name,
+                            "when": d.created_at,
+                        }
+                    )
+                return OKResponse(
+                    message="Histórico de acessos encontrado com sucesso", data=response
+                ).dict()
+            return NoContentResponse(
+                "Nenhum histórico de acesso encontrado para este dispositivo",
+            ).dict()
 
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")

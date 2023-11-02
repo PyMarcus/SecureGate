@@ -17,5 +17,20 @@ export interface CreateUserRequest {
   email: string
   rfid: string
   authorized: boolean
-  added_by: string
+}
+
+export interface CreateDeviceRequest {
+  name: string
+  wifi_ssid: string
+  wifi_password: string
+  version: string
+}
+
+export interface GetAllAccessHistoryRequest {
+  start: string
+  end: string
+}
+
+export interface GetUserAccessHistoryRequest {
+  user_id: string
 }

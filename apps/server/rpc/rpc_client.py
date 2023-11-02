@@ -115,18 +115,18 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_user(header, admin_id)
 
-    def select_member(
-        self, header: typing.Dict[str, typing.Any], user_id: str
+    def select_admin(
+        self, header: typing.Dict[str, typing.Any], admin_id: str
     ) -> typing.Dict[str, typing.Any]:
         """
         The select_member method get a member with your data
             email: A string representing the member's email address.
             token: A string representing the users token.
         """
-        return self.client.select_member(header, user_id)
+        return self.client.select_admin(header, admin_id)
 
-    def select_access_history(
-        self, header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
+    def select_user_access_history(
+        self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
         """
         The select_access_history method get a member with your data
@@ -138,7 +138,7 @@ class RPCSingletonClient(metaclass=Singleton):
             if no date is passed, the selected data will be that of the current day,
             from 6 am until the time of the search
         """
-        return self.client.select_access_history(header, date_ini, date_end)
+        return self.client.select_user_access_history(header, user_id)
 
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id
@@ -190,8 +190,8 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_all_devices(header)
 
-    def select_all_access_history(
-        self, header: typing.Dict[str, str]
+    def select_device_access_history(
+        self, header: typing.Dict[str, str], device_id: str
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         """
         The select_all_access_history method get a dict list with all access history
@@ -200,7 +200,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_all_access_history(header)
+        return self.client.select_device_access_history(header, device_id)
 
 
 def get_rpc_client() -> RPCSingletonClient:

@@ -32,11 +32,9 @@ app.include_router(admins_routes, dependencies=[Depends(auth_middleware)])
 app.include_router(users_routes, dependencies=[Depends(auth_middleware)])
 app.include_router(history_routes, dependencies=[Depends(auth_middleware)])
 
-
 app.mount(f"/{env.API_URL_PREFIX}", app)
 
 app.add_exception_handler(Exception, exception_middleware)
-
 
 if __name__ == "__main__":
     from os import path

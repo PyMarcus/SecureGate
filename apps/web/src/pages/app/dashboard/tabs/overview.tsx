@@ -1,3 +1,4 @@
+import { LoadingIndicator } from '@/components/loading-indicator'
 import { OverviewChart } from '@/components/overview-chart'
 import { Button } from '@/components/ui/button'
 import {
@@ -8,10 +9,15 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { useDeviceStore } from '@/stores/user-device'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
+  const { users, isLoading } = useDeviceStore()
+
+  const totalUsers = users.length
+
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
       <ScrollArea className="w-full">
@@ -19,17 +25,16 @@ export const Overview = () => {
           <Card className="w-full min-w-[12rem]">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total de membros
+                Total de usuários
               </CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <span>1,234</span>
-                <span className="text-sm font-medium">/1,500</span>
+                {isLoading ? <LoadingIndicator /> : <span>{totalUsers}</span>}
               </div>
               <p className="text-xs text-muted-foreground">
-                Total de membros cadastrados
+                Total de usuários cadastrados
               </p>
             </CardContent>
           </Card>

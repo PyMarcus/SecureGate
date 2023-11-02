@@ -23,15 +23,16 @@ class UserController:
                 return UnauthorizedError("Token inválido").dict()
 
             data = CreateUserSchema(**payload)
-            member = Member(
+            member = User(
+                id=uuid.uuid4(),
                 name=data.name,
                 email=data.email,
                 rfid=data.rfid,
                 authorized=data.authorized or True,
-                added_by=uuid.UUID(data.added_by),
+                added_by=uuid.UUID(header_data.user_id),
             )
 
-            if InsertMain.insert_member(member):
+            if InsertMain.insert_user(member):
                 LogMaker.write_log(f"User {member.email} created", "info")
                 return CreatedResponse(message="Usuário criado com sucesso!", data=True).dict()
             return InternalServerError("Erro ao criar usuário").dict()
@@ -49,7 +50,7 @@ class UserController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            data = SelectMain.select_member(user_id)
+            data = SelectMain.select_user(user_id)
             if data:
                 return OKResponse(
                     message="Usuário encontrado com sucesso!",
@@ -77,7 +78,7 @@ class UserController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            users = SelectMain.select_all_members()
+            users = SelectMain.select_all_users()
             response = []
             for u in users:
                 response.append(

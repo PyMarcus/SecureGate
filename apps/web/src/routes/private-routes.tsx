@@ -13,6 +13,7 @@ export const PrivateRoutes = ({ enabledRole = null }: PrivateRoutesProps) => {
   if (session) {
     const { token, user } = session
     api.defaults.headers.Authorization = `Bearer ${token}`
+    api.defaults.headers.userId = user.id
     api.defaults.headers.userEmail = user.email
 
     if (enabledRole !== null) {
