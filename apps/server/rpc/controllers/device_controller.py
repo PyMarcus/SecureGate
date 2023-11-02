@@ -18,6 +18,9 @@ class DeviceController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
             data = DeviceSchema(**payload)
             if not data.name or not data.wifi_ssid or not data.wifi_password or not data.version:
                 return BadRequestError("Dados inválidos").dict()
@@ -45,8 +48,8 @@ class DeviceController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             data = SelectMain.select_device(device_id)
             if data:
@@ -72,8 +75,8 @@ class DeviceController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             devices = SelectMain.select_all_devices()
             response = []

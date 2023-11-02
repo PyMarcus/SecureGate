@@ -20,6 +20,9 @@ class AdminController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
             data = AdminSchema(**payload)
             if not data.name or not data.email or not data.password or not data.role:
                 return BadRequestError("Dados inválidos").dict()
@@ -51,8 +54,8 @@ class AdminController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             data = SelectMain.select_user_by_id(admin_id)
             if data:
@@ -77,8 +80,8 @@ class AdminController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             admins = SelectMain.select_all_users()
             response = []

@@ -19,8 +19,8 @@ class UserController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             data = CreateUserSchema(**payload)
             member = Member(
@@ -46,8 +46,8 @@ class UserController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             data = SelectMain.select_member(user_id)
             if data:
@@ -74,8 +74,8 @@ class UserController:
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            # if Security.verify_token(header_data.email, header_data.token):
-            #     return UnauthorizedError("Token inválido").dict()
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
 
             users = SelectMain.select_all_members()
             response = []

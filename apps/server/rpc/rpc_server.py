@@ -7,8 +7,9 @@ import uuid
 import Pyro4
 from rpc_server_interface import RPCServerInterface
 
-from apps.server.database import InsertMain, SelectMain
+from apps.server.database import InsertMain
 from apps.server.database.models.__all_models import *
+from apps.server.rpc.controllers.access_history_controller import AccessHistoryController
 from apps.server.rpc.controllers.admin_controller import AdminController
 from apps.server.rpc.controllers.device_controller import DeviceController
 from apps.server.rpc.controllers.session_controller import SessionController
@@ -18,7 +19,6 @@ from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
 from packages.errors.errors import *
-from packages.responses.responses import *
 
 
 def authorization_required(function: typing.Callable) -> typing.Any:
@@ -107,9 +107,9 @@ class RPCServer(RPCServerInterface):
 
     @Pyro4.expose
     def select_access_history(
-        self, history: typing.Dict[str, typing.Any], date_ini: str, date_end: str
+        self, header: typing.Dict[str, typing.Any], date_ini: str, date_end: str
     ) -> typing.Dict[str, typing.Any]:
-        return self.__select_access_history(history, date_ini, date_end)
+        return AccessHistoryController.select_access_history(header, date_ini, date_end)
 
     @Pyro4.expose
     def decoder(self, device_encrypted: str) -> typing.Dict[str, typing.Any]:
@@ -139,7 +139,7 @@ class RPCServer(RPCServerInterface):
     def select_all_access_history(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_access_history(header)
+        return AccessHistoryController.select_all_access_history(header)
 
     @authorization_required
     def __register_access_history(
@@ -158,74 +158,6 @@ class RPCServer(RPCServerInterface):
                 LogMaker.write_log(f"[-]Fail to insert {history}", "info")
                 return False
         return UnauthorizedError("Invalid token or email").dict()
-
-    @authorization_required
-    def __select_access_history(
-        self, header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
-    ) -> typing.Dict[str, typing.Any]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                if date_ini is None and date_end is None:
-                    today = datetime.datetime.now()
-                    start = datetime.datetime(today.year, today.month, today.day, 6, 0)
-                    date_ini = start.strftime("%Y-%m-%d %H:%M")
-                    date_end = today.strftime("%Y-%m-%d %H:%M")
-
-                access_data: AccessHistory = SelectMain.select_access_history(date_ini, date_end)
-                if access_data:
-                    for row in access_data:
-                        user = SelectMain.select_user_by_id(row.user_id)
-                        member = SelectMain.select_member_by_id(row.member_id)
-                        device = SelectMain.select_device_by_id(row.device_id)
-                        response = {
-                            "id": str(row.id),
-                            "member_id": str(member.id),
-                            "member_name": member.name,
-                            "user_id": str(user.id),
-                            "user_name": user.name,
-                            "device_id": str(device.id),
-                            "device_name": device.name,
-                            "when": row.created_at,
-                        }
-                    return OKResponse(
-                        message=f"Successfully selected range {date_ini} to {date_end} of access history",
-                        data=response,
-                    ).dict()
-                return NoContentResponse(message="No data", data={}).dict()
-        return UnauthorizedError("Invalid token or email").dict()
-
-    @authorization_required
-    def __select_all_access_history(
-        self, header: typing.Dict[str, str]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                access_data: typing.List[AccessHistory] = SelectMain.select_all_access_history()
-                if access_data:
-                    response: typing.List = list()
-                    for row in access_data:
-                        user = SelectMain.select_user_by_id(str(row.user_id))
-                        member = SelectMain.select_member_by_id(str(row.member_id))
-                        device = SelectMain.select_device_by_id(str(row.device_id))
-                        response.append(
-                            {
-                                "id": str(row.id),
-                                "member_id": str(member.id),
-                                "member_name": member.name,
-                                "user_id": str(user.id),
-                                "user_name": user.name,
-                                "device_id": str(device.id),
-                                "device_name": device.name,
-                                "when": row.created_at,
-                            }
-                        )
-
-                    return OKResponse(
-                        message="Successfully selected all registers", data=response
-                    ).dict()
-                return NoContentResponse(message="No data", data={})
-            return UnauthorizedError("Invalid token or email").dict()
-        return BadRequestError("Token or email not found").dict()
 
 
 if __name__ == "__main__":

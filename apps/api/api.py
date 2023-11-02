@@ -5,6 +5,7 @@ from apps.api.middlewares.auth_middleware import auth_middleware
 from apps.api.middlewares.exception_middleware import exception_middleware
 from apps.api.routes.admins_routes import routes as admins_routes
 from apps.api.routes.devices_routes import routes as devices_routes
+from apps.api.routes.history_routes import routes as history_routes
 from apps.api.routes.management_routes import routes as management_routes
 from apps.api.routes.session_routes import routes as session_routes
 from apps.api.routes.users_routes import routes as users_routes
@@ -29,6 +30,7 @@ app.include_router(session_routes)
 app.include_router(devices_routes, dependencies=[Depends(auth_middleware)])
 app.include_router(admins_routes, dependencies=[Depends(auth_middleware)])
 app.include_router(users_routes, dependencies=[Depends(auth_middleware)])
+app.include_router(history_routes, dependencies=[Depends(auth_middleware)])
 
 
 app.mount(f"/{env.API_URL_PREFIX}", app)

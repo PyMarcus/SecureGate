@@ -126,10 +126,7 @@ class RPCSingletonClient(metaclass=Singleton):
         return self.client.select_member(header, user_id)
 
     def select_access_history(
-        self,
-        request: typing.Dict[str, typing.Any],
-        date_ini: str | None = None,
-        date_end: str | None = None,
+        self, header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
     ) -> typing.Dict[str, typing.Any]:
         """
         The select_access_history method get a member with your data
@@ -141,7 +138,7 @@ class RPCSingletonClient(metaclass=Singleton):
             if no date is passed, the selected data will be that of the current day,
             from 6 am until the time of the search
         """
-        return self.client.select_access_history(request, date_ini, date_end)
+        return self.client.select_access_history(header, date_ini, date_end)
 
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id

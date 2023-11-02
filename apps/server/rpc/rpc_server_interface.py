@@ -43,7 +43,7 @@ class RPCServerInterface(ABC):
 
     @abstractmethod
     def register_access_history(
-        self, history: typing.Dict[str, typing.Any]
+        self, payload: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing register_access_history method")
 
@@ -65,7 +65,7 @@ class RPCServerInterface(ABC):
 
     @abstractmethod
     def select_access_history(
-        self, history: typing.Dict[str, typing.Any], date_ini: str, date_end: str
+        self, header: typing.Dict[str, typing.Any], date_ini: str | None, date_end: str | None
     ) -> typing.Dict[str, typing.Any]:
         raise NotImplementedError("missing select_access_history method")
 
