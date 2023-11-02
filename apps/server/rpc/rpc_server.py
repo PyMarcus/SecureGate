@@ -10,6 +10,7 @@ from rpc_server_interface import RPCServerInterface
 from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
 from apps.server.rpc.controllers.admin_controller import AdminController
+from apps.server.rpc.controllers.device_controller import DeviceController
 from apps.server.rpc.controllers.session_controller import SessionController
 from apps.server.rpc.controllers.user_controller import UserController
 from apps.server.security import Security
@@ -75,8 +76,10 @@ class RPCServer(RPCServerInterface):
         return UserController.create_user(header, payload)
 
     @Pyro4.expose
-    def register_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__register_device(device)
+    def create_device(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> typing.Dict[str, typing.Any]:
+        return DeviceController.create_device(header, payload)
 
     @Pyro4.expose
     def register_access_history(
@@ -85,18 +88,22 @@ class RPCServer(RPCServerInterface):
         return self.__register_access_history(history)
 
     @Pyro4.expose
+    def select_admin(
+        self, header: typing.Dict[str, typing.Any], admin_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        return AdminController.select_admin(header, admin_id)
+
+    @Pyro4.expose
     def select_user(
         self, header: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:
-        return self.__select_user(header, user_id)
+        return UserController.select_user(header, user_id)
 
     @Pyro4.expose
-    def select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__select_member(member)
-
-    @Pyro4.expose
-    def select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        return self.__select_device(device)
+    def select_device(
+        self, header: typing.Dict[str, typing.Any], device_id: str
+    ) -> typing.Dict[str, typing.Any]:
+        return DeviceController.select_device(header, device_id)
 
     @Pyro4.expose
     def select_access_history(
@@ -111,47 +118,28 @@ class RPCServer(RPCServerInterface):
         return Security.decrypted_traffic_package(encrypted_data)
 
     @Pyro4.expose
-    def select_all_members(
-        self, header: typing.Dict[str, str]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_members(header)
-
-    @Pyro4.expose
     def select_all_users(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_users(header)
+        return UserController.select_all_users(header)
+
+    @Pyro4.expose
+    def select_all_admins(
+        self, header: typing.Dict[str, str]
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return AdminController.select_all_admins(header)
 
     @Pyro4.expose
     def select_all_devices(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.__select_all_devices(header)
+        return DeviceController.select_all_devices(header)
 
     @Pyro4.expose
     def select_all_access_history(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return self.__select_all_access_history(header)
-
-    @authorization_required
-    def __register_device(self, dev: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        if dev.get("email") and dev.get("token"):
-            if Security.verify_token(dev.get("email"), dev.get("token")):
-                name: str = dev.get("name")
-                wifi_ssid: str = dev.get("wifi_ssid")
-                version: str = dev.get("version")
-                password = Security.hash_password(dev.get("wifi_password"))
-                device: Device = Device(
-                    name=name, version=version, wifi_ssid=wifi_ssid, wifi_password=password
-                )
-
-                if InsertMain.insert_device(device):
-                    LogMaker.write_log(f"[+]{device} has been inserted", "info")
-                    return True
-                LogMaker.write_log(f"[-]Fail to insert {device}", "info")
-                return False
-        return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
     def __register_access_history(
@@ -169,67 +157,6 @@ class RPCServer(RPCServerInterface):
                     return True
                 LogMaker.write_log(f"[-]Fail to insert {history}", "info")
                 return False
-        return UnauthorizedError("Invalid token or email").dict()
-
-    @authorization_required
-    def __select_user(
-        self, header: typing.Dict[str, str], user_id: str
-    ) -> typing.Dict[str, typing.Any]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                if not user_id:
-                    return BadRequestError("User id not found").dict()
-                data = SelectMain.select_user_by_id(user_id)
-                if data:
-                    return OKResponse(
-                        message="Successfully selected user",
-                        data={
-                            "id": str(data.id),
-                            "name": data.name,
-                            "email": data.email,
-                            "role": data.role,
-                        },
-                    ).dict()
-                return NotFoundError("User not found").dict()
-            return UnauthorizedError("Invalid token or email").dict()
-
-    @authorization_required
-    def __select_device(self, device: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        if device.get("email") and device.get("token"):
-            if Security.verify_token(device.get("email"), device.get("token")):
-                name: str = device.get("name")
-                password: str = device.get("wifi_password")
-                device_data: Device = SelectMain.select_device(name)
-                if Security.verify_password(device_data.wifi_password, password):
-                    if device_data:
-                        auth_message = self.__authorized_device_message(
-                            str(device_data.id),
-                            device_data.name,
-                            device_data.wifi_ssid,
-                            device_data.version,
-                            device_data.wifi_password,
-                        )
-                        encrypted_data = Security.encrypted_traffic(auth_message)
-                        return encrypted_data
-                return BadRequestError("Invalid credentials").dict()
-        return UnauthorizedError("Invalid token or email").dict()
-
-    @authorization_required
-    def __select_member(self, member: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
-        if member.get("email") and member.get("token"):
-            if Security.verify_token(member.get("email"), member.get("token")):
-                email: str = member.get("email")
-                member_data: Member = SelectMain.select_member(email)
-                if member_data:
-                    return self.__authorized_member_message(
-                        member_data.name,
-                        member_data.email,
-                        member_data.id,
-                        member_data.rfid,
-                        member_data.added_by,
-                        member_data.authorized,
-                    )
-                return BadRequestError("Member not found").dict()
         return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
@@ -268,72 +195,6 @@ class RPCServer(RPCServerInterface):
         return UnauthorizedError("Invalid token or email").dict()
 
     @authorization_required
-    def __select_all_users(
-        self, header: typing.Dict[str, str]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                data = SelectMain.select_all_users()
-                response: typing.List = list()
-                for content in data:
-                    response.append(
-                        {
-                            "name": content.name,
-                            "email": content.email,
-                            "role": content.role,
-                            "root_id": content.root_id,
-                            "id": content.id,
-                        }
-                    )
-                return OKResponse(message="Successfully selected all users", data=response).dict()
-            return UnauthorizedError("Invalid token or email").dict()
-        return BadRequestError("Token or email not found").dict()
-
-    @authorization_required
-    def __select_all_members(
-        self, header: typing.Dict[str, str]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                data = SelectMain.select_all_members()
-                response: typing.List = list()
-                for content in data:
-                    response.append(
-                        {
-                            "name": content.name,
-                            "email": content.email,
-                            "rfid": content.rfid,
-                            "added_by": str(content.added_by),
-                            "id": content.id,
-                            "authorized": content.authorized,
-                        }
-                    )
-                return OKResponse(message="Successfully selected all members", data=response).dict()
-            return UnauthorizedError("Invalid token or email").dict()
-        return BadRequestError("Token or email not found").dict()
-
-    @authorization_required
-    def __select_all_devices(
-        self, header: typing.Dict[str, str]
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                data = SelectMain.select_all_devices()
-                response: typing.List = list()
-                for content in data:
-                    response.append(
-                        {
-                            "name": content.name,
-                            "version": content.version,
-                            "id": content.id,
-                            "wifi_ssid": content.wifi_ssid,
-                        }
-                    )
-                return OKResponse(message="Successfully selected all devices", data=response).dict()
-            return UnauthorizedError("Invalid token or email").dict()
-        return BadRequestError("Token or email not found").dict()
-
-    @authorization_required
     def __select_all_access_history(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
@@ -365,71 +226,6 @@ class RPCServer(RPCServerInterface):
                 return NoContentResponse(message="No data", data={})
             return UnauthorizedError("Invalid token or email").dict()
         return BadRequestError("Token or email not found").dict()
-
-    def __unauthorized_message(self) -> typing.Dict[str, typing.Any]:
-        return {"error": "Access to the requested resource is forbidden", "status": 401}
-
-    def __authorized_user_message(
-        self, name: str, email: str, user_id: str, role: UserRole
-    ) -> typing.Dict[str, typing.Any]:
-        return {
-            "error": None,
-            "status": 200,
-            "message": "Welcome!",
-            "user_request": name,
-            "email": email,
-            "time": str(datetime.datetime.now()),
-            "user_id": user_id,
-            "role": role,
-            "token": Security.generate_token(email),
-        }
-
-    def __authorized_device_message(
-        self,
-        id: str,
-        name: str,
-        wifi_ssid: str,
-        version: str,
-        password: str,
-    ) -> typing.Dict[str, typing.Any]:
-        return {
-            "error": None,
-            "status": 200,
-            "message": "It's device",
-            "device": name,
-            "wifi_ssid": wifi_ssid,
-            "version": version,
-            "id": id,
-            "time": str(datetime.datetime.now()),
-            "password": password,
-        }
-
-    def __authorized_member_message(
-        self,
-        name: str,
-        email: str,
-        member_id: str,
-        rfid: str,
-        added_by: uuid.UUID,
-        authorized: bool,
-    ) -> typing.Dict[str, typing.Any]:
-        return {
-            "error": None,
-            "status": 200,
-            "message": f"Member {name}",
-            "rfid": rfid,
-            "added_by": str(added_by),
-            "email": email,
-            "time": str(datetime.datetime.now()),
-            "member_id": member_id,
-            "authorized": authorized,
-        }
-
-    def __bad_request_message(self) -> typing.Dict[str, typing.Any]:
-        return {
-            "error": "Bad request",
-            "status": 400,
-        }
 
 
 if __name__ == "__main__":

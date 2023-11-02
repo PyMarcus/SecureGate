@@ -89,7 +89,9 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.register_access_history(request)
 
-    def register_device(self, request: typing.Dict[str, typing.Any]) -> bool:
+    def create_device(
+        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+    ) -> bool:
         """
         The register_device method creates a new device, allowing them access through the gate.
         It takes a dictionary as input (request), containing device registration information.
@@ -101,25 +103,27 @@ class RPCSingletonClient(metaclass=Singleton):
             wifi_ssid: A string representing the wifi's ssid.
             wifi_password: A string representing the wifi's password of device.
         """
-        return self.client.register_device(request)
+        return self.client.create_device(header, payload)
 
     def select_user(
-        self, header: typing.Dict[str, typing.Any], user_id: str
+        self, header: typing.Dict[str, typing.Any], admin_id: str
     ) -> typing.Dict[str, typing.Any]:
         """
         The select_user method get a member with your data
             email: A string representing the users's email address.
             token: A string representing the users token.
         """
-        return self.client.select_user(header, user_id)
+        return self.client.select_user(header, admin_id)
 
-    def select_member(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def select_member(
+        self, header: typing.Dict[str, typing.Any], user_id: str
+    ) -> typing.Dict[str, typing.Any]:
         """
         The select_member method get a member with your data
             email: A string representing the member's email address.
             token: A string representing the users token.
         """
-        return self.client.select_member(request)
+        return self.client.select_member(header, user_id)
 
     def select_access_history(
         self,
@@ -139,16 +143,19 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_access_history(request, date_ini, date_end)
 
-    def select_device(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
+    def select_device(
+        self, header: typing.Dict[str, typing.Any], device_id
+    ) -> typing.Dict[str, typing.Any]:
         """
         The select_device method get a device with your data
             email: A string representing the user's email address.
             token: A string representing the token.
             name: A string representing the device's name.
         """
-        base64_encoded_data = self.client.select_device(request).get("secure").get("data")
-        encrypted_data = base64.urlsafe_b64decode(base64_encoded_data)
-        return self.client.decoder(encrypted_data)
+        return self.client.select_device(header, device_id)
+        # base64_encoded_data = self.client.select_device(header).get("secure").get("data")
+        # encrypted_data = base64.urlsafe_b64decode(base64_encoded_data)
+        # return self.client.decoder(encrypted_data)
 
     def select_all_members(
         self, header: typing.Dict[str, str]

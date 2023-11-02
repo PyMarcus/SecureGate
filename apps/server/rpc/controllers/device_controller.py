@@ -1,5 +1,4 @@
 import typing
-import uuid
 
 from apps.server.database import InsertMain, SelectMain
 from apps.server.database.models.__all_models import *
@@ -7,45 +6,40 @@ from apps.server.security import Security
 from libs import LogMaker
 from packages.errors.errors import *
 from packages.responses.responses import *
-from packages.schemas.admins_schema import AdminSchema
+from packages.schemas.devices_schema import DeviceSchema
 from packages.schemas.session_header import SessionHeader
-from packages.schemas.session_schema import *
 
 
-class AdminController:
+class DeviceController:
     @staticmethod
-    def create_admin(header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]):
+    def create_device(header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]):
         try:
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
                 return BadRequestError("Token ou email não informados").dict()
 
-            data = AdminSchema(**payload)
-            if not data.name or not data.email or not data.password or not data.role:
+            data = DeviceSchema(**payload)
+            if not data.name or not data.wifi_ssid or not data.wifi_password or not data.version:
                 return BadRequestError("Dados inválidos").dict()
 
-            user = User(
-                id=uuid.uuid4(),
+            device = Device(
                 name=data.name,
-                email=data.email,
-                password=Security.hash_password(data.password),
-                root_id=header_data.user_id,
-                role=UserRole.ADMIN,
+                version=data.version,
+                wifi_ssid=data.wifi_ssid,
+                wifi_password=Security.hash_password(data.wifi_password),
             )
 
-            print(user)
-            if InsertMain.insert_user(user):
-                LogMaker.write_log(f"Admin {user.email} signed up", "info")
-                return CreatedResponse(
-                    message="Administrador criado com sucesso!", data=True
-                ).dict()
-            return BadRequestError("Erro ao criar administrador").dict()
+            if InsertMain.insert_device(device):
+                LogMaker.write_log(f"[+]{device} has been created", "info")
+                return CreatedResponse(message="Dispositivo criado com sucesso!", data=True).dict()
+            return InternalServerError("Erro ao criar dispositivo").dict()
+
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_admin(header: typing.Dict[str, typing.Any], admin_id: str):
+    def select_device(header: typing.Dict[str, typing.Any], device_id: str):
         try:
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
@@ -54,15 +48,16 @@ class AdminController:
             # if Security.verify_token(header_data.email, header_data.token):
             #     return UnauthorizedError("Token inválido").dict()
 
-            data = SelectMain.select_user_by_id(admin_id)
+            data = SelectMain.select_device(device_id)
             if data:
                 return OKResponse(
-                    message="Administrador encontrado com sucesso!",
+                    message="Dispositivo encontrado com sucesso!",
                     data={
                         "id": str(data.id),
                         "name": data.name,
-                        "email": data.email,
-                        "role": data.role,
+                        "wifi_ssid": data.wifi_ssid,
+                        "wifi_password": data.wifi_password,
+                        "version": data.version,
                     },
                 ).dict()
             return NotFoundError("Administrador não encontrado").dict()
@@ -71,7 +66,7 @@ class AdminController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_all_admins(header: typing.Dict[str, typing.Any]):
+    def select_all_devices(header: typing.Dict[str, typing.Any]):
         try:
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
@@ -80,19 +75,18 @@ class AdminController:
             # if Security.verify_token(header_data.email, header_data.token):
             #     return UnauthorizedError("Token inválido").dict()
 
-            admins = SelectMain.select_all_users()
+            devices = SelectMain.select_all_devices()
             response = []
-            for a in admins:
+            for d in devices:
                 response.append(
                     {
-                        "name": a.name,
-                        "email": a.email,
-                        "role": a.role,
-                        "root_id": a.root_id,
-                        "id": a.id,
+                        "id": d.id,
+                        "name": d.name,
+                        "version": d.version,
+                        "wifi_ssid": d.wifi_ssid,
                     }
                 )
-            return OKResponse(message="Admins listados com sucesso!", data=response).dict()
+            return OKResponse(message="Dispositivos listados com sucesso!", data=response).dict()
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()

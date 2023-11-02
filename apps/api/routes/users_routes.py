@@ -26,3 +26,10 @@ def get_all(request: Request, rpc: RPCSingletonClient = Depends(get_rpc_client))
     header = get_request_header(request)
     result = rpc.select_all_members(header)
     return handle_rpc_result(result)
+
+
+@routes.get("/{user_id}")
+def get_by_id(request: Request, user_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+    header = get_request_header(request)
+    result = rpc.select_member(header, user_id)
+    return handle_rpc_result(result)

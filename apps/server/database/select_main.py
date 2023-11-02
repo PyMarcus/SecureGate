@@ -95,12 +95,10 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_member(cls, email: str) -> Member | None:
+    def select_member(cls, id: str) -> Member | None:
         try:
             with cls.__session.create_session() as session:
-                member: typing.Type[Member] = (
-                    session.query(Member).filter(Member.email == email).first()
-                )
+                member: typing.Type[Member] = session.query(Member).filter(Member.id == id).first()
                 if member:
                     return member
                 return None
@@ -108,12 +106,10 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_device(cls, name: str) -> Device | None:
+    def select_device(cls, id: str) -> Device | None:
         try:
             with cls.__session.create_session() as session:
-                device: typing.Type[Device] = (
-                    session.query(Device).filter(Device.name == name).first()
-                )
+                device: typing.Type[Device] = session.query(Device).filter(Device.id == id).first()
                 if device:
                     return device
                 return None
