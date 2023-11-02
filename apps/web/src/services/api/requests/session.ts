@@ -5,7 +5,7 @@ import { useMutation, useQuery } from 'react-query'
 
 const SESSIONS_ENDPOINT = '/session'
 
-const signInRequest = async (data: SignInRequest) => {
+export const signInRequest = async (data: SignInRequest) => {
   const response = await api.post<SignInResponse>(
     `${SESSIONS_ENDPOINT}/signin`,
     data,
@@ -17,7 +17,7 @@ export const useSignIn = () => {
   return useMutation('signin', signInRequest)
 }
 
-const signUpRequest = async (data: SignUpRequest) => {
+export const signUpRequest = async (data: SignUpRequest) => {
   const response = await api.post<SignInResponse>(
     `${SESSIONS_ENDPOINT}/signup`,
     data,
@@ -29,7 +29,7 @@ export const useSignUp = () => {
   return useMutation('signup', signUpRequest)
 }
 
-const healthRequest = async () => {
+export const healthRequest = async () => {
   const response = await api.get('/management/health')
   return response.data
 }

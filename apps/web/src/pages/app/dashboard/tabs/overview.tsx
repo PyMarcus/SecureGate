@@ -9,15 +9,48 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { getDeviceAccessHistoryRequest } from '@/services/api/requests/devices'
 import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
+import { format, sub } from 'date-fns'
+import { useEffect } from 'react'
+import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
-  const { isLoadingDevices } = useDeviceStore()
+  const {
+    isLoadingDevices,
+    deviceAccessHistory,
+    currentDevice,
+    setDeviceAccessHistory,
+  } = useDeviceStore()
   const { users, isLoadingUsers } = useUserStore()
   const totalUsers = users.length
+
+  const currentDate = new Date()
+  const twentyFourHoursAgo = sub(currentDate, { hours: 24 })
+
+  const getDeviceAccessHistory = () =>
+    getDeviceAccessHistoryRequest({
+      deviceId: currentDevice!.id,
+      startDate: format(twentyFourHoursAgo, 'yyyy-MM-dd HH:mm'),
+      endDate: format(twentyFourHoursAgo, 'yyyy-MM-dd HH:mm'),
+    })
+
+  const {
+    isLoading: isLoadingDeviceAccessHistory,
+    data: deviceAccessHistoryResponse,
+  } = useQuery('deviceAccessHistory', getDeviceAccessHistory, {
+    enabled: !!currentDevice,
+  })
+
+  useEffect(() => {
+    if (deviceAccessHistoryResponse && deviceAccessHistoryResponse.success) {
+      console.log(deviceAccessHistoryResponse.data)
+      setDeviceAccessHistory(deviceAccessHistoryResponse.data || [])
+    }
+  }, [deviceAccessHistoryResponse, setDeviceAccessHistory])
 
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
@@ -52,7 +85,11 @@ export const Overview = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <span>1,234</span>
+                {isLoadingDevices ? (
+                  <LoadingIndicator />
+                ) : (
+                  <span>{deviceAccessHistory.length}</span>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">
                 Total de acessos hoje
@@ -84,12 +121,12 @@ export const Overview = () => {
               className="max-w-[calc(100vw-6rem)] 
             md:max-w-[calc(100vw-8rem)]"
             >
-              {isLoadingDevices ? (
+              {isLoadingDeviceAccessHistory ? (
                 <div className="h-[310px] grid place-items-center">
                   <LoadingIndicator />
                 </div>
               ) : (
-                <OverviewChart />
+                <OverviewChart history={deviceAccessHistory} />
               )}
 
               <ScrollBar orientation="horizontal" />

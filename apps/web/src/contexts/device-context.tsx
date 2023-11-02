@@ -1,7 +1,11 @@
-import { useAllDevices, useDeviceUsers } from '@/services/api/requests/devices'
+import {
+  getAllDevicesRequest,
+  getDeviceUsersRequest,
+} from '@/services/api/requests/devices'
 import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import { ReactNode, createContext, useContext, useEffect } from 'react'
+import { useQuery } from 'react-query'
 
 interface DeviceContextType {}
 
@@ -12,70 +16,40 @@ interface DeviceProviderProps {
 export const DeviceContext = createContext({} as DeviceContextType)
 
 export const DeviceProvider = ({ children }: DeviceProviderProps) => {
-  const { isLoading: isLoadingDevices, data: devicesResponse } = useAllDevices()
-  const { setDevices, setIsLoadingDevices } = useDeviceStore()
-  const hasDevices = devicesResponse && devicesResponse.success
+  const { currentDevice, setDevices, setIsLoadingDevices } = useDeviceStore()
+
+  const { setUsers, setIsLoadingUsers } = useUserStore()
+
+  const getDevices = () => getAllDevicesRequest()
+  const { isLoading: isLoadingDevices, data: devicesResponse } = useQuery(
+    'allDevices',
+    getDevices,
+  )
 
   useEffect(() => {
     setIsLoadingDevices(isLoadingDevices)
-    if (hasDevices) {
+    if (devicesResponse && devicesResponse.success) {
       setDevices(devicesResponse.data)
     }
-  }, [
-    hasDevices,
-    devicesResponse,
-    isLoadingDevices,
-    setDevices,
-    setIsLoadingDevices,
-  ])
+  }, [devicesResponse, isLoadingDevices, setDevices, setIsLoadingDevices])
 
-  const { data: response, isLoading: isLoadingUsers } = useDeviceUsers()
-  const { setUsers, setIsLoadingUsers } = useUserStore()
-  const hasUsers = response && response.success
+  const getDeviceUsers = () =>
+    getDeviceUsersRequest({
+      deviceId: currentDevice!.id,
+    })
+
+  const { isLoading: isLoadingUsers, data: usersResponse } = useQuery(
+    'deviceUsers',
+    getDeviceUsers,
+    { enabled: !!currentDevice },
+  )
 
   useEffect(() => {
     setIsLoadingUsers(isLoadingUsers)
-    if (hasUsers) {
-      setUsers(response.data)
+    if (usersResponse && usersResponse.success) {
+      setUsers(usersResponse.data)
     }
-  }, [hasUsers, isLoadingUsers, response, setIsLoadingUsers, setUsers])
-
-  // const {
-  //   currentDevice,
-  //   setDevices,
-  //   setDeviceAccessHistory,
-  //   setIsLoadingDevices,
-  // } = useDeviceStore()
-  // const { setUsers, setIsLoadingUsers } = useUserStore()
-
-  // useEffect(() => {
-  //   setIsLoadingDevices(isLoadingDevices)
-  //   if (allDevices && allDevices.success) {
-  //     setDevices(allDevices.data)
-  //   }
-  // }, [isLoadingDevices, allDevices, setDevices, setIsLoadingDevices])
-
-  // const { data: response, isLoading: isLoadingUsers } = useAllUsers()
-
-  // useEffect(() => {
-  //   setIsLoadingUsers(isLoadingUsers)
-  //   if (response && response.success) {
-  //     setUsers(response.data)
-  //   }
-  // }, [isLoadingUsers, response, setIsLoadingUsers, setUsers])
-
-  // const currentDate = new Date()
-  // const twentyFourHoursAgo = sub(currentDate, { hours: 24 })
-
-  // const { data: historyResponse } = useDeviceAccessHistory({
-  //   deviceId: currentDevice?.id || '',
-  //   startDate: format(twentyFourHoursAgo, 'yyyy-MM-dd HH:mm'),
-  //   endDate: format(currentDate, 'yyyy-MM-dd HH:mm'),
-  // })
-
-  // if (historyResponse && historyResponse.success) {
-  //   setDeviceAccessHistory(historyResponse.data)
-  // }
+  }, [isLoadingUsers, usersResponse, setIsLoadingUsers, setUsers])
 
   return <DeviceContext.Provider value={{}}>{children}</DeviceContext.Provider>
 }

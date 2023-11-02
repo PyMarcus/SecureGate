@@ -1,92 +1,65 @@
+import { AccessHistory } from '@/@types/schemas/access-history'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { useEffect, useState } from 'react'
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-import { ScrollArea } from './ui/scroll-area'
 
-const week_data = [
-  {
-    name: '06:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '07:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '08:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '09:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '10:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '11:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '12:00 AM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '01:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '02:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '03:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '04:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '05:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '06:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '07:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '08:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '09:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '10:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '11:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-  {
-    name: '12:00 PM',
-    value: Math.floor(Math.random() * 300) + 100,
-  },
-]
+interface ChartData {
+  name: string
+  value: number
+}
 
-export const OverviewChart = () => {
-  // const { deviceAccessHistory } = useDeviceStore()
+interface BaseChartData {
+  [key: string]: number
+}
+
+const BaseData: BaseChartData = {
+  '06:00': 0,
+  '07:00': 0,
+  '08:00': 0,
+  '09:00': 0,
+  '10:00': 0,
+  '11:00': 0,
+  '12:00': 0,
+  '13:00': 0,
+  '14:00': 0,
+  '15:00': 0,
+  '16:00': 0,
+  '17:00': 0,
+  '18:00': 0,
+  '19:00': 0,
+  '20:00': 0,
+  '21:00': 0,
+  '22:00': 0,
+  '23:00': 0,
+}
+
+interface OverviewChartProps {
+  history: AccessHistory[]
+}
+
+export const OverviewChart = ({ history }: OverviewChartProps) => {
+  const [chartData, setChartData] = useState<ChartData[]>([])
+  useEffect(() => {
+    if (history) {
+      const data = history.reduce((acc, access) => {
+        const date = new Date(access.when)
+        const hour = `${date.getHours()}:00`
+
+        acc[hour] && acc[hour]++
+
+        return acc
+      }, BaseData)
+
+      setChartData(
+        Object.entries(data).map(([name, value]) => ({ name, value })),
+      )
+    }
+  }, [history])
 
   return (
     <ScrollArea className="w-full">
       <ResponsiveContainer height={310} width="100%">
-        <BarChart data={week_data}>
+        <BarChart data={chartData}>
           <XAxis
             dataKey="name"
             stroke="#888888"

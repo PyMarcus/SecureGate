@@ -33,3 +33,14 @@ def get_by_id(request: Request, user_id: str, rpc: RPCSingletonClient = Depends(
     header = get_request_header(request)
     result = rpc.select_user(header, user_id)
     return handle_rpc_result(result)
+
+
+@routes.get("/{user_id}/history")
+def get_user_history(
+    request: Request,
+    user_id: str,
+    rpc: RPCSingletonClient = Depends(get_rpc_client),
+):
+    header = get_request_header(request)
+    result = rpc.select_user_access_history(header, user_id)
+    return handle_rpc_result(result)

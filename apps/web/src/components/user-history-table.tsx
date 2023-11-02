@@ -7,102 +7,74 @@ import {
 } from '@/components/ui/table'
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
 
-import { User } from '@/@types/schemas/user'
+import { AccessHistory } from '@/@types/schemas/access-history'
+import { getUserAccessHistoryRequest } from '@/services/api/requests/users'
+import { useUserStore } from '@/stores/user-store'
+import { useQuery } from 'react-query'
+import { LoadingIndicator } from './loading-indicator'
 import { TableCell } from './ui/table'
 
-const users: User[] = [
-  {
-    id: '8a9180aa-7684-11ee-b962-0242ac120002',
-    name: 'John Doe 1',
-    email: 'john1@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: true,
-    rfId: '1234567890',
-  },
-  {
-    id: '8da554ec-7684-11ee-b962-0242ac120002',
-    name: 'John Doe 2',
-    email: 'john2@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: false,
-    rfId: '0987654321',
-  },
-  {
-    id: '91dcb5aa-7684-11ee-b962-0242ac120002',
-    name: 'John Doe 3',
-    email: 'john3@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: true,
-    rfId: '1234098765',
-  },
-  {
-    id: '95e6f9f4-7684-11ee-b962-0242ac120002',
-    name: 'John Doe 4',
-    email: 'john4@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: false,
-    rfId: '0987564321',
-  },
-  {
-    id: '9a7c3c7a-7684-11ee-b362-0242ac120002',
-    name: 'John Doe 5',
-    email: 'john5@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: true,
-    rfId: '1234567890',
-  },
-  {
-    id: '9a7c3c7a-7684-11ee-b9562-0242ac120002',
-    name: 'John Doe 6',
-    email: 'john6@doe.com',
-    addedBy: 'a5669e1a-7684-11ee-b962-0242ac120002',
-    authorized: true,
-    rfId: '1234567890',
-  },
-]
+interface UserHistoryRowProps {
+  history: AccessHistory
+}
 
-const UserHistoryRow = () => {
+const UserHistoryRow = ({ history }: UserHistoryRowProps) => {
+  const displayId = history.id.split('-')[0]
   return (
     <TableRow>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
-      <TableCell></TableCell>
+      <TableCell>{displayId}</TableCell>
+      <TableCell>{history.user_name}</TableCell>
+      <TableCell>{history.device_name}</TableCell>
+      <TableCell>{history.when}</TableCell>
     </TableRow>
   )
 }
 
 export const UserHistoryTable = () => {
-  const hasFilteredMembers = users.length > 0
+  const { selectedUser } = useUserStore()
+
+  const getUserAccessHistory = () =>
+    getUserAccessHistoryRequest({ userId: selectedUser!.id })
+
+  const hasSelectedUser = !!selectedUser
+  const { data: userAccessHistory, isLoading } = useQuery(
+    ['userAccessHistory', selectedUser!.id],
+    getUserAccessHistory,
+    { enabled: hasSelectedUser },
+  )
+
+  const hasUserAccessHistory = userAccessHistory && userAccessHistory.data
 
   return (
     <ScrollArea
       className="max-w-[calc(100vw-6rem)] md:max-w-[calc(100vw-8rem)]
       md:h-[calc(100vh-42rem)]"
     >
-      {hasFilteredMembers ? (
+      {hasUserAccessHistory ? (
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>ID</TableHead>
               <TableHead className="min-w-[100px]">Nome</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Autorizado</TableHead>
-              <TableHead className="sr-only">Ações</TableHead>
+              <TableHead>Portão</TableHead>
+              <TableHead>Data</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
-              <UserHistoryRow key={user.id} />
+            {userAccessHistory.data.map((history) => (
+              <UserHistoryRow key={history.id} history={history} />
             ))}
           </TableBody>
         </Table>
       ) : (
         <div className="h-32 grid place-items-center">
-          <p className="text-sm text-muted-foreground">
-            Nenhum membro encontrado!
-          </p>
+          {isLoading ? (
+            <LoadingIndicator />
+          ) : (
+            <p className="text-sm text-muted-foreground">
+              Nenhum histórico encontrado!
+            </p>
+          )}
         </div>
       )}
       <ScrollBar orientation="horizontal" />

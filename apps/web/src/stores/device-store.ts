@@ -8,7 +8,7 @@ interface DeviceState {
   currentDevice: Device | null
   setCurrentDevice: (device: Device) => void
 
-  deviceAccessHistory: AccessHistory[] | null
+  deviceAccessHistory: AccessHistory[]
   setDeviceAccessHistory: (deviceAccessHistory: AccessHistory[]) => void
 
   isLoadingDevices: boolean

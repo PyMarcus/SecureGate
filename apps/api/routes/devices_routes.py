@@ -28,7 +28,9 @@ def get_all(request: Request, rpc: RPCSingletonClient = Depends(get_rpc_client))
 
 
 @routes.get("/{device_id}")
-def get_by_id(request: Request, device_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+def get_device_by_id(
+    request: Request, device_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)
+):
     header = get_request_header(request)
     result = rpc.select_device(header, device_id)
     return handle_rpc_result(result)
@@ -40,4 +42,17 @@ def get_device_users(
 ):
     header = get_request_header(request)
     result = rpc.select_device_users(header, device_id)
+    return handle_rpc_result(result)
+
+
+@routes.get("/{device_id}/history")
+def get_by_device_history(
+    request: Request,
+    device_id: str,
+    date_ini: str | None = None,
+    date_end: str | None = None,
+    rpc: RPCSingletonClient = Depends(get_rpc_client),
+):
+    header = get_request_header(request)
+    result = rpc.select_device_access_history(header, device_id, date_ini, date_end)
     return handle_rpc_result(result)

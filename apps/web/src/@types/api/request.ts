@@ -26,6 +26,10 @@ export interface CreateDeviceRequest {
   version: string
 }
 
+export interface GetDeviceUsersRequest {
+  deviceId: string
+}
+
 export interface GetDeviceHistoryRequest {
   deviceId: string
   startDate?: string

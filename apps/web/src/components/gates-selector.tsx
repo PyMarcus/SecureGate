@@ -39,7 +39,7 @@ export function GatesSelector() {
   const handleSelectDevice = (device: Device) => {
     setCurrentDevice(device)
 
-    queryClient.invalidateQueries('allUsers')
+    queryClient.invalidateQueries('deviceUsers')
     queryClient.invalidateQueries('allDevices')
     queryClient.invalidateQueries('deviceAccessHistory')
   }
