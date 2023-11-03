@@ -53,6 +53,10 @@ class DotEnv:
     RPC_HOST: str | None = os.getenv("RPC_HOST")
     RPC_PORT: int | None = _map_to_int(os.getenv("RPC_PORT"))
 
+    # BOARD
+    BOARD_AP_SSID: str | None = os.getenv("BOARD_AP_SSID")
+    BOARD_AP_PASSWORD: str | None = os.getenv("BOARD_AP_PASSWORD")
+
     # TOKENS
     SECRET_KEY: str | None = os.getenv("SECRET_KEY")
     FERNET_KEY: str | None = os.getenv("FERNET_KEY")

@@ -14,6 +14,7 @@
     "lint:fix": "eslint 'apps/web/src/**/*.@(js|jsx|ts|tsx)' --fix && prettier --write 'apps/web/src/**/*.@(js|jsx|ts|tsx)'",
     "api": "python3 -m apps.api.api",
     "rpc": "python3 -m apps.server.rpc.rpc_server",
+    "emulator": "python3 -m apps.emulator.emulator",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
