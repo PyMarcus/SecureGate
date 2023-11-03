@@ -37,16 +37,37 @@ class HTTPHandler(BaseHTTPRequestHandler):
             return token == config.get("token")
         return False
 
+    def save_config(self, payload):
+        config.update(payload)
+        config_result = config.save_config()
+        return config.check_schema(config_result, config.COMPLETE_SCHEMA)
+
     def do_POST(self):
-        if not self.authenticate():
+        try:
+            if not self.authenticate():
+                return self.send_json_response(
+                    status=401, success=False, message="Token inválido ou não fornecido"
+                )
+
+            payload = self.parse_json_request()
+            print(config.check_schema(payload, config.CONFIG_SCHEMA))
+            if not config.check_schema(payload, config.CONFIG_SCHEMA):
+                return self.send_json_response(
+                    status=400, success=False, message="A configuração é inválida"
+                )
+
+            if self.save_config(payload):
+                return self.send_json_response(
+                    status=200, data=True, message="Configuração salva com sucesso"
+                )
+
             return self.send_json_response(
-                status=401, success=False, message="Token inválido ou não fornecido"
+                status=500, success=False, message="Erro ao salvar configuração"
             )
-
-        payload = self.parse_json_request()
-        print(payload)
-
-        self.send_json_response(status=200, data={"status": "ok"})
+        except Exception:
+            return self.send_json_response(
+                status=500, success=False, message="Não foi possível salvar a configuração"
+            )
 
 
 class ConfigService:

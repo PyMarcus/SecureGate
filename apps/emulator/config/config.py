@@ -1,5 +1,6 @@
 import json
 import os
+from enum import Enum
 from os import path
 
 from apps.emulator.src.utils.log import Log
@@ -15,6 +16,19 @@ class Config:
         self._root = path.abspath(path.join(path.dirname(__file__), "../"))
         self._file_path = path.join(self._root, file_name)
         self._data = self.load_config()
+        self.BASE_SCHEMA = {"token": str, "ap": {"ssid": str, "password": str}}
+        self.CONFIG_SCHEMA = {
+            "id": str,
+            "mqtt": {"host": str, "port": int, "user": str, "password": str},
+            "wifi": {"ssid": str, "password": str},
+        }
+        self.COMPLETE_SCHEMA = {
+            "id": str,
+            "token": str,
+            "mqtt": {"host": str, "port": int, "user": str, "password": str},
+            "wifi": {"ssid": str, "password": str},
+            "ap": {"ssid": str, "password": str},
+        }
 
     def load_config(self):
         """
@@ -46,6 +60,7 @@ class Config:
         """
         with open(self._file_path, "w") as f:
             json.dump(self._data, f)
+        return self._data
 
     def get(self, key, default=None):
         """
@@ -59,6 +74,12 @@ class Config:
         """
         self._data[key] = value
         self.save_config()
+
+    def update(self, data: dict):
+        """
+        Update the configuration data with a dictionary and save the changes to the JSON file.
+        """
+        self._data.update(data)
 
     def remove(self, key):
         """
@@ -74,16 +95,33 @@ class Config:
         """
         return path.exists(self._file_path)
 
-    def check(self, key: str = None):
+    def check(self):
         """
-        Check if the configuration data is valid.
+        Check if the configuration file exists and has valid data.
         """
-        if key:
-            return key in self._data
+        return self.check_schema(self._data, self.COMPLETE_SCHEMA)
 
-        keys = ["id", "mqtt", "wifi"]
-        for key in keys:
-            if key not in self._data:
+    def check_schema(self, payload: dict, schema: dict):
+        """
+        Check if a payload matches a schema.
+        :param payload: the payload to check
+        :param schema: one of the 3 schemas defined in this class
+        :return: True if the payload matches the schema, False otherwise
+        """
+        for key, value in schema.items():
+            if key not in payload:
+                return False
+
+            if isinstance(value, dict):
+                if not isinstance(payload[key], dict):
+                    return False
+                if not self.check_schema(payload[key], value):
+                    return False
+
+            elif not isinstance(payload[key], value):
+                return False
+        for key in payload:
+            if key not in schema:
                 return False
         return True
 
