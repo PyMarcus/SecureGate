@@ -1,4 +1,6 @@
 import { User } from '@/@types/schemas/user'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +16,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { TableCell, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
 import {
   ClockCounterClockwise,
@@ -23,9 +26,6 @@ import {
   X,
 } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { Badge } from './ui/badge'
-import { Button } from './ui/button'
-import { TableCell, TableRow } from './ui/table'
 
 interface UserCardProps {
   user: User
@@ -54,7 +54,10 @@ export const UserRow = ({ user, isSelected, onSelectRow }: UserCardProps) => {
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell>
-        <Badge variant={isAuthorized ? 'default' : 'destructive'}>
+        <Badge
+          className={cn(isAuthorized && 'bg-emerald-500')}
+          variant={isAuthorized ? 'default' : 'destructive'}
+        >
           {authorization}
         </Badge>
       </TableCell>

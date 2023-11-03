@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/table'
 import { UserRow } from '@/components/user-row'
 
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useState } from 'react'
 import { LoadingIndicator } from './loading-indicator'
 import { NewUserDialog } from './new-user-dialog'
-import { ScrollArea, ScrollBar } from './ui/scroll-area'
 
 interface UsersTableProps {
   isLoading: boolean

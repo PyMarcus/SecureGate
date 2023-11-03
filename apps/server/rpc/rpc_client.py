@@ -228,6 +228,14 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_device_access_history(header, device_id, date_ini, date_end)
 
+    def select_device_access_history_by_date(
+        self,
+        header: typing.Dict[str, str],
+        device_id: str,
+        date: str | None,
+    ) -> typing.List[typing.Dict[str, typing.Any]]:
+        return self.client.select_device_access_history_by_date(header, device_id, date)
+
     def update_user_authorization(
         self, header: typing.Dict[str, str], request: typing.Dict[str, typing.Any]
     ) -> typing.List[typing.Dict[str, typing.Any]]:

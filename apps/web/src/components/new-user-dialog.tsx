@@ -21,6 +21,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { useCreateUser } from '@/services/api/requests/users'
+import { useDeviceStore } from '@/stores/device-store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react'
 import { useId, useState } from 'react'
@@ -32,6 +33,7 @@ export const NewUserDialog = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const { isLoading, mutateAsync } = useCreateUser()
+  const { currentDevice } = useDeviceStore()
 
   const handleOpenChange = (open: boolean) => setIsOpen(open)
   const closeDialog = () => setIsOpen(false)
@@ -68,7 +70,10 @@ export const NewUserDialog = () => {
   }
 
   const handleFormSubmit = async (values: FormType) => {
-    const response = await mutateAsync(values)
+    const response = await mutateAsync({
+      ...values,
+      device_id: currentDevice!.id,
+    })
 
     if (response && response.success) {
       toast({

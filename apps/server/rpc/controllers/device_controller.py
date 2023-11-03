@@ -106,7 +106,7 @@ class DeviceController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            users = SelectMain.select_all_users()
+            users = SelectMain.select_users_by_device_id(device_id)
             response = []
             for u in users:
                 response.append(

@@ -17,6 +17,7 @@ export interface CreateUserRequest {
   email: string
   rfid: string
   authorized: boolean
+  device_id: string
 }
 
 export interface CreateDeviceRequest {
@@ -32,8 +33,7 @@ export interface GetDeviceUsersRequest {
 
 export interface GetDeviceHistoryRequest {
   deviceId: string
-  startDate?: string
-  endDate?: string
+  date: string
 }
 
 export interface GetUserAccessHistoryRequest {

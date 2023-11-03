@@ -41,7 +41,7 @@ def get_device_users(
     request: Request, device_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)
 ):
     header = get_request_header(request)
-    result = rpc.select_device_users(header, device_id)
+    result = rpc.select_all_users_by_device_id(header, device_id)
     return handle_rpc_result(result)
 
 
@@ -49,10 +49,9 @@ def get_device_users(
 def get_by_device_history(
     request: Request,
     device_id: str,
-    date_ini: str | None = None,
-    date_end: str | None = None,
+    date: str | None = None,
     rpc: RPCSingletonClient = Depends(get_rpc_client),
 ):
     header = get_request_header(request)
-    result = rpc.select_device_access_history(header, device_id, date_ini, date_end)
+    result = rpc.select_device_access_history_by_date(header, device_id, date)
     return handle_rpc_result(result)

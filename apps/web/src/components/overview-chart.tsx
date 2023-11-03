@@ -1,12 +1,7 @@
 import { AccessHistory } from '@/@types/schemas/access-history'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-
-interface ChartData {
-  name: string
-  value: number
-}
 
 interface BaseChartData {
   [key: string]: number
@@ -38,22 +33,17 @@ interface OverviewChartProps {
 }
 
 export const OverviewChart = ({ history }: OverviewChartProps) => {
-  const [chartData, setChartData] = useState<ChartData[]>([])
-  useEffect(() => {
-    if (history) {
-      const data = history.reduce((acc, access) => {
-        const date = new Date(access.when)
-        const hour = `${date.getHours()}:00`
-
-        acc[hour] && acc[hour]++
-
+  const chartData = useMemo(() => {
+    const data = history.reduce(
+      (acc, access) => {
+        const hour = new Date(`${access.when}Z`).getHours()
+        acc[`${hour}:00`] = (acc[`${hour}:00`] || 0) + 1
         return acc
-      }, BaseData)
+      },
+      { ...BaseData },
+    )
 
-      setChartData(
-        Object.entries(data).map(([name, value]) => ({ name, value })),
-      )
-    }
+    return Object.entries(data).map(([name, value]) => ({ name, value }))
   }, [history])
 
   return (

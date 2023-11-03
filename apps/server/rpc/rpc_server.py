@@ -3,6 +3,7 @@ import datetime
 import threading
 import typing
 import uuid
+from typing import Any, Dict
 
 import Pyro4
 from rpc_server_interface import RPCServerInterface
@@ -148,7 +149,7 @@ class RPCServer(RPCServerInterface):
         self,
         header: typing.Dict[str, str],
         device_id: str,
-    ) -> typing.List[typing.Dict[str, typing.Any]]:
+    ) -> dict[str, Any]:
         return UserController.select_users_by_device_id(header=header, device_id=device_id)
 
     @Pyro4.expose
@@ -162,6 +163,12 @@ class RPCServer(RPCServerInterface):
         return AccessHistoryController.select_device_access_history(
             header, device_id, date_ini, date_end
         )
+
+    @Pyro4.expose
+    def select_device_access_history_by_date(
+        self, header: typing.Dict[str, str], device_id: str, date: str
+    ):
+        return AccessHistoryController.select_device_access_history_by_date(header, device_id, date)
 
     @Pyro4.expose
     def update_user_authorization(

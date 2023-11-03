@@ -1,0 +1,391 @@
+2023-11-02 08:34:57,681 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 08:34:57,682 - INFO - [+]SERVER URI: PYRO:obj_3bc42ee8b200457fa524e5ea6c2cf245@localhost:7878
+2023-11-02 08:35:05,297 - INFO - [+]Connected on database
+2023-11-02 08:57:23,944 - WARNING - [-]Server is down
+2023-11-02 08:57:24,432 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 08:57:24,432 - INFO - [+]SERVER URI: PYRO:obj_a44aead5f1d24595bcfed6e384639bd7@localhost:7878
+2023-11-02 08:57:50,940 - INFO - [+]Connected on database
+2023-11-02 09:00:03,388 - WARNING - [-]Server is down
+2023-11-02 09:00:03,964 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:00:03,964 - INFO - [+]SERVER URI: PYRO:obj_afad86a0160f48b0ad5d07e030c3cf14@localhost:7878
+2023-11-02 09:00:11,007 - INFO - [+]Connected on database
+2023-11-02 09:02:56,535 - INFO - User john@doe.com signed in
+2023-11-02 09:06:05,043 - INFO - User john@doe.com signed in
+2023-11-02 09:06:05,314 - INFO - User john@doe.com signed in
+2023-11-02 09:06:05,557 - INFO - User john@doe.com signed in
+2023-11-02 09:06:05,871 - INFO - User john@doe.com signed in
+2023-11-02 09:06:06,141 - INFO - User john@doe.com signed in
+2023-11-02 09:06:06,391 - INFO - User john@doe.com signed in
+2023-11-02 09:06:47,486 - INFO - User john@doe.com signed in
+2023-11-02 09:06:47,746 - INFO - User john@doe.com signed in
+2023-11-02 09:06:48,010 - INFO - User john@doe.com signed in
+2023-11-02 09:06:48,317 - INFO - User john@doe.com signed in
+2023-11-02 09:06:48,584 - INFO - User john@doe.com signed in
+2023-11-02 09:06:48,845 - INFO - User john@doe.com signed in
+2023-11-02 09:06:58,288 - WARNING - [-]Server is down
+2023-11-02 09:06:58,874 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:06:58,874 - INFO - [+]SERVER URI: PYRO:obj_3edcb21785144c6d8c7e7527a0d90d9e@localhost:7878
+2023-11-02 09:07:04,513 - INFO - [+]Connected on database
+2023-11-02 09:07:04,801 - INFO - User john@doe.com signed in
+2023-11-02 09:07:05,065 - INFO - User john@doe.com signed in
+2023-11-02 09:07:05,332 - INFO - User john@doe.com signed in
+2023-11-02 09:07:05,650 - INFO - User john@doe.com signed in
+2023-11-02 09:07:05,902 - INFO - User john@doe.com signed in
+2023-11-02 09:07:06,152 - INFO - User john@doe.com signed in
+2023-11-02 09:07:46,878 - WARNING - [-]Server is down
+2023-11-02 09:07:47,577 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:07:47,577 - INFO - [+]SERVER URI: PYRO:obj_bc2349ce7bea4c2ba73f8cc808fe33de@localhost:7878
+2023-11-02 09:07:54,638 - INFO - [+]Connected on database
+2023-11-02 09:07:54,934 - INFO - User john@doe.com signed in
+2023-11-02 09:07:55,201 - INFO - User john@doe.com signed in
+2023-11-02 09:07:55,458 - INFO - User john@doe.com signed in
+2023-11-02 09:07:55,760 - INFO - User john@doe.com signed in
+2023-11-02 09:07:56,018 - INFO - User john@doe.com signed in
+2023-11-02 09:07:56,271 - INFO - User john@doe.com signed in
+2023-11-02 09:12:27,932 - WARNING - [-]Server is down
+2023-11-02 09:12:28,424 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:12:28,424 - INFO - [+]SERVER URI: PYRO:obj_db53c34a6cba40b79c2f03521a2e698d@localhost:7878
+2023-11-02 09:13:51,111 - INFO - [+]Connected on database
+2023-11-02 09:13:51,386 - INFO - User john@doe.com signed in
+2023-11-02 09:13:51,634 - INFO - User john@doe.com signed in
+2023-11-02 09:13:51,895 - INFO - User john@doe.com signed in
+2023-11-02 09:13:52,199 - INFO - User john@doe.com signed in
+2023-11-02 09:13:52,447 - INFO - User john@doe.com signed in
+2023-11-02 09:13:52,708 - INFO - User john@doe.com signed in
+2023-11-02 09:14:06,595 - INFO - User john@doe.com signed in
+2023-11-02 09:14:06,859 - INFO - User john@doe.com signed in
+2023-11-02 09:14:07,121 - INFO - User john@doe.com signed in
+2023-11-02 09:14:07,434 - INFO - User john@doe.com signed in
+2023-11-02 09:14:07,701 - INFO - User john@doe.com signed in
+2023-11-02 09:14:07,974 - INFO - User john@doe.com signed in
+2023-11-02 09:14:19,313 - INFO - User john@doe.com signed in
+2023-11-02 09:14:19,571 - INFO - User john@doe.com signed in
+2023-11-02 09:14:19,828 - INFO - User john@doe.com signed in
+2023-11-02 09:14:20,139 - INFO - User john@doe.com signed in
+2023-11-02 09:14:20,404 - INFO - User john@doe.com signed in
+2023-11-02 09:14:20,653 - INFO - User john@doe.com signed in
+2023-11-02 09:14:34,806 - INFO - User john@doe.com signed in
+2023-11-02 09:14:35,062 - INFO - User john@doe.com signed in
+2023-11-02 09:14:35,325 - INFO - User john@doe.com signed in
+2023-11-02 09:14:35,635 - INFO - User john@doe.com signed in
+2023-11-02 09:14:35,908 - INFO - User john@doe.com signed in
+2023-11-02 09:14:36,176 - INFO - User john@doe.com signed in
+2023-11-02 09:32:55,140 - WARNING - [-]Server is down
+2023-11-02 09:32:55,826 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:32:55,826 - INFO - [+]SERVER URI: PYRO:obj_9ece6495643d4ca7b6ff4bbfba209fdd@localhost:7878
+2023-11-02 09:33:00,882 - INFO - [+]Connected on database
+2023-11-02 09:33:00,966 - INFO - User john@doe.com signed up
+2023-11-02 09:33:04,012 - INFO - User john@doe.com signed in
+2023-11-02 09:33:08,980 - INFO - User john@doe.com signed in
+2023-11-02 09:33:09,244 - INFO - User john@doe.com signed in
+2023-11-02 09:33:09,513 - INFO - User john@doe.com signed in
+2023-11-02 09:33:09,836 - INFO - User john@doe.com signed in
+2023-11-02 09:33:10,098 - INFO - User john@doe.com signed in
+2023-11-02 09:33:10,365 - INFO - User john@doe.com signed in
+2023-11-02 09:33:10,642 - INFO - Admin test@admin.com signed up
+2023-11-02 09:33:55,709 - INFO - User john@doe.com signed in
+2023-11-02 09:33:55,976 - INFO - User john@doe.com signed in
+2023-11-02 09:33:56,248 - INFO - User john@doe.com signed in
+2023-11-02 09:33:56,565 - INFO - User john@doe.com signed in
+2023-11-02 09:33:56,809 - INFO - User john@doe.com signed in
+2023-11-02 09:33:57,059 - INFO - User john@doe.com signed in
+2023-11-02 09:36:47,893 - WARNING - [-]Server is down
+2023-11-02 09:36:48,594 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:36:48,594 - INFO - [+]SERVER URI: PYRO:obj_025e3e97c03f4b1ca54c6bd296090351@localhost:7878
+2023-11-02 09:36:54,338 - INFO - [+]Connected on database
+2023-11-02 09:36:54,638 - INFO - User john@doe.com signed in
+2023-11-02 09:36:54,907 - INFO - User john@doe.com signed in
+2023-11-02 09:36:55,166 - INFO - User john@doe.com signed in
+2023-11-02 09:36:55,492 - INFO - User john@doe.com signed in
+2023-11-02 09:36:55,763 - INFO - User john@doe.com signed in
+2023-11-02 09:36:56,037 - INFO - User john@doe.com signed in
+2023-11-02 09:37:32,231 - INFO - User john@doe.com signed in
+2023-11-02 09:37:32,502 - INFO - User john@doe.com signed in
+2023-11-02 09:37:32,770 - INFO - User john@doe.com signed in
+2023-11-02 09:37:33,059 - INFO - User john@doe.com signed in
+2023-11-02 09:37:33,310 - INFO - User john@doe.com signed in
+2023-11-02 09:37:33,591 - INFO - User john@doe.com signed in
+2023-11-02 09:37:45,595 - INFO - User john@doe.com signed in
+2023-11-02 09:37:45,857 - INFO - User john@doe.com signed in
+2023-11-02 09:37:46,105 - INFO - User john@doe.com signed in
+2023-11-02 09:37:46,405 - INFO - User john@doe.com signed in
+2023-11-02 09:37:46,658 - INFO - User john@doe.com signed in
+2023-11-02 09:37:46,915 - INFO - User john@doe.com signed in
+2023-11-02 09:37:47,175 - INFO - [+]<apps.server.database.models.device.Device object at 0x7fa3a0d82da0> has been created
+2023-11-02 09:38:02,158 - INFO - User john@doe.com signed in
+2023-11-02 09:38:02,425 - INFO - User john@doe.com signed in
+2023-11-02 09:38:02,692 - INFO - User john@doe.com signed in
+2023-11-02 09:38:02,995 - INFO - User john@doe.com signed in
+2023-11-02 09:38:03,249 - INFO - User john@doe.com signed in
+2023-11-02 09:38:03,508 - INFO - User john@doe.com signed in
+2023-11-02 09:39:29,631 - INFO - User john@doe.com signed in
+2023-11-02 09:39:29,887 - INFO - User john@doe.com signed in
+2023-11-02 09:39:30,176 - INFO - User john@doe.com signed in
+2023-11-02 09:39:30,430 - INFO - User john@doe.com signed in
+2023-11-02 09:39:30,479 - INFO - User test@test.com created
+2023-11-02 09:40:50,705 - INFO - User john@doe.com signed in
+2023-11-02 09:40:50,965 - INFO - User john@doe.com signed in
+2023-11-02 09:40:51,236 - INFO - User john@doe.com signed in
+2023-11-02 09:40:51,564 - INFO - User john@doe.com signed in
+2023-11-02 09:40:51,833 - INFO - User john@doe.com signed in
+2023-11-02 09:40:52,111 - INFO - User john@doe.com signed in
+2023-11-02 09:41:15,837 - INFO - User john@doe.com signed in
+2023-11-02 09:41:16,108 - INFO - User john@doe.com signed in
+2023-11-02 09:41:16,363 - INFO - User john@doe.com signed in
+2023-11-02 09:41:16,678 - INFO - User john@doe.com signed in
+2023-11-02 09:41:16,930 - INFO - User john@doe.com signed in
+2023-11-02 09:41:17,209 - INFO - User john@doe.com signed in
+2023-11-02 09:41:41,959 - INFO - User john@doe.com signed in
+2023-11-02 09:41:42,232 - INFO - User john@doe.com signed in
+2023-11-02 09:41:42,480 - INFO - User john@doe.com signed in
+2023-11-02 09:41:42,789 - INFO - User john@doe.com signed in
+2023-11-02 09:41:43,053 - INFO - User john@doe.com signed in
+2023-11-02 09:41:43,316 - INFO - User john@doe.com signed in
+2023-11-02 09:41:54,083 - INFO - User john@doe.com signed in
+2023-11-02 09:41:54,342 - INFO - User john@doe.com signed in
+2023-11-02 09:41:54,596 - INFO - User john@doe.com signed in
+2023-11-02 09:41:54,881 - INFO - User john@doe.com signed in
+2023-11-02 09:41:55,148 - INFO - User john@doe.com signed in
+2023-11-02 09:41:55,405 - INFO - User john@doe.com signed in
+2023-11-02 09:42:38,225 - WARNING - [-]Server is down
+2023-11-02 09:42:38,912 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:42:38,913 - INFO - [+]SERVER URI: PYRO:obj_d65b3511351f459c913358a46bfd1e24@localhost:7878
+2023-11-02 09:42:39,459 - WARNING - [-]Server is down
+2023-11-02 09:42:40,070 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:42:40,070 - INFO - [+]SERVER URI: PYRO:obj_90db8946e63047c787953b49ae770134@localhost:7878
+2023-11-02 09:42:44,806 - INFO - [+]Connected on database
+2023-11-02 09:42:45,091 - INFO - User john@doe.com signed in
+2023-11-02 09:42:45,338 - INFO - User john@doe.com signed in
+2023-11-02 09:42:45,586 - INFO - User john@doe.com signed in
+2023-11-02 09:42:45,890 - INFO - User john@doe.com signed in
+2023-11-02 09:42:46,155 - INFO - User john@doe.com signed in
+2023-11-02 09:42:46,422 - INFO - User john@doe.com signed in
+2023-11-02 09:42:46,473 - ERROR - Error: 'AccessHistory' object has no attribute 'member_id'
+2023-11-02 09:43:33,295 - WARNING - [-]Server is down
+2023-11-02 09:43:34,001 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 09:43:34,001 - INFO - [+]SERVER URI: PYRO:obj_928386800da6482f98cbe1c95376a6aa@localhost:7878
+2023-11-02 09:43:40,220 - INFO - [+]Connected on database
+2023-11-02 09:43:40,506 - INFO - User john@doe.com signed in
+2023-11-02 09:43:40,774 - INFO - User john@doe.com signed in
+2023-11-02 09:43:41,046 - INFO - User john@doe.com signed in
+2023-11-02 09:43:41,363 - INFO - User john@doe.com signed in
+2023-11-02 09:43:41,625 - INFO - User john@doe.com signed in
+2023-11-02 09:43:41,877 - INFO - User john@doe.com signed in
+2023-11-02 09:43:51,991 - INFO - User john@doe.com signed in
+2023-11-02 09:43:52,237 - INFO - User john@doe.com signed in
+2023-11-02 09:43:52,489 - INFO - User john@doe.com signed in
+2023-11-02 09:43:52,785 - INFO - User john@doe.com signed in
+2023-11-02 09:43:53,045 - INFO - User john@doe.com signed in
+2023-11-02 09:43:53,308 - INFO - User john@doe.com signed in
+2023-11-02 09:44:46,781 - INFO - User john@doe.com signed in
+2023-11-02 09:44:47,042 - INFO - User john@doe.com signed in
+2023-11-02 09:44:47,311 - INFO - User john@doe.com signed in
+2023-11-02 09:44:47,624 - INFO - User john@doe.com signed in
+2023-11-02 09:44:47,897 - INFO - User john@doe.com signed in
+2023-11-02 09:44:48,151 - INFO - User john@doe.com signed in
+2023-11-02 09:44:48,419 - INFO - [+]<apps.server.database.models.device.Device object at 0x7fd49a7765c0> has been created
+2023-11-02 09:44:58,110 - INFO - User john@doe.com signed in
+2023-11-02 09:44:58,374 - INFO - User john@doe.com signed in
+2023-11-02 09:44:58,641 - INFO - User john@doe.com signed in
+2023-11-02 09:44:58,949 - INFO - User john@doe.com signed in
+2023-11-02 09:44:59,227 - INFO - User john@doe.com signed in
+2023-11-02 09:44:59,483 - INFO - User john@doe.com signed in
+2023-11-02 10:30:22,105 - WARNING - [-]Server is down
+2023-11-02 10:30:22,736 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 10:30:22,736 - INFO - [+]SERVER URI: PYRO:obj_62d663a50e094e63a847cc1afda063f5@localhost:7878
+2023-11-02 10:30:30,161 - INFO - [+]Connected on database
+2023-11-02 10:30:30,473 - INFO - [+]<apps.server.database.models.device.Device object at 0x7fc0c3d05180> has been created
+2023-11-02 10:31:17,563 - WARNING - [-]Server is down
+2023-11-02 10:31:18,126 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 10:31:18,126 - INFO - [+]SERVER URI: PYRO:obj_830f49e09df04f7aa7299af98f26e3f9@localhost:7878
+2023-11-02 10:32:34,123 - INFO - [+]Connected on database
+2023-11-02 10:32:34,429 - INFO - [+]<apps.server.database.models.device.Device object at 0x7f82a0105180> has been created
+2023-11-02 10:33:23,858 - WARNING - [-]Server is down
+2023-11-02 10:33:24,433 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 10:33:24,433 - INFO - [+]SERVER URI: PYRO:obj_e080c8f2573f4efbbfe7fd29c2ce1600@localhost:7878
+2023-11-02 10:33:35,172 - INFO - [+]Connected on database
+2023-11-02 10:33:45,999 - INFO - [+]<apps.server.database.models.device.Device object at 0x7f8ee67094e0> has been created
+2023-11-02 10:34:51,064 - WARNING - [-]Server is down
+2023-11-02 10:34:51,637 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 10:34:51,638 - INFO - [+]SERVER URI: PYRO:obj_9ebe5d7e6e5e40eebad02dbc15395117@localhost:7878
+2023-11-02 10:34:54,402 - INFO - [+]Connected on database
+2023-11-02 10:34:54,769 - INFO - [+]<apps.server.database.models.device.Device object at 0x7ff471109000> has been created
+2023-11-02 10:47:00,819 - INFO - User john@doe.com signed in
+2023-11-02 10:47:01,074 - INFO - User john@doe.com signed in
+2023-11-02 10:47:01,309 - INFO - User john@doe.com signed in
+2023-11-02 10:47:01,612 - INFO - User john@doe.com signed in
+2023-11-02 10:47:01,890 - INFO - User john@doe.com signed in
+2023-11-02 10:47:02,157 - INFO - User john@doe.com signed in
+2023-11-02 10:49:56,542 - INFO - User john@doe.com signed in
+2023-11-02 10:51:29,024 - INFO - User usuario1@gmail.com created
+2023-11-02 11:08:47,033 - INFO - User john@doe.com signed in
+2023-11-02 11:08:47,275 - INFO - User john@doe.com signed in
+2023-11-02 11:08:47,519 - INFO - User john@doe.com signed in
+2023-11-02 11:08:47,814 - INFO - User john@doe.com signed in
+2023-11-02 11:08:48,038 - INFO - User john@doe.com signed in
+2023-11-02 11:08:48,285 - INFO - User john@doe.com signed in
+2023-11-02 11:09:10,608 - INFO - User john@doe.com signed in
+2023-11-02 11:09:10,845 - INFO - User john@doe.com signed in
+2023-11-02 11:09:11,090 - INFO - User john@doe.com signed in
+2023-11-02 11:09:11,392 - INFO - User john@doe.com signed in
+2023-11-02 11:09:11,663 - INFO - User john@doe.com signed in
+2023-11-02 11:09:11,918 - INFO - User john@doe.com signed in
+2023-11-02 11:13:55,998 - INFO - User john@doe.com signed in
+2023-11-02 11:27:46,415 - INFO - User batata@gmail.com created
+2023-11-02 11:35:49,527 - WARNING - [-]Server is down
+2023-11-02 11:35:50,129 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 11:35:50,129 - INFO - [+]SERVER URI: PYRO:obj_6ce01b0eb2de4c439e79db1e63e82a04@localhost:7878
+2023-11-02 11:36:34,435 - INFO - [+]Connected on database
+2023-11-02 11:36:34,725 - INFO - User john@doe.com signed in
+2023-11-02 11:36:34,963 - INFO - User john@doe.com signed in
+2023-11-02 11:36:35,223 - INFO - User john@doe.com signed in
+2023-11-02 11:36:35,536 - INFO - User john@doe.com signed in
+2023-11-02 11:36:35,796 - INFO - User john@doe.com signed in
+2023-11-02 11:36:36,053 - INFO - User john@doe.com signed in
+2023-11-02 11:36:50,765 - INFO - User john@doe.com signed in
+2023-11-02 11:36:51,010 - INFO - User john@doe.com signed in
+2023-11-02 11:36:51,235 - INFO - User john@doe.com signed in
+2023-11-02 11:36:51,532 - INFO - User john@doe.com signed in
+2023-11-02 11:36:51,799 - INFO - User john@doe.com signed in
+2023-11-02 11:36:52,056 - INFO - User john@doe.com signed in
+2023-11-02 11:55:27,276 - INFO - User john@doe.com signed in
+2023-11-02 11:55:27,520 - INFO - User john@doe.com signed in
+2023-11-02 11:55:27,752 - INFO - User john@doe.com signed in
+2023-11-02 11:55:28,033 - INFO - User john@doe.com signed in
+2023-11-02 11:55:28,287 - INFO - User john@doe.com signed in
+2023-11-02 11:55:28,535 - INFO - User john@doe.com signed in
+2023-11-02 11:55:34,658 - INFO - User john@doe.com signed in
+2023-11-02 11:55:34,905 - INFO - User john@doe.com signed in
+2023-11-02 11:55:35,160 - INFO - User john@doe.com signed in
+2023-11-02 11:55:35,461 - INFO - User john@doe.com signed in
+2023-11-02 11:55:35,723 - INFO - User john@doe.com signed in
+2023-11-02 11:55:35,983 - INFO - User john@doe.com signed in
+2023-11-02 11:55:55,586 - INFO - User john@doe.com signed in
+2023-11-02 11:55:55,817 - INFO - User john@doe.com signed in
+2023-11-02 11:55:56,057 - INFO - User john@doe.com signed in
+2023-11-02 11:55:56,374 - INFO - User john@doe.com signed in
+2023-11-02 11:55:56,623 - INFO - User john@doe.com signed in
+2023-11-02 11:55:56,885 - INFO - User john@doe.com signed in
+2023-11-02 11:57:45,996 - INFO - User john@doe.com signed in
+2023-11-02 11:57:46,237 - INFO - User john@doe.com signed in
+2023-11-02 11:57:46,478 - INFO - User john@doe.com signed in
+2023-11-02 11:57:46,785 - INFO - User john@doe.com signed in
+2023-11-02 11:57:47,043 - INFO - User john@doe.com signed in
+2023-11-02 11:57:47,300 - INFO - User john@doe.com signed in
+2023-11-02 11:59:22,662 - WARNING - [-]Server is down
+2023-11-02 11:59:23,358 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 11:59:23,358 - INFO - [+]SERVER URI: PYRO:obj_b22cae3193154d1c8a31ac89b6fdb58f@localhost:7878
+2023-11-02 11:59:30,257 - INFO - [+]Connected on database
+2023-11-02 11:59:39,121 - INFO - User john@doe.com signed in
+2023-11-02 11:59:39,359 - INFO - User john@doe.com signed in
+2023-11-02 11:59:39,611 - INFO - User john@doe.com signed in
+2023-11-02 11:59:39,919 - INFO - User john@doe.com signed in
+2023-11-02 11:59:40,158 - INFO - User john@doe.com signed in
+2023-11-02 11:59:40,398 - INFO - User john@doe.com signed in
+2023-11-02 12:01:12,927 - INFO - User john@doe.com signed in
+2023-11-02 12:01:13,167 - INFO - User john@doe.com signed in
+2023-11-02 12:01:13,402 - INFO - User john@doe.com signed in
+2023-11-02 12:01:13,698 - INFO - User john@doe.com signed in
+2023-11-02 12:01:13,934 - INFO - User john@doe.com signed in
+2023-11-02 12:01:14,181 - INFO - User john@doe.com signed in
+2023-11-02 12:15:15,867 - WARNING - [-]Server is down
+2023-11-02 12:15:16,431 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:15:16,431 - INFO - [+]SERVER URI: PYRO:obj_64f360d96b124798a7ce2a31c0af849d@localhost:7878
+2023-11-02 12:15:31,207 - INFO - [+]Connected on database
+2023-11-02 12:17:57,684 - WARNING - [-]Server is down
+2023-11-02 12:17:58,242 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:17:58,242 - INFO - [+]SERVER URI: PYRO:obj_22c18905d8124af4b46e6ac40b79ae7a@localhost:7878
+2023-11-02 12:18:02,274 - INFO - [+]Connected on database
+2023-11-02 12:18:24,652 - WARNING - [-]Server is down
+2023-11-02 12:18:25,219 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:18:25,219 - INFO - [+]SERVER URI: PYRO:obj_f6522fe2618d4bd38ae02377acaa1fd9@localhost:7878
+2023-11-02 12:18:30,760 - INFO - [+]Connected on database
+2023-11-02 12:25:02,094 - WARNING - [-]Server is down
+2023-11-02 12:25:02,663 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:25:02,663 - INFO - [+]SERVER URI: PYRO:obj_58ff7cb351134cdc870375fa6b9883b6@localhost:7878
+2023-11-02 12:25:07,454 - INFO - [+]Connected on database
+2023-11-02 12:47:20,285 - WARNING - [-]Server is down
+2023-11-02 12:47:20,852 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:47:20,853 - INFO - [+]SERVER URI: PYRO:obj_09c653dbc4804237b2eeb2376522118c@localhost:7878
+2023-11-02 12:47:31,374 - INFO - [+]Connected on database
+2023-11-02 12:47:31,654 - INFO - User john@doe.com signed in
+2023-11-02 12:59:15,382 - WARNING - [-]Server is down
+2023-11-02 12:59:15,853 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 12:59:15,853 - INFO - [+]SERVER URI: PYRO:obj_9e4e6f7fdf7a44e2a66b958fe36ce7d4@localhost:7878
+2023-11-02 12:59:23,484 - INFO - [+]Connected on database
+2023-11-02 12:59:23,752 - INFO - User john@doe.com signed in
+2023-11-02 12:59:23,995 - INFO - User john@doe.com signed in
+2023-11-02 12:59:24,236 - INFO - User john@doe.com signed in
+2023-11-02 12:59:24,572 - INFO - User john@doe.com signed in
+2023-11-02 12:59:24,827 - INFO - User john@doe.com signed in
+2023-11-02 12:59:25,090 - INFO - User john@doe.com signed in
+2023-11-02 13:04:56,801 - INFO - [+]<apps.server.database.models.device.Device object at 0x7f2bf0b137f0> has been created
+2023-11-02 13:18:33,687 - INFO - User john@doe.com signed in
+2023-11-02 13:18:33,942 - INFO - User john@doe.com signed in
+2023-11-02 13:18:34,190 - INFO - User john@doe.com signed in
+2023-11-02 13:18:34,513 - INFO - User john@doe.com signed in
+2023-11-02 13:18:34,775 - INFO - User john@doe.com signed in
+2023-11-02 13:18:35,036 - INFO - User john@doe.com signed in
+2023-11-02 13:18:49,073 - INFO - User john@doe.com signed in
+2023-11-02 13:18:49,306 - INFO - User john@doe.com signed in
+2023-11-02 13:18:49,540 - INFO - User john@doe.com signed in
+2023-11-02 13:18:49,859 - INFO - User john@doe.com signed in
+2023-11-02 13:18:50,136 - INFO - User john@doe.com signed in
+2023-11-02 13:18:50,397 - INFO - User john@doe.com signed in
+2023-11-02 13:20:45,284 - INFO - User john@doe.com signed in
+2023-11-02 13:20:45,536 - INFO - User john@doe.com signed in
+2023-11-02 13:20:45,788 - INFO - User john@doe.com signed in
+2023-11-02 13:20:46,082 - INFO - User john@doe.com signed in
+2023-11-02 13:20:46,338 - INFO - User john@doe.com signed in
+2023-11-02 13:20:46,576 - INFO - User john@doe.com signed in
+2023-11-02 13:21:04,021 - INFO - User john@doe.com signed in
+2023-11-02 13:21:04,277 - INFO - User john@doe.com signed in
+2023-11-02 13:21:04,533 - INFO - User john@doe.com signed in
+2023-11-02 13:21:04,838 - INFO - User john@doe.com signed in
+2023-11-02 13:21:05,089 - INFO - User john@doe.com signed in
+2023-11-02 13:21:05,341 - INFO - User john@doe.com signed in
+2023-11-02 13:21:27,507 - INFO - User john@doe.com signed in
+2023-11-02 13:21:27,746 - INFO - User john@doe.com signed in
+2023-11-02 13:21:27,986 - INFO - User john@doe.com signed in
+2023-11-02 13:21:28,302 - INFO - User john@doe.com signed in
+2023-11-02 13:21:28,567 - INFO - User john@doe.com signed in
+2023-11-02 13:21:28,807 - INFO - User john@doe.com signed in
+2023-11-02 13:21:41,879 - INFO - User john@doe.com signed in
+2023-11-02 13:21:42,116 - INFO - User john@doe.com signed in
+2023-11-02 13:21:42,368 - INFO - User john@doe.com signed in
+2023-11-02 13:21:42,662 - INFO - User john@doe.com signed in
+2023-11-02 13:21:42,930 - INFO - User john@doe.com signed in
+2023-11-02 13:21:43,176 - INFO - User john@doe.com signed in
+2023-11-02 13:21:50,494 - INFO - User john@doe.com signed in
+2023-11-02 13:21:50,760 - INFO - User john@doe.com signed in
+2023-11-02 13:21:51,005 - INFO - User john@doe.com signed in
+2023-11-02 13:21:51,291 - INFO - User john@doe.com signed in
+2023-11-02 13:21:51,535 - INFO - User john@doe.com signed in
+2023-11-02 13:21:51,781 - INFO - User john@doe.com signed in
+2023-11-02 13:22:05,588 - INFO - User john@doe.com signed in
+2023-11-02 13:22:05,834 - INFO - User john@doe.com signed in
+2023-11-02 13:22:06,077 - INFO - User john@doe.com signed in
+2023-11-02 13:22:06,376 - INFO - User john@doe.com signed in
+2023-11-02 13:22:06,638 - INFO - User john@doe.com signed in
+2023-11-02 13:22:06,888 - INFO - User john@doe.com signed in
+2023-11-02 13:22:18,586 - INFO - User john@doe.com signed in
+2023-11-02 13:22:18,843 - INFO - User john@doe.com signed in
+2023-11-02 13:22:19,096 - INFO - User john@doe.com signed in
+2023-11-02 13:22:19,421 - INFO - User john@doe.com signed in
+2023-11-02 13:22:19,682 - INFO - User john@doe.com signed in
+2023-11-02 13:22:19,934 - INFO - User john@doe.com signed in
+2023-11-02 13:22:42,696 - INFO - User john@doe.com signed in
+2023-11-02 13:22:42,926 - INFO - User john@doe.com signed in
+2023-11-02 13:22:43,168 - INFO - User john@doe.com signed in
+2023-11-02 13:22:43,463 - INFO - User john@doe.com signed in
+2023-11-02 13:22:43,723 - INFO - User john@doe.com signed in
+2023-11-02 13:22:43,975 - INFO - User john@doe.com signed in
+2023-11-02 13:26:47,047 - INFO - User usuario2@gmail.com created
+2023-11-02 14:04:47,375 - INFO - User usuario3@gmail.com created
+2023-11-02 14:57:09,930 - INFO - User usuario4@gmail.com created
+2023-11-02 15:08:00,736 - WARNING - [-]Server is down
+2023-11-02 15:08:01,339 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-02 15:08:01,339 - INFO - [+]SERVER URI: PYRO:obj_bb8f94a03c5b4c6db640a72b5895cf85@localhost:7878
+2023-11-02 15:08:05,709 - INFO - [+]Connected on database
+2023-11-02 15:08:06,168 - INFO - [+]<apps.server.database.models.device.Device object at 0x7f90d3317d00> has been created
+2023-11-02 17:03:01,932 - WARNING - [-]Server is down

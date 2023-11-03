@@ -1,7 +1,7 @@
+import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Page } from '@/routes/app-pages'
 import { NavLink } from 'react-router-dom'
-import { buttonVariants } from './ui/button'
 
 interface SidebarNavProps {
   pages: Page[]

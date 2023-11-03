@@ -17,6 +17,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 import { useCreateDevice } from '@/services/api/requests/devices'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from '@phosphor-icons/react'
@@ -24,8 +26,6 @@ import { useId, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as zod from 'zod'
 import { LoadingIndicator } from './loading-indicator'
-import { Input } from './ui/input'
-import { toast } from './ui/use-toast'
 
 export const NewGateDialog = () => {
   const [isOpen, setIsOpen] = useState(false)

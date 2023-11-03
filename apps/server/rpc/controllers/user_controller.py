@@ -23,17 +23,18 @@ class UserController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
             data = CreateUserSchema(**payload)
-            member = User(
+            user = User(
                 id=uuid.uuid4(),
                 name=data.name,
                 email=data.email,
                 rfid=data.rfid,
+                device_id=uuid.UUID(data.device_id),
                 authorized=data.authorized or True,
                 added_by=uuid.UUID(header_data.user_id),
             )
 
-            if InsertMain.insert_user(member):
-                LogMaker.write_log(f"User {member.email} created", "info")
+            if InsertMain.insert_user(user):
+                LogMaker.write_log(f"User {user.email} created", "info")
                 return CreatedResponse(message="Usuário criado com sucesso!", data=True).dict()
             return InternalServerError("Erro ao criar usuário").dict()
         except Exception as e:
@@ -69,26 +70,21 @@ class UserController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    @authorization_required
     def select_users_by_device_id(
         header: typing.Dict[str, typing.Any], device_id: str
     ) -> typing.Dict[str, typing.Any]:
         try:
+            header_data = SessionHeader(**header)
+            if not header_data.token or not header_data.email:
+                return BadRequestError("Token ou email não informados").dict()
+
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
             users: typing.List = SelectMain.select_users_by_device_id(device_id)
             response = []
             if users:
-                for user in users:
-                    u: UserAccessHistoryJoinSchema = UserAccessHistoryJoinSchema(
-                        id=user[0].id,
-                        name=user[0].name,
-                        email=user[0].name,
-                        rfid=user[0].rfid,
-                        authorized=user[0].authorized,
-                        added_by=user[0].added_by,
-                        created_at=user[1],
-                        device_id=user[2],
-                    )
-
+                for u in users:
                     response.append(
                         {
                             "name": u.name,
@@ -97,12 +93,10 @@ class UserController:
                             "added_by": str(u.added_by),
                             "id": u.id,
                             "authorized": u.authorized,
-                            "time": u.created_at,
-                            "device_id": u.device_id,
                         }
                     )
                 return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
-            return NoContentResponse(message="Sem dados", data={}).dict()
+            return NoContentResponse(message="Sem dados", data=[]).dict()
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
@@ -136,15 +130,20 @@ class UserController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    @authorization_required
     def update_user_authorization(
         header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
         try:
-            print("called1")
+            header_data = SessionHeader(**header)
+            if not header_data.token or not header_data.email:
+                return BadRequestError("Token ou email não informados").dict()
+
+            if not Security.verify_token(header_data.email, header_data.token):
+                return UnauthorizedError("Token inválido").dict()
+
             if UpdateMain.update_user_authorization(user):
                 return OKResponse(
-                    message="Permissao de usuário atualizada com sucesso!", data={}
+                    message="Permissao de usuário atualizada com sucesso!", data=True
                 ).dict()
             return InternalServerError(
                 "Não foi possível atualizar o usuario, verifique os dados"

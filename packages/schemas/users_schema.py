@@ -10,6 +10,7 @@ class CreateUserSchema(BaseModel):
     rfid: str
     # added_by: str
     authorized: bool
+    device_id: str
 
 
 class UserAccessHistoryJoinSchema(BaseModel):

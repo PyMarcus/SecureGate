@@ -18,6 +18,7 @@ class User(BaseModel):
     rfid: str = sa.Column(sa.String(300), nullable=False, unique=True)
     authorized: bool = sa.Column(sa.Boolean, nullable=False, default=True)
     added_by: uuid = sa.Column(sa.UUID, sa.ForeignKey("admins.id"), nullable=False)
+    device_id: uuid = sa.Column(sa.UUID, sa.ForeignKey("devices.id"), nullable=False)
 
     def __repr__(self) -> str:
         return f"<User {self.name} - {self.email}"

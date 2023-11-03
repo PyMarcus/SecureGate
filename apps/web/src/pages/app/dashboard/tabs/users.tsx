@@ -1,4 +1,6 @@
+import { AccessHistory } from '@/@types/schemas/access-history'
 import { User } from '@/@types/schemas/user'
+import { AccessHistoryTable } from '@/components/access-history-table'
 import { LoadingIndicator } from '@/components/loading-indicator'
 
 import {
@@ -9,17 +11,19 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { UserHistoryTable } from '@/components/user-history-table'
 import { UsersTable } from '@/components/users-table'
+import { useUserAccessHistory } from '@/services/api/requests/users'
 import { useUserStore } from '@/stores/user-store'
 import {
   IdentificationCard,
   LockKeyOpen,
   Users as UsersIcon,
 } from '@phosphor-icons/react'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export const Users = () => {
+  const [accessHistory, setAccessHistory] = useState<AccessHistory[]>([])
+
   const {
     users,
     selectedUser,
@@ -27,6 +31,17 @@ export const Users = () => {
     setSelectedUser,
     removeSelectedUser,
   } = useUserStore()
+
+  const { isLoading: isLoadingUserAccessHistory, data: userAccessHistory } =
+    useUserAccessHistory({
+      userId: selectedUser?.id || '-',
+    })
+
+  useEffect(() => {
+    if (userAccessHistory && userAccessHistory.success) {
+      setAccessHistory(userAccessHistory.data)
+    }
+  }, [userAccessHistory])
 
   const memberHistoryRef = useRef<HTMLHeadingElement | null>(null)
 
@@ -41,8 +56,9 @@ export const Users = () => {
     }
   }
 
-  const totalUsers = users.length
-  const totalAuthorizedUsers = users.filter(({ authorized }) => authorized)
+  const totalUsers = users.length || 0
+  const totalAuthorizedUsers =
+    users.filter(({ authorized }) => authorized) || []
 
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8 ">
@@ -144,7 +160,10 @@ export const Users = () => {
           </CardHeader>
           <CardContent>
             {selectedUser ? (
-              <UserHistoryTable />
+              <AccessHistoryTable
+                isLoading={isLoadingUserAccessHistory}
+                accessHistory={accessHistory}
+              />
             ) : (
               <div className="h-32 grid place-items-center">
                 <p className="text-sm text-muted-foreground">

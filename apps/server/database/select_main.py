@@ -1,13 +1,16 @@
 import datetime
 import typing
 import uuid
+from typing import Type
 
+from sqlalchemy import and_
 from sqlalchemy.orm import aliased
 
 from packages.schemas.users_schema import UserAccessHistoryJoinSchema
 
 from .config import DBConnection
 from .models.__all_models import *
+from .models.access_history import AccessHistory
 
 
 class SelectMain:
@@ -65,20 +68,14 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_users_by_device_id(
-        cls, device_id: str
-    ) -> typing.List[typing.Type[UserAccessHistoryJoinSchema]] | None:
+    def select_users_by_device_id(cls, device_id: str) -> typing.List[typing.Type[User]] | None:
         try:
             with cls.__session.create_session() as session:
-                ah_alias = aliased(AccessHistory)
-                history: typing.Type[UserAccessHistoryJoinSchema] = (
-                    session.query(User, ah_alias.created_at, ah_alias.device_id)
-                    .outerjoin(ah_alias, ah_alias.device_id == device_id)
-                    .order_by(ah_alias.created_at.desc())
-                    .all()
+                users: typing.Type[User] = (
+                    session.query(User).filter(User.device_id == device_id).all()
                 )
-                if history:
-                    return history
+                if users:
+                    return users
                 return None
         except Exception:
             return None
@@ -110,6 +107,32 @@ class SelectMain:
                     .filter(AccessHistory.created_at.between(date_ini_obj, date_end_obj))
                     .all()
                 )
+                if history:
+                    return history
+                return None
+        except Exception as e:
+            print(e)
+            return None
+
+    @classmethod
+    def select_device_access_history_by_date(
+        cls, device_id: str, date: str
+    ) -> Type[AccessHistory] | None:
+        try:
+            with cls.__session.create_session() as session:
+                date_obj = datetime.datetime.strptime(date, "%Y-%m-%d")
+
+                history = (
+                    session.query(AccessHistory)
+                    .filter(AccessHistory.device_id == device_id)
+                    .filter(
+                        and_(
+                            AccessHistory.created_at >= date_obj,
+                            AccessHistory.created_at < date_obj + datetime.timedelta(days=1),
+                        )
+                    )
+                    .order_by(AccessHistory.created_at.desc())
+                ).all()
                 if history:
                     return history
                 return None

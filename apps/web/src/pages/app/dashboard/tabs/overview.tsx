@@ -1,3 +1,4 @@
+import { AccessHistoryTable } from '@/components/access-history-table'
 import { LoadingIndicator } from '@/components/loading-indicator'
 import { OverviewChart } from '@/components/overview-chart'
 import { Button } from '@/components/ui/button'
@@ -9,13 +10,12 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { getDeviceAccessHistoryRequest } from '@/services/api/requests/devices'
+import { useDeviceAccessHistory } from '@/services/api/requests/devices'
 import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
-import { format, sub } from 'date-fns'
+import { format } from 'date-fns'
 import { useEffect } from 'react'
-import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
@@ -28,29 +28,17 @@ export const Overview = () => {
   const { users, isLoadingUsers } = useUserStore()
   const totalUsers = users.length
 
-  const currentDate = new Date()
-  const twentyFourHoursAgo = sub(currentDate, { hours: 24 })
-
-  const getDeviceAccessHistory = () =>
-    getDeviceAccessHistoryRequest({
-      deviceId: currentDevice!.id,
-      startDate: format(twentyFourHoursAgo, 'yyyy-MM-dd HH:mm'),
-      endDate: format(twentyFourHoursAgo, 'yyyy-MM-dd HH:mm'),
+  const { isLoading: accessHistoryLoading, data: accessHistory } =
+    useDeviceAccessHistory({
+      deviceId: currentDevice?.id || '-',
+      date: format(new Date(), 'yyyy-MM-dd'),
     })
 
-  const {
-    isLoading: isLoadingDeviceAccessHistory,
-    data: deviceAccessHistoryResponse,
-  } = useQuery('deviceAccessHistory', getDeviceAccessHistory, {
-    enabled: !!currentDevice,
-  })
-
   useEffect(() => {
-    if (deviceAccessHistoryResponse && deviceAccessHistoryResponse.success) {
-      console.log(deviceAccessHistoryResponse.data)
-      setDeviceAccessHistory(deviceAccessHistoryResponse.data || [])
+    if (accessHistory && accessHistory.success) {
+      setDeviceAccessHistory(accessHistory.data)
     }
-  }, [deviceAccessHistoryResponse, setDeviceAccessHistory])
+  }, [accessHistory, setDeviceAccessHistory])
 
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
@@ -113,7 +101,7 @@ export const Overview = () => {
               </Button>
             </div>
             <CardDescription className="mt-0">
-              Acessos nas últimas 24 horas
+              Total de acessos por hora do dia
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -121,7 +109,7 @@ export const Overview = () => {
               className="max-w-[calc(100vw-6rem)] 
             md:max-w-[calc(100vw-8rem)]"
             >
-              {isLoadingDeviceAccessHistory ? (
+              {accessHistoryLoading ? (
                 <div className="h-[310px] grid place-items-center">
                   <LoadingIndicator />
                 </div>
@@ -138,14 +126,19 @@ export const Overview = () => {
             <div className="inline-flex items-center justify-between">
               <CardTitle>Últimos acessos</CardTitle>
               <Button variant="link" size="sm" asChild>
-                <Link to="/painel/membros">Ver todos</Link>
+                <Link to="/painel/usuarios">Ver todos</Link>
               </Button>
             </div>
             <CardDescription className="mt-0">
-              Últimos 10 acessos
+              Histórico diário de acessos
             </CardDescription>
           </CardHeader>
-          <CardContent></CardContent>
+          <CardContent>
+            <AccessHistoryTable
+              accessHistory={deviceAccessHistory}
+              isLoading={accessHistoryLoading}
+            />
+          </CardContent>
         </Card>
       </div>
     </section>
