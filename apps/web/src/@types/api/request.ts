@@ -39,3 +39,8 @@ export interface GetDeviceHistoryRequest {
 export interface GetUserAccessHistoryRequest {
   userId: string
 }
+
+export interface UpdateUserAuthorizationRequest {
+  userId: string
+  authorized: boolean
+}

@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
+import { useUpdateUserAuthorization } from '@/services/api/requests/users'
 import {
   ClockCounterClockwise,
   DotsThreeVertical,
@@ -25,7 +26,7 @@ import {
   LockKeyOpen,
   X,
 } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { toast } from './ui/use-toast'
 
 interface UserCardProps {
   user: User
@@ -33,20 +34,25 @@ interface UserCardProps {
   onSelectRow: (user: User) => void
 }
 
-type Authorization = 'Sim' | 'Não'
-
 export const UserRow = ({ user, isSelected, onSelectRow }: UserCardProps) => {
-  const [authorization, setAuthorization] = useState<Authorization>(
-    user.authorized ? 'Sim' : 'Não',
-  )
-
-  const isAuthorized = authorization === 'Sim'
-
   const displayId = user.id.split('-')[0]
 
   const handleSelectRow = () => onSelectRow(user)
-  const handleAuthorizationChange = (value: string) =>
-    setAuthorization(value as Authorization)
+
+  const { mutateAsync } = useUpdateUserAuthorization()
+
+  const handleAuthorizationChange = async (value: string) => {
+    const response = await mutateAsync({
+      userId: user.id,
+      authorized: value === 'Sim',
+    })
+    if (response && response.success) {
+      toast({
+        title: 'Usuário atualizado!',
+        description: 'Permissão de acesso atualizada com sucesso.',
+      })
+    }
+  }
 
   return (
     <TableRow className={cn(isSelected && 'bg-muted')}>
@@ -54,11 +60,8 @@ export const UserRow = ({ user, isSelected, onSelectRow }: UserCardProps) => {
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell>
-        <Badge
-          className={cn(isAuthorized && 'bg-emerald-500')}
-          variant={isAuthorized ? 'default' : 'destructive'}
-        >
-          {authorization}
+        <Badge variant={user.authorized ? 'success' : 'destructive'}>
+          {user.authorized ? 'Sim' : 'Não'}
         </Badge>
       </TableCell>
       <TableCell>
@@ -84,7 +87,7 @@ export const UserRow = ({ user, isSelected, onSelectRow }: UserCardProps) => {
               <DropdownMenuPortal>
                 <DropdownMenuSubContent>
                   <DropdownMenuRadioGroup
-                    value={authorization}
+                    value={user.authorized ? 'Sim' : 'Não'}
                     onValueChange={handleAuthorizationChange}
                   >
                     <DropdownMenuRadioItem

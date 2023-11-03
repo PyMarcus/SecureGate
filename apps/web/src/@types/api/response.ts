@@ -29,10 +29,14 @@ export type SignInResponse = ApiResponse<SignInResponseData>
 type SignUpResponseData = true
 export type SignUpResponse = ApiResponse<SignUpResponseData>
 
-// Members =====================================================================
+// Users =====================================================================
 
 type CreateUserResponseData = true
 export type CreateUserResponse = ApiResponse<CreateUserResponseData>
+
+type UpdateUserAuthorizationResponseData = true
+export type UpdateUserAuthorizationResponse =
+  ApiResponse<UpdateUserAuthorizationResponseData>
 
 // Devices =====================================================================
 type GetAllDevicesResponseData = Device[]

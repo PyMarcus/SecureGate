@@ -4,7 +4,7 @@ from apps.api.utils.get_request_header import get_request_header
 from apps.api.utils.handle_rpc_result import handle_rpc_result
 from apps.server.rpc import RPCSingletonClient
 from apps.server.rpc.rpc_client import get_rpc_client
-from packages.schemas.users_schema import CreateUserSchema
+from packages.schemas.users_schema import *
 
 routes = APIRouter(
     prefix="/users",
@@ -43,4 +43,16 @@ def get_user_history(
 ):
     header = get_request_header(request)
     result = rpc.select_user_access_history(header, user_id)
+    return handle_rpc_result(result)
+
+
+@routes.put("/{user_id}/authorization")
+def update_user_authorization(
+    request: Request,
+    body: UpdateUserAuthorizedSchema,
+    rpc: RPCSingletonClient = Depends(get_rpc_client),
+):
+    header = get_request_header(request)
+    print(body)
+    result = rpc.update_user_authorization(header, body.model_dump())
     return handle_rpc_result(result)

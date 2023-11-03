@@ -13,6 +13,11 @@ class CreateUserSchema(BaseModel):
     device_id: str
 
 
+class UpdateUserAuthorizedSchema(BaseModel):
+    user_id: str
+    new_authorization: bool
+
+
 class UserAccessHistoryJoinSchema(BaseModel):
     id: typing.Any
     name: str
