@@ -24,7 +24,7 @@ class Log:
         print(colored(f"[EMULATOR] {message}", "yellow"))
 
     @staticmethod
-    def error(message: str):
+    def danger(message: str):
         """
         Log an error message to the console.
         """

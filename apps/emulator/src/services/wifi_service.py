@@ -9,10 +9,10 @@ class WifiService:
         """
         Create a WiFi hotspot.
         """
-        Log.info(f"Hosting WiFi network {ssid} with password {password}")
+        Log.info(f"Hosting WiFi network ssid: {ssid} with password: {password}")
 
     def connect(self, ssid: str, password: str):
         """
         Connect to a WiFi network.
         """
-        Log.info(f"Connecting to WiFi network {ssid} with password {password}")
+        Log.info(f"Connecting to WiFi network ssid: {ssid}")
