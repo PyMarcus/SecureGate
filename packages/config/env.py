@@ -61,6 +61,7 @@ class DotEnv:
     # BOARD EMULATOR
     BOARD_EMULATOR_HOST: str | None = os.getenv("BOARD_EMULATOR_HOST")
     BOARD_EMULATOR_PORT: int | None = _map_to_int(os.getenv("BOARD_EMULATOR_PORT"))
+    BOARD_EMULATOR_URL: str | None = os.getenv("BOARD_EMULATOR_URL")
 
     # TOKENS
     SECRET_KEY: str | None = os.getenv("SECRET_KEY")

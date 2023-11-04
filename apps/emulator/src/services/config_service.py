@@ -5,6 +5,12 @@ from apps.emulator.config.config import config
 from apps.emulator.src.utils.log import Log
 
 
+def save_config(payload):
+    config.update(payload)
+    config_result = config.save_config()
+    return config.check_schema(config_result, config.COMPLETE_SCHEMA)
+
+
 class HTTPHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         Log.info(format % args)
@@ -37,11 +43,6 @@ class HTTPHandler(BaseHTTPRequestHandler):
             return token == config.get("token")
         return False
 
-    def save_config(self, payload):
-        config.update(payload)
-        config_result = config.save_config()
-        return config.check_schema(config_result, config.COMPLETE_SCHEMA)
-
     def do_POST(self):
         try:
             if not self.authenticate():
@@ -50,15 +51,16 @@ class HTTPHandler(BaseHTTPRequestHandler):
                 )
 
             payload = self.parse_json_request()
-            print(config.check_schema(payload, config.CONFIG_SCHEMA))
             if not config.check_schema(payload, config.CONFIG_SCHEMA):
                 return self.send_json_response(
                     status=400, success=False, message="A configuração é inválida"
                 )
 
-            if self.save_config(payload):
+            if save_config(payload):
                 return self.send_json_response(
-                    status=200, data=True, message="Configuração salva com sucesso"
+                    status=200,
+                    data=True,
+                    message="Configuração salva com sucesso. Reinicie o dispositivo para aplicar as alterações.",
                 )
 
             return self.send_json_response(
