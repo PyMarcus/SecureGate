@@ -9,33 +9,44 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { toast } from '@/components/ui/use-toast'
+import { useConfigureDevice } from '@/services/api/requests/configuration'
 import { useCreateDevice } from '@/services/api/requests/devices'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Password, PlusCircle, WifiHigh } from '@phosphor-icons/react'
 import { useId, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { v4 as uuidv4 } from 'uuid'
 import * as zod from 'zod'
 import { CopyButton } from './copy-button'
 import { LoadingIndicator } from './loading-indicator'
 import { NewGateForm } from './new-gate-form'
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
+import { toast } from './ui/use-toast'
 
 interface Step {
   content: React.ReactNode
   leftButtonText: string
   rightButtonText: string
-  onLeftButton?: (params?: unknown) => void
-  onRightButton?: (params?: unknown) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onLeftButton?: (params?: any) => void | Promise<void>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRightButton?: (params?: any) => void | Promise<void>
 }
 
 export const NewGateDialog = () => {
   const { VITE_BOARD_AP_SSID, VITE_BOARD_AP_PASSWORD } = import.meta.env
 
+  const [deviceId, setDeviceId] = useState<string>(uuidv4())
   const [formStep, setFormStep] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
 
-  const { isLoading, mutateAsync } = useCreateDevice()
+  const { isLoading: isConfiguring, mutateAsync: configureDevice } =
+    useConfigureDevice()
+  const {
+    isLoading,
+
+    mutateAsync: saveDevice,
+  } = useCreateDevice()
 
   const handleOpenChange = (open: boolean) => setIsOpen(open)
   const handleNextStep = () => setFormStep((prev) => prev + 1)
@@ -84,18 +95,59 @@ export const NewGateDialog = () => {
   const handleResetAndClose = () => {
     form.reset()
     closeDialog()
+    setDeviceId(uuidv4())
     handleResetStep()
   }
 
-  const handleFormSubmit = async (values: FormType) => {
+  const getConfigPayload = (values: FormType) => {
+    const {
+      VITE_MQTT_HOST,
+      VITE_MQTT_PORT,
+      VITE_MQTT_USERNAME,
+      VITE_MQTT_PASSWORD,
+    } = import.meta.env
+
+    return {
+      id: deviceId,
+      mqtt: {
+        host: VITE_MQTT_HOST,
+        port: Number(VITE_MQTT_PORT),
+        user: VITE_MQTT_USERNAME,
+        password: VITE_MQTT_PASSWORD,
+      },
+      wifi: {
+        ssid: values.wifiSSID,
+        password: values.wifiPassword,
+      },
+    }
+  }
+
+  const getCreatePayload = (values: FormType) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmWifiPassword, ...rest } = values
-
-    const response = await mutateAsync({
+    return {
       ...rest,
+      id: deviceId,
       wifi_password: values.wifiPassword,
       wifi_ssid: values.wifiSSID,
-    })
+    }
+  }
+
+  const handleConfigSubmit = async (values: FormType) => {
+    const payload = getConfigPayload(values)
+    const response = await configureDevice(payload)
+
+    if (response && response.success) {
+      toast({
+        title: 'Portão configurado',
+        description: response.message,
+      })
+      handleNextStep()
+    }
+  }
+  const handleCreateSubmit = async (values: FormType) => {
+    const payload = getCreatePayload(values)
+    const response = await saveDevice(payload)
 
     if (response && response.success) {
       toast({
@@ -166,7 +218,7 @@ export const NewGateDialog = () => {
       leftButtonText: 'Voltar',
       rightButtonText: 'Próximo',
       onLeftButton: handlePreviousStep,
-      onRightButton: handleNextStep,
+      onRightButton: form.handleSubmit(handleConfigSubmit),
     },
     2: {
       content: (
@@ -186,13 +238,15 @@ export const NewGateDialog = () => {
       leftButtonText: 'Voltar',
       rightButtonText: 'Adicionar',
       onLeftButton: handlePreviousStep,
-      onRightButton: form.handleSubmit(handleFormSubmit),
+      onRightButton: form.handleSubmit(handleCreateSubmit),
     },
   }
 
   const currentStep = formSteps[formStep]
   const isFistStep = formStep === 0
   const isOnFormStep = formStep === 1
+
+  const hasLoading = isConfiguring || isLoading
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
@@ -234,9 +288,9 @@ export const NewGateDialog = () => {
           <Button
             form={formId}
             onClick={currentStep.onRightButton}
-            disabled={isLoading || (isOnFormStep && !formState.isValid)}
+            disabled={hasLoading || (isOnFormStep && !formState.isValid)}
           >
-            {isLoading && <LoadingIndicator className="mr-2" />}
+            {hasLoading && <LoadingIndicator className="mr-2" />}
             {currentStep.rightButtonText}
           </Button>
         </DialogFooter>

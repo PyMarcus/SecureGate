@@ -14,7 +14,7 @@ def _boot():
         wifi_config = config.get("wifi")
         print(wifi_config)
     else:
-        host, port = env.BOARD_EMULATOR_HOST, env.BOARD_EMULATOR_PORT
+        host, port = env.BOARD_API_HOST, env.BOARD_API_PORT
         if not host or not port:
             raise Exception("Missing host or port for emulator")
 

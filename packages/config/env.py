@@ -58,10 +58,9 @@ class DotEnv:
     BOARD_AP_PASSWORD: str | None = os.getenv("BOARD_AP_PASSWORD")
     BOARD_TOKEN: str | None = os.getenv("BOARD_TOKEN")
 
-    # BOARD EMULATOR
-    BOARD_EMULATOR_HOST: str | None = os.getenv("BOARD_EMULATOR_HOST")
-    BOARD_EMULATOR_PORT: int | None = _map_to_int(os.getenv("BOARD_EMULATOR_PORT"))
-    BOARD_EMULATOR_URL: str | None = os.getenv("BOARD_EMULATOR_URL")
+    BOARD_API_HOST: str | None = os.getenv("BOARD_API_HOST")
+    BOARD_API_PORT: int | None = _map_to_int(os.getenv("BOARD_API_PORT"))
+    BOARD_API_URL: str | None = os.getenv("BOARD_API_URL")
 
     # TOKENS
     SECRET_KEY: str | None = os.getenv("SECRET_KEY")

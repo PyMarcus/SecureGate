@@ -1,5 +1,5 @@
 import { Role } from '@/@types/schemas/session-user'
-import { api } from '@/services/api/instance'
+import { serverApi } from '@/services/api/instance'
 import { useSessionStore } from '@/stores/session-store'
 import { Navigate, Outlet } from 'react-router-dom'
 
@@ -12,9 +12,9 @@ export const PrivateRoutes = ({ enabledRole = null }: PrivateRoutesProps) => {
 
   if (session) {
     const { token, user } = session
-    api.defaults.headers.Authorization = `Bearer ${token}`
-    api.defaults.headers.userId = user.id
-    api.defaults.headers.userEmail = user.email
+    serverApi.defaults.headers.Authorization = `Bearer ${token}`
+    serverApi.defaults.headers.userId = user.id
+    serverApi.defaults.headers.userEmail = user.email
 
     if (enabledRole !== null) {
       return user.role === enabledRole ? <Outlet /> : <Navigate to="/404" />

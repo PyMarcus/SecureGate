@@ -9,13 +9,16 @@ import {
   UpdateUserAuthorizationResponse,
 } from '@/@types/api/response'
 import { queryClient } from '@/lib/react-query/client'
-import { api } from '@/services/api/instance'
+import { serverApi } from '@/services/api/instance'
 import { QueryFunctionContext, useMutation, useQuery } from 'react-query'
 
 const USERS_ENDPOINT = '/users'
 
 export const createUserRequest = async (data: CreateUserRequest) => {
-  const response = await api.post<CreateUserResponse>(USERS_ENDPOINT, data)
+  const response = await serverApi.post<CreateUserResponse>(
+    USERS_ENDPOINT,
+    data,
+  )
   return response.data
 }
 
@@ -29,7 +32,7 @@ export const useCreateUser = () => {
 
 const getUserAccessHistoryRequest = async (ctx: QueryFunctionContext) => {
   const [, userId] = ctx.queryKey
-  const response = await api.get<GetAccessHistoryResponse>(
+  const response = await serverApi.get<GetAccessHistoryResponse>(
     `${USERS_ENDPOINT}/${userId}/history`,
   )
   return response.data
@@ -45,7 +48,7 @@ const updateUserAuthorizationRequest = async ({
   userId,
   authorized,
 }: UpdateUserAuthorizationRequest) => {
-  const response = await api.put<UpdateUserAuthorizationResponse>(
+  const response = await serverApi.put<UpdateUserAuthorizationResponse>(
     `${USERS_ENDPOINT}/${userId}/authorization`,
     {
       user_id: userId,

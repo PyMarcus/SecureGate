@@ -2,12 +2,10 @@ import datetime
 import typing
 
 from apps.server.database import InsertMain, SelectMain
-from apps.server.database.models.__all_models import *
 from apps.server.security import Security
 from libs import LogMaker
 from packages.errors.errors import *
 from packages.responses.responses import *
-from packages.schemas.devices_schema import DeviceSchema
 from packages.schemas.session_header import SessionHeader
 
 

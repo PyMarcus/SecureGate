@@ -43,6 +43,15 @@ class HTTPHandler(BaseHTTPRequestHandler):
             return token == config.get("token")
         return False
 
+    def do_OPTIONS(self):
+        self.send_response(200, "ok")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "OPTIONS, POST, GET")
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Access-Control-Allow-Headers", "Authorization")
+        self.end_headers()
+
     def do_POST(self):
         try:
             if not self.authenticate():

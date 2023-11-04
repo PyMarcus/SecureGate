@@ -51,3 +51,7 @@ export type GetDeviceUsersResponse = ApiResponse<GetDeviceUsers>
 // Access History ==============================================================
 type GetAccessHistoryResponseData = AccessHistory[]
 export type GetAccessHistoryResponse = ApiResponse<GetAccessHistoryResponseData>
+
+// Device Configuration ========================================================
+type ConfigureDeviceResponseData = true
+export type ConfigureDeviceResponse = ApiResponse<ConfigureDeviceResponseData>

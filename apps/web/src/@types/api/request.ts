@@ -21,6 +21,7 @@ export interface CreateUserRequest {
 }
 
 export interface CreateDeviceRequest {
+  id: string
   name: string
   wifi_ssid: string
   wifi_password: string
@@ -43,4 +44,22 @@ export interface GetUserAccessHistoryRequest {
 export interface UpdateUserAuthorizationRequest {
   userId: string
   authorized: boolean
+}
+
+interface WifiConfig {
+  ssid: string
+  password: string
+}
+
+interface MqttConfig {
+  host: string
+  port: number
+  user: string
+  password: string
+}
+
+export interface ConfigureDeviceRequest {
+  id: string
+  mqtt: MqttConfig
+  wifi: WifiConfig
 }

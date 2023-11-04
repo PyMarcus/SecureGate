@@ -10,13 +10,13 @@ import {
   GetDeviceUsersResponse,
 } from '@/@types/api/response'
 import { queryClient } from '@/lib/react-query/client'
-import { api } from '@/services/api/instance'
+import { serverApi } from '@/services/api/instance'
 import { QueryFunctionContext, useMutation, useQuery } from 'react-query'
 
 const DEVICES_ENDPOINT = '/devices'
 
 const getAllDevicesRequest = async () => {
-  const response = await api.get<GetAllDevicesResponse>(DEVICES_ENDPOINT)
+  const response = await serverApi.get<GetAllDevicesResponse>(DEVICES_ENDPOINT)
   return response.data
 }
 
@@ -29,7 +29,10 @@ export const useGetAllDevices = () =>
   })
 
 export const createDeviceRequest = async (data: CreateDeviceRequest) => {
-  const response = await api.post<CreateDeviceResponse>(DEVICES_ENDPOINT, data)
+  const response = await serverApi.post<CreateDeviceResponse>(
+    DEVICES_ENDPOINT,
+    data,
+  )
   return response.data
 }
 
@@ -43,7 +46,7 @@ export const useCreateDevice = () => {
 
 const getDeviceUsersRequest = async (ctx: QueryFunctionContext) => {
   const [, deviceId] = ctx.queryKey
-  const response = await api.get<GetDeviceUsersResponse>(
+  const response = await serverApi.get<GetDeviceUsersResponse>(
     `${DEVICES_ENDPOINT}/${deviceId}/users`,
   )
   return response.data
@@ -57,7 +60,7 @@ export const getDeviceAccessHistoryRequest = async (
   ctx: QueryFunctionContext,
 ) => {
   const [, deviceId, date] = ctx.queryKey
-  const response = await api.get<GetAccessHistoryResponse>(
+  const response = await serverApi.get<GetAccessHistoryResponse>(
     `${DEVICES_ENDPOINT}/${deviceId}/history`,
     { params: { date } },
   )

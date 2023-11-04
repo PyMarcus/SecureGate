@@ -23,11 +23,17 @@ class DeviceController:
                 return UnauthorizedError("Token inválido").dict()
 
             data = DeviceSchema(**payload)
-            if not data.name or not data.wifi_ssid or not data.wifi_password or not data.version:
+            if (
+                not data.id
+                or not data.name
+                or not data.wifi_ssid
+                or not data.wifi_password
+                or not data.version
+            ):
                 return BadRequestError("Dados inválidos").dict()
 
             device = Device(
-                id=uuid.uuid4(),
+                id=uuid.UUID(data.id),
                 name=data.name,
                 version=data.version,
                 wifi_ssid=data.wifi_ssid,
