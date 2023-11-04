@@ -68,13 +68,11 @@ class MQTTClient:
         self._client.loop_stop()
         self._client.disconnect()
 
-    def listen(self):
+    def listener(self):
         """
-        Starts the client loop in a new thread. It will run until a KeyboardInterrupt is raised.
-        It prevents the main thread from blocking.
+        Returns a thread that will listen for incoming messages. It will run until a KeyboardInterrupt is raised.
         """
-        listener_thread = threading.Thread(target=self._listen)
-        listener_thread.start()
+        return threading.Thread(target=self._listen)
 
     def publish(self, topic: str, message: str):
         """
@@ -100,15 +98,9 @@ if __name__ == "__main__":
         raise Exception("MQTT_HOST or MQTT_PORT not set")
 
     mqtt = MQTTClient(host, port)
-    mqtt.listen()
+    mqtt_thread = mqtt.listener().start()
 
     def on_msg_callback(topic: str, payload: str):
         print(f"[MQTT/CALLBACK] {topic}: {payload}")
 
     mqtt.subscribe("test", on_msg_callback)
-
-    try:
-        while True:
-            ...
-    except KeyboardInterrupt:
-        mqtt.disconnect()
