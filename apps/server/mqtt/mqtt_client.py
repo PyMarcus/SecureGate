@@ -11,12 +11,14 @@ class MQTTClient:
     for handling incoming messages.
     """
 
-    def __init__(self, host: str, port: int):
+    def __init__(self, host: str, port: int, user: str | None = None, password: str | None = None):
         if not host or not port:
             raise Exception("Missing host or port for MQTTClient")
 
         self._host: str = host
         self._port: int = port
+        self._user: str | None = user
+        self._password: str | None = password
 
         self._client: mqtt.Client = mqtt.Client()
         self._topic_callbacks: dict[str, typing.Callable] = {}
@@ -29,6 +31,9 @@ class MQTTClient:
         """
         self._client.on_connect = self._on_connect
         self._client.on_message = self._on_message
+
+        if self._user and self._password:
+            self._client.username_pw_set(self._user, self._password)
         self._client.connect(self._host, self._port, 60)
 
     def _on_connect(self, *args):
@@ -60,7 +65,7 @@ class MQTTClient:
             print("\n[MQTT/CLIENT] Disconnecting...")
             self._client.disconnect()
 
-    def disconnect(self):
+    def stop(self):
         """
         Stops the client loop and disconnects from the broker.
         """
@@ -68,11 +73,12 @@ class MQTTClient:
         self._client.loop_stop()
         self._client.disconnect()
 
-    def listener(self):
+    def listen(self):
         """
         Returns a thread that will listen for incoming messages. It will run until a KeyboardInterrupt is raised.
         """
-        return threading.Thread(target=self._listen)
+        mqtt_thread = threading.Thread(target=self._listen)
+        mqtt_thread.start()
 
     def publish(self, topic: str, message: str):
         """
@@ -98,7 +104,7 @@ if __name__ == "__main__":
         raise Exception("MQTT_HOST or MQTT_PORT not set")
 
     mqtt = MQTTClient(host, port)
-    mqtt_thread = mqtt.listener().start()
+    mqtt_thread = mqtt.listen().start()
 
     def on_msg_callback(topic: str, payload: str):
         print(f"[MQTT/CALLBACK] {topic}: {payload}")

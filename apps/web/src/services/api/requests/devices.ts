@@ -1,5 +1,6 @@
 import {
   CreateDeviceRequest,
+  DeviceActivationRequest,
   GetDeviceHistoryRequest,
   GetDeviceUsersRequest,
 } from '@/@types/api/request'
@@ -75,4 +76,26 @@ export const useDeviceAccessHistory = ({
     ['deviceHistory', deviceId, date],
     getDeviceAccessHistoryRequest,
   )
+}
+
+const deviceActivationRequest = async ({
+  deviceId,
+  action,
+}: DeviceActivationRequest) => {
+  const response = await serverApi.post(
+    `${DEVICES_ENDPOINT}/${deviceId}/activation`,
+    {
+      device_id: deviceId,
+      action,
+    },
+  )
+  return response.data
+}
+
+export const useDeviceActivation = () => {
+  return useMutation('deviceActivation', deviceActivationRequest, {
+    onError: (error) => {
+      console.log(error)
+    },
+  })
 }

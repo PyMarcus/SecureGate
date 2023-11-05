@@ -4,7 +4,7 @@ from apps.api.utils.get_request_header import get_request_header
 from apps.api.utils.handle_rpc_result import handle_rpc_result
 from apps.server.rpc import RPCSingletonClient
 from apps.server.rpc.rpc_client import get_rpc_client
-from packages.schemas.devices_schema import DeviceSchema
+from packages.schemas.devices_schema import DeviceActivationSchema, DeviceSchema
 from packages.schemas.users_schema import CreateUserSchema
 
 routes = APIRouter(
@@ -54,4 +54,16 @@ def get_by_device_history(
 ):
     header = get_request_header(request)
     result = rpc.select_device_access_history_by_date(header, device_id, date)
+    return handle_rpc_result(result)
+
+
+@routes.post("/{device_id}/activation")
+def activate_device(
+    request: Request,
+    device_id: str,
+    body: DeviceActivationSchema,
+    rpc: RPCSingletonClient = Depends(get_rpc_client),
+):
+    header = get_request_header(request)
+    result = rpc.handle_device_activation(header, body.model_dump())
     return handle_rpc_result(result)

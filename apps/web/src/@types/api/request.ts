@@ -41,6 +41,11 @@ export interface GetUserAccessHistoryRequest {
   userId: string
 }
 
+export interface DeviceActivationRequest {
+  deviceId: string
+  action: 'ACTIVATE' | 'DEACTIVATE'
+}
+
 export interface UpdateUserAuthorizationRequest {
   userId: string
   authorized: boolean

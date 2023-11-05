@@ -7,3 +7,8 @@ class DeviceSchema(BaseModel):
     wifi_ssid: str
     wifi_password: str
     version: str
+
+
+class DeviceActivationSchema(BaseModel):
+    device_id: str
+    action: str

@@ -1,0 +1,6 @@
+from enum import Enum
+
+
+class MQTTTopic(Enum):
+    ACTIVATION = "SECURE_GATE::ACTIVATION"
+    AUTHORIZATION = "SECURE_GATE::AUTHORIZATION"

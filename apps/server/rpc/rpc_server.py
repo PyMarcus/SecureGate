@@ -10,6 +10,7 @@ from rpc_server_interface import RPCServerInterface
 
 from apps.server.database import InsertMain
 from apps.server.database.models.__all_models import *
+from apps.server.mqtt.mqtt_client import MQTTClient
 from apps.server.rpc.controllers.access_history_controller import AccessHistoryController
 from apps.server.rpc.controllers.admin_controller import AdminController
 from apps.server.rpc.controllers.device_controller import DeviceController
@@ -54,7 +55,33 @@ class RPCServer(RPCServerInterface):
        building interconnected, efficient, and secure applications
     """
 
+    def __init__(self):
+        self.__setup_mqtt()
+        self.__subscribe_mqtt_topics()
+
+        self.__setup_controllers()
+
     __user_logged: uuid.UUID | None = None  # admin or root
+
+    def __setup_controllers(self):
+        self.__device_controller = DeviceController(self.__mqtt)
+
+    def __setup_mqtt(self):
+        host, port = env.MQTT_HOST, env.MQTT_PORT
+        if not host or not port:
+            raise Exception("MQTT_HOST or MQTT_PORT not set")
+
+        self.__mqtt = MQTTClient(host, port)
+        self.__mqtt.listen()
+
+    def __subscribe_mqtt_topics(self):
+        self.__mqtt.subscribe("test", self.on_msg_callback)
+
+    def stop_mqtt(self):
+        self.__mqtt.stop()
+
+    def on_msg_callback(self, topic: str, payload: str):
+        print(f"[MQTT/CALLBACK] {topic}: {payload}")
 
     @Pyro4.expose
     def sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -82,7 +109,7 @@ class RPCServer(RPCServerInterface):
     def create_device(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
-        return DeviceController.create_device(header, payload)
+        return self.__device_controller.create_device(header, payload)
 
     @Pyro4.expose
     def register_access_history(  # chamar quando o user passar no portao
@@ -106,13 +133,13 @@ class RPCServer(RPCServerInterface):
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id: str
     ) -> typing.Dict[str, typing.Any]:
-        return DeviceController.select_device(header, device_id)
+        return self.__device_controller.select_device(header, device_id)
 
     @Pyro4.expose
     def select_device_users(
         self, header: typing.Dict[str, typing.Any], device_id: str
     ) -> typing.Dict[str, typing.Any]:
-        return DeviceController.select_device_users(header, device_id)
+        return self.__device_controller.select_device_users(header, device_id)
 
     @Pyro4.expose
     def select_user_access_history(
@@ -142,7 +169,7 @@ class RPCServer(RPCServerInterface):
     def select_all_devices(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return DeviceController.select_all_devices(header)
+        return self.__device_controller.select_all_devices(header)
 
     @Pyro4.expose
     def select_users_by_device_id(
@@ -175,6 +202,12 @@ class RPCServer(RPCServerInterface):
         self, header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return UserController.update_user_authorization(header, user)
+
+    @Pyro4.expose
+    def handle_device_activation(
+        self, header: typing.Dict[str, str], payload: typing.Dict[str, str]
+    ) -> bool:
+        return self.__device_controller.handle_device_activation(header, payload)
 
     @authorization_required
     def __register_access_history(
@@ -219,3 +252,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         LogMaker.write_log("[-]Server is down", "warning")
         daemon.shutdown()
+        server.stop_mqtt()

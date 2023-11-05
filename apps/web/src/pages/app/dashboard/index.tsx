@@ -1,15 +1,22 @@
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { GatesSelector } from '@/components/gates-selector'
+import { LoadingIndicator } from '@/components/loading-indicator'
 import { NewGateDialog } from '@/components/new-gate-dialog'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useToast } from '@/components/ui/use-toast'
+import { useDeviceActivation } from '@/services/api/requests/devices'
+import { useDeviceStore } from '@/stores/device-store'
 import { useSessionStore } from '@/stores/session-store'
 import { LockKeyOpen } from '@phosphor-icons/react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 export const Dashboard = () => {
   const { session } = useSessionStore()
+  const { currentDevice } = useDeviceStore()
+
+  const { toast } = useToast()
 
   const navigate = useNavigate()
   const { pathname } = useLocation()
@@ -20,6 +27,26 @@ export const Dashboard = () => {
 
   const handleTabsNavigation = (value: string) => {
     navigate(`/painel/${value}`)
+  }
+
+  const { isLoading: isActivating, mutateAsync: activateDevice } =
+    useDeviceActivation()
+
+  const handleActivateDevice = async () => {
+    if (currentDevice) {
+      const response = await activateDevice({
+        deviceId: currentDevice.id,
+        action: 'ACTIVATE',
+      })
+      if (response && response.success) {
+        const { data } = response
+
+        toast({
+          title: 'Portão ativado com sucesso!',
+          description: `Agora você pode abrir o portão "${data.name}"`,
+        })
+      }
+    }
   }
 
   return (
@@ -46,9 +73,14 @@ export const Dashboard = () => {
               <ConfirmDialog
                 title="Are you sure you want to open this gate?"
                 description="This action cannot be undone. After opening the gate, you won't be able to close it automatically."
+                onConfirm={handleActivateDevice}
                 trigger={
-                  <Button variant="destructive" className="space-x-2 min-w-max">
-                    <LockKeyOpen />
+                  <Button
+                    variant="destructive"
+                    className="space-x-2 min-w-max"
+                    disabled={!currentDevice || isActivating}
+                  >
+                    {isActivating ? <LoadingIndicator /> : <LockKeyOpen />}
                     <span className="sr-only md:not-sr-only">Abrir portão</span>
                   </Button>
                 }

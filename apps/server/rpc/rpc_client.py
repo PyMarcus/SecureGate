@@ -212,6 +212,14 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_all_devices(header)
 
+    def handle_device_activation(
+        self, header: typing.Dict[str, str], payload: typing.Dict[str, str]
+    ) -> bool:
+        """
+        The activate_device method activate a device
+        """
+        return self.client.handle_device_activation(header, payload)
+
     def select_device_access_history(
         self,
         header: typing.Dict[str, str],
