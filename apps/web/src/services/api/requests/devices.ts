@@ -12,6 +12,8 @@ import {
 } from '@/@types/api/response'
 import { queryClient } from '@/lib/react-query/client'
 import { serverApi } from '@/services/api/instance'
+import { useDeviceStore } from '@/stores/device-store'
+import { useUserStore } from '@/stores/user-store'
 import { QueryFunctionContext, useMutation, useQuery } from 'react-query'
 
 const DEVICES_ENDPOINT = '/devices'
@@ -21,13 +23,20 @@ const getAllDevicesRequest = async () => {
   return response.data
 }
 
-export const useGetAllDevices = () =>
-  useQuery('allDevices', getAllDevicesRequest, {
-    onSuccess: () => {
+export const useGetAllDevices = () => {
+  const { setCurrentDevice, setDevices } = useDeviceStore()
+  return useQuery('allDevices', getAllDevicesRequest, {
+    onSuccess: (data) => {
+      if (data.success) {
+        setDevices(data.data)
+        setCurrentDevice(data.data[0])
+      }
+
       queryClient.invalidateQueries('deviceUsers')
       queryClient.invalidateQueries('deviceHistory')
     },
   })
+}
 
 export const createDeviceRequest = async (data: CreateDeviceRequest) => {
   const response = await serverApi.post<CreateDeviceResponse>(
@@ -54,7 +63,15 @@ const getDeviceUsersRequest = async (ctx: QueryFunctionContext) => {
 }
 
 export const useDeviceUsers = ({ deviceId }: GetDeviceUsersRequest) => {
-  return useQuery(['deviceUsers', deviceId], getDeviceUsersRequest)
+  const { setUsers } = useUserStore()
+
+  return useQuery(['deviceUsers', deviceId], getDeviceUsersRequest, {
+    onSuccess: (data) => {
+      if (data.success) {
+        setUsers(data.data)
+      }
+    },
+  })
 }
 
 export const getDeviceAccessHistoryRequest = async (
@@ -72,9 +89,19 @@ export const useDeviceAccessHistory = ({
   deviceId,
   date,
 }: GetDeviceHistoryRequest) => {
+  const { setDeviceAccessHistory } = useDeviceStore()
+
   return useQuery(
     ['deviceHistory', deviceId, date],
     getDeviceAccessHistoryRequest,
+    {
+      onSuccess: (data) => {
+        if (data.success) {
+          setDeviceAccessHistory(data.data)
+        }
+      },
+      refetchInterval: 5000,
+    },
   )
 }
 

@@ -77,20 +77,6 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.create_user(header, payload)
 
-    def register_access_history(
-        self, header: typing.Dict[str, typing.Any], request: typing.Dict[str, typing.Any]
-    ) -> bool:
-        """
-        The register_access_history method creates a new access history.
-        It takes a dictionary as input (request), containing member registration information.
-        The dictionary must include four mandatory fields:
-            token: A string representing the users token.
-            email: A string representing the member's email address.
-            member_id: A string representing the member's id.
-            device_id: A string representing the device's id.
-        """
-        return self.client.register_access_history(header, request)
-
     def create_device(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
     ) -> bool:

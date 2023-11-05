@@ -28,46 +28,23 @@ export function GatesSelector() {
   const [open, setOpen] = useState(false)
   const [filter, setFilter] = useState('')
 
-  const {
-    devices,
-    currentDevice,
-    setCurrentDevice,
-    setIsLoadingDevices,
-    setDevices,
-  } = useDeviceStore()
-  const { setUsers, setIsLoadingUsers } = useUserStore()
+  const { devices, currentDevice, setCurrentDevice, setIsLoadingDevices } =
+    useDeviceStore()
 
-  const { isLoading: devicesLoading, data: devicesData } = useGetAllDevices()
-  const {
-    isLoading: usersLoading,
-    data: usersData,
-    refetch: refetchUsers,
-  } = useDeviceUsers({ deviceId: currentDevice?.id || '-' })
+  const { setIsLoadingUsers } = useUserStore()
+
+  const { isLoading: devicesLoading } = useGetAllDevices()
+  const { isLoading: deviceUsersLoading } = useDeviceUsers({
+    deviceId: currentDevice?.id || '-',
+  })
 
   useEffect(() => {
-    currentDevice && refetchUsers()
-  }, [currentDevice, refetchUsers])
+    setIsLoadingUsers(deviceUsersLoading)
+  }, [deviceUsersLoading, setIsLoadingUsers])
 
   useEffect(() => {
     setIsLoadingDevices(devicesLoading)
-    if (devicesData && devicesData.success) {
-      setDevices(devicesData.data)
-      setCurrentDevice(devicesData.data[0])
-    }
-  }, [
-    devicesData,
-    devicesLoading,
-    setDevices,
-    setIsLoadingDevices,
-    setCurrentDevice,
-  ])
-
-  useEffect(() => {
-    setIsLoadingUsers(usersLoading)
-    if (usersData && usersData.success) {
-      setUsers(usersData.data)
-    }
-  }, [usersData, usersLoading, setUsers, setIsLoadingUsers])
+  }, [devicesLoading, setIsLoadingDevices])
 
   const handleSelectDevice = (device: Device) => setCurrentDevice(device)
 

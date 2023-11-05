@@ -15,30 +15,18 @@ import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
 import { format } from 'date-fns'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
-  const {
-    isLoadingDevices,
-    deviceAccessHistory,
-    currentDevice,
-    setDeviceAccessHistory,
-  } = useDeviceStore()
+  const { isLoadingDevices, deviceAccessHistory, currentDevice } =
+    useDeviceStore()
   const { users, isLoadingUsers } = useUserStore()
   const totalUsers = users.length
 
-  const { isLoading: accessHistoryLoading, data: accessHistory } =
-    useDeviceAccessHistory({
-      deviceId: currentDevice?.id || '-',
-      date: format(new Date(), 'yyyy-MM-dd'),
-    })
-
-  useEffect(() => {
-    if (accessHistory && accessHistory.success) {
-      setDeviceAccessHistory(accessHistory.data)
-    }
-  }, [accessHistory, setDeviceAccessHistory])
+  const { isLoading: accessHistoryLoading } = useDeviceAccessHistory({
+    deviceId: currentDevice?.id || '-',
+    date: format(new Date(), 'yyyy-MM-dd'),
+  })
 
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">

@@ -42,12 +42,6 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing register_device method")
 
     @abstractmethod
-    def register_access_history(
-        self, payload: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
-        raise NotImplementedError("missing register_access_history method")
-
-    @abstractmethod
     def select_user(
         self, member: typing.Dict[str, typing.Any], user_id: str
     ) -> typing.Dict[str, typing.Any]:

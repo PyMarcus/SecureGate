@@ -238,30 +238,13 @@ class RPCServer(RPCServerInterface):
                     history: AccessHistory = AccessHistory(
                         id=uuid.uuid4(),
                         user_id=user.id,
-                        admin_id=uuid.UUID("005a1a63-a5b4-4abf-a92a-aaefdbe2e150"),
-                        # set as None (change in the table)
+                        admin_id=None,
                         device_id=user.device_id,
                     )
                     self.__save_access_history(history)
 
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
-
-    @authorization_required
-    def __register_access_history(
-        self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
-        if header.get("email") and header.get("token"):
-            if Security.verify_token(header.get("email"), header.get("token")):
-                history: AccessHistory = AccessHistory(
-                    id=uuid.uuid4(),
-                    user_id=history.get("user_id"),
-                    admin_id=self.__user_logged,
-                    device_id=history.get("device_id"),
-                )
-                print(f"HISTORY {history}")
-                return self.__save_access_history(history)
-        return UnauthorizedError("Invalid token or email").dict()
 
 
 if __name__ == "__main__":
