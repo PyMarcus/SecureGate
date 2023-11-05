@@ -10,23 +10,20 @@ from packages.constants.mqtt_topics import MQTTTopic
 def on_activation_message(topic: str, payload: str):
     data = json.loads(payload)
 
+    if data["device_id"] != config.get("id"):
+        Log.danger("ID do dispositivo inválido!")
+        return
+
     if data["action"] == "ACTIVATE":
-        Log.info("Abrindo portão...")
+        Log.warn("Abrindo portão...")
         time.sleep(3)
         Log.success("Portão aberto com sucesso!")
-        return
-
-    if data["action"] == "DEACTIVATE":
-        Log.info("Fechando portão...")
+    elif data["action"] == "DEACTIVATE":
+        Log.warn("Fechando portão...")
         time.sleep(3)
         Log.success("Portão fechado com sucesso!")
-        return
-
-    Log.danger("Ação inválida!")
-
-
-def on_authorization_message(topic: str, payload: str):
-    pass
+    else:
+        Log.danger("Ação inválida!")
 
 
 def rfid_read():
@@ -50,8 +47,6 @@ def _main():
     Log.success("MQTT client started successfully!")
 
     mqtt.subscribe(MQTTTopic.ACTIVATION.value, on_activation_message)
-    mqtt.subscribe(MQTTTopic.AUTHORIZATION.value, on_authorization_message)
-
     mqtt.listen()
 
     try:
@@ -62,7 +57,13 @@ def _main():
                 Log.danger("Por favor, informe um RFID válido!")
                 continue
 
-            print(rfid)
+            auth_payload = json.dumps(
+                {
+                    "device_id": config.get("id"),
+                    "rfid": rfid,
+                }
+            )
+            mqtt.publish(MQTTTopic.AUTHENTICATION.value, auth_payload)
 
     except KeyboardInterrupt:
         mqtt.stop()

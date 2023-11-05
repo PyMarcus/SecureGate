@@ -8,6 +8,7 @@ from apps.server.security import Security
 from libs import LogMaker
 from packages.errors.errors import *
 from packages.responses.responses import *
+from packages.schemas.devices_schema import RFIDAuthenticationSchema
 from packages.schemas.session_header import SessionHeader
 from packages.schemas.users_schema import CreateUserSchema, UserAccessHistoryJoinSchema
 
@@ -151,3 +152,12 @@ class UserController:
         except Exception as e:
             LogMaker.write_log(f"Error: {e}", "error")
             return InternalServerError("Não foi possível processar a requisição").dict()
+
+    @staticmethod
+    def authenticate_user_rfid(device_id: str, rfid: str):
+        try:
+            user = SelectMain.select_user_by_device_id_and_rfid(device_id, rfid)
+            return user
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+            return None

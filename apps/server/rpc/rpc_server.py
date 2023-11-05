@@ -20,7 +20,9 @@ from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri
 from packages.config.env import env
+from packages.constants.mqtt_topics import MQTTTopic
 from packages.errors.errors import *
+from packages.schemas.devices_schema import DeviceActivationSchema, RFIDAuthenticationSchema
 
 
 def authorization_required(function: typing.Callable) -> typing.Any:
@@ -75,13 +77,12 @@ class RPCServer(RPCServerInterface):
         self.__mqtt.listen()
 
     def __subscribe_mqtt_topics(self):
-        self.__mqtt.subscribe("test", self.on_msg_callback)
+        self.__mqtt.subscribe(
+            MQTTTopic.AUTHENTICATION.value, self.__handle_rfid_authentication_request
+        )
 
     def stop_mqtt(self):
         self.__mqtt.stop()
-
-    def on_msg_callback(self, topic: str, payload: str):
-        print(f"[MQTT/CALLBACK] {topic}: {payload}")
 
     @Pyro4.expose
     def sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
@@ -209,6 +210,43 @@ class RPCServer(RPCServerInterface):
     ) -> bool:
         return self.__device_controller.handle_device_activation(header, payload)
 
+    def __save_access_history(self, history: AccessHistory) -> bool:
+        if InsertMain.insert_access_history(history):
+            LogMaker.write_log(f"[+]{history} has been inserted", "info")
+            return True
+        LogMaker.write_log(f"[-]Fail to insert {history}", "info")
+        return False
+
+    def __handle_rfid_authentication_request(self, topic: str, payload: str) -> None:
+        try:
+            data = RFIDAuthenticationSchema(**json.loads(payload))
+            if not data.device_id or not data.rfid:
+                raise Exception("Invalid payload")
+
+            user = UserController.authenticate_user_rfid(data.device_id, data.rfid)
+            if user:
+                if user.authorized:
+                    print("User is authorized")
+
+                    activation_payload = DeviceActivationSchema(
+                        device_id=str(user.device_id),
+                        action="ACTIVATE",
+                    ).model_dump()
+
+                    self.__mqtt.publish(MQTTTopic.ACTIVATION.value, json.dumps(activation_payload))
+
+                    history: AccessHistory = AccessHistory(
+                        id=uuid.uuid4(),
+                        user_id=user.id,
+                        admin_id=uuid.UUID("005a1a63-a5b4-4abf-a92a-aaefdbe2e150"),
+                        # set as None (change in the table)
+                        device_id=user.device_id,
+                    )
+                    self.__save_access_history(history)
+
+        except Exception as e:
+            LogMaker.write_log(f"Error: {e}", "error")
+
     @authorization_required
     def __register_access_history(
         self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
@@ -222,11 +260,7 @@ class RPCServer(RPCServerInterface):
                     device_id=history.get("device_id"),
                 )
                 print(f"HISTORY {history}")
-                if InsertMain.insert_access_history(history):
-                    LogMaker.write_log(f"[+]{history} has been inserted", "info")
-                    return True
-                LogMaker.write_log(f"[-]Fail to insert {history}", "info")
-                return False
+                return self.__save_access_history(history)
         return UnauthorizedError("Invalid token or email").dict()
 
 

@@ -12,3 +12,8 @@ class DeviceSchema(BaseModel):
 class DeviceActivationSchema(BaseModel):
     device_id: str
     action: str
+
+
+class RFIDAuthenticationSchema(BaseModel):
+    device_id: str
+    rfid: str

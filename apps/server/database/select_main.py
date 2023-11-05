@@ -57,6 +57,22 @@ class SelectMain:
             return None
 
     @classmethod
+    def select_user_by_device_id_and_rfid(cls, device_id: str, rfid: str) -> User | None:
+        try:
+            with cls.__session.create_session() as session:
+                user: User = (
+                    session.query(User)
+                    .filter(User.device_id == device_id)
+                    .filter(User.rfid == rfid)
+                    .first()
+                )
+                if user:
+                    return user
+            return None
+        except Exception:
+            return None
+
+    @classmethod
     def select_device_by_id(cls, device_id: str) -> Admin | None:
         try:
             with cls.__session.create_session() as session:
