@@ -195,10 +195,12 @@ class SelectMain:
             return None
 
     @classmethod
-    def select_all_admins(cls) -> typing.List[Admin]:
+    def select_admins_by_root_id(cls, root_id: str) -> typing.List[Admin]:
         try:
             with cls.__session.create_session() as session:
-                admins: typing.Type[Admin] = session.query(Admin).all()
+                admins: typing.Type[Admin] = (
+                    session.query(Admin).filter(Admin.root_id == root_id, Admin.id != root_id).all()
+                )
                 if admins:
                     return admins
                 return list()

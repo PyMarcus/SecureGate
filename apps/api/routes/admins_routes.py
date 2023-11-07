@@ -20,10 +20,12 @@ def create(request: Request, body: AdminSchema, rpc: RPCSingletonClient = Depend
     return handle_rpc_result(result)
 
 
-@routes.get("/")
-def get_all(request: Request, rpc: RPCSingletonClient = Depends(get_rpc_client)):
+@routes.get("/{root_id}")
+def get_all_by_root_id(
+    request: Request, root_id: str, rpc: RPCSingletonClient = Depends(get_rpc_client)
+):
     header = get_request_header(request)
-    result = rpc.select_all_users(header)
+    result = rpc.select_admins_by_root_id(header, root_id)
     return handle_rpc_result(result)
 
 

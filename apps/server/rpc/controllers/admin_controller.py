@@ -73,7 +73,7 @@ class AdminController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_all_admins(header: typing.Dict[str, typing.Any]):
+    def select_admins_by_root_id(header: typing.Dict[str, typing.Any], root_id: str):
         try:
             header_data = SessionHeader(**header)
             if not header_data.token or not header_data.email:
@@ -82,7 +82,10 @@ class AdminController:
             if not Security.verify_token(header_data.email, header_data.token):
                 return UnauthorizedError("Token inválido").dict()
 
-            admins = SelectMain.select_all_admins()
+            if not root_id:
+                return BadRequestError("Dados inválidos").dict()
+
+            admins = SelectMain.select_admins_by_root_id(root_id)
             response = []
             for a in admins:
                 response.append(

@@ -30,7 +30,7 @@ class UserController:
                 email=data.email,
                 rfid=data.rfid,
                 device_id=uuid.UUID(data.device_id),
-                authorized=data.authorized or True,
+                authorized=data.authorized,
                 added_by=uuid.UUID(header_data.user_id),
             )
 

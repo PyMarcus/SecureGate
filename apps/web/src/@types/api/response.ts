@@ -1,5 +1,6 @@
 import { Role } from '@/@types/schemas/session-user'
 import { AccessHistory } from '../schemas/access-history'
+import { Admin } from '../schemas/admin'
 import { Device } from '../schemas/device'
 import { User } from '../schemas/user'
 
@@ -55,3 +56,10 @@ export type GetAccessHistoryResponse = ApiResponse<GetAccessHistoryResponseData>
 // Device Configuration ========================================================
 type ConfigureDeviceResponseData = true
 export type ConfigureDeviceResponse = ApiResponse<ConfigureDeviceResponseData>
+
+// Admins =====================================================================
+type CreateAdminResponseData = true
+export type CreateAdminResponse = ApiResponse<CreateAdminResponseData>
+
+type GetAdmins = Admin[]
+export type GetAdminsResponse = ApiResponse<GetAdmins>

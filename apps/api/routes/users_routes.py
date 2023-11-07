@@ -17,6 +17,7 @@ def create(
     request: Request, body: CreateUserSchema, rpc: RPCSingletonClient = Depends(get_rpc_client)
 ):
     header = get_request_header(request)
+    print(body.model_dump())
     result = rpc.create_user(header, body.model_dump())
     return handle_rpc_result(result)
 

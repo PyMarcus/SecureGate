@@ -161,10 +161,10 @@ class RPCServer(RPCServerInterface):
         return UserController.select_all_users(header)
 
     @Pyro4.expose
-    def select_all_admins(
-        self, header: typing.Dict[str, str]
+    def select_admins_by_root_id(
+        self, header: typing.Dict[str, str], root_id: str
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return AdminController.select_all_admins(header)
+        return AdminController.select_admins_by_root_id(header, root_id)
 
     @Pyro4.expose
     def select_all_devices(

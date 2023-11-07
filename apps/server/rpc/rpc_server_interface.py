@@ -76,8 +76,8 @@ class RPCServerInterface(ABC):
         raise NotImplementedError("missing select_all_members method")
 
     @abstractmethod
-    def select_all_admins(
-        self, header: typing.Dict[str, str]
+    def select_admins_by_root_id(
+        self, header: typing.Dict[str, str], root_id: str
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         raise NotImplementedError("missing select_all_users method")
 

@@ -174,6 +174,9 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         return self.client.select_all_members(header)
 
+    def select_admins_by_root_id(self, header: typing.Dict[str, str], root_id: str):
+        return self.client.select_admins_by_root_id(header, root_id)
+
     def select_all_users(
         self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:

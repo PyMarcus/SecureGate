@@ -1,8 +1,24 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { useUserAdmins } from '@/services/api/requests/admins'
+import { useAdminStore } from '@/stores/admin-store'
+import { useSessionStore } from '@/stores/session-store'
 import { Users } from '@phosphor-icons/react'
+import { useEffect } from 'react'
 
 export const Admins = () => {
+  const { session } = useSessionStore()
+  const { isLoadingAdmins, setIsLoadingAdmins } = useAdminStore()
+
+  const { isLoading: deviceUsersLoading } = useUserAdmins({
+    rootId: session?.user?.id || '-',
+  })
+
+  console.log(deviceUsersLoading)
+  useEffect(() => {
+    setIsLoadingAdmins(isLoadingAdmins)
+  }, [isLoadingAdmins, setIsLoadingAdmins])
+
   return (
     <section className="flex-1 flex flex-col gap-6 md:gap-8">
       <ScrollArea className="w-full">

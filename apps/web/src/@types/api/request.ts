@@ -20,6 +20,13 @@ export interface CreateUserRequest {
   device_id: string
 }
 
+export interface CreateAdminRequest {
+  name: string
+  email: string
+  password: string
+  role: 'ADMIN'
+}
+
 export interface CreateDeviceRequest {
   id: string
   name: string
@@ -67,4 +74,8 @@ export interface ConfigureDeviceRequest {
   id: string
   mqtt: MqttConfig
   wifi: WifiConfig
+}
+
+export interface GetAdminsRequest {
+  rootId: string
 }
