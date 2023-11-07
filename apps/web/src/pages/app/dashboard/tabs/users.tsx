@@ -13,6 +13,7 @@ import {
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { UsersTable } from '@/components/users-table'
 import { useUserAccessHistory } from '@/services/api/requests/users'
+import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import {
   IdentificationCard,
@@ -31,6 +32,7 @@ export const Users = () => {
     setSelectedUser,
     removeSelectedUser,
   } = useUserStore()
+  const { isLoadingDevices, deviceAccessHistory } = useDeviceStore()
 
   const { isLoading: isLoadingUserAccessHistory, data: userAccessHistory } =
     useUserAccessHistory({
@@ -120,7 +122,13 @@ export const Users = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <span>1,234</span>
+                {isLoadingDevices ? (
+                  <LoadingIndicator />
+                ) : (
+                  <div>
+                    <span>{deviceAccessHistory.length}</span>
+                  </div>
+                )}
               </div>
               <p className="text-xs text-muted-foreground">
                 Total de acessos realizados hoje

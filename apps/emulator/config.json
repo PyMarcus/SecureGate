@@ -5,7 +5,7 @@
     "password": "12345678"
   },
 
-  "id": "3a3996ee-5258-4f6d-adf3-e77af24aea58",
+  "id": "c4eff2c8-eb82-495f-b5f7-90c68080d4b9",
   "mqtt": {
     "host": "localhost",
     "port": 1883,

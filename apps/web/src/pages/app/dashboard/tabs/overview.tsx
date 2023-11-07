@@ -14,7 +14,6 @@ import { useDeviceAccessHistory } from '@/services/api/requests/devices'
 import { useDeviceStore } from '@/stores/device-store'
 import { useUserStore } from '@/stores/user-store'
 import { LockKeyOpen, Users } from '@phosphor-icons/react'
-import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 
 export const Overview = () => {
@@ -25,7 +24,7 @@ export const Overview = () => {
 
   const { isLoading: accessHistoryLoading } = useDeviceAccessHistory({
     deviceId: currentDevice?.id || '-',
-    date: format(new Date(), 'yyyy-MM-dd'),
+    date: new Date().toISOString().split('T')[0],
   })
 
   return (

@@ -1,0 +1,169 @@
+2023-11-05 15:37:09,197 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 15:37:09,198 - INFO - [+]SERVER URI: PYRO:obj_ad7363950e1f4aa481142e78c92ded0d@localhost:7878
+2023-11-05 15:37:30,757 - INFO - [+]Connected on database
+2023-11-05 15:37:33,045 - INFO - User john@doe.com signed in
+2023-11-05 15:42:42,855 - WARNING - [-]Server is down
+2023-11-05 15:42:43,453 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 15:42:43,453 - INFO - [+]SERVER URI: PYRO:obj_a1a65be366964824bec540b662eff102@localhost:7878
+2023-11-05 15:42:48,474 - INFO - [+]Connected on database
+2023-11-05 15:47:22,079 - WARNING - [-]Server is down
+2023-11-05 15:47:22,646 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 15:47:22,647 - INFO - [+]SERVER URI: PYRO:obj_b1d5f3884ad544718acc5637f8ff2c5b@localhost:7878
+2023-11-05 15:47:27,642 - INFO - [+]Connected on database
+2023-11-05 15:48:42,611 - WARNING - [-]Server is down
+2023-11-05 15:48:43,184 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 15:48:43,185 - INFO - [+]SERVER URI: PYRO:obj_56891deaf80b408dbf8a69182b4ce785@localhost:7878
+2023-11-05 15:48:46,920 - INFO - [+]Connected on database
+2023-11-05 16:02:50,434 - WARNING - [-]Server is down
+2023-11-05 16:02:50,915 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:02:50,916 - INFO - [+]SERVER URI: PYRO:obj_55396937d3c04e9f8c5ac7cb03297997@localhost:7878
+2023-11-05 16:02:56,439 - INFO - [+]Connected on database
+2023-11-05 16:04:32,037 - INFO - User john@doe.com signed in
+2023-11-05 16:04:32,296 - INFO - User john@doe.com signed in
+2023-11-05 16:04:32,552 - INFO - User john@doe.com signed in
+2023-11-05 16:04:32,829 - INFO - User john@doe.com signed in
+2023-11-05 16:04:33,093 - INFO - User john@doe.com signed in
+2023-11-05 16:04:33,346 - INFO - User john@doe.com signed in
+2023-11-05 16:04:44,760 - INFO - User john@doe.com signed in
+2023-11-05 16:06:17,412 - INFO - User john@doe.com signed in
+2023-11-05 16:06:17,661 - INFO - User john@doe.com signed in
+2023-11-05 16:06:17,912 - INFO - User john@doe.com signed in
+2023-11-05 16:06:18,240 - INFO - User john@doe.com signed in
+2023-11-05 16:06:18,502 - INFO - User john@doe.com signed in
+2023-11-05 16:06:18,752 - INFO - User john@doe.com signed in
+2023-11-05 16:06:32,314 - INFO - User john@doe.com signed in
+2023-11-05 16:06:32,567 - INFO - User john@doe.com signed in
+2023-11-05 16:06:32,804 - INFO - User john@doe.com signed in
+2023-11-05 16:06:33,094 - INFO - User john@doe.com signed in
+2023-11-05 16:06:33,351 - INFO - User john@doe.com signed in
+2023-11-05 16:06:33,607 - INFO - User john@doe.com signed in
+2023-11-05 16:07:38,614 - INFO - User john@doe.com signed in
+2023-11-05 16:07:38,871 - INFO - User john@doe.com signed in
+2023-11-05 16:07:39,117 - INFO - User john@doe.com signed in
+2023-11-05 16:07:39,433 - INFO - User john@doe.com signed in
+2023-11-05 16:07:39,695 - INFO - User john@doe.com signed in
+2023-11-05 16:07:39,961 - INFO - User john@doe.com signed in
+2023-11-05 16:07:55,268 - INFO - User john@doe.com signed in
+2023-11-05 16:07:55,511 - INFO - User john@doe.com signed in
+2023-11-05 16:07:55,744 - INFO - User john@doe.com signed in
+2023-11-05 16:07:56,042 - INFO - User john@doe.com signed in
+2023-11-05 16:07:56,304 - INFO - User john@doe.com signed in
+2023-11-05 16:07:56,569 - INFO - User john@doe.com signed in
+2023-11-05 16:08:19,466 - WARNING - [-]Server is down
+2023-11-05 16:08:20,045 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:08:20,045 - INFO - [+]SERVER URI: PYRO:obj_1fef38bfa22d477da854b52d6e3f77c1@localhost:7878
+2023-11-05 16:08:25,571 - INFO - [+]Connected on database
+2023-11-05 16:08:25,822 - INFO - User john@doe.com signed in
+2023-11-05 16:08:26,074 - INFO - User john@doe.com signed in
+2023-11-05 16:08:26,309 - INFO - User john@doe.com signed in
+2023-11-05 16:08:26,608 - INFO - User john@doe.com signed in
+2023-11-05 16:08:26,860 - INFO - User john@doe.com signed in
+2023-11-05 16:08:27,117 - INFO - User john@doe.com signed in
+2023-11-05 16:08:59,117 - WARNING - [-]Server is down
+2023-11-05 16:08:59,699 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:08:59,700 - INFO - [+]SERVER URI: PYRO:obj_2edd1bfa47e24ae488c37f98226db59e@localhost:7878
+2023-11-05 16:09:05,215 - INFO - [+]Connected on database
+2023-11-05 16:09:05,500 - INFO - User john@doe.com signed in
+2023-11-05 16:09:05,740 - INFO - User john@doe.com signed in
+2023-11-05 16:09:05,980 - INFO - User john@doe.com signed in
+2023-11-05 16:09:06,276 - INFO - User john@doe.com signed in
+2023-11-05 16:09:06,538 - INFO - User john@doe.com signed in
+2023-11-05 16:09:06,800 - INFO - User john@doe.com signed in
+2023-11-05 16:25:36,223 - WARNING - [-]Server is down
+2023-11-05 16:25:36,829 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:25:36,829 - INFO - [+]SERVER URI: PYRO:obj_eb34134726bb4bad827fc8352ef8e71a@localhost:7878
+2023-11-05 16:26:09,079 - WARNING - [-]Server is down
+2023-11-05 16:26:09,564 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:26:09,564 - INFO - [+]SERVER URI: PYRO:obj_14e85d5fcc9c4652859879979422f2ad@localhost:7878
+2023-11-05 16:26:12,968 - INFO - [+]Connected on database
+2023-11-05 16:31:30,987 - WARNING - [-]Server is down
+2023-11-05 16:31:31,566 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:31:31,566 - INFO - [+]SERVER URI: PYRO:obj_45c44cc0493e4ba7a272ab0a39943428@localhost:7878
+2023-11-05 16:31:36,443 - INFO - [+]Connected on database
+2023-11-05 16:31:37,313 - ERROR - Error: object of type 'MQTTTopic' has no len()
+2023-11-05 16:32:03,673 - WARNING - [-]Server is down
+2023-11-05 16:32:04,252 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:32:04,252 - INFO - [+]SERVER URI: PYRO:obj_ffee97d038a7414580927277e3a122be@localhost:7878
+2023-11-05 16:32:07,817 - INFO - [+]Connected on database
+2023-11-05 16:33:35,929 - WARNING - [-]Server is down
+2023-11-05 16:33:36,511 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 16:33:36,511 - INFO - [+]SERVER URI: PYRO:obj_70245c382f6e44fe8e43c9a32a55bff4@localhost:7878
+2023-11-05 16:33:53,074 - INFO - [+]Connected on database
+2023-11-05 17:10:09,284 - WARNING - [-]Server is down
+2023-11-05 17:10:09,870 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:10:09,871 - INFO - [+]SERVER URI: PYRO:obj_102925fc7afb4be9b538f9cbc83eb3c4@localhost:7878
+2023-11-05 17:13:18,688 - INFO - [+]Connected on database
+2023-11-05 17:13:26,143 - WARNING - [-]Server is down
+2023-11-05 17:13:26,726 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:13:26,726 - INFO - [+]SERVER URI: PYRO:obj_5da8eb1868b84db796676a0e47ab0350@localhost:7878
+2023-11-05 17:14:14,899 - WARNING - [-]Server is down
+2023-11-05 17:14:15,371 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:14:15,372 - INFO - [+]SERVER URI: PYRO:obj_6492490bceee4702983b3d60575ce57a@localhost:7878
+2023-11-05 17:14:17,365 - WARNING - [-]Server is down
+2023-11-05 17:14:17,837 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:14:17,838 - INFO - [+]SERVER URI: PYRO:obj_cfa976fdeabf42c19c7097110789c31b@localhost:7878
+2023-11-05 17:14:19,462 - WARNING - [-]Server is down
+2023-11-05 17:14:19,934 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:14:19,935 - INFO - [+]SERVER URI: PYRO:obj_2452697a631a49a9b09d034b06c01f76@localhost:7878
+2023-11-05 17:14:31,996 - INFO - [+]Connected on database
+2023-11-05 17:24:11,543 - WARNING - [-]Server is down
+2023-11-05 17:24:12,124 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:24:12,125 - INFO - [+]SERVER URI: PYRO:obj_3e350d4e08dc4c43b1e9dacaa55b1dd0@localhost:7878
+2023-11-05 17:24:19,469 - ERROR - Error: packages.schemas.devices_schema.RFIDAuthenticationSchema() argument after ** must be a mapping, not int
+2023-11-05 17:24:48,511 - ERROR - Error: 1 validation error for RFIDAuthenticationSchema
+device_id
+  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]
+    For further information visit https://errors.pydantic.dev/2.4/v/string_type
+2023-11-05 17:30:40,071 - WARNING - [-]Server is down
+2023-11-05 17:30:40,549 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:30:40,550 - INFO - [+]SERVER URI: PYRO:obj_cb1b567582d446af9a9feae0366100ff@localhost:7878
+2023-11-05 17:31:06,114 - INFO - [+]Connected on database
+2023-11-05 17:32:47,806 - ERROR - Error: 1 validation error for DeviceActivationSchema
+device_id
+  Input should be a valid string [type=string_type, input_value=UUID('7e2eaeae-bcf9-4e9b-a3af-0effe55e9e28'), input_type=UUID]
+    For further information visit https://errors.pydantic.dev/2.4/v/string_type
+2023-11-05 17:33:47,643 - WARNING - [-]Server is down
+2023-11-05 17:33:48,220 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:33:48,221 - INFO - [+]SERVER URI: PYRO:obj_d841253d19a3471c89f0777ecd8b6156@localhost:7878
+2023-11-05 17:33:58,910 - INFO - [+]Connected on database
+2023-11-05 17:41:34,647 - WARNING - [-]Server is down
+2023-11-05 17:41:35,106 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:41:35,107 - INFO - [+]SERVER URI: PYRO:obj_925b0146267544c6910667143ccdab01@localhost:7878
+2023-11-05 17:42:20,060 - INFO - [+]Connected on database
+2023-11-05 17:42:20,148 - INFO - [-]Fail to insert a2548f6c-1e13-49c8-9cbe-58f6c2784e5e e466cffd-6782-4b1c-9862-a2f3ddde263f a59a37e3-69a8-407e-b892-c5f43588e5f3 7e2eaeae-bcf9-4e9b-a3af-0effe55e9e28 None
+2023-11-05 17:42:47,666 - WARNING - [-]Server is down
+2023-11-05 17:42:48,254 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:42:48,255 - INFO - [+]SERVER URI: PYRO:obj_4b8f43bbf23e41de8889554028c7110d@localhost:7878
+2023-11-05 17:43:01,511 - INFO - [+]Connected on database
+2023-11-05 17:43:01,628 - INFO - [+]f22b9572-3403-4a28-89a6-b6a7d419f9af e466cffd-6782-4b1c-9862-a2f3ddde263f 005a1a63-a5b4-4abf-a92a-aaefdbe2e150 7e2eaeae-bcf9-4e9b-a3af-0effe55e9e28 2023-11-05 17:43:01.598594 has been inserted
+2023-11-05 17:43:18,849 - INFO - [+]bd285deb-2c12-40ec-a651-7736a5c3ac8c e466cffd-6782-4b1c-9862-a2f3ddde263f 005a1a63-a5b4-4abf-a92a-aaefdbe2e150 7e2eaeae-bcf9-4e9b-a3af-0effe55e9e28 2023-11-05 17:43:18.834632 has been inserted
+2023-11-05 17:49:33,024 - WARNING - [-]Server is down
+2023-11-05 17:49:33,597 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:49:33,598 - INFO - [+]SERVER URI: PYRO:obj_1d82bc407153428db57be05fefdc581d@localhost:7878
+2023-11-05 17:51:11,279 - INFO - [+]Connected on database
+2023-11-05 17:51:11,345 - INFO - User john@doe.com signed up
+2023-11-05 17:51:13,686 - INFO - User john@doe.com signed in
+2023-11-05 17:52:17,404 - INFO - [+]Gate 1 3a3996ee-5258-4f6d-adf3-e77af24aea58 Gate 1 WiFi $2b$12$/P8XKJ95S84O.IHAiqGaUez56hfPc0Ys7vYZezB8XY98WnRJRpU9K 1.0.0 has been created
+2023-11-05 17:52:50,462 - INFO - User bob@esponja.com created
+2023-11-05 17:53:07,900 - INFO - User patrick@estrela.com created
+2023-11-05 17:55:17,328 - WARNING - [-]Server is down
+2023-11-05 17:55:17,905 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:55:17,906 - INFO - [+]SERVER URI: PYRO:obj_d6a36bc59d304f4ca14a9db51baafb50@localhost:7878
+2023-11-05 17:55:22,329 - INFO - [+]Connected on database
+2023-11-05 17:55:25,291 - INFO - User john@doe.com signed in
+2023-11-05 17:56:16,765 - INFO - [-]Fail to insert 54bc9178-3dec-4c86-a114-14dbb2366128 986ae5da-0ea5-4506-bce1-12c94baa2c4a 005a1a63-a5b4-4abf-a92a-aaefdbe2e150 3a3996ee-5258-4f6d-adf3-e77af24aea58 None
+2023-11-05 17:57:56,337 - INFO - [-]Fail to insert 63c4e8e3-1485-47fa-9b9c-e18d66743b8a 986ae5da-0ea5-4506-bce1-12c94baa2c4a 005a1a63-a5b4-4abf-a92a-aaefdbe2e150 3a3996ee-5258-4f6d-adf3-e77af24aea58 None
+2023-11-05 17:58:03,935 - INFO - [-]Fail to insert 95caf5a8-7023-442c-afdf-88b8fa79bd7d 53c7d6d5-7e9d-4bd8-a105-d932bac625e1 005a1a63-a5b4-4abf-a92a-aaefdbe2e150 3a3996ee-5258-4f6d-adf3-e77af24aea58 None
+2023-11-05 17:58:52,431 - WARNING - [-]Server is down
+2023-11-05 17:58:53,011 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 17:58:53,012 - INFO - [+]SERVER URI: PYRO:obj_241c2df511784ceca61c9c7d893db6b5@localhost:7878
+2023-11-05 18:09:25,352 - INFO - [+]Connected on database
+2023-11-05 18:13:36,688 - WARNING - [-]Server is down
+2023-11-05 18:13:37,270 - INFO - [+]RPCServer is running on localhost/7878
+2023-11-05 18:13:37,271 - INFO - [+]SERVER URI: PYRO:obj_81f239b3b278481fbb8ee8e14dffa910@localhost:7878
+2023-11-05 18:13:43,304 - INFO - [+]Connected on database
+2023-11-05 18:13:43,400 - INFO - [+]05e5bc90-2cd0-456d-a74d-17dc2c05b541 986ae5da-0ea5-4506-bce1-12c94baa2c4a None 3a3996ee-5258-4f6d-adf3-e77af24aea58 2023-11-05 18:13:43.385925 has been inserted
+2023-11-05 18:16:59,019 - INFO - [+]ad97cf55-1513-43fb-91a5-fab66d01210f 53c7d6d5-7e9d-4bd8-a105-d932bac625e1 None 3a3996ee-5258-4f6d-adf3-e77af24aea58 2023-11-05 18:16:58.995797 has been inserted
+2023-11-05 18:17:15,966 - INFO - [+]9817a8cf-099e-410f-97d1-6ef19d15ac4b 986ae5da-0ea5-4506-bce1-12c94baa2c4a None 3a3996ee-5258-4f6d-adf3-e77af24aea58 2023-11-05 18:17:15.951941 has been inserted
+2023-11-05 18:37:39,465 - INFO - [+]Gate 2 173d92c0-9414-4259-9837-9f26d3b6ab43 Gate 2 WiFi $2b$12$dUmjfZvuVRVBbAQ4MS86g.8SKkUUWgc7uytdTF/bbRJo9AV.yZzSu 1.0.0 has been created
+2023-11-05 18:43:05,352 - WARNING - [-]Server is down
