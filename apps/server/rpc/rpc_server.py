@@ -6,7 +6,6 @@ import uuid
 from typing import Any, Dict
 
 import Pyro4
-from rpc_server_interface import RPCServerInterface
 
 from apps.server.database import InsertMain
 from apps.server.database.models.__all_models import *
@@ -16,6 +15,7 @@ from apps.server.rpc.controllers.admin_controller import AdminController
 from apps.server.rpc.controllers.device_controller import DeviceController
 from apps.server.rpc.controllers.session_controller import SessionController
 from apps.server.rpc.controllers.user_controller import UserController
+from apps.server.rpc.rpc_server_interface import RPCServerInterface
 from apps.server.security import Security
 from libs import LogMaker
 from libs.pyro_uri import set_pyro_uri

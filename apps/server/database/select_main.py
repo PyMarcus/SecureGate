@@ -161,7 +161,10 @@ class SelectMain:
         try:
             with cls.__session.create_session() as session:
                 history: typing.Type[AccessHistory] = (
-                    session.query(AccessHistory).filter(AccessHistory.user_id == user_id).all()
+                    session.query(AccessHistory)
+                    .filter(AccessHistory.user_id == user_id)
+                    .order_by(AccessHistory.created_at.desc())
+                    .all()
                 )
                 if history:
                     return history

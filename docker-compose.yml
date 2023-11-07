@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  rpc_server:
+    container_name: rpc_server_inst
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - postgres
+      - mqtt
+    networks:
+      - rpc_server_network
+      - postgres_network
+      - mqtt_network
+    ports:
+      - '${RPC_PORT}:${RPC_PORT}'
+
   postgres:
     image: postgres:latest
     container_name: postgres_inst
@@ -13,6 +28,8 @@ services:
     volumes:
       - ./.postgres/data:/var/lib/postgresql/data
     restart: always
+    networks:
+      - postgres_network
 
   mqtt:
     image: eclipse-mosquitto:latest
@@ -25,4 +42,13 @@ services:
       - ./.mqtt/data:/mosquitto/data
       - ./.mqtt/log:/mosquitto/log
     restart: unless-stopped
-    network_mode: bridge
+    networks:
+      - mqtt_network
+
+networks:
+  rpc_server_network:
+    external: true
+  postgres_network:
+    external: true
+  mqtt_network:
+    external: true

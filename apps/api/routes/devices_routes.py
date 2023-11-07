@@ -54,6 +54,7 @@ def get_by_device_history(
 ):
     header = get_request_header(request)
     result = rpc.select_device_access_history_by_date(header, device_id, date)
+    print(result)
     return handle_rpc_result(result)
 
 

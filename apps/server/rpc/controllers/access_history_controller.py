@@ -37,7 +37,9 @@ class AccessHistoryController:
             response = []
             if data:
                 for d in data:
-                    admin = SelectMain.select_admin_by_id(str(d.admin_id))
+                    if d.admin_id:
+                        admin = SelectMain.select_admin_by_id(str(d.admin_id))
+
                     user = SelectMain.select_user_by_id(str(d.user_id))
                     device = SelectMain.select_device_by_id(str(d.device_id))
                     response.append(
@@ -45,8 +47,8 @@ class AccessHistoryController:
                             "id": str(d.id),
                             "user_id": str(user.id),
                             "user_name": user.name,
-                            "admin_id": str(admin.id),
-                            "admin_name": admin.name,
+                            "admin_id": str(admin.id) if d.admin_id else "",
+                            "admin_name": admin.name if d.admin_id else "",
                             "device_id": str(device.id),
                             "device_name": device.name,
                             "when": d.created_at,

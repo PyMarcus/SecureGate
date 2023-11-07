@@ -1,1 +1,19 @@
-{"token": "z2C7nicSvRakMQe0i9rTShJJnx0YKWBs", "ap": {"ssid": "secure_gate", "password": "12345678"}, "id": "173d92c0-9414-4259-9837-9f26d3b6ab43", "mqtt": {"host": "localhost", "port": 1883, "user": "", "password": ""}, "wifi": {"ssid": "Gate 2 WiFi", "password": "12345678"}}
+{
+  "token": "z2C7nicSvRakMQe0i9rTShJJnx0YKWBs",
+  "ap": {
+    "ssid": "secure_gate",
+    "password": "12345678"
+  },
+
+  "id": "3a3996ee-5258-4f6d-adf3-e77af24aea58",
+  "mqtt": {
+    "host": "localhost",
+    "port": 1883,
+    "user": "",
+    "password": ""
+  },
+  "wifi": {
+    "ssid": "portao_if",
+    "password": "portao_if"
+  }
+}

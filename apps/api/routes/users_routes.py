@@ -43,6 +43,7 @@ def get_user_history(
 ):
     header = get_request_header(request)
     result = rpc.select_user_access_history(header, user_id)
+    print(result)
     return handle_rpc_result(result)
 
 
