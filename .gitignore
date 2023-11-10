@@ -20,13 +20,9 @@ mqtt/log
 # environment
 .env
 
-# node
-node_modules/
-
 # logs
 securegate.log
 
 # app
-.pyro_uri
 !/postgres/
 postgres

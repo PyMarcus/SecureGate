@@ -1,5 +1,6 @@
-from apps.emulator.src.utils.log import Log
+from src.packages.logger.Logger import Logger
 
+logger = Logger('wifi_service')
 
 class WifiService:
     def __init__(self):
@@ -9,10 +10,10 @@ class WifiService:
         """
         Create a WiFi hotspot.
         """
-        Log.info(f"Hosting WiFi network ssid: {ssid} with password: {password}")
+        logger.info(f"Hosting WiFi network ssid: {ssid} with password: {password}")
 
     def connect(self, ssid: str, password: str):
         """
         Connect to a WiFi network.
         """
-        Log.info(f"Connecting to WiFi network ssid: {ssid}")
+        logger.info(f"Connecting to WiFi network ssid: {ssid}")

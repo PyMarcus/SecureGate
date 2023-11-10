@@ -1,8 +1,10 @@
 import uvicorn
 
 from apps.emulator.src.services.device_api import device_api
-from apps.emulator.src.utils.log import Log
-from packages.config.env import env
+from src.packages.config.env import env
+from src.packages.logger.Logger import Logger
+
+logger = Logger('device_config_service')
 
 
 class ConfigService:
@@ -17,7 +19,9 @@ class ConfigService:
         try:
             host, port = env.BOARD_API_HOST, env.BOARD_API_PORT
             if not host or not port:
-                raise Exception("API_HOST or API_PORT not set")
+                message = "API_HOST or API_PORT not set"
+                logger.danger(message)
+                raise Exception(message)
 
             uvicorn.run(
                 app=device_api,
@@ -26,5 +30,4 @@ class ConfigService:
                 log_level="info",
             )
         except KeyboardInterrupt:
-            Log.break_()
-            Log.danger("Stopping config service")
+            logger.danger("Stopping config service")

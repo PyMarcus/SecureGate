@@ -1,10 +1,8 @@
 import json
-import os
-from enum import Enum
 from os import path
 
 from apps.emulator.src.utils.log import Log
-from packages.config.env import env
+from src.packages.config.env import env
 
 
 class Config:
