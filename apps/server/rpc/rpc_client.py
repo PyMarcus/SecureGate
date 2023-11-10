@@ -1,10 +1,7 @@
-import base64
 import typing
 
 import rpyc
 
-from apps.server.security import Security
-from libs.pyro_uri import get_pyro_uri
 from packages.config.env import env
 
 
@@ -38,7 +35,9 @@ class RPCSingletonClient(metaclass=Singleton):
         self._client: rpyc.core.protocol.Connection = self.connect()
 
     def connect(self) -> rpyc.core.protocol.Connection:
-        return rpyc.connect(self._host, self._port, config={"allow_public_attrs": True})
+        return rpyc.connect(
+            self._host, self._port, config={"allow_public_attrs": True}, keepalive=True
+        )
 
     def disconnect(self):
         if self._client:
@@ -279,68 +278,7 @@ def get_rpc_client() -> RPCSingletonClient:
 
 if __name__ == "__main__":
     client: RPCSingletonClient = get_rpc_client()
-    """
-    print(client.sign_up({
-        "name": "root2",
-        "email": "imaroot2@email.com",
-        "password": "rootsecurity2",
-        "role": "root"
-    }))
-    print(
-        client.sign_in(
-            {
-                "email": "imaroot2@email.com",
-                "password": "rootsecurity2",
-            }
-        )
-    )
-    print(client.sign_up({
-        "name": "admin2",
-        "email": "imaadmin@email2.com",
-        "password": "adminsecurity2",
-    }))
-    print(client.sign_up({
-        "name": "admin",
-        "email": "imaadmin@email.com",
-        "password": "adminsecurity",
-        "role": "admin"
-    }))
 
-    print(
-        client.sign_in(
-            {
-                "email": "imaadmin@email.com",
-                "password": "adminsecurity",
-            }
-        )
-    )
-    print(
-        client.create_user(
-            header={"email": "imaadmin@email.com",
-                    'token': 'ImltYWFkbWluQGVtYWlsLmNvbSI.ZUPwKA.ermkhm-p1vJqywmOzMLkw_VvhvY',
-                    'user_id':'f6c7284b-f5c8-49cb-a219-79aef5d857f3'},
-            payload={
-                "name": "aluno02",
-                "email": "aluno02@email.com",
-                "rfid": "40028922ABD",
-                "authorized": True,
-            }
-        )
-    )
-
-    header = {"email": "imaadmin@email.com",
-              "token": 'ImltYWFkbWluQGVtYWlsLmNvbSI.ZUPwKA.ermkhm-p1vJqywmOzMLkw_VvhvY',
-              'user_id':'13daa86d-babd-4fd8-8779-36ca7d052493'}
-    print(client.select_all_users(header))
-
-    print(
-        client.select_user(
-            header,
-            'e62d14ac-cd26-4986-ad1f-ea65021f709d'
-        )
-    )
-
-    """
     data = client.sign_in(
         {
             "email": "imaadmin@email.com",
@@ -348,24 +286,4 @@ if __name__ == "__main__":
         }
     )
 
-    header = {
-        "email": data.get("data").get("email"),
-        "token": data.get("data").get("token"),
-        "user_id": data.get("data").get("user_id"),
-    }
-
-    """print(
-        client.create_device(
-            header,
-            {
-                "name": "device23333",
-                "version": "0.0.0",
-                "wifi_ssid": "wifihost",
-                "wifi_password": "wifipassword",
-            },
-        )
-    )"""
-    print(header)
-    r = {"user_id": "eccbe35e-8d4e-4904-8ec8-06d759774984", "new_authorization": False}
-    print(r)
-    print(client.update_user_authorization(header=header, request=r))
+    print(data)

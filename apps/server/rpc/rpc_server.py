@@ -62,9 +62,9 @@ class RPCServer(Service):
 
         self._setup_mqtt()
         self._subscribe_mqtt_topics()
-        self.__setup_controllers()
+        self._setup_controllers()
 
-    def __setup_controllers(self):
+    def _setup_controllers(self):
         self.__device_controller = DeviceController(self._mqtt)
 
     def _setup_mqtt(self):
@@ -84,12 +84,11 @@ class RPCServer(Service):
         self._mqtt.stop()
 
     def on_connect(self, conn):
-        message = f"[+]RPCServer is running on {conn}"
+        message = f"[+]RPCServer is running on {self._host}:{self._port}"
         LogMaker.write_log(message, "info")
 
     def on_disconnect(self, conn):
-        self.stop_mqtt()
-        message = "[-]Server is down"
+        message = "[-]Client disconnected"
         LogMaker.write_log(message, "warning")
 
     def run(self):
