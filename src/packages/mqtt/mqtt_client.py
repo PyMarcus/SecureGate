@@ -3,6 +3,10 @@ import typing
 
 import paho.mqtt.client as mqtt
 
+from src.packages.logger.Logger import Logger
+
+logger = Logger("mqtt")
+
 
 class MQTTClient:
     """
@@ -106,7 +110,9 @@ if __name__ == "__main__":
     mqtt = MQTTClient(host, port)
     mqtt_thread = mqtt.listen().start()
 
+
     def on_msg_callback(topic: str, payload: str):
         print(f"[MQTT/CALLBACK] {topic}: {payload}")
+
 
     mqtt.subscribe("test", on_msg_callback)

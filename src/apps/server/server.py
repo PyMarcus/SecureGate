@@ -7,7 +7,7 @@ from src.packages.constants.mqtt_topics import MQTTTopic
 from src.packages.logger.Logger import Logger
 from src.packages.mqtt.mqtt_client import MQTTClient
 
-logger = Logger(__name__
+logger = Logger("server")
 
 
 class Server(Service):
@@ -32,9 +32,18 @@ class Server(Service):
     def _subscribe_mqtt_topics(self) -> None:
         self._mqtt.subscribe(MQTTTopic.AUTHENTICATION.value, self.handle_rfid_auth)
 
+    def stop_mqtt(self):
+        self._mqtt.stop()
+
     def _setup_controller(self) -> None:
         # self._device_controller = DeviceController(self._mqtt)
         pass
+
+    def on_connect(self, conn):
+        logger.info(f"New connection: {conn}")
+
+    def on_disconnect(self, conn):
+        logger.info(f"Disconnected: {conn}")
 
     def run(self) -> None:
         thread = ThreadedServer(self, hostname=self._host, port=self._port)
@@ -44,8 +53,22 @@ class Server(Service):
         pass
 
 
-
-
 if __name__ == "__main__":
-    server = ThreadedServer(Server(env("SERVER_HOST"), env("SERVER_PORT")))
-    server.start()
+    host, port = env.RPC_HOST, env.RPC_PORT
+    if not host or not port:
+        message = "RPC_HOST or RPC_PORT not set"
+        logger.danger(message)
+        raise Exception(message)
+
+    try:
+        server = Server(host, port)
+        server.run()
+
+    except Exception as e:
+        logger.danger(str(e))
+        exit(1)
+
+    except KeyboardInterrupt:
+        logger.info("Shutting down server")
+        server.stop_mqtt()
+        exit(0)

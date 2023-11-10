@@ -1,12 +1,14 @@
 import os
 from os import path
+from src.packages.logger.Logger import Logger
 
 from dotenv import load_dotenv
 
-project_root = path.abspath(path.join(path.dirname(__file__), "../.."))
+project_root = path.abspath(path.join(path.dirname(__file__), "../../../"))
 loaded = load_dotenv(path.join(project_root, ".env"))
 
-print(f"Loaded .env file: {loaded}")
+logger = Logger("environment")
+logger.info("Environment variables loaded") if loaded else logger.warn("Environment variables not loaded")
 
 
 def _map_to_int(value: str | None) -> int | None:
