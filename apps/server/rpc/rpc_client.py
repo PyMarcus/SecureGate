@@ -1,10 +1,11 @@
 import base64
 import typing
 
-import Pyro4
+import rpyc
 
 from apps.server.security import Security
 from libs.pyro_uri import get_pyro_uri
+from packages.config.env import env
 
 
 class Singleton(type):
@@ -30,9 +31,19 @@ class RPCSingletonClient(metaclass=Singleton):
     id from server to run.
     """
 
-    def __init__(self, uri: str) -> None:
-        """uri example: PYRO:obj_8c60fc357d0d498f9b5112d987024df4@0.0.0.0:1111"""
-        self.client = Pyro4.Proxy(uri)
+    def __init__(self, host: str, port: int):
+        self._host = host
+        self._port = port
+
+        self._client: rpyc.core.protocol.Connection = self.connect()
+
+    def connect(self) -> rpyc.core.protocol.Connection:
+        return rpyc.connect(self._host, self._port, config={"allow_public_attrs": True})
+
+    def disconnect(self):
+        if self._client:
+            self._client.close()
+        exit(0)
 
     def sign_in(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
@@ -43,7 +54,7 @@ class RPCSingletonClient(metaclass=Singleton):
            email: A string representing the user's email address.
            password: A string representing the user's password.
         """
-        return self.client.sign_in(request)
+        return self._client.root.exposed_sign_in(request)
 
     def sign_up(self, request: typing.Dict[str, typing.Any]) -> typing.Dict[str, typing.Any]:
         """
@@ -55,12 +66,12 @@ class RPCSingletonClient(metaclass=Singleton):
            email: A string representing the user's email address.
            password: A string representing the user's password.
         """
-        return self.client.sign_up(request)
+        return self._client.root.exposed_sign_up(request)
 
     def create_admin(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
     ) -> bool:
-        return self.client.create_admin(header, payload)
+        return self._client.root.exposed_create_admin(header, payload)
 
     def create_user(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
@@ -75,7 +86,7 @@ class RPCSingletonClient(metaclass=Singleton):
             rfid: A string representing the member's RFID (Radio-Frequency Identification) tag information.
             added_by: A string representing the ID of the person who added this member to the system.
         """
-        return self.client.create_user(header, payload)
+        return self._client.root.exposed_create_user(header, payload)
 
     def create_device(
         self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
@@ -91,12 +102,12 @@ class RPCSingletonClient(metaclass=Singleton):
             wifi_ssid: A string representing the wifi's ssid.
             wifi_password: A string representing the wifi's password of device.
         """
-        return self.client.create_device(header, payload)
+        return self._client.root.exposed_create_device(header, payload)
 
     def select_device_users(
         self, header: typing.Dict[str, typing.Any], device_id: str
     ) -> typing.Dict[str, typing.Any]:
-        return self.client.select_device_users(header, device_id)
+        return self._client.root.exposed_select_device_users(header, device_id)
 
     def select_user(
         self, header: typing.Dict[str, typing.Any], admin_id: str
@@ -106,7 +117,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email: A string representing the users's email address.
             token: A string representing the users token.
         """
-        return self.client.select_user(header, admin_id)
+        return self._client.root.exposed_select_user(header, admin_id)
 
     def select_admin(
         self, header: typing.Dict[str, typing.Any], admin_id: str
@@ -116,7 +127,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email: A string representing the member's email address.
             token: A string representing the users token.
         """
-        return self.client.select_admin(header, admin_id)
+        return self._client.root.exposed_select_admin(header, admin_id)
 
     def select_user_access_history(
         self, header: typing.Dict[str, typing.Any], user_id: str
@@ -131,7 +142,7 @@ class RPCSingletonClient(metaclass=Singleton):
             if no date is passed, the selected data will be that of the current day,
             from 6 am until the time of the search
         """
-        return self.client.select_user_access_history(header, user_id)
+        return self._client.root.exposed_select_user_access_history(header, user_id)
 
     def select_all_users_by_device_id(
         self, header: typing.Dict[str, typing.Any], device_id: str
@@ -146,7 +157,7 @@ class RPCSingletonClient(metaclass=Singleton):
                 id of device
 
         """
-        return self.client.select_users_by_device_id(header, device_id)
+        return self._client.root.exposed_select_users_by_device_id(header, device_id)
 
     def select_device(
         self, header: typing.Dict[str, typing.Any], device_id
@@ -157,7 +168,7 @@ class RPCSingletonClient(metaclass=Singleton):
             token: A string representing the token.
             name: A string representing the device's name.
         """
-        return self.client.select_device(header, device_id)
+        return self._client.root.exposed_select_device(header, device_id)
         # base64_encoded_data = self.client.select_device(header).get("secure").get("data")
         # encrypted_data = base64.urlsafe_b64decode(base64_encoded_data)
         # return self.client.decoder(encrypted_data)
@@ -172,10 +183,10 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_all_members(header)
+        return self._client.root.exposed_select_all_members(header)
 
     def select_admins_by_root_id(self, header: typing.Dict[str, str], root_id: str):
-        return self.client.select_admins_by_root_id(header, root_id)
+        return self._client.root.exposed_select_admins_by_root_id(header, root_id)
 
     def select_all_users(
         self, header: typing.Dict[str, str]
@@ -187,7 +198,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_all_users(header)
+        return self._client.root.exposed_select_all_users(header)
 
     def select_all_devices(
         self, header: typing.Dict[str, str]
@@ -199,7 +210,7 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_all_devices(header)
+        return self._client.root.exposed_select_all_devices(header)
 
     def handle_device_activation(
         self, header: typing.Dict[str, str], payload: typing.Dict[str, str]
@@ -207,7 +218,7 @@ class RPCSingletonClient(metaclass=Singleton):
         """
         The activate_device method activate a device
         """
-        return self.client.handle_device_activation(header, payload)
+        return self._client.root.exposed_handle_device_activation(header, payload)
 
     def select_device_access_history(
         self,
@@ -223,7 +234,9 @@ class RPCSingletonClient(metaclass=Singleton):
             email,
             token
         """
-        return self.client.select_device_access_history(header, device_id, date_ini, date_end)
+        return self._client.root.exposed_select_device_access_history(
+            header, device_id, date_ini, date_end
+        )
 
     def select_device_access_history_by_date(
         self,
@@ -231,7 +244,9 @@ class RPCSingletonClient(metaclass=Singleton):
         device_id: str,
         date: str | None,
     ) -> typing.List[typing.Dict[str, typing.Any]]:
-        return self.client.select_device_access_history_by_date(header, device_id, date)
+        return self._client.root.exposed_select_device_access_history_by_date(
+            header, device_id, date
+        )
 
     def update_user_authorization(
         self, header: typing.Dict[str, str], request: typing.Dict[str, typing.Any]
@@ -247,7 +262,7 @@ class RPCSingletonClient(metaclass=Singleton):
              user_id: user`s id
              new_authorization: (bool) new authorization value
         """
-        return self.client.update_user_authorization(header, request)
+        return self._client.root.exposed_update_user_authorization(header, request)
 
 
 def get_rpc_client() -> RPCSingletonClient:
@@ -255,7 +270,11 @@ def get_rpc_client() -> RPCSingletonClient:
     This function is a factory that returns a RPCSingletonClient
     instance.
     """
-    return RPCSingletonClient(uri=get_pyro_uri())
+    host, port = env.RPC_HOST, env.RPC_PORT
+    if not host or not port:
+        raise Exception("RPC_HOST or RPC_PORT not set")
+
+    return RPCSingletonClient(host, port)
 
 
 if __name__ == "__main__":

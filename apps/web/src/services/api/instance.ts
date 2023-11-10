@@ -6,6 +6,7 @@ export const serverApi = axios.create({
   baseURL: VITE_API_URL,
 })
 
+console.log(VITE_BOARD_API_URL)
 export const deviceApi = axios.create({
   baseURL: VITE_BOARD_API_URL,
 })

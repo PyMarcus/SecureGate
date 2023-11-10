@@ -1,11 +1,10 @@
 {
-  "token": "z2C7nicSvRakMQe0i9rTShJJnx0YKWBs",
+  "token": "token",
   "ap": {
-    "ssid": "secure_gate",
+    "ssid": "secure-gate",
     "password": "12345678"
   },
-
-  "id": "c4eff2c8-eb82-495f-b5f7-90c68080d4b9",
+  "id": "9721d8cf-7b4a-4ad3-81bd-befe52230efe",
   "mqtt": {
     "host": "localhost",
     "port": 1883,
@@ -13,7 +12,7 @@
     "password": ""
   },
   "wifi": {
-    "ssid": "portao_if",
-    "password": "portao_if"
+    "ssid": "gate_1_wifi_ssid",
+    "password": "gate_1_wifi_ssid"
   }
 }
