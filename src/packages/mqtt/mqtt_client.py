@@ -3,7 +3,7 @@ import typing
 
 import paho.mqtt.client as mqtt
 
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 
 logger = Logger("mqtt")
 

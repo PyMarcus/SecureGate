@@ -2,15 +2,19 @@ import time
 import typing
 import uuid
 
-from apps.server.database import InsertMain, SelectMain
-from apps.server.mqtt.mqtt_client import MQTTClient
+from src.packages.database.insert_main import InsertMain
+from src.packages.database.select_main import SelectMain
+from src.packages.responses.errors import *
+from src.packages.logger.logger import Logger
+from src.packages.mqtt.mqtt_client import MQTTClient
 from src.packages.security import Security
-from libs import LogMaker
-from packages.constants.mqtt_topics import MQTTTopic
-from src.packages.responses.responses import *
+from src.packages.constants.mqtt_topics import MQTTTopic
+from src.packages.responses.successes import *
 from src.packages.schemas.devices_schema import DeviceActivationSchema, DeviceSchema
 from src.packages.schemas.session_header import SessionHeader
 
+
+logger = Logger("device_controller")
 
 class DeviceController:
     def __init__(self, mqtt_client: MQTTClient):
@@ -46,12 +50,12 @@ class DeviceController:
             )
             print(f"device {device}")
             if InsertMain.insert_device(device):
-                LogMaker.write_log(f"[+]{device} has been created", "info")
+                logger.info(f"Device {device.name} created")
                 return CreatedResponse(message="Dispositivo criado com sucesso!", data=True).dict()
             return InternalServerError("Erro ao criar dispositivo").dict()
 
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     def select_device(self, header: typing.Dict[str, typing.Any], device_id: str):
@@ -77,7 +81,7 @@ class DeviceController:
                 ).dict()
             return NotFoundError("Administrador não encontrado").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     def select_all_devices(self, header: typing.Dict[str, typing.Any]):
@@ -102,7 +106,7 @@ class DeviceController:
                 )
             return OKResponse(message="Dispositivos listados com sucesso!", data=response).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     def select_device_users(self, header: typing.Dict[str, typing.Any], device_id: str):
@@ -129,7 +133,7 @@ class DeviceController:
                 )
             return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     def handle_device_activation(
@@ -155,5 +159,5 @@ class DeviceController:
             return OKResponse(message="Dispositivo ativado com sucesso!", data=True).dict()
 
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()

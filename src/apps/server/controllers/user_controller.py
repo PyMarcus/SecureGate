@@ -1,12 +1,18 @@
 import typing
 import uuid
 
-from apps.server.database import InsertMain, SelectMain, UpdateMain
+from src.packages.database.models.user import User
+from src.packages.database.update_main import UpdateMain
+from src.packages.responses.errors import *
+from src.packages.logger.logger import Logger
 from src.packages.security import Security
-from libs import LogMaker
-from src.packages.responses.responses import *
+from src.packages.database.insert_main import InsertMain
+from src.packages.database.select_main import SelectMain
+from src.packages.responses.successes import *
 from src.packages.schemas.session_header import SessionHeader
 from src.packages.schemas.users_schema import CreateUserSchema
+
+logger = Logger("user_controller")
 
 
 class UserController:
@@ -31,11 +37,11 @@ class UserController:
             )
 
             if InsertMain.insert_user(user):
-                LogMaker.write_log(f"User {user.email} created", "info")
+                logger.info(f"User {user.email} created")
                 return CreatedResponse(message="Usuário criado com sucesso!", data=True).dict()
             return InternalServerError("Erro ao criar usuário").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -63,12 +69,12 @@ class UserController:
                 ).dict()
             return NotFoundError("Usuário não encontrado").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
     def select_users_by_device_id(
-        header: typing.Dict[str, typing.Any], device_id: str
+            header: typing.Dict[str, typing.Any], device_id: str
     ) -> typing.Dict[str, typing.Any]:
         try:
             header_data = SessionHeader(**header)
@@ -95,7 +101,7 @@ class UserController:
                 return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
             return NoContentResponse(message="Sem dados", data=[]).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -123,12 +129,12 @@ class UserController:
                 )
             return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
     def update_user_authorization(
-        header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
+            header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
     ) -> typing.Dict[str, typing.Any]:
         try:
             header_data = SessionHeader(**header)
@@ -146,7 +152,7 @@ class UserController:
                 "Não foi possível atualizar o usuario, verifique os dados"
             ).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -155,5 +161,5 @@ class UserController:
             user = SelectMain.select_user_by_device_id_and_rfid(device_id, rfid)
             return user
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return None

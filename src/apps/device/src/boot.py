@@ -1,10 +1,12 @@
 import time
 
-from apps.emulator.config.config import config
-from apps.emulator.src.services.config_service import ConfigService
-from apps.emulator.src.services.wifi_service import WifiService
-from apps.emulator.src.utils.log import Log
-from packages.config.env import env
+from src.apps.device.config.config import config
+from src.apps.device.src.services.config_service import ConfigService
+from src.apps.device.src.services.wifi_service import WifiService
+from src.packages.config.env import env
+from src.packages.logger.logger import Logger
+
+logger = Logger("device_boot")
 
 
 def _boot():
@@ -15,9 +17,9 @@ def _boot():
 
     if config.check():
         wifi_config = config.get("wifi")
-        Log.info(f"Connecting to {wifi_config.get('ssid')}...")
+        logger.info(f"Connecting to {wifi_config.get('ssid')}...")
         time.sleep(5)
-        Log.success("Connected to wifi successfully!")
+        logger.info("Connected to wifi successfully!")
     else:
         host, port = env.BOARD_API_HOST, env.BOARD_API_PORT
         if not host or not port:

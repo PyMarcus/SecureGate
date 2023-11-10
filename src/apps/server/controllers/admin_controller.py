@@ -1,12 +1,18 @@
 import typing
 import uuid
 
-from apps.server.database import InsertMain, SelectMain
-from src.packages.security import Security
-from libs import LogMaker
-from src.packages.responses.responses import *
 from src.packages.schemas.admins_schema import AdminSchema
 from src.packages.schemas.session_header import SessionHeader
+from src.packages.database.insert_main import InsertMain
+from src.packages.database.models.admin import Admin, UserRole
+from src.packages.database.select_main import SelectMain
+from src.packages.responses.errors import *
+
+from src.packages.security import Security
+from src.packages.logger.logger import Logger
+from src.packages.responses.successes import *
+
+logger = Logger("session_controller")
 
 
 class AdminController:
@@ -34,13 +40,13 @@ class AdminController:
             )
 
             if InsertMain.insert_admin(user):
-                LogMaker.write_log(f"Admin {user.email} signed up", "info")
+                logger.info(f"Admin {user.email} signed up")
                 return CreatedResponse(
                     message="Administrador criado com sucesso!", data=True
                 ).dict()
             return BadRequestError("Erro ao criar administrador").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -66,7 +72,7 @@ class AdminController:
                 ).dict()
             return NotFoundError("Administrador não encontrado").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -96,5 +102,5 @@ class AdminController:
                 )
             return OKResponse(message="Admins listados com sucesso!", data=response).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()

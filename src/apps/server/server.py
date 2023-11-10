@@ -7,6 +7,7 @@ from src.apps.server.controllers.admin_controller import AdminController
 from src.apps.server.controllers.device_controller import DeviceController
 from src.apps.server.controllers.session_controller import SessionController
 from src.apps.server.controllers.user_controller import UserController
+from src.apps.server.controllers.session_controller import SessionController
 from src.packages.config.env import env
 import json
 from rpyc import Service
@@ -15,8 +16,9 @@ from rpyc.utils.server import ThreadedServer
 from src.packages.constants.mqtt_topics import MQTTTopic
 from src.packages.database.insert_main import InsertMain
 from src.packages.database.models.access_history import AccessHistory
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 from src.packages.mqtt.mqtt_client import MQTTClient
+
 from src.packages.schemas.devices_schema import RFIDAuthenticationSchema, DeviceActivationSchema
 from src.packages.security import Security
 
@@ -36,14 +38,15 @@ class Server(Service):
         host, port = env.MQTT_HOST, env.MQTT_PORT
         if not host or not port:
             message = "MQTT_HOST or MQTT_PORT not set"
-            logger.danger(message)
+            logger.error(message)
             raise Exception(message)
 
         self._mqtt = MQTTClient(host, port)
         self._mqtt.listen()
 
     def _subscribe_mqtt_topics(self) -> None:
-        self._mqtt.subscribe(MQTTTopic.AUTHENTICATION.value, self._handle_rfid_auth)
+        # self._mqtt.subscribe(MQTTTopic.AUTHENTICATION.value, self._handle_rfid_auth)
+        pass
 
     def stop_mqtt(self):
         self._mqtt.stop()
@@ -61,61 +64,58 @@ class Server(Service):
         thread = ThreadedServer(self, hostname=self._host, port=self._port)
         thread.start()
 
-    def exposed_sign_in(self, payload: typing.Dict[str, typing.Any]) -> typing.Dict[
-        str, typing.Any]:
-        response = SessionController.sign_in(payload)
-        self.__user_logged = response.get("data").get("user_id")
-        return response
+    def exposed_sign_in(self, payload: typing.Dict) -> typing.Dict:
+        return SessionController.sign_in(payload)
 
-    def exposed_sign_up(self, payload: typing.Dict[str, typing.Any]) -> bool:
+    def exposed_sign_up(self, payload: typing.Dict) -> bool:
         return SessionController.sign_up(payload)
 
     def exposed_create_admin(
-            self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+            self, header: typing.Dict, payload: typing.Dict
     ) -> bool:
         return AdminController.create_admin(header, payload)
 
     def exposed_create_user(
-            self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, payload: typing.Dict
+    ) -> typing.Dict:
         return UserController.create_user(header, payload)
 
     def exposed_create_device(
-            self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, payload: typing.Dict
+    ) -> typing.Dict:
         return self._device_controller.create_device(header, payload)
 
     def exposed_register_access_history(  # chamar quando o user passar no portao
-            self, header: typing.Dict[str, typing.Any], history: typing.Dict[str, typing.Any]
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, history: typing.Dict
+    ) -> typing.Dict:
         return self._register_access_history(header, history)
 
     def exposed_select_admin(
-            self, header: typing.Dict[str, typing.Any], admin_id: str
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, admin_id: str
+    ) -> typing.Dict:
         return AdminController.select_admin(header, admin_id)
 
     def exposed_select_user(
-            self, header: typing.Dict[str, typing.Any], user_id: str
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, user_id: str
+    ) -> typing.Dict:
         return UserController.select_user(header, user_id)
 
     def exposed_select_device(
-            self, header: typing.Dict[str, typing.Any], device_id: str
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, device_id: str
+    ) -> typing.Dict:
         return self._device_controller.select_device(header, device_id)
 
     def exposed_select_device_users(
-            self, header: typing.Dict[str, typing.Any], device_id: str
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, device_id: str
+    ) -> typing.Dict:
         return self._device_controller.select_device_users(header, device_id)
 
     def exposed_select_user_access_history(
-            self, header: typing.Dict[str, typing.Any], user_id: str
-    ) -> typing.Dict[str, typing.Any]:
+            self, header: typing.Dict, user_id: str
+    ) -> typing.Dict:
         return AccessHistoryController.select_user_access_history(header, user_id)
 
-    def exposed_decoder(self, device_encrypted: str) -> typing.Dict[str, typing.Any]:
+    def exposed_decoder(self, device_encrypted: str) -> typing.Dict:
         logger.info("calling decoder")
         encrypted_data = base64.urlsafe_b64decode(device_encrypted.get("data"))
         return Security.decrypted_traffic_package(encrypted_data)
@@ -139,7 +139,7 @@ class Server(Service):
             self,
             header: typing.Dict[str, str],
             device_id: str,
-    ) -> dict[str, Any]:
+    ) -> dict[str, typing.Any]:
         return UserController.select_users_by_device_id(header=header, device_id=device_id)
 
     def exposed_select_device_access_history(
@@ -159,7 +159,7 @@ class Server(Service):
         return AccessHistoryController.select_device_access_history_by_date(header, device_id, date)
 
     def exposed_update_user_authorization(
-            self, header: typing.Dict[str, str], user: typing.Dict[str, typing.Any]
+            self, header: typing.Dict[str, str], user: typing.Dict
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return UserController.update_user_authorization(header, user)
 
@@ -203,21 +203,25 @@ class Server(Service):
                     logger.info(f"User {user.id} not authorized")
 
         except Exception as e:
-            logger.danger(str(e))
+            logger.error(str(e))
+
+    def exposed_test(self, value: str) -> str:
+        logger.info(f"Test: {value}")
+        return value
 
 
 if __name__ == "__main__":
     host, port = env.RPC_HOST, env.RPC_PORT
     if not host or not port:
         message = "RPC_HOST or RPC_PORT not set"
-        logger.danger(message)
+        logger.error(message)
         raise Exception(message)
 
     try:
         server = Server(host, port)
         server.run()
     except Exception as e:
-        logger.danger(str(e))
+        logger.error(str(e))
         exit(1)
     except KeyboardInterrupt:
         logger.info("Shutting down server")

@@ -1,4 +1,4 @@
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 
 logger = Logger('wifi_service')
 

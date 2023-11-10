@@ -21,7 +21,7 @@ mqtt/log
 .env
 
 # logs
-securegate.log
+.logs/
 
 # app
 !/postgres/

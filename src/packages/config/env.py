@@ -1,6 +1,6 @@
 import os
 from os import path
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 
 from dotenv import load_dotenv
 

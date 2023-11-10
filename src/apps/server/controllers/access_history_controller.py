@@ -3,11 +3,13 @@ import typing
 
 from src.packages.database.insert_main import InsertMain
 from src.packages.database.select_main import SelectMain
+from src.packages.responses.errors import *
+from src.packages.logger.logger import Logger
 from src.packages.security import Security
-from src.packages.responses.responses import *
+from src.packages.responses.successes import *
 from src.packages.schemas.session_header import SessionHeader
 
-logger = LogMaker.get_logger('access_history_controller')
+logger = Logger("access_history_controller")
 
 
 class AccessHistoryController:
@@ -17,7 +19,7 @@ class AccessHistoryController:
         try:
             InsertMain.insert_access_history(payload)
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -63,7 +65,7 @@ class AccessHistoryController:
             ).dict()
 
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
         return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -114,7 +116,7 @@ class AccessHistoryController:
             ).dict()
 
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
         return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -168,5 +170,5 @@ class AccessHistoryController:
             ).dict()
 
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
         return InternalServerError("Não foi possível processar a requisição").dict()

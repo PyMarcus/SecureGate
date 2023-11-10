@@ -1,8 +1,10 @@
 import json
 from os import path
 
-from apps.emulator.src.utils.log import Log
 from src.packages.config.env import env
+from src.packages.logger.logger import Logger
+
+logger = Logger("device_config")
 
 
 class Config:
@@ -46,7 +48,7 @@ class Config:
         if not ssid or not password or not token:
             raise Exception("Missing AP SSID, password or token")
 
-        Log.warn(f"Configuration file not found. Creating a new one at {self._file_path}")
+        logger.warn(f"Configuration file not found. Creating a new one at {self._file_path}")
         default_config = {"token": token, "ap": {"ssid": ssid, "password": password}}
         self._data = default_config
         with open(self._file_path, "w") as f:

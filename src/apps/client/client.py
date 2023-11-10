@@ -1,5 +1,5 @@
 from src.packages.config.env import env
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 
 import rpyc
 
@@ -23,14 +23,27 @@ class Client:
 
     def run(self) -> None:
         self._connect()
+        self.test()
         self._disconnect()
+
+    # Methods
+    def test(self):
+        result = self._connection.root.test("any string")
+        logger.info(result)
+
+    def _sign_in(self):
+        pass
+
+    def _sign_up(self):
+        pass
 
 
 if __name__ == "__main__":
     host, port = env.RPC_HOST, env.RPC_PORT
     if not host or not port:
         message = "RPC_HOST or RPC_PORT not set"
-        logger.danger(message)
+        logger.error(message)
+        raise Exception(message)
 
     client = Client(host, port)
     client.run()

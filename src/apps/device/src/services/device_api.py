@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer
 
-from apps.emulator.config.config import config
+from src.apps.device.config.config import config
 
 device_api = FastAPI(title="SecureGate device config service")
 device_api.add_middleware(

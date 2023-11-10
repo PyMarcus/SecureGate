@@ -4,7 +4,7 @@ import bcrypt
 from cryptography.fernet import Fernet
 from itsdangerous import BadSignature, URLSafeTimedSerializer
 
-from packages.config.env import env
+from src.packages.config.env import env
 from src.packages.responses import *
 
 

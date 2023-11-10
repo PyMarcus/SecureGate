@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from src.packages.config.env import env
 from src.packages.database.models import BaseModel
-from src.packages.logger.Logger import Logger
+from src.packages.logger.logger import Logger
 
 logger = Logger("database")
 
@@ -33,7 +33,7 @@ class DBConnection:
             db_url = env.DATABASE_URL
             if not db_url:
                 message = "DATABASE_URL not set"
-                logger.danger(message)
+                logger.error(message)
                 raise Exception(message)
 
             cls.__engine = sa.create_engine(url=db_url, echo=False)

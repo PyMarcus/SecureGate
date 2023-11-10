@@ -11,4 +11,4 @@ RUN pip3 install -r requirements.txt
 
 EXPOSE 7878
 
-CMD ["python3", "-m", "apps.server.rpc.rpc_server"]
+CMD ["python3", "-m", "src.apps.server.server"]

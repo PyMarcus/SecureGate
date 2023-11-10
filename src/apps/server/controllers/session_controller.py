@@ -1,13 +1,21 @@
 import typing
 import uuid
 
-from apps.server.database import InsertMain, SelectMain
+from src.packages.database.insert_main import InsertMain
+from src.packages.database.models.admin import Admin, UserRole
+from src.packages.database.select_main import SelectMain
+from src.packages.responses.errors import *
+from src.packages.schemas.session_schema import SigninSchema, SignupSchema
+
 from src.packages.security import Security
-from libs import LogMaker
-from src.packages.responses.responses import *
+from src.packages.logger.logger import Logger
+from src.packages.responses.successes import *
+
+logger = Logger("session_controller")
 
 
 class SessionController:
+
     @staticmethod
     def sign_in(payload: typing.Dict[str, typing.Any]):
         try:
@@ -23,7 +31,7 @@ class SessionController:
 
             if not Security.verify_password(hashed_password, data.password):
                 return BadRequestError("Email ou senha inválidos").dict()
-            LogMaker.write_log(f"User {user.email} signed in", "info")
+            logger.info(f"User {user.email} signed in")
 
             return OKResponse(
                 message="Sign in realizado com sucesso!",
@@ -36,7 +44,7 @@ class SessionController:
                 },
             ).dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
@@ -56,9 +64,9 @@ class SessionController:
                 role=UserRole.ROOT,
             )
             if InsertMain.insert_admin(user):
-                LogMaker.write_log(f"User {user.email} signed up", "info")
+                logger.info(f"User {user.email} signed up")
                 return CreatedResponse(message="Usuário criado com sucesso!", data=True).dict()
             return BadRequestError("Erro ao criar usuário").dict()
         except Exception as e:
-            LogMaker.write_log(f"Error: {e}", "error")
+            logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()
