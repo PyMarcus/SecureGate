@@ -2,7 +2,7 @@ from termcolor import colored
 
 
 class Logger:
-    def __int__(self, name: str):
+    def __init__(self, name: str):
         self.name = name.upper()
 
     def info(self, message: str):
