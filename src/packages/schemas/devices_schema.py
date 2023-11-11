@@ -17,3 +17,21 @@ class DeviceActivationSchema(BaseModel):
 class RFIDAuthenticationSchema(BaseModel):
     device_id: str
     rfid: str
+
+
+class DeviceMQTTConfigSchema(BaseModel):
+    host: str
+    port: int
+    user: str
+    password: str
+
+
+class DeviceWiFiConfigSchema(BaseModel):
+    ssid: str
+    password: str
+
+
+class DeviceConfigSchema(BaseModel):
+    id: str
+    mqtt: DeviceMQTTConfigSchema
+    wifi: DeviceWiFiConfigSchema

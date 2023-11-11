@@ -13,6 +13,8 @@ services:
       - rpc_server_network
       - postgres_network
       - mqtt_network
+    environment:
+      - PYTHONUNBUFFERED=1
     ports:
       - '${RPC_PORT}:${RPC_PORT}'
 

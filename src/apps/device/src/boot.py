@@ -21,16 +21,20 @@ def _boot():
         time.sleep(5)
         logger.info("Connected to wifi successfully!")
     else:
-        host, port = env.BOARD_API_HOST, env.BOARD_API_PORT
-        if not host or not port:
-            raise Exception("Missing host or port for emulator")
+        try:
+            host, port = env.BOARD_API_HOST, env.BOARD_API_PORT
+            if not host or not port:
+                raise Exception("Missing host or port for emulator")
 
-        config_service = ConfigService(host, port)
+            config_service = ConfigService(host, port)
 
-        ap_config = config.get("ap")
-        wifi_service.host(ap_config.get("ssid"), ap_config.get("password"))
+            ap_config = config.get("ap")
+            wifi_service.host(ap_config.get("ssid"), ap_config.get("password"))
 
-        config_service.start()
-
+            config_service.start()
+        except KeyboardInterrupt:
+            logger.info("Keyboard interrupt detected. Shutting down...")
+            config_service.stop()
+            logger.info("Shut down successfully!")
 
 _boot()

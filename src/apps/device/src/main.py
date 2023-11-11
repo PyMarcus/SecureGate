@@ -1,4 +1,6 @@
 import json
+import os
+import signal
 import time
 
 from src.apps.device.config.config import config
@@ -55,7 +57,7 @@ def _main():
     try:
         while True:
             logger.info("Aguardando RFID...")
-            rfid = input("=> ")
+            rfid = input("=> ").strip()
             if not rfid or len(rfid) != 8:
                 logger.warn("Por favor, informe um RFID válido!")
                 continue
@@ -74,4 +76,5 @@ def _main():
         exit(0)
 
 
-_main()
+if config.get("mqtt"):
+    _main()

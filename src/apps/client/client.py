@@ -1,16 +1,16 @@
 import typing
 import uuid
 from datetime import datetime
-
+import requests
 from src.packages.config.env import env
 from src.packages.logger.logger import Logger
 from termcolor import colored
 import rpyc
 
-from src.packages.schemas.admins_schema import AdminSchema
-from src.packages.schemas.devices_schema import DeviceSchema, DeviceActivationSchema
-from src.packages.schemas.session_schema import Session, SignupSchema, SigninSchema
-from src.packages.schemas.users_schema import CreateUserSchema
+from src.packages.schemas.admins_schema import *
+from src.packages.schemas.devices_schema import *
+from src.packages.schemas.session_schema import *
+from src.packages.schemas.users_schema import *
 
 logger = Logger("client")
 
@@ -190,7 +190,7 @@ class Client:
         logger.info('Histórico de acesso encontrado:')
         logger.info('Usuário - Dispositivo - Data')
         for access in history:
-            date = datetime.strptime(access['when'], "%Y-%m-%d %H:%M:%S.%f").strftime(
+            date = datetime.strptime(str(access['when']), "%Y-%m-%d %H:%M:%S.%f").strftime(
                 "%d/%m/%Y %H:%M")
             logger.info(f"{access['user_name']} - {access['device_name']} - {date}")
 
@@ -289,6 +289,46 @@ class Client:
             logger.error('Erro ao listar administradores')
 
     # Device =======================================================================================
+
+    def _send_device_config(self, device: DeviceSchema) -> bool:
+        api_url, api_token = env.BOARD_API_URL, env.BOARD_TOKEN
+        if not api_url or not api_token:
+            message = "BOARD_API_URL or BOARD_TOKEN not set"
+            logger.error(message)
+            raise Exception(message)
+
+        mqtt_host, mqtt_port, mqtt_user, mqtt_password = env.MQTT_HOST, env.MQTT_PORT, env.MQTT_USERNAME, env.MQTT_PASSWORD
+        if not mqtt_host or not mqtt_port:
+            message = "MQTT_HOST or MQTT_PORT  not set"
+            logger.error(message)
+            raise Exception(message)
+
+        try:
+            payload = DeviceConfigSchema(
+                id=device.id,
+                mqtt=DeviceMQTTConfigSchema(
+                    host=env.MQTT_HOST,
+                    port=env.MQTT_PORT,
+                    user=env.MQTT_USERNAME,
+                    password=env.MQTT_PASSWORD,
+                ),
+                wifi=DeviceWiFiConfigSchema(
+                    ssid=device.wifi_ssid,
+                    password=device.wifi_password,
+                ),
+            ).model_dump()
+
+            result = requests.post(api_url, json=payload, headers={
+                'Authorization': f'Bearer {api_token}'
+            }).json()
+            if result.get('success'):
+                return True
+            logger.error(result.get('message', 'Erro ao enviar configuração'))
+            return False
+        except Exception as e:
+            logger.error(str(e))
+            return False
+
     def _create_device(self, name: str, wifi_ssid: str, wifi_password: str) -> None:
         try:
             payload = DeviceSchema(
@@ -297,9 +337,24 @@ class Client:
                 wifi_ssid=wifi_ssid,
                 wifi_password=wifi_password,
                 version='1.0.0',
-            ).model_dump()
+            )
 
-            result = dict(self._connection.root.create_device(self._session.model_dump(), payload))
+            ap_ssid, ap_password = env.BOARD_AP_SSID, env.BOARD_AP_PASSWORD
+            if not ap_ssid or not ap_password:
+                message = "BOARD_AP_SSID or BOARD_AP_PASSWORD not set"
+                logger.error(message)
+                raise Exception(message)
+
+            logger.info(
+                f'Conecte-se na rede do dispositivo (ssid: {ap_ssid}, password: {ap_password})')
+            logger.warn('Pressione enter para continuar...')
+            input('')
+            configured = self._send_device_config(payload)
+            if not configured:
+                return logger.error('Erro ao configurar dispositivo')
+
+            result = dict(self._connection.root.create_device(self._session.model_dump(),
+                                                              payload.model_dump()))
             if result.get('success'):
                 return logger.success(result.get('message', 'Dispositivo criado com sucesso!'))
             logger.error(result.get('message', 'Erro ao criar dispositivo'))
@@ -382,7 +437,8 @@ class Client:
             if result.get('success'):
                 return self._print_access_history(result.get('data', []))
             logger.error(result.get('message', 'Erro ao listar histórico de acesso'))
-        except Exception:
+        except Exception as e:
+            logger.error(e)
             logger.error('Erro ao listar histórico de acesso')
 
 
