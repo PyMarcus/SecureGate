@@ -1,25 +1,23 @@
 import base64
+import json
 import typing
 import uuid
+
+from rpyc import Service
+from rpyc.utils.server import ThreadedServer
 
 from src.apps.server.controllers.access_history_controller import AccessHistoryController
 from src.apps.server.controllers.admin_controller import AdminController
 from src.apps.server.controllers.device_controller import DeviceController
 from src.apps.server.controllers.session_controller import SessionController
 from src.apps.server.controllers.user_controller import UserController
-from src.apps.server.controllers.session_controller import SessionController
 from src.packages.config.env import env
-import json
-from rpyc import Service
-from rpyc.utils.server import ThreadedServer
-
 from src.packages.constants.mqtt_topics import MQTTTopic
 from src.packages.database.insert_main import InsertMain
 from src.packages.database.models.access_history import AccessHistory
 from src.packages.logger.logger import Logger
 from src.packages.mqtt.mqtt_client import MQTTClient
-
-from src.packages.schemas.devices_schema import RFIDAuthenticationSchema, DeviceActivationSchema
+from src.packages.schemas.devices_schema import DeviceActivationSchema, RFIDAuthenticationSchema
 from src.packages.security import Security
 
 logger = Logger("server")
@@ -35,9 +33,9 @@ class Server(Service):
         self._setup_controller()
 
     def _setup_mqtt(self) -> None:
-        host, port = env.MQTT_HOST, env.MQTT_PORT
+        host, port = env.MQTT_SERVER_HOST, env.MQTT_PORT
         if not host or not port:
-            message = "MQTT_HOST or MQTT_PORT not set"
+            message = "MQTT_SERVER_HOST or MQTT_PORT not set"
             logger.error(message)
             raise Exception(message)
 
@@ -61,7 +59,8 @@ class Server(Service):
         logger.info(f"Disconnected: {conn}")
 
     def run(self) -> None:
-        thread = ThreadedServer(self, hostname=self._host, port=self._port)
+        thread = ThreadedServer(self, hostname=self._host, port=self._port,
+                                protocol_config={"allow_public_attrs": True})
         thread.start()
 
     def exposed_sign_in(self, payload: typing.Dict) -> typing.Dict:
@@ -205,15 +204,11 @@ class Server(Service):
         except Exception as e:
             logger.error(str(e))
 
-    def exposed_test(self, value: str) -> str:
-        logger.info(f"Test: {value}")
-        return value
-
 
 if __name__ == "__main__":
-    host, port = env.RPC_HOST, env.RPC_PORT
+    host, port = env.RPC_SERVER_HOST, env.RPC_PORT
     if not host or not port:
-        message = "RPC_HOST or RPC_PORT not set"
+        message = "RPC_SERVER_HOST or RPC_PORT not set"
         logger.error(message)
         raise Exception(message)
 
@@ -221,6 +216,7 @@ if __name__ == "__main__":
         server = Server(host, port)
         server.run()
     except Exception as e:
+        print(host, port)
         logger.error(str(e))
         exit(1)
     except KeyboardInterrupt:

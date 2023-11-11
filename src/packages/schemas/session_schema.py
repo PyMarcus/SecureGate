@@ -11,3 +11,10 @@ class SignupSchema(BaseModel):
     email: str
     password: str
     role: str  # 'ROOT'
+
+
+class Session(BaseModel):
+    token: str
+    user_id: str
+    name: str
+    email: str

@@ -103,9 +103,9 @@ if __name__ == "__main__":
     # Just a simple example of how to use the MQTTClient
     from src.packages.config.env import env
 
-    host, port = env.MQTT_HOST, env.MQTT_PORT
+    host, port = env.MQTT_SERVER_HOST, env.MQTT_PORT
     if not host or not port:
-        raise Exception("MQTT_HOST or MQTT_PORT not set")
+        raise Exception("MQTT_SERVER_HOST or MQTT_PORT not set")
 
     mqtt = MQTTClient(host, port)
     mqtt_thread = mqtt.listen().start()

@@ -30,9 +30,9 @@ class DBConnection:
             )
 
         else:
-            db_url = env.DATABASE_URL
+            db_url = env.DATABASE_SERVER_URL
             if not db_url:
-                message = "DATABASE_URL not set"
+                message = "DATABASE_SERVER_URL not set"
                 logger.error(message)
                 raise Exception(message)
 

@@ -36,10 +36,10 @@ class SessionController:
             return OKResponse(
                 message="Sign in realizado com sucesso!",
                 data={
-                    "user_id": user.id,
+                    "user_id": str(user.id),
                     "name": user.name,
                     "email": user.email,
-                    "role": user.role,
+                    "role": user.role.value,
                     "token": Security.generate_token(user.email),
                 },
             ).dict()

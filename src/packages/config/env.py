@@ -1,14 +1,15 @@
 import os
 from os import path
-from src.packages.logger.logger import Logger
 
 from dotenv import load_dotenv
+
+from src.packages.logger.logger import Logger
 
 project_root = path.abspath(path.join(path.dirname(__file__), "../../../"))
 loaded = load_dotenv(path.join(project_root, ".env"))
 
 logger = Logger("environment")
-logger.info("Environment variables loaded") if loaded else logger.warn("Environment variables not loaded")
+logger.success("Environment variables loaded") if loaded else logger.warn("Environment variables not loaded")
 
 
 def _map_to_int(value: str | None) -> int | None:
@@ -28,15 +29,18 @@ class DotEnv:
 
     # Database
     DATABASE_HOST: str | None = os.getenv("DATABASE_HOST")
+    DATABASE_SERVER_HOST: str | None = os.getenv("DATABASE_SERVER_HOST")
     DATABASE_PORT: int | None = _map_to_int(os.getenv("DATABASE_PORT"))
     DATABASE_NAME: str | None = os.getenv("DATABASE_NAME")
     DATABASE_USERNAME: str | None = os.getenv("DATABASE_USERNAME")
     DATABASE_PASSWORD: str | None = os.getenv("DATABASE_PASSWORD")
     DATABASE_URL: str | None = os.getenv("DATABASE_URL")
+    DATABASE_SERVER_URL: str | None = os.getenv("DATABASE_SERVER_URL")
 
     # MQTT
     MQTT_PROTOCOL: str | None = os.getenv("MQTT_PROTOCOL")
     MQTT_HOST: str | None = os.getenv("MQTT_HOST")
+    MQTT_SERVER_HOST: str | None = os.getenv("MQTT_SERVER_HOST")
     MQTT_PORT: int | None = _map_to_int(os.getenv("MQTT_PORT"))
     MQTT_WS_PORT: int | None = _map_to_int(os.getenv("MQTT_WS_PORT"))
     MQTT_URL: str | None = os.getenv("MQTT_URL")
@@ -53,6 +57,7 @@ class DotEnv:
 
     # RPC
     RPC_HOST: str | None = os.getenv("RPC_HOST")
+    RPC_SERVER_HOST: str | None = os.getenv("RPC_SERVER_HOST")
     RPC_PORT: int | None = _map_to_int(os.getenv("RPC_PORT"))
 
     # BOARD
