@@ -1,11 +1,15 @@
 import typing
+import uuid
 
 from src.packages.config.env import env
 from src.packages.logger.logger import Logger
 from termcolor import colored
 import rpyc
 
+from src.packages.schemas.admins_schema import AdminSchema
+from src.packages.schemas.devices_schema import DeviceSchema
 from src.packages.schemas.session_schema import Session, SignupSchema, SigninSchema
+from src.packages.schemas.users_schema import CreateUserSchema
 
 logger = Logger("client")
 
@@ -43,6 +47,24 @@ class Client:
                 'command': 'sair',
                 'description': 'Faz logout do sistema',
                 'function': self._sign_out,
+            },
+            'nadmin': {
+                'command': 'nadmin',
+                'args': ['nome', 'email', 'senha'],
+                'description': 'Cria um novo administrador',
+                'function': self._create_admin,
+            },
+            'nusuario': {
+                'command': 'nusuario',
+                'args': ['nome', 'email', 'rfid', 'id_dispositivo'],
+                'description': 'Cria um novo usuário',
+                'function': self._create_user,
+            },
+            'ndispositivo': {
+                'command': 'ndispositivo',
+                'args': ['nome', 'nome_wifi', 'senha_wifi'],
+                'description': 'Cria um novo dispositivo',
+                'function': self._create_device,
             },
         }
 
@@ -93,6 +115,7 @@ class Client:
             logger.info('Bem-vindo ao SecureGate!')
             logger.warn('Digite /ajuda para ver os comandos disponíveis')
 
+            self._sign_in('123', '123')  # TODO: remove this, only for testing
             while True:
                 try:
                     self._cli()
@@ -120,10 +143,9 @@ class Client:
         try:
             result = dict(self._connection.root.sign_in(payload.model_dump()))
             if result.get('success'):
-                print(result.get('data'))
-                logger.success(result.get('message', 'Login realizado com sucesso!'))
-            else:
-                logger.error(result.get('message', 'Erro ao realizar login'))
+                self._session = Session(**result.get('data', {}))
+                return logger.success(result.get('message', 'Login realizado com sucesso!'))
+            logger.error(result.get('message', 'Erro ao realizar login'))
         except Exception:
             logger.error('Erro ao realizar login')
 
@@ -138,20 +160,70 @@ class Client:
 
             result = dict(self._connection.root.sign_up(payload))
             if result.get('success'):
-                logger.success(result.get('message', 'Usuário cadastrado com sucesso!'))
-            else:
-                logger.error(result.get('message', 'Erro ao cadastrar usuário'))
+                return logger.success(result.get('message', 'Usuário cadastrado com sucesso!'))
+            logger.error(result.get('message', 'Erro ao cadastrar usuário'))
         except Exception:
             logger.error('Erro ao cadastrar usuário')
 
     def _sign_out(self):
-        pass
+        self._session = None
+        logger.success('Logout realizado com sucesso!')
+        self._disconnect()
 
     # Admin ========================================================================================
+    def _create_admin(self, name: str, email: str, password: str) -> None:
+        try:
+            payload = AdminSchema(
+                name=name,
+                email=email,
+                password=password,
+                role='ADMIN',
+            ).model_dump()
+
+            result = dict(self._connection.root.create_admin(self._session.model_dump(), payload))
+            if result.get('success'):
+                return logger.success(result.get('message', 'Administrador criado com sucesso!'))
+            logger.error(result.get('message', 'Erro ao criar administrador'))
+        except Exception:
+            logger.error('Erro ao criar administrador')
 
     # Device =======================================================================================
+    def _create_device(self, name: str, wifi_ssid: str, wifi_password: str) -> None:
+        try:
+            payload = DeviceSchema(
+                id=str(uuid.uuid4()),
+                name=name,
+                wifi_ssid=wifi_ssid,
+                wifi_password=wifi_password,
+                version='1.0.0',
+            ).model_dump()
+
+            result = dict(self._connection.root.create_device(self._session.model_dump(), payload))
+            if result.get('success'):
+                return logger.success(result.get('message', 'Dispositivo criado com sucesso!'))
+            logger.error(result.get('message', 'Erro ao criar dispositivo'))
+        except Exception:
+            logger.error('Erro ao criar dispositivo')
 
     # User =========================================================================================
+    def _create_user(self, name: str, email: str, rfid: str, device_id: str) -> None:
+        try:
+            if len(rfid) != 8:
+                return logger.error('RFID inválido!')
+            payload = CreateUserSchema(
+                name=name,
+                email=email,
+                rfid=rfid,
+                authorized=True,
+                device_id=device_id,
+            ).model_dump()
+
+            result = dict(self._connection.root.create_user(self._session.model_dump(), payload))
+            if result.get('success'):
+                return logger.success(result.get('message', 'Usuário criado com sucesso!'))
+            logger.error(result.get('message', 'Erro ao criar usuário'))
+        except Exception:
+            logger.error('Erro ao criar usuário')
 
     # Access History ===============================================================================
 

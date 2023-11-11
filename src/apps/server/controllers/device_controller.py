@@ -3,6 +3,7 @@ import typing
 import uuid
 
 from src.packages.database.insert_main import InsertMain
+from src.packages.database.models.device import Device
 from src.packages.database.select_main import SelectMain
 from src.packages.responses.errors import *
 from src.packages.logger.logger import Logger
@@ -13,15 +14,15 @@ from src.packages.responses.successes import *
 from src.packages.schemas.devices_schema import DeviceActivationSchema, DeviceSchema
 from src.packages.schemas.session_header import SessionHeader
 
-
 logger = Logger("device_controller")
+
 
 class DeviceController:
     def __init__(self, mqtt_client: MQTTClient):
         self._mqtt = mqtt_client
 
     def create_device(
-        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
+            self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, typing.Any]
     ):
         try:
             header_data = SessionHeader(**header)
@@ -32,13 +33,7 @@ class DeviceController:
                 return UnauthorizedError("Token inválido").dict()
 
             data = DeviceSchema(**payload)
-            if (
-                not data.id
-                or not data.name
-                or not data.wifi_ssid
-                or not data.wifi_password
-                or not data.version
-            ):
+            if not data.id or not data.name or not data.wifi_ssid or not data.wifi_password or not data.version:
                 return BadRequestError("Dados inválidos").dict()
 
             device = Device(
@@ -137,7 +132,7 @@ class DeviceController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     def handle_device_activation(
-        self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, str]
+            self, header: typing.Dict[str, typing.Any], payload: typing.Dict[str, str]
     ):
         try:
             header_data = SessionHeader(**header)

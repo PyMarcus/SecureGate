@@ -1,14 +1,9 @@
-FROM ubuntu:latest
-
-RUN apt update
-RUN apt install python3 python3-pip -y
+FROM python:latest
 
 WORKDIR /secure_gate
-
 COPY . .
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 7878
-
-CMD ["python3", "-m", "src.apps.server.server"]
+CMD ["python", "-m", "src.apps.server.server"]
