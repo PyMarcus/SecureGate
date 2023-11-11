@@ -150,9 +150,10 @@ class DeviceController:
             if data.action.upper() not in ["ACTIVATE", "DEACTIVATE"]:
                 return BadRequestError("Ação inválida").dict()
 
-            self._mqtt.publish(MQTTTopic.ACTIVATION.value, json.dumps(payload))
+            self._mqtt.publish(MQTTTopic.ACTIVATION.value, json.dumps(dict(payload)))
             time.sleep(3)
-            return OKResponse(message="Dispositivo ativado com sucesso!", data=True).dict()
+            action = 'ativado' if data.action.upper() == 'ACTIVATE' else 'desativado'
+            return OKResponse(message=f"Dispositivo {action} com sucesso!", data=True).dict()
 
         except Exception as e:
             logger.error(str(e))

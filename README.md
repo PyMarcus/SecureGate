@@ -1,6 +1,7 @@
 # Secure Gate
 
-Secure Gate is a complete access management solution, combining a user-friendly web app, a robust backend system, and ESP32 integration.
+Secure Gate is a complete access management solution, combining a user-friendly web app, a robust backend system, and
+ESP32 integration.
 It enables users to manage gate access by RFID cards, providing better security and convenience.
 
 ## Requirements
@@ -13,22 +14,6 @@ It enables users to manage gate access by RFID cards, providing better security 
 - Docker Compose
 
 ## Setup
-
-To setup the project, you can just run the `setup.sh` script.
-
-1. Make the script executable
-
-   ```bash
-   chmod +x ./scripts/setup.sh
-   ```
-
-2. Run the script
-
-   ```bash
-   ./scripts/setup.sh
-   ```
-
-## Manual Setup
 
 1. Create a virtual environment
 
@@ -54,22 +39,17 @@ To setup the project, you can just run the `setup.sh` script.
    pre-commit install
    ```
 
-5. Install node dependencies
+5. Create `.env` file
 
-   ```bash
-   npm install
-   ```
-
-6. Make husky pre-commit hook executable
-
-   ```bash
-   chmod +x .husky/pre-commit
-   ```
-
-7. Create `.env` file
-   
    ```bash
    cp .env.example .env
+   ```
+
+6. Give execute permissions to `client.sh`, `device.sh`
+
+   ```bash
+   chmod +x ./scripts/client.sh
+    chmod +x ./scripts/device.sh
    ```
 
 ## Running

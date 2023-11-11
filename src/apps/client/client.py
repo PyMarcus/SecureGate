@@ -8,7 +8,7 @@ from termcolor import colored
 import rpyc
 
 from src.packages.schemas.admins_schema import AdminSchema
-from src.packages.schemas.devices_schema import DeviceSchema
+from src.packages.schemas.devices_schema import DeviceSchema, DeviceActivationSchema
 from src.packages.schemas.session_schema import Session, SignupSchema, SigninSchema
 from src.packages.schemas.users_schema import CreateUserSchema
 
@@ -90,6 +90,18 @@ class Client:
                 'description': 'Lista o histórico de acesso do dia',
                 'function': self._list_day_access_history,
             },
+            "abrir": {
+                "command": "abrir",
+                "args": ["id_dispositivo"],
+                "description": "Abre o portão",
+                "function": self._activate_device,
+            },
+            "fechar": {
+                "command": "fechar",
+                "args": ["id_dispositivo"],
+                "description": "Fecha o portão",
+                "function": self._deactivate_device,
+            },
         }
 
     def _connect(self) -> rpyc.Connection | None:
@@ -139,7 +151,7 @@ class Client:
             logger.info('Bem-vindo ao SecureGate!')
             logger.warn('Digite /ajuda para ver os comandos disponíveis')
 
-            self._sign_in('123', '123')  # TODO: remove this, only for testing
+            self._sign_in('john@doe.com', 'john@doe.com')  # TODO: remove this, only for testing
             while True:
                 try:
                     self._cli()
@@ -191,7 +203,6 @@ class Client:
             logger.info(f"{admin['id']} - {admin['name']} - {admin['email']}")
 
     # Public =======================================================================================
-
     def _help(self):
         logger.info('Comandos disponíveis:')
         self._print_commands(self._public_commands)
@@ -206,6 +217,7 @@ class Client:
 
             payload = SigninSchema(email=email, password=password)
             result = dict(self._connection.root.sign_in(payload.model_dump()))
+            print(result)
             if result.get('success'):
                 self._session = Session(**result.get('data', {}))
                 return logger.success(result.get('message', 'Login realizado com sucesso!'))
@@ -303,6 +315,30 @@ class Client:
             logger.error(result.get('message', 'Erro ao listar usuários'))
         except Exception:
             logger.error('Erro ao listar usuários')
+
+    def _activate_device(self, device_id: str) -> None:
+        self._handle_device_activation(device_id, 'ACTIVATE')
+
+    def _deactivate_device(self, device_id: str) -> None:
+        self._handle_device_activation(device_id, 'DEACTIVATE')
+
+    def _handle_device_activation(self, device_id: str, action: str) -> None:
+        try:
+            payload = DeviceActivationSchema(
+                device_id=device_id,
+                action=action,
+            ).model_dump()
+
+            result = dict(
+                self._connection.root.handle_device_activation(self._session.model_dump(), payload))
+            if result.get('success'):
+                action = 'ativado' if action == 'ACTIVATE' else 'desativado'
+                return logger.success(result.get('message', f'Dispositivo {action} com sucesso!'))
+            logger.error(result.get('message', f'Erro ao {action} dispositivo'))
+        except Exception as e:
+            print(e)
+            action = 'ativar' if payload == 'ACTIVATE' else 'desativar'
+            logger.error(f'Erro ao {action} dispositivo')
 
     # User =========================================================================================
     def _create_user(self, name: str, email: str, rfid: str, device_id: str) -> None:

@@ -2,10 +2,10 @@ import json
 import time
 
 from src.apps.device.config.config import config
-from src.apps.device.src.mqtt.mqtt_client import MQTTClient
 
 from src.packages.constants.mqtt_topics import MQTTTopic
 from src.packages.logger.logger import Logger
+from src.packages.mqtt.mqtt_client import MQTTClient
 
 logger = Logger("device_main")
 
@@ -14,19 +14,19 @@ def on_activation_message(topic: str, payload: str):
     data = json.loads(payload)
 
     if data["device_id"] != config.get("id"):
-        logger.warn("ID do dispositivo inválido!")
+        logger.error("ID do dispositivo inválido!")
         return
 
     if data["action"] == "ACTIVATE":
         logger.warn("Abrindo portão...")
         time.sleep(3)
-        logger.info("Portão aberto com sucesso!")
+        logger.success("Portão aberto com sucesso!")
     elif data["action"] == "DEACTIVATE":
         logger.warn("Fechando portão...")
         time.sleep(3)
-        logger.info("Portão fechado com sucesso!")
+        logger.success("Portão fechado com sucesso!")
     else:
-        logger.warn("Ação inválida!")
+        logger.error("Ação inválida!")
 
 
 def rfid_read():
@@ -47,7 +47,7 @@ def _main():
     time.sleep(5)
 
     mqtt = MQTTClient(host, port)
-    logger.info("MQTT client started successfully!")
+    logger.success("MQTT client started successfully!")
 
     mqtt.subscribe(MQTTTopic.ACTIVATION.value, on_activation_message)
     mqtt.listen()

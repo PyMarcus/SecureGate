@@ -43,8 +43,7 @@ class Server(Service):
         self._mqtt.listen()
 
     def _subscribe_mqtt_topics(self) -> None:
-        # self._mqtt.subscribe(MQTTTopic.AUTHENTICATION.value, self._handle_rfid_auth)
-        pass
+        self._mqtt.subscribe(MQTTTopic.AUTHENTICATION.value, self._handle_rfid_auth)
 
     def stop_mqtt(self):
         self._mqtt.stop()
