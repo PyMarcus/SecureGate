@@ -73,38 +73,6 @@ class UserController:
             return InternalServerError("Não foi possível processar a requisição").dict()
 
     @staticmethod
-    def select_users_by_device_id(
-            header: typing.Dict[str, typing.Any], device_id: str
-    ) -> typing.Dict[str, typing.Any]:
-        try:
-            header_data = SessionHeader(**header)
-            if not header_data.token or not header_data.email:
-                return BadRequestError("Token ou email não informados").dict()
-
-            if not Security.verify_token(header_data.email, header_data.token):
-                return UnauthorizedError("Token inválido").dict()
-
-            users: typing.List = SelectMain.select_users_by_device_id(device_id)
-            response = []
-            if users:
-                for u in users:
-                    response.append(
-                        {
-                            "name": u.name,
-                            "email": u.email,
-                            "rfid": u.rfid,
-                            "added_by": str(u.added_by),
-                            "id": u.id,
-                            "authorized": u.authorized,
-                        }
-                    )
-                return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
-            return NoContentResponse(message="Sem dados", data=[]).dict()
-        except Exception as e:
-            logger.error(str(e))
-            return InternalServerError("Não foi possível processar a requisição").dict()
-
-    @staticmethod
     def select_all_users(header: typing.Dict[str, typing.Any]):
         try:
             header_data = SessionHeader(**header)

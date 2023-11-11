@@ -54,7 +54,7 @@ class AccessHistoryController:
                             "admin_name": admin.name if d.admin_id else "",
                             "device_id": str(device.id),
                             "device_name": device.name,
-                            "when": d.created_at,
+                            "when": str(d.created_at),
                         }
                     )
                 return OKResponse(

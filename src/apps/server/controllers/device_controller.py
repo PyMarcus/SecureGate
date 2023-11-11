@@ -115,17 +115,18 @@ class DeviceController:
 
             users = SelectMain.select_users_by_device_id(device_id)
             response = []
-            for u in users:
-                response.append(
-                    {
-                        "name": u.name,
-                        "email": u.email,
-                        "rfid": u.rfid,
-                        "added_by": str(u.added_by),
-                        "id": u.id,
-                        "authorized": u.authorized,
-                    }
-                )
+            if users:
+                for u in users:
+                    response.append(
+                        {
+                            "name": u.name,
+                            "email": u.email,
+                            "rfid": u.rfid,
+                            "added_by": str(u.added_by),
+                            "id": u.id,
+                            "authorized": u.authorized,
+                        }
+                    )
             return OKResponse(message="Usuários listados com sucesso!", data=response).dict()
         except Exception as e:
             logger.error(str(e))

@@ -1,5 +1,6 @@
 import typing
 import uuid
+from datetime import datetime
 
 from src.packages.config.env import env
 from src.packages.logger.logger import Logger
@@ -66,6 +67,29 @@ class Client:
                 'description': 'Cria um novo dispositivo',
                 'function': self._create_device,
             },
+            'lusuarios': {
+                'command': 'lusuarios',
+                'args': ['id_dispositivo'],
+                'description': 'Lista os usuários de um dispositivo',
+                'function': self._list_device_users,
+            },
+            'luacesso': {
+                'command': 'luacesso',
+                'args': ['id_usuario'],
+                'description': 'Lista o histórico de acesso de um usuário',
+                'function': self._list_user_access_history,
+            },
+            'ladmins': {
+                'command': 'ladmins',
+                'description': 'Lista os administradores',
+                'function': self._list_root_admins,
+            },
+            'lacesso': {
+                'command': 'lacesso',
+                'args': ['id_dispositivo'],
+                'description': 'Lista o histórico de acesso do dia',
+                'function': self._list_day_access_history,
+            },
         }
 
     def _connect(self) -> rpyc.Connection | None:
@@ -125,11 +149,48 @@ class Client:
         else:
             logger.error('Não foi possível conectar ao servidor')
 
-    # Public =======================================================================================
+    # Helpers ======================================================================================
     def _print_commands(self, commands: dict[str, dict]):
         for cmd in commands.values():
             args = f"{' '.join(f'<{arg}>' for arg in cmd['args'])}" if cmd.get('args') else ''
             logger.info(f"{self._cmd_prefix}{cmd['command']} {args} - {cmd['description']}")
+
+    def _print_device_users(self, users: list[dict]):
+        if not len(users):
+            return logger.info('Nenhum usuário encontrado')
+        logger.info('Usuários encontrados:')
+        logger.info('Nome - Email - RFID - Autorizado')
+        for user in users:
+            auth_emoji = '✅' if user['authorized'] else '❌'
+            logger.info(f"{user['name']} - {user['email']} - {user['rfid']} - {auth_emoji}")
+
+    def _print_admin_devices(self, devices: list[dict]):
+        if not len(devices):
+            return logger.info('Nenhum dispositivo encontrado')
+        logger.info('Dispositivos encontrados:')
+        logger.info('Nome - Nome da rede - Versão')
+        for device in devices:
+            logger.info(f"{device['name']} - {device['wifi_ssid']} - v{device['version']}")
+
+    def _print_access_history(self, history: list[dict]):
+        if not len(history):
+            return logger.info('Nenhum histórico de acesso encontrado')
+        logger.info('Histórico de acesso encontrado:')
+        logger.info('Usuário - Dispositivo - Data')
+        for access in history:
+            date = datetime.strptime(access['when'], "%Y-%m-%d %H:%M:%S.%f").strftime(
+                "%d/%m/%Y %H:%M")
+            logger.info(f"{access['user_name']} - {access['device_name']} - {date}")
+
+    def _print_admins(self, admins: list[dict]):
+        if not len(admins):
+            return logger.info('Nenhum administrador encontrado')
+        logger.info('Administradores encontrados:')
+        logger.info('ID - Nome - Email')
+        for admin in admins:
+            logger.info(f"{admin['id']} - {admin['name']} - {admin['email']}")
+
+    # Public =======================================================================================
 
     def _help(self):
         logger.info('Comandos disponíveis:')
@@ -139,8 +200,11 @@ class Client:
 
     # Session ======================================================================================
     def _sign_in(self, email: str, password: str):
-        payload = SigninSchema(email=email, password=password)
         try:
+            if self._session:
+                return logger.error('Você já está logado!')
+
+            payload = SigninSchema(email=email, password=password)
             result = dict(self._connection.root.sign_in(payload.model_dump()))
             if result.get('success'):
                 self._session = Session(**result.get('data', {}))
@@ -187,6 +251,31 @@ class Client:
         except Exception:
             logger.error('Erro ao criar administrador')
 
+    def _list_admin_devices(self, admin_id: str) -> None:
+        try:
+            result = dict(
+                self._connection.root.select_admin_devices(self._session.model_dump(), admin_id))
+            if result.get('success'):
+                return self._print_admin_devices(result.get('data', []))
+            logger.error(result.get('message', 'Erro ao listar dispositivos'))
+        except Exception:
+            logger.error('Erro ao listar dispositivos')
+
+    def _list_root_admins(self) -> None:
+        try:
+            if not self._session.role == 'ROOT':
+                return logger.error('Você não tem permissão para executar este comando!')
+
+            root_id = self._session.user_id
+            result = dict(
+                self._connection.root.select_admins_by_root_id(self._session.model_dump(), root_id))
+            print(result['data'])
+            if result.get('success'):
+                return self._print_admins(result.get('data', []))
+            logger.error(result.get('message', 'Erro ao listar administradores'))
+        except Exception:
+            logger.error('Erro ao listar administradores')
+
     # Device =======================================================================================
     def _create_device(self, name: str, wifi_ssid: str, wifi_password: str) -> None:
         try:
@@ -204,6 +293,16 @@ class Client:
             logger.error(result.get('message', 'Erro ao criar dispositivo'))
         except Exception:
             logger.error('Erro ao criar dispositivo')
+
+    def _list_device_users(self, device_id: str) -> None:
+        try:
+            result = dict(
+                self._connection.root.select_device_users(self._session.model_dump(), device_id))
+            if result.get('success'):
+                return self._print_device_users(result.get('data', []))
+            logger.error(result.get('message', 'Erro ao listar usuários'))
+        except Exception:
+            logger.error('Erro ao listar usuários')
 
     # User =========================================================================================
     def _create_user(self, name: str, email: str, rfid: str, device_id: str) -> None:
@@ -225,7 +324,30 @@ class Client:
         except Exception:
             logger.error('Erro ao criar usuário')
 
+    def _list_user_access_history(self, user_id: str) -> None:
+        try:
+            result = dict(
+                self._connection.root.select_user_access_history(self._session.model_dump(),
+                                                                 user_id))
+            if result.get('success'):
+                return self._print_access_history(result.get('data', []))
+            logger.error(result.get('message', 'Erro ao criar dispositivo'))
+        except Exception as e:
+            logger.error('Erro ao listar histórico de acesso')
+
     # Access History ===============================================================================
+    def _list_day_access_history(self, device_id: str):
+        try:
+            today = datetime.utcnow().strftime("%Y-%m-%d")
+            result = dict(
+                self._connection.root.select_device_access_history_by_date(
+                    self._session.model_dump(), device_id, today))
+
+            if result.get('success'):
+                return self._print_access_history(result.get('data', []))
+            logger.error(result.get('message', 'Erro ao listar histórico de acesso'))
+        except Exception:
+            logger.error('Erro ao listar histórico de acesso')
 
 
 if __name__ == "__main__":

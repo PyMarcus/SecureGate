@@ -90,17 +90,19 @@ class AdminController:
 
             admins = SelectMain.select_admins_by_root_id(root_id)
             response = []
-            for a in admins:
-                response.append(
-                    {
-                        "name": a.name,
-                        "email": a.email,
-                        "role": a.role,
-                        "root_id": a.root_id,
-                        "id": a.id,
-                    }
-                )
-            return OKResponse(message="Admins listados com sucesso!", data=response).dict()
+            if admins:
+                for a in admins:
+                    response.append(
+                        {
+                            "name": a.name,
+                            "email": a.email,
+                            "role": a.role.value,
+                            "root_id": str(a.root_id),
+                            "id": str(a.id),
+                        }
+                    )
+                return OKResponse(message="Admins listados com sucesso!", data=response).dict()
+            return NotFoundError("Admins não encontrados").dict()
         except Exception as e:
             logger.error(str(e))
             return InternalServerError("Não foi possível processar a requisição").dict()

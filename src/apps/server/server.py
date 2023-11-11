@@ -84,21 +84,26 @@ class Server(Service):
     ) -> typing.Dict:
         return self._device_controller.create_device(header, payload)
 
-    def exposed_register_access_history(  # chamar quando o user passar no portao
+    # Not used
+    # Just called inside the server
+    def exposed_register_access_history(
             self, header: typing.Dict, history: typing.Dict
     ) -> typing.Dict:
         return self._register_access_history(header, history)
 
+    # Not used
     def exposed_select_admin(
             self, header: typing.Dict, admin_id: str
     ) -> typing.Dict:
         return AdminController.select_admin(header, admin_id)
 
+    # Not used
     def exposed_select_user(
             self, header: typing.Dict, user_id: str
     ) -> typing.Dict:
         return UserController.select_user(header, user_id)
 
+    # Not used
     def exposed_select_device(
             self, header: typing.Dict, device_id: str
     ) -> typing.Dict:
@@ -114,11 +119,13 @@ class Server(Service):
     ) -> typing.Dict:
         return AccessHistoryController.select_user_access_history(header, user_id)
 
+    # Not used
     def exposed_decoder(self, device_encrypted: str) -> typing.Dict:
         logger.info("calling decoder")
         encrypted_data = base64.urlsafe_b64decode(device_encrypted.get("data"))
         return Security.decrypted_traffic_package(encrypted_data)
 
+    # Not used
     def exposed_select_all_users(
             self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
@@ -129,18 +136,13 @@ class Server(Service):
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return AdminController.select_admins_by_root_id(header, root_id)
 
+    # Not used
     def exposed_select_all_devices(
             self, header: typing.Dict[str, str]
     ) -> typing.List[typing.Dict[str, typing.Any]]:
         return self._device_controller.select_all_devices(header)
 
-    def exposed_select_users_by_device_id(
-            self,
-            header: typing.Dict[str, str],
-            device_id: str,
-    ) -> dict[str, typing.Any]:
-        return UserController.select_users_by_device_id(header=header, device_id=device_id)
-
+    # Not used
     def exposed_select_device_access_history(
             self,
             header: typing.Dict[str, str],
